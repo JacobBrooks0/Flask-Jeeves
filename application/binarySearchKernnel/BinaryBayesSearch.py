@@ -14,7 +14,7 @@ def GenerateQuestion(Symptoms, QuestionsSoFar):
     return Symptoms[QuestionID]
 
 def GetAnswer(Symptoms, SymptomQuestion):
-    print(SymptomQuestion['name'] + '?')
+    print(SymptomQuestion['question'])
     print('1 - No\n2 - Probably not\n3 - Don\'t Know\n4 - Probably yes\n5 - Yes')
     return(input())
 
@@ -93,7 +93,9 @@ for i in range(MaxNumberofQuestions):
     QuestionsSoFar.append(GenerateQuestion(AllVariables, QuestionsSoFar))
     AnswersSoFar.append( AnswerValues[GetAnswer(AllVariables, QuestionsSoFar[-1])] )
 
-
+    print(QuestionsSoFar)
+    print(AnswersSoFar)
+    input()
     # Calculating Probabilities based on Bayes theorem
     probabilities = CalculateProbabilites(AllDiseases, DiseaseRules, QuestionsSoFar, AnswersSoFar)
     probabilities = sorted( probabilities, key= lambda d:d['probability'] )

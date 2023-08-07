@@ -46,3 +46,8 @@ class Diary(db.Model):
     date = db.Column(db.Date, nullable=False)
     diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
     field = db.Column(db.String(100))
+
+class Symptoms(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
