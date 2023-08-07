@@ -16,58 +16,57 @@ def filter_disease_name(diseases, flag):
     return local_diseases
 
 def answerDefaultAnamnese(age, sex, contactWithOtherPets, diet, neutered, outdoor):
-    ageAns = []
-    sexAns = []
-    contactWithOtherPetsAns = []
-    dietAns = []
-    neuteredAns = []
-    outdoorAns = []
+    answers = []
+
     def ageConversion(age):
         if age < 1:
-            ageAns = [1, 0, 0, 0, 0]
-        elif age > 1 and age < 2:
-            ageAns = [0, 1, 0, 0, 0]
-        elif age > 2 and age < 5:
-            ageAns = [0, 0, 1, 0, 0]
-        elif age > 5 and age < 7:
-            ageAns = [0, 0, 0, 1, 0]
+            answers.append(0.00)
+        elif age >= 1 and age < 2:
+            answers.append(0.25)
+        elif age >= 2 and age < 5:
+            answers.append(0.50)
+        elif age >= 5 and age < 7:
+            answers.append(0.75)
         else:
-            ageAns = [0, 0, 0, 0, 1]
+            answers.append(1.00)
 
     def sexConversion(sex):
-        if sex == 'Male'
-            sexAns = [0, 0, 0, 0, 1]
+        if sex == 'Male':
+            answers.append(1.00)
         else:
-            sexAns = [1, 0, 0, 0 , 0]
+            answers.append(0.00)
 
     def contactWithOtherPetsConversion(contactWithOtherPets):
         if contactWithOtherPets == 'Yes':
-            contactWithOtherPets = [0, 0, 0, 0, 1]
+            answers.append(1.00)
         else:
-            contactWithOtherPets = [1, 0, 0, 0, 0]
+            answers.append(0.00)
 
     def dietConversion(diet):
-        if diet == 'Processed'
-            dietAns = [0, 0, 0, 0, 1]
+        if diet == 'Processed':
+            answers.append(1.00)
         elif diet == 'Mixed':
-            dietAns = [0, 0, 1, 0, 0]
+            answers.append(0.50)
         elif diet == 'natural':
-            dietAns = [1, 0, 0, 0, 0]
+            answers.append(0.00)
 
-    def neuteredConversion(neutered)
+    def neuteredConversion(neutered):
         if neutered == 'Yes':
-            neuteredAns = [0, 0, 0, 0, 1]
+            answers.append(1.00)
         else:
-            neuteredAns = [1, 0, 0, 0, 0]
+            answers.append(0.00)
 
-    def outdoorConversion(outdoor)
+    def outdoorConversion(outdoor):
         if outdoor == 'Yes':
-            outdoorAns = [0, 0, 0, 0, 1]
+            answers.append(1.00)
         else:
-            outdoorAns = [1, 0, 0, 0, 0]
+            answers.append(0.00)
 
-
-
-
-
+    ageConversion(age)
+    sexConversion(sex)
+    contactWithOtherPetsConversion(contactWithOtherPets)
+    dietConversion(diet)
+    neuteredConversion(neutered)
+    outdoorConversion(outdoor)
+    return answers
 
