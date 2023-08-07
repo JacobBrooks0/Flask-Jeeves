@@ -80,6 +80,8 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  document.body.style.backgroundColor = "#faf0d7";
+
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -155,6 +157,7 @@ export default function Navbar() {
         </Drawer>
         <Main open={open}></Main>
       </Box>
+
       <Outlet />
       <CatBot />
     </>
