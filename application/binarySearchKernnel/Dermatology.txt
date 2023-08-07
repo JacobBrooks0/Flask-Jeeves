@@ -1,0 +1,282 @@
+Dermatology
+
+---SCABIES
+Intense itching and scratching
+Hair loss or thinning of fur
+Redness and inflammation of the skin
+Crusty or scaly skin
+Formation of small, raised bumps or pustules
+Irritated or weepy eyes (if mites affect the face)
+Secondary bacterial infections due to scratching
+
+-Age: most common bellow 1 years old. But can affect all ages
+-Enviroment: Most common for outdoor cats
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---FLEA ALLERGY DERMATITIS
+Intense Itching and ScratchinG
+Hair Loss and Inflamed Skin:
+Small Red Bumps or Pustules
+Secondary Infections
+Restlessness and Agitation:
+Over-Grooming: 
+Increased Flea Activity
+
+-Age: most common above years old. But can affect all ages
+-Enviroment: Most common for outdoor cats
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---ATOPIC DERMATITIS
+Itching and Scratching
+Hair Loss and Redness
+Skin Lesions
+Secondary Infections
+Ear Problems
+Sneezing and Respiratory Signs
+CHRONIC DISEASE
+
+-Age: most common above years old. But can affect all ages
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Urinary
+
+---URETHRAL OBSTRUCTION
+Frequent Attempts to Urinate
+Straining to Urinate
+No Urine Output
+Crying or Vocalization
+Licking Genital Area
+Bloody Urine
+Lethargy and Weakness
+Abdominal Pain
+
+-Age: most common above 1 year old. But can affect all ages
+-Enviroment: -
+-Neutered: - 
+-Diet: dry pet food
+-Gender: male
+
+---Feline Lower Urinary Tract Disease
+Frequent Urination
+Straining to Urinate:
+Blood in Urine
+Painful Urination
+Urinating Outside the Litter Box
+Licking Genital Area
+Urinary Accidents
+OVERWEIGHT
+
+-Age: most common above 5 years old
+-Enviroment: indoor
+-Neutered: - 
+-Diet: pet food
+-Gender: -
+
+---RENAL DISEASE
+Increased Thirst and Urination
+Decreased Appetite
+Weight Loss
+Vomiting and Nausea
+Lethargy and Weakness:
+Poor Coat Condition
+Bad Breath
+Mouth Ulcers
+Seizures
+
+-Age: most common above 7 years old
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Respiratory
+---RHINOTRACHEITIS
+Sneezing
+Nasal Discharge
+Conjunctivitis
+Eye Ulcers
+Coughing
+Loss of Appetite
+Lethargy
+Fever
+NOT VACCINATTED
+RECENTLY ADOPTED
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---CALICIVIRUS
+Sneezing
+Nasal Discharge
+Oral Ulcers:
+Conjunctivitis
+Limping Syndrome
+Fever
+Loss of Appetite
+Lethargy
+NOT VACCINATTED
+RECENTLY ADOPTED
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---ASTHMA
+Coughing
+Wheezing
+Labored Breathing
+Open-Mouth Breathing
+Gagging
+Reduced Activity
+SMOKERS
+
+-Age: most common above 3 year old
+-Enviroment: indoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Neurological
+---RENAL DISEASE
+Increased Thirst and Urination
+Decreased Appetite
+Weight Loss
+Vomiting and Nausea
+Lethargy and Weakness:
+Poor Coat Condition
+Bad Breath
+Mouth Ulcers
+Seizures
+
+-Age: most common above 7 years old
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Ocular:
+---CALICIVIRUS
+Sneezing
+Nasal Discharge
+Oral Ulcers
+Conjunctivitis
+Limping Syndrome
+Fever
+Loss of Appetite
+Lethargy
+NOT VACCINATTED
+RECENTLY ADOPTED
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---RHINOTRACHEITIS
+Sneezing
+Nasal Discharge
+Conjunctivitis
+Eye Ulcers
+Coughing
+Loss of Appetite
+Lethargy
+Fever
+NOT VACCINATTED
+RECENTLY ADOPTED
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---CORNEAL ULCER 
+Eye Discomfort
+Watery Eyes
+Redness
+Cloudiness
+Rubbing or Pawing
+Sensitivity to Light
+Blinking
+HAVING CONTACT WITH OTHER PETS
+TRAUMA
+
+-Age: -
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Gastrointestinal
+---PANLEUKOPENIA
+Vomiting
+Diarrhea
+Lethargy
+Loss of Appetite
+Fever
+Weight Loss
+NOT VACCINATTED
+RECENTLY ADOPTED
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---INTESTINAL PARASITES
+Diarrhea
+Vomiting
+Weight Loss
+Potbellied Appearance
+Lethargy
+Anal Itching or Scooting
+Visible Worms
+
+-Age: most common below 1 year old
+-Enviroment: outdoor
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+---HAIRBALL OBSTRUCTION
+Repeated Unproductive Vomiting
+Lethargy
+Loss of Appetite
+Abdominal Discomfort
+Coughing or Gagging
+Constipation or Diarrhea
+LONG-HAIRED BREEDS
+
+-Age: most common above 1 year old
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
+
+Musculoskeletal
+---LUXATIONS
+Limping or Lameness
+Pain or Discomfort
+Swelling
+Abnormal Joint Movement
+TRAUMA
+
+-Age: -
+-Enviroment: -
+-Neutered: - 
+-Diet: -
+-Gender: -
