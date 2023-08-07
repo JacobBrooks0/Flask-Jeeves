@@ -26,7 +26,12 @@ def CalculateProbabilites(Diseases, DiseaseRules, QuestionsSoFar, AnswersSoFar):
         DisLikelihood[Diseases[dis]['name']] =  1.0
         for ans in range(len(AnswersSoFar)):
             # print("Disease:", Diseases[dis]['name'], ", Question:", QuestionsSoFar[ans]['name'])
-            DisLikelihood[Diseases[dis]['name']] *= max( 0.01, 1.0 - abs( CalculateAnswer(DiseaseRules[Diseases[dis]['name']][QuestionsSoFar[ans]['name']]) - AnswersSoFar[ans] ) )
+            LikeCalc = 0.0
+            try:
+                LikeCalc = CalculateAnswer(DiseaseRules[Diseases[dis]['name']][QuestionsSoFar[ans]['name']])
+            except:
+                LikeCalc = 0.5
+            DisLikelihood[Diseases[dis]['name']] *= max( 0.01, 1.0 - abs( LikeCalc - AnswersSoFar[ans] ) )
             # print("P_Likelihood", DisLikelihood[Diseases[dis]['name']], ",", Diseases[dis]['name'], ",", QuestionsSoFar[ans]['name'], "Correct Answer: ", DiseaseRules[Diseases[dis]['name']][QuestionsSoFar[ans]['name']], "AnswersSoFar", AnswersSoFar[ans])
 
     ProbabilitiesList = []
