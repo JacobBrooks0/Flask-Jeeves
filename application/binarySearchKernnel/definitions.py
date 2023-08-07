@@ -1,4 +1,3 @@
-# Symptoms Type (Discrete, Continuous)
 AnswerValues = {
     '1' : 0.00,
     '2' : 0.25,
