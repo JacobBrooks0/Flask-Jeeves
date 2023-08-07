@@ -16,9 +16,12 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
+    "@videosdk.live/react-sdk": "^0.1.75",
     "axios": "^1.4.0",
+    "hls.js": "^1.4.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-player": "^2.12.0",
     "react-router-dom": "^6.14.2",
     "react-simple-chatbot": "^0.6.1",
     "vite-plugin-svgr": "^3.2.0"

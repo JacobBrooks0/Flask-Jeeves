@@ -5,6 +5,8 @@ const CredentialsContext = createContext();
 export const CredentialsProvider = ({ children }) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [firstNameValue, setFirstNameValue] = useState("");
+  const [lastNameValue, setLastNameValue] = useState("");
 
   return (
     <CredentialsContext.Provider
@@ -13,6 +15,10 @@ export const CredentialsProvider = ({ children }) => {
         setEmailValue,
         passwordValue,
         setPasswordValue,
+        firstNameValue,
+        setFirstNameValue,
+        lastNameValue,
+        setLastNameValue,
       }}
     >
       {children}

@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState } from "react";
 import { useCredentials } from "../../contexts";
+import "./styles.css";
 
 export default function LoginPage() {
   const {
@@ -26,11 +27,11 @@ export default function LoginPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: formData.username,
+        email: formData.email,
         password: formData.password,
       }),
     };
-    const response = await fetch("http://localhost:3000/users/login", options);
+    const response = await fetch("http://localhost:3000/user/login", options);
     const data = await response.json();
     console.log(data);
 
@@ -52,18 +53,23 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginRequest({ username: usernameValue, password: passwordValue });
-    setUsernameValue("");
+    loginRequest({ email: emailValue, password: passwordValue });
+    setEmailValue("");
     setPasswordValue("");
   };
 
   return (
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
+        <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
+        <Typography component="h1" variant="h5" className="sign-in">
+          Sign in
+        </Typography>
         <TextField
           margin="normal"
           fullWidth
           required
+          variant="standard"
           id="email"
           label="Email Address"
           name="email"
@@ -75,6 +81,7 @@ export default function LoginPage() {
           margin="normal"
           fullWidth
           required
+          variant="standard"
           id="password"
           label="Password"
           name="password"
@@ -87,12 +94,17 @@ export default function LoginPage() {
         />
         <Button
           type="submit"
+          className="button"
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          style={{ backgroundColor: "#FFD9C0", color: "black" }}
         >
           Sign In
         </Button>
+        <Link href="/register" variant="body2" style={{ color: "black" }}>
+          Don't have an account? Sign Up
+        </Link>
       </form>
     </div>
   );

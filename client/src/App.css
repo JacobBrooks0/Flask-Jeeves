@@ -1,14 +1,14 @@
-#root {
-  display: grid;
-  grid-template-rows: min-content;
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-rows: min-content;
+body,
+html {
+  display: flex;
   height: 100%;
+  width: 100%;
   background-color: #faf0d7;
 }
 
