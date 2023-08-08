@@ -1,3 +1,7 @@
+import panda as pd
+import pyscopg2
+from sqlalchemy import create_engine
+
 AnswerValues = {
     '1' : 0.00,
     '2' : 0.25,

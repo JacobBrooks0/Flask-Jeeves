@@ -38,7 +38,6 @@ class Appointments(db.Model):
         self.pet_id = pet_id
         self.description = description
 
-
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -51,7 +50,7 @@ class Pets(db.Model):
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, user_id, name dob, breed, outdoor, neutered, history_id, sex, diet)?
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet):
         self.user_id = user_id
         self.name = name
         self.dob = dob
@@ -61,7 +60,6 @@ class Pets(db.Model):
         self.history_id = history_id
         self.sex = sex
         self.diet = diet
-
 
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -97,13 +95,13 @@ class DiseasesVariables(db.Model):
     question = db.Column(db.String(200), nullable=False)
     defaultQuestion = db.Column(db.Boolean, nullable=False)
 
-     def __init__(self, specialty, feature, question, defaultQuestion):
+    def __init__(self, specialty, feature, question, defaultQuestion):
         self.specialty = specialty
         self.feature = feature
         self.question = question
         self.defaultQuestion = defaultQuestion
 
-class UsersAnswersCount(db.Model)
+class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)
     diseasesVariables_id = db.Column(db.Integer, db.ForeignKey('diseasesVariables.id'), nullable=False)
