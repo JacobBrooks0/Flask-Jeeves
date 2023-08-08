@@ -6,3 +6,4 @@ export { default as RegisterPage } from "./RegisterPage";
 export { default as SymptomPage } from "./SymptomPage";
 export { default as UserPage } from "./UserPage";
 export { default as VideoPage } from "./VideoPage";
+export { default as AboutPage } from "./AboutPage";

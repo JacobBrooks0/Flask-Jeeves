@@ -2,7 +2,7 @@ import React from "react";
 import ChatBot from "react-simple-chatbot";
 
 export default function CatBot() {
-  const styles = { backgroundColor: "#7CAECA" };
+  const styles = { backgroundColor: "#826bf5" };
 
   const steps = [
     {

@@ -1,69 +1,108 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import style from "./style.module.css";
 import {
   GoogleMap,
   Marker,
   InfoWindow,
   useLoadScript,
+  StandaloneSearchBox,
 } from "@react-google-maps/api";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
 
 export default function MapPage() {
+  const [markers, setMarker] = useState([]);
+  const [location, setLocation] = useState();
+  const mapRef = useRef();
   const { isLoaded } = useLoadScript({
-    id: "713a483497249211",
-    googleMapsApiKey: "AIzaSyC12dt0iPt_ASPAXEhjvbdermheQ1_8Gko",
+    googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
+    libraries: ["places"],
   });
-  const [mapRef, setMapRef] = useState();
-  const [isOpen, setIsOpen] = useState(false);
-  const [infoWindowData, setInfoWindowData] = useState();
-  const markers = [
-    { address: "Address1", lat: 18.5204, lng: 73.8567 },
-    { address: "Address2", lat: 18.5314, lng: 73.8446 },
-    { address: "Address3", lat: 18.5642, lng: 73.7769 },
-  ];
 
-  const onMapLoad = (map) => {
-    setMapRef(map);
-    const bounds = new google.maps.LatLngBounds();
-    markers?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-    map.fitBounds(bounds);
+  //veterinary_care
+
+  function useLocation() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setMarker([
+        {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      ]);
+    });
+  }
+
+  const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  useEffect(() => {
+    useLocation();
+  }, []);
+
+  const hanldePlacesChanged = async (val) => {
+    setValue(val, false);
+    clearSuggestions();
+
+    const results = await getGeocode({ address: val });
+    const { lat, lng } = await getLatLng(results[0]);
+    setMarker([
+      {
+        lat: lat,
+        lng: lng,
+      },
+    ]);
+    mapRef.current?.panTo(markers[0]);
   };
 
-  const handleMarkerClick = (id, lat, lng, address) => {
-    mapRef?.panTo({ lat, lng });
-    setInfoWindowData({ id, address });
-    setIsOpen(true);
-  };
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
 
   return (
     <div className={style["header"]}>
-      {!isLoaded ? (
+      {!isLoaded || markers.length == 0 ? (
         <h1>Loading...</h1>
       ) : (
-        <GoogleMap
-          mapContainerClassName={style["map-container"]}
-          onLoad={onMapLoad}
-          onClick={() => setIsOpen(false)}
-        >
-          {markers.map(({ address, lat, lng }, ind) => (
-            <Marker
-              key={ind}
-              position={{ lat, lng }}
-              onClick={() => {
-                handleMarkerClick(ind, lat, lng, address);
-              }}
-            >
-              {isOpen && infoWindowData?.id === ind && (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setIsOpen(false);
-                  }}
-                >
-                  <h3>{infoWindowData.address}</h3>
-                </InfoWindow>
-              )}
-            </Marker>
-          ))}
-        </GoogleMap>
+        <div className={style["header"]}>
+          <Combobox onSelect={hanldePlacesChanged}>
+            <ComboboxInput
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              className="combobox-input"
+              placeholder="Search office address"
+            />
+            {console.log(value)}
+            <ComboboxPopover>
+              <ComboboxList>
+                {status === "OK" &&
+                  data.map(({ place_id, description }) => (
+                    <ComboboxOption key={place_id} value={description} />
+                  ))}
+              </ComboboxList>
+            </ComboboxPopover>
+          </Combobox>
+          <GoogleMap
+            zoom={13}
+            onLoad={onLoad}
+            center={markers[0]}
+            mapContainerClassName={style["map-container"]}
+          >
+            <Marker position={markers[0]} />
+          </GoogleMap>
+        </div>
       )}
     </div>
   );
