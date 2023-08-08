@@ -1,7 +1,5 @@
 #Here we will build all out tables (DB). 
-from application import db, app
-
-app.app_context().push()
+from application import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
