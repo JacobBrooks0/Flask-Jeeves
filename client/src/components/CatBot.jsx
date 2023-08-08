@@ -87,6 +87,7 @@ export default function CatBot() {
   return (
     <>
       <ChatBot
+        style={{ zIndex: 10000 }}
         floating
         floatingStyle={styles}
         headerTitle="CatBot"

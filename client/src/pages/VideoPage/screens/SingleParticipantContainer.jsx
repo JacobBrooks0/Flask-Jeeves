@@ -42,7 +42,7 @@ const SingleParticipantContainer = ({ participantId }) => {
   }, [micStream, micOn, isLocal, participantId]);
 
   return (
-    <div style={{ height: 200, width: 360, position: "relative" }}>
+    <div className="participant-view">
       <audio autoPlay playsInline controls={false} ref={audioPlayer} />
       <div
         style={{ position: "absolute", background: "#ffffffb3", padding: 8 }}

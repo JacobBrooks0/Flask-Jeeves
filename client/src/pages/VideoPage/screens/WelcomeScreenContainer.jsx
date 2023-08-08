@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createNewRoom } from "../API";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import AddIcon from "@mui/icons-material/Add";
+import CallIcon from "@mui/icons-material/Call";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
@@ -10,20 +14,21 @@ const WelcomeScreenContainer = ({ setAppData }) => {
     setAppData({ mode: "CONFERENCE", meetingId });
   };
   const hostClick = () => setAppData({ mode: "CONFERENCE", meetingId });
-  const viewerClick = () => setAppData({ mode: "VIEWER", meetingId });
 
   return (
-    <div>
-      <button onClick={createClick}>Create new Meeting</button>
-      <p>{"\n\nor\n\n"}</p>
-      <input
-        placeholder="Enter meetingId"
+    <div className="welcome-controls">
+      <Button variant="contained" endIcon={<AddIcon />} onClick={createClick}>
+        Create new Meeting
+      </Button>
+      <TextField
+        variant="outlined"
+        label="Meeting ID"
         onChange={(e) => setMeetingId(e.target.value)}
         value={meetingId}
       />
-      <p>{"\n\n"}</p>
-      <button onClick={hostClick}>Join As Host</button>
-      <button onClick={viewerClick}>Join As Viewer</button>
+      <Button variant="contained" endIcon={<CallIcon />} onClick={hostClick}>
+        Join
+      </Button>
     </div>
   );
 };
