@@ -1,43 +1,55 @@
 import { useMeeting, Constants } from "@videosdk.live/react-sdk";
-import React, { useMemo } from "react";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CallEndIcon from "@mui/icons-material/CallEnd";
+import MicIcon from "@mui/icons-material/Mic";
+import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
 
 const MediaControlsContainer = () => {
-  const {
-    toggleMic,
-    toggleWebcam,
-    startHls,
-    stopHls,
-    hlsState,
-    meetingId,
-  } = useMeeting();
+  const { toggleMic, toggleWebcam, meetingId, end } = useMeeting();
 
-  const { isHlsStarted, isHlsStopped, isHlsPlayable } = useMemo(
-    () => ({
-      isHlsStarted: hlsState === Constants.hlsEvents.HLS_STARTED,
-      isHlsStopped: hlsState === Constants.hlsEvents.HLS_STOPPED,
-      isHlsPlayable: hlsState === Constants.hlsEvents.HLS_PLAYABLE,
-    }),
-    [hlsState]
-  );
+  const handleEndMeeting = () => {
+    // Ending Meeting
+    end();
+    window.location.reload();
+  };
 
-  const _handleToggleHls = () => {
-    if (isHlsStarted) {
-      stopHls();
-    } else if (isHlsStopped) {
-      startHls({ quality: "high" });
-    }
+  const handleToggleMic = () => {
+    // Toggling Mic
+    toggleMic();
+  };
+
+  const handleToggleWebcam = () => {
+    // Toggling webcam
+    toggleWebcam();
   };
 
   return (
-    <div>
-      <p>MeetingId: {meetingId}</p>
-      <p>HLS state: {hlsState}</p>
-      {isHlsPlayable && <p>Viewers will now be able to watch the stream.</p>}
-      <button onClick={toggleMic}>Toggle Mic</button>
-      <button onClick={toggleWebcam}>Toggle Webcam</button>
-      <button onClick={_handleToggleHls}>
-        {isHlsStarted ? "Stop Hls" : "Start Hls"}
-      </button>
+    <div className="meeting-controls">
+      <Typography variant="h5">Meeting ID: {meetingId}</Typography>
+      <Button
+        variant="contained"
+        onClick={handleToggleMic}
+        endIcon={<MicIcon />}
+      >
+        Toggle Mic
+      </Button>
+      <Button
+        variant="contained"
+        endIcon={<VideoCameraFrontIcon />}
+        onClick={handleToggleWebcam}
+      >
+        Toggle Webcam
+      </Button>
+      <Button
+        variant="contained"
+        color="error"
+        endIcon={<CallEndIcon />}
+        onClick={handleEndMeeting}
+      >
+        End Meeting
+      </Button>
     </div>
   );
 };
