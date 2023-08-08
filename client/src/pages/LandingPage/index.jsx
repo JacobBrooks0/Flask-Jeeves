@@ -1,3 +1,11 @@
+import JoinUs from "../../components/JoinUs";
+import LandingHeader from "../../components/LandingHeader";
+
 export default function LandingPage() {
-  return <h1>LandingPage</h1>;
+  return (
+    <>
+      <LandingHeader />
+      <JoinUs />
+    </>
+  );
 }

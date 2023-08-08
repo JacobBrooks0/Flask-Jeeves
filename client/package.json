@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
     "@react-google-maps/api": "^2.19.2",
+    "@react-oauth/google": "^0.11.1",
     "@videosdk.live/react-sdk": "^0.1.75",
     "axios": "^1.4.0",
     "hls.js": "^1.4.10",
