@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
 import CatBot from "./CatBot";
+import { NavLink, Link } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -20,6 +21,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import "../App.css";
+
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import MapIcon from "@mui/icons-material/Map";
 
 const drawerWidth = 240;
 
@@ -91,19 +99,26 @@ export default function Navbar() {
           sx={{ backgroundColor: "#826bf5" }}
           open={open}
         >
-          <Toolbar sx={{ justifyContent: "flex-end" }}>
-            {/* <Typography variant="h6" noWrap component="div">
-              Persistent drawer
-            </Typography> */}
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="end"
-              sx={{ mr: 0.5, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            <div style={{ justifyContent: "flex-start" }}>
+              <Link to="/home">
+                <img
+                  src="src/assets/cat-logo.png"
+                  style={{ width: "70px", height: "60px" }}
+                />
+              </Link>
+            </div>
+            <div style={{ justifyContent: "flex-end" }}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="end"
+                sx={{ mr: 0.5, ...(open && { display: "none" }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -119,41 +134,53 @@ export default function Navbar() {
           variant="persistent"
           open={open}
         >
-          <DrawerHeader>
+          <DrawerHeader sx={{ justifyContent: "flex-start" }}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
                 <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
               )}
             </IconButton>
           </DrawerHeader>
           <Divider />
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
+            {[
+              { name: "Home", icon: <HomeIcon />, route: "/home" },
+              { name: "About", icon: <InfoIcon />, route: "/about" },
+              {
+                name: "Symptom Checker",
+                icon: <AssignmentIcon />,
+                route: "/symptom",
+              },
+              { name: "Video Call", icon: <VideoCallIcon />, route: "/video" },
+              { name: "Vet Map", icon: <MapIcon />, route: "/map" },
+            ].map((text, index) => (
+              <ListItem
+                key={text.name}
+                className="navbar-header"
+                disablePadding
+              >
+                <NavLink
+                  to={text.route}
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "#826bf5" : "rgba(0, 0, 0, 0.54)",
+                      textDecoration: "none",
+                      width: "100%",
+                      backgroundColor: isActive ? "#eee" : null,
+                    };
+                  }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{text.icon}</ListItemIcon>
+                    <ListItemText primary={text.name} />
+                  </ListItemButton>
+                </NavLink>
               </ListItem>
             ))}
           </List>
           <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
         </Drawer>
         <Main open={open}></Main>
       </Box>

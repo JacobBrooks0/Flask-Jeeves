@@ -14,3 +14,7 @@ html {
 .glfuN {
   background: #826bf5 !important;
 }
+
+.navbar-header a.active .MuiListItemIcon-root {
+  color: #826bf5;
+}

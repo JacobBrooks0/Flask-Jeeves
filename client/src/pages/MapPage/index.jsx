@@ -29,6 +29,8 @@ export default function MapPage() {
     libraries: ["places"],
   });
 
+  //veterinary_care
+
   function useLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
       setMarker([
@@ -79,10 +81,10 @@ export default function MapPage() {
             <ComboboxInput
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              disabled={!ready}
               className="combobox-input"
               placeholder="Search office address"
             />
+            {console.log(value)}
             <ComboboxPopover>
               <ComboboxList>
                 {status === "OK" &&
