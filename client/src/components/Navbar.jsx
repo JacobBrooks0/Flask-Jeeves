@@ -80,7 +80,7 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  document.body.style.backgroundColor = "#faf0d7";
+  document.body.style.backgroundColor = "whitesmoke";
 
   return (
     <>
@@ -88,7 +88,7 @@ export default function Navbar() {
         <CssBaseline />
         <AppBar
           position="fixed"
-          sx={{ backgroundColor: "#7caeca" }}
+          sx={{ backgroundColor: "#826bf5" }}
           open={open}
         >
           <Toolbar sx={{ justifyContent: "flex-end" }}>
@@ -160,6 +160,9 @@ export default function Navbar() {
 
       <Outlet />
       <CatBot />
+      <footer>
+        <p>Hey</p>
+      </footer>
     </>
   );
 }
