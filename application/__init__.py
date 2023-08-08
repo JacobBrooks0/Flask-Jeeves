@@ -27,7 +27,7 @@ def create_app(env=None):
         app.config["SECRET_KEY"] = "test"
     else: #development
         app.config["TESTING"] = False
-        app.config["DEBUG"] = True
+        app.config["DEBUG"] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 #initialising the db and connecting to app
@@ -35,8 +35,7 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    from application.routes import main #user
-    app.register_blueprint(main)
-    #app.register_blueprint(user)
+    from application.user.routes import user
+    app.register_blueprint(user)
 
     return app

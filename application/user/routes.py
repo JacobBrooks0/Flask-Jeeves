@@ -1,4 +1,4 @@
-""" from application import db
+from application import db
 from flask import request, jsonify, Blueprint
 from application.models import User
 
@@ -67,4 +67,4 @@ def delete_user_by_id(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify({"message": "User deleted successfully!"}), 200 """
+    return jsonify({"message": "User deleted successfully!"}), 200
