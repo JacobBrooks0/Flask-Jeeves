@@ -28,6 +28,12 @@ import InfoIcon from "@mui/icons-material/Info";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import MapIcon from "@mui/icons-material/Map";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const drawerWidth = 240;
 
@@ -108,7 +114,110 @@ export default function Navbar() {
                 />
               </Link>
             </div>
-            <div style={{ justifyContent: "flex-end" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <NavLink
+                to="/about"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <InfoIcon />
+                  About
+                </div>
+              </NavLink>
+              <NavLink
+                to="/symptom"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <AssignmentIcon />
+                  Symptoms
+                </div>
+              </NavLink>
+              <NavLink
+                to="/video"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <VideoCallIcon />
+                  Video
+                </div>
+              </NavLink>
+              <NavLink
+                to="/map"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                {" "}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <MapIcon />
+                  Maps
+                </div>
+              </NavLink>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -179,8 +288,19 @@ export default function Navbar() {
                 </NavLink>
               </ListItem>
             ))}
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText
+                  style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                  primary="Logout"
+                />
+              </ListItemButton>
+            </ListItem>
           </List>
-          <Divider />
         </Drawer>
         <Main open={open}></Main>
       </Box>
@@ -188,7 +308,47 @@ export default function Navbar() {
       <Outlet />
       <CatBot />
       <footer>
-        <p>Hey</p>
+        <div className="footer">
+          <div className="row icons">
+            <a href="#">
+              <FacebookIcon />
+            </a>
+            <a href="#">
+              <YouTubeIcon />
+            </a>
+            <a href="#">
+              <InstagramIcon />
+            </a>
+            <a href="#">
+              <TwitterIcon />
+            </a>
+          </div>
+
+          <div className="row">
+            <ul>
+              <li>
+                <a href="#">Contact us</a>
+              </li>
+              <li>
+                <a href="#">Our Services</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#">Terms & Conditions</a>
+              </li>
+              <li>
+                <a href="#">Career</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="row">
+            Cat Care Copyright © 2023 - All rights reserved || Designed By: Cat
+            Care
+          </div>
+        </div>
       </footer>
     </>
   );
