@@ -11,6 +11,7 @@ import {
   SymptomPage,
   UserPage,
   VideoPage,
+  AboutPage,
 } from "./pages";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<Navbar />}>
         <Route path="/home" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/symptom" element={<SymptomPage />} />
         <Route path="/user" element={<UserPage />} />

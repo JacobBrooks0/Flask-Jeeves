@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
 import CatBot from "./CatBot";
+import { NavLink, Link } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -20,6 +21,19 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import "../App.css";
+
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import MapIcon from "@mui/icons-material/Map";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const drawerWidth = 240;
 
@@ -80,7 +94,7 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  document.body.style.backgroundColor = "#faf0d7";
+  document.body.style.backgroundColor = "whitesmoke";
 
   return (
     <>
@@ -88,22 +102,132 @@ export default function Navbar() {
         <CssBaseline />
         <AppBar
           position="fixed"
-          sx={{ backgroundColor: "#7caeca" }}
+          sx={{ backgroundColor: "#826bf5" }}
           open={open}
         >
-          <Toolbar sx={{ justifyContent: "flex-end" }}>
-            {/* <Typography variant="h6" noWrap component="div">
-              Persistent drawer
-            </Typography> */}
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="end"
-              sx={{ mr: 0.5, ...(open && { display: "none" }) }}
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            <div style={{ justifyContent: "flex-start" }}>
+              <Link to="/home">
+                <img
+                  src="src/assets/cat-logo.png"
+                  style={{ width: "70px", height: "60px" }}
+                />
+              </Link>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
             >
-              <MenuIcon />
-            </IconButton>
+              <NavLink
+                to="/about"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <InfoIcon />
+                  About
+                </div>
+              </NavLink>
+              <NavLink
+                to="/symptom"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <AssignmentIcon />
+                  Symptoms
+                </div>
+              </NavLink>
+              <NavLink
+                to="/video"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <VideoCallIcon />
+                  Video
+                </div>
+              </NavLink>
+              <NavLink
+                to="/map"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                {" "}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <MapIcon />
+                  Maps
+                </div>
+              </NavLink>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="end"
+                sx={{ mr: 0.5, ...(open && { display: "none" }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -119,40 +243,63 @@ export default function Navbar() {
           variant="persistent"
           open={open}
         >
-          <DrawerHeader>
+          <DrawerHeader sx={{ justifyContent: "flex-start" }}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
                 <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
               )}
             </IconButton>
           </DrawerHeader>
           <Divider />
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
+            {[
+              { name: "Home", icon: <HomeIcon />, route: "/home" },
+              { name: "About", icon: <InfoIcon />, route: "/about" },
+              {
+                name: "Symptom Checker",
+                icon: <AssignmentIcon />,
+                route: "/symptom",
+              },
+              { name: "Video Call", icon: <VideoCallIcon />, route: "/video" },
+              { name: "Vet Map", icon: <MapIcon />, route: "/map" },
+            ].map((text, index) => (
+              <ListItem
+                key={text.name}
+                className="navbar-header"
+                disablePadding
+              >
+                <NavLink
+                  to={text.route}
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "#826bf5" : "rgba(0, 0, 0, 0.54)",
+                      textDecoration: "none",
+                      width: "100%",
+                      backgroundColor: isActive ? "#eee" : null,
+                    };
+                  }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{text.icon}</ListItemIcon>
+                    <ListItemText primary={text.name} />
+                  </ListItemButton>
+                </NavLink>
               </ListItem>
             ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText
+                  style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                  primary="Logout"
+                />
+              </ListItemButton>
+            </ListItem>
           </List>
         </Drawer>
         <Main open={open}></Main>
@@ -160,6 +307,49 @@ export default function Navbar() {
 
       <Outlet />
       <CatBot />
+      <footer>
+        <div className="footer">
+          <div className="row icons">
+            <a href="#">
+              <FacebookIcon />
+            </a>
+            <a href="#">
+              <YouTubeIcon />
+            </a>
+            <a href="#">
+              <InstagramIcon />
+            </a>
+            <a href="#">
+              <TwitterIcon />
+            </a>
+          </div>
+
+          <div className="row">
+            <ul>
+              <li>
+                <a href="#">Contact us</a>
+              </li>
+              <li>
+                <a href="#">Our Services</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#">Terms & Conditions</a>
+              </li>
+              <li>
+                <a href="#">Career</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="row">
+            Cat Care Copyright © 2023 - All rights reserved || Designed By: Cat
+            Care
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
