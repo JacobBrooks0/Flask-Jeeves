@@ -78,57 +78,46 @@ class Diary(db.Model):
         self.diagnosis = diagnosis
         self.field = field
 
-class Questions(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(200), nullable=False)
-
-    def __init__(self, question):
-        self.question = question
-
-class Specialty(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-
-    def __init__(self, name):
-        self.name = name
-
-class Answers(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    answer = db.Column(db.Integer, nullable=False)
-
-     def __init__(self, question_id, user_id, answer):
-        self.question_id = question_id
-        self.user_id = user_id
-        self.answer = answer
-
-class Symptoms(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-
-     def __init__(self, question_id, name):
-        self.question_id = question_id
-        self.name = name
-
-
 class Diseases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    symptom_id = db.Column(db.Integer, db.ForeignKey('symptoms.id'), nullable=False)
-    specialty_id = db.Column(db.Integer, db.ForeignKey('specialty.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    specialty = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
 
-    def __init__(self, symptom_id, specialty_id, name):
+    def __init__(self, specialty, name):
         self.symptom_id = symptom_id
-        self.specialty_id = specialty_id
+        self.specialty = specialty
         self.name = name
+        self.description = description
 
-class DiseasesRules(db.Model):
+class DiseasesVariables(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    specialty = db.Column(db.JSON)
+    feature = db.Column(db.String(100), nullable=False)
+    question = db.Column(db.String(200), nullable=False)
+    defaultQuestion = db.Column(db.Boolean, nullable=False)
 
+     def __init__(self, specialty, feature, question, defaultQuestion):
+        self.specialty = specialty
+        self.feature = feature
+        self.question = question
+        self.defaultQuestion = defaultQuestion
 
-#####chatgpt, have to test that
-# question_specialty_association = db.Table('question_specialty_association',
-#     db.Column('question_id', db.Integer, db.ForeignKey('question.id'), primary_key=True),
-#     db.Column('specialty_id', db.Integer, db.ForeignKey('specialty.id'), primary_key=True)
-# )
+class UsersAnswersCount(db.Model)
+    id = db.Column(db.Integer, primary_key=True)
+    disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)
+    diseasesVariables_id = db.Column(db.Integer, db.ForeignKey('diseasesVariables.id'), nullable=False)
+    no = db.Column(db.Integer)
+    probablyNot = db.Column(db.Integer)
+    iDontKnow = db.Column(db.Integer)
+    propablyYes = db.Column(db.Integer)
+    yes = db.Column(db.Integer)
+
+    def __init__(self, disease_id, diseasesVariables_id, no, probablyNot, iDontKnow, propablyYes, yes):
+        self.disease_id = disease_id
+        self.diseasesVariables_id = diseasesVariables_id
+        self.no = no
+        self.probablyNot = probablyNot
+        self.iDontKnow = iDontKnow
+        self.propablyYes = propablyYes
+        self.yes = yes
