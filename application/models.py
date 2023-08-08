@@ -33,6 +33,13 @@ class Appointments(db.Model):
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table
     pet = db.relationship('Pet', backref=db.backref('appointments', lazy=True))
+    
+    #initialiase all the class values as the instance values
+    def __init__(self, date, pet_id, description):
+        self.date = date
+        self.pet_id = pet_id
+        self.description = description 
+                 
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -66,7 +73,7 @@ class Answers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    answer = db.Column(db.Interger, nullable=False)
+    answer = db.Column(db.Integer, nullable=False)
 
 class Symptoms(db.Model):
     id = db.Column(db.Integer, primary_key=True)

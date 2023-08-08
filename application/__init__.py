@@ -16,5 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
 #initialise the db
 db = SQLAlchemy(app)
+#create_app
 
 from application import routes

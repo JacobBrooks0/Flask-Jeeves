@@ -3,26 +3,31 @@ from application import db
 from flask import request, jsonify, Blueprint
 from application.models import User
 
+#Blueprint obj creation
 main = Blueprint("main", __name__)
 print(__name__)
 
 #homepage
 @main.route("/")
-def hello_world():
+def index():
     return "<p>Hello, World!</p>"
 
-# Route to Create a New User
+# Route to Create a New User(add data to database w. POST route:)
 @main.route('/user', methods=['POST'])
 def create_user():
-    data = request.get_json()
+    #retrieved data from client 
+    data = request.json
+    #created new user using the data
     new_user = User(
         first_name=data['first_name'],
         last_name=data['last_name'],
         email=data['email'],
         password=data['password']
     )
+    #send user to DB
     db.session.add(new_user)
     db.session.commit()
+    #return JSON response to the client 
     return jsonify({"message": "User created successfully!"}), 201
 
 # Route to Get All Users
@@ -41,9 +46,9 @@ def get_all_users():
     return jsonify(user_list), 200
 
 # Route to Get a Specific User by ID
-@main.route('/user/<int:user_id>', methods=['GET'])
+@main.route('/user/<id>', methods=['GET'])
 def get_user_by_id(user_id):
-    user = User.query.get_or_404(user_id)
+    user = User.query.filter_by(id=id).first()
     user_data = {
         'id': user.id,
         'first_name': user.first_name,
