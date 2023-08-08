@@ -26,10 +26,9 @@ export default function MapPage() {
   const mapRef = useRef();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_MAPS_API_KEY,
+
     libraries: ["places"],
   });
-
-  //veterinary_care
 
   function useLocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -40,6 +39,7 @@ export default function MapPage() {
         },
       ]);
     });
+    // searchForVets();
   }
 
   const onLoad = useCallback((map) => (mapRef.current = map), []);
@@ -81,10 +81,10 @@ export default function MapPage() {
             <ComboboxInput
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              // disabled={!ready}
               className="combobox-input"
-              placeholder="Search office address"
+              placeholder="Search for an address"
             />
-            {console.log(value)}
             <ComboboxPopover>
               <ComboboxList>
                 {status === "OK" &&
@@ -98,12 +98,14 @@ export default function MapPage() {
             zoom={13}
             onLoad={onLoad}
             center={markers[0]}
+            options={{ mapId: "713a483497249211" }}
             mapContainerClassName={style["map-container"]}
           >
             <Marker position={markers[0]} />
           </GoogleMap>
         </div>
       )}
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d76869.11007913601!2d-0.17636060714725105!3d52.981529438243165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sveterinarian%20in%20boston!5e0!3m2!1sen!2suk!4v1691514679997!5m2!1sen!2suk"></iframe>
     </div>
   );
 }
