@@ -35,7 +35,7 @@ for i in range(max_Number_of_Questions):
 
 print("The three most probable diseases are:")
 for i in range(-1, -4, -1):
-    print(probabilities[i])
+    print(probabilities[i]['name'])
 
 # FUTURO
 # 1 - Criar o banco de dados para salvar:
