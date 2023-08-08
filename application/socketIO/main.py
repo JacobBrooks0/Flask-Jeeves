@@ -5,7 +5,7 @@ from string import ascii_uppercase
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "auhuiha"
-socketio= SocketIO(app)
+socketio = SocketIO(app)
 
 rooms = {}
 def generate_unique_code(length):
@@ -17,7 +17,7 @@ def generate_unique_code(length):
 			break
 	return code
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/chat", methods=["POST", "GET"])
 def home():
 	session.clear()
 	if request.method == "POST":
@@ -38,6 +38,8 @@ def home():
 			rooms[room] = {"members": 0, "messages": []}
 		elif code not in rooms:
 			return render_template("home.html", error="Room does not exist.", code=code, name=name)
+		elif rooms[room]["members"] >=2:
+			return render_template("home.html", error="This room is full.", code=code, name=name)
 
 		session["room"] = room
 		session["name"] = name
@@ -45,7 +47,7 @@ def home():
 
 	return render_template("home.html")
 
-@app.route("/room")
+@app.route("/chat/room")
 def room():
 	room = session.get("room")
 	if room is None or session.get("name") is None or room not in rooms:
