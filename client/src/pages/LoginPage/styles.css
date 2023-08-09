@@ -1,19 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+
 .login-body {
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url("../../assets/login-bg.jpg");
+  background-image: url("../../assets/login-bg.png");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-color: #826bf5;
 }
 
 .login-form {
   padding: 30px;
   margin: 0;
-  background-color: #faf0d7;
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -23,6 +26,8 @@
 
 .sign-in {
   align-self: center;
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
 }
 
 .logo {

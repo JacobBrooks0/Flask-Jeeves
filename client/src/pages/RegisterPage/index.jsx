@@ -84,7 +84,16 @@ export default function RegisterPage() {
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
         <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
-        <Typography component="h1" variant="h5" className="sign-in">
+        <Typography
+          component="h1"
+          variant="h4"
+          className="sign-in"
+          fontFamily={"'Jua', sans-serif"}
+          sx={{
+            fontWeight: "400",
+            textAlign: "center",
+          }}
+        >
           Register
         </Typography>
         <TextField
@@ -147,10 +156,25 @@ export default function RegisterPage() {
           className="button"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          style={{ backgroundColor: "#FFD9C0", color: "black" }}
+          sx={{
+            mt: 2,
+            px: 4,
+            py: 1,
+            fontSize: "0.9rem",
+            textTransform: "capitalize",
+            borderRadius: 1,
+            borderColor: "#14192d",
+            color: "#fff",
+            backgroundColor: "#826BF5",
+            "&&:hover": {
+              backgroundColor: "#7958D6",
+            },
+            "&&:focus": {
+              backgroundColor: "#7958D6",
+            },
+          }}
         >
-          Sign Up
+          Register
         </Button>
         <Link href="/login" variant="body2" style={{ color: "black" }}>
           Already have an account? Sign In
