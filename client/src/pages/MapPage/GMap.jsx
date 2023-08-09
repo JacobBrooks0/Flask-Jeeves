@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useLocations } from "../../contexts/";
 
 const GMap = () => {
   const googleMapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState([]);
+  const { details, setDetails } = useLocations();
 
   let infowindow;
 
@@ -19,10 +21,10 @@ const GMap = () => {
     });
   }
 
-  var request = {
+  let request = {
     location: marker[0],
     radius: "500",
-    query: "vets",
+    query: `vets`,
   };
 
   const service = new google.maps.places.PlacesService(map);
@@ -36,6 +38,12 @@ const GMap = () => {
     }
   }
 
+  function detailsCallback(place, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      setDetails(place);
+    }
+  }
+
   function createMarker(place) {
     if (!place.geometry || !place.geometry.location) return;
 
@@ -45,9 +53,18 @@ const GMap = () => {
     });
 
     google.maps.event.addListener(marker, "click", () => {
-      //   infowindow.setContent(place.name || "");
-      console.log(place.name);
-      //   infowindow.open(map);
+      let extraDetails = {
+        placeId: place.place_id,
+        fields: [
+          "name",
+          "photo",
+          "website",
+          "formatted_phone_number",
+          "rating",
+          "formatted_address",
+        ],
+      };
+      service.getDetails(extraDetails, detailsCallback);
     });
   }
 
@@ -64,10 +81,10 @@ const GMap = () => {
   useEffect(() => {
     if (!map) return;
 
-    new window.google.maps.Marker({
-      position: marker[0],
-      map: map,
-    });
+    // new window.google.maps.Marker({
+    //   position: marker[0],
+    //   map: map,
+    // });
   }, [map]);
 
   const initGoogleMap = () => {
@@ -80,7 +97,7 @@ const GMap = () => {
     return { googMap: googMap };
   };
 
-  return <div ref={googleMapRef} style={{ width: 600, height: 500 }} />;
+  return <div ref={googleMapRef} style={{ width: "60%", height: "75%" }} />;
 };
 
 export default GMap;
