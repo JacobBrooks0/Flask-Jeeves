@@ -1,19 +1,17 @@
-from flask import Flask, render_template, request, session, redirect, url_for
-from flask_socketio import join_room, leave_room, send, SocketIO
-import random
-from string import ascii_uppercase
+from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-import os #imbuilt pyrhon module
+import os #imbuilt python module
 from dotenv import load_dotenv
+
 
 #load env virables.
 load_dotenv()
 
-#application factory 
-#function to call with diff setting (dev or testing environment)
-#run different version of the app (multiple instances with different config)
-#setup app factory
+""" application factory 
+function to call with diff setting (dev or testing environment)
+run different version of the app (multiple instances with different config)
+setup app factory """
 
 #create an instance of the db
 db = SQLAlchemy()
@@ -38,10 +36,11 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    from application.user.routes import user_routes
-    from application.homepage.routes import homepage_routes
-
-    app.register_blueprint(user_routes)
-    app.register_blueprint(homepage_routes)
+    #BLUEPRINTS
+    from application.homepage.routes import homepage
+    from application.user.routes import user
+    #Blueprints registration
+    app.register_blueprint(user)
+    app.register_blueprint(homepage)
 
     return app

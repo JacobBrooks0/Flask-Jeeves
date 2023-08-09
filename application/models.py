@@ -82,8 +82,7 @@ class Diseases(db.Model):
     specialty = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
 
-    def __init__(self, specialty, name):
-        self.symptom_id = symptom_id
+    def __init__(self, specialty, name, description):
         self.specialty = specialty
         self.name = name
         self.description = description
