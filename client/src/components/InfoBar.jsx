@@ -7,6 +7,7 @@ import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import PetsIcon from "@mui/icons-material/Pets";
 
 export default function InfoBar() {
   const [open, setOpen] = useState(false);
@@ -148,7 +149,47 @@ export default function InfoBar() {
       }}
     >
       {Object.keys(details).length == 0 ? (
-        <p>No details to show </p>
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              flex: 0.5,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            <PetsIcon style={{ height: "90%", width: "90%" }} />
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              padding: "0 20px",
+              flex: 0.5,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              fontFamily: "Jua",
+            }}
+          >
+            <h2 style={{ paddingBottom: "20px" }}>
+              Don't 'paws' to read this!
+            </h2>
+            <h3>
+              Select a marker to see information about that Veterinary business
+            </h3>
+          </div>
+        </div>
       ) : (
         <>
           <div
