@@ -23,61 +23,61 @@ export default function InfoBar() {
     if (Math.round(num * 2) / 2 === 5) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 4.5) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarHalfIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarHalfIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 4) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 3.5) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarHalfIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarHalfIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 3) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 2.5) {
       return (
         <>
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarIcon style={{ marginBottom: "3px" }} />
-          <StarHalfIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
-          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarHalfIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
+          <StarBorderIcon style={{ marginBottom: "3px", color: "#ffa500" }} />
         </>
       );
     } else if (Math.round(num * 2) / 2 === 2) {
@@ -234,9 +234,16 @@ export default function InfoBar() {
             Phone Number: {details.formatted_phone_number}
           </p>
           <p
-            style={{ textAlign: "center", margin: "20px 0", padding: "0 20px" }}
+            style={{
+              textAlign: "center",
+              margin: "20px 0",
+              padding: "0 20px",
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            Rating: {roundHalf(details.rating)}
+            {roundHalf(details.rating)}
           </p>
         </>
       )}
