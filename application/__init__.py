@@ -35,7 +35,7 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    #BLUEPRINTS
+     #BLUEPRINTS
     from application.homepage.routes import homepage
 
     from application.user.routes import user
