@@ -22,6 +22,9 @@ sqlalchemy = "==2.0.19"
 typing-extensions = "==4.7.1"
 werkzeug = "==2.3.6"
 numpy = "*"
+flask-socketio = "*"
+python-socketio = "*"
+python-engineio = "*"
 
 [dev-packages]
 pytest = "*"
