@@ -35,10 +35,6 @@ class Appointments(db.Model):
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table
     pet = db.relationship("Pet", backref=db.backref("appointments", lazy=True))
-    pets = db.relationship(
-        "Pets",
-        backref=db.backref("appointments", lazy=True, cascade="all,delete-orphan"),
-    )
 
     # initialiase all the class values as the instance values
     def __init__(self, date, pet_id, description):
@@ -60,9 +56,6 @@ class Pets(db.Model):
     )  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
-    user = db.relationship(
-        "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
-    )
 
     def __init__(
         self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet
@@ -85,9 +78,6 @@ class Diary(db.Model):
     date = db.Column(db.Date, nullable=False)
     diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
     field = db.Column(db.String(100))
-    pets = db.relationship(
-        "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
-    )
 
     def __init__(self, pet_id, name, date, diagnosis, field):
         self.pet_id = pet_id
