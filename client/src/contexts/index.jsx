@@ -7,6 +7,8 @@ export const CredentialsProvider = ({ children }) => {
   const [passwordValue, setPasswordValue] = useState("");
   const [firstNameValue, setFirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
 
   return (
     <CredentialsContext.Provider
@@ -19,6 +21,10 @@ export const CredentialsProvider = ({ children }) => {
         setFirstNameValue,
         lastNameValue,
         setLastNameValue,
+        user,
+        setUser,
+        profile,
+        setProfile,
       }}
     >
       {children}

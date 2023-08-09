@@ -1,8 +1,14 @@
-.welcome-controls {
-  margin-top: 50px;
+.video-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.welcome-controls {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   align-items: center;
   height: 100vh;

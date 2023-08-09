@@ -4,13 +4,16 @@ import App from "./App.jsx";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { CredentialsProvider, LocationProvider } from "./contexts";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <CredentialsProvider>
-      <LocationProvider>
-        <App />
-      </LocationProvider>
-    </CredentialsProvider>
-  </BrowserRouter>
+  <GoogleOAuthProvider clientId="1003135220595-1uqu94v5934mgev6fcvka78uj16apgg2.apps.googleusercontent.com">
+    <BrowserRouter>
+      <CredentialsProvider>
+        <LocationProvider>
+          <App />
+        </LocationProvider>
+      </CredentialsProvider>
+    </BrowserRouter>
+  </GoogleOAuthProvider>
 );
