@@ -1,7 +1,5 @@
 #Here we will build all out tables (DB). 
-from application import db, app
-
-app.app_context().push()
+from application import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,24 +7,37 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-
     # JSON column to store an array of pets
     pets = db.Column(db.JSON)
-
     # Date of Birth (DOB)
     dob = db.Column(db.Date, nullable=False)
-
     # JSON column to store an array of appointment history
     appointment_history = db.Column(db.JSON)
+
+#initialiase all the class values as the instance values
+    def __init__(self, first_name, last_name, email, password, pets, dob, appointment_history):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.password = password
+        self.pets = pets
+        self.dob = dob
+        self.appointment_history = appointment_history
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
     pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-
     # Relationship with Pet table
     pet = db.relationship('Pet', backref=db.backref('appointments', lazy=True))
+    
+    #initialiase all the class values as the instance values
+    def __init__(self, date, pet_id, description):
+        self.date = date
+        self.pet_id = pet_id
+        self.description = description 
+                 
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,7 +71,7 @@ class Answers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    answer = db.Column(db.Interger, nullable=False)
+    answer = db.Column(db.Integer, nullable=False)
 
 class Symptoms(db.Model):
     id = db.Column(db.Integer, primary_key=True)
