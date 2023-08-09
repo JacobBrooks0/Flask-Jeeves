@@ -8,11 +8,11 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     # JSON column to store an array of pets
-    pets = db.Column(db.JSON)
+    pets = db.Column(db.JSON, nullable = True)
     # Date of Birth (DOB)
-    dob = db.Column(db.Date, nullable=False)
+    dob = db.Column(db.Date, nullable=True)
     # JSON column to store an array of appointment history
-    appointment_history = db.Column(db.JSON)
+    appointment_history = db.Column(db.JSON, nullable=True)
 
 #initialiase all the class values as the instance values
     def __init__(self, first_name, last_name, email, password, pets, dob, appointment_history):
@@ -82,8 +82,7 @@ class Diseases(db.Model):
     specialty = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
 
-    def __init__(self, specialty, name):
-        self.symptom_id = symptom_id
+    def __init__(self, specialty, name, description):
         self.specialty = specialty
         self.name = name
         self.description = description
