@@ -7,9 +7,11 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCredentials } from "../../contexts";
 import "./styles.css";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 export default function LoginPage() {
   const {
@@ -17,7 +19,48 @@ export default function LoginPage() {
     setEmailValue,
     passwordValue,
     setPasswordValue,
+    user,
+    setUser,
+    profile,
+    setProfile,
   } = useCredentials();
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+    console.log(profile);
+  }, [user]);
+
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+  };
+
+  const responseMessage = (response) => {
+    console.log(response);
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
   const loginRequest = async (formData) => {
     const options = {
@@ -58,11 +101,22 @@ export default function LoginPage() {
     setPasswordValue("");
   };
 
+  const googleStyling = { width: "100%", backgroundColor: "black" };
+
   return (
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
         <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
-        <Typography component="h1" variant="h5" className="sign-in">
+        <Typography
+          component="h1"
+          variant="h4"
+          className="sign-in"
+          fontFamily={"'Jua', sans-serif"}
+          sx={{
+            fontWeight: "400",
+            textAlign: "center",
+          }}
+        >
           Sign in
         </Typography>
         <TextField
@@ -93,12 +147,52 @@ export default function LoginPage() {
           label="Remember me"
         />
         <Button
+          className="button"
+          fullWidth
+          variant="contained"
+          sx={{
+            my: 0.5,
+            px: 4,
+            py: 0.8,
+            fontSize: "0.9rem",
+            textTransform: "capitalize",
+            borderRadius: 1,
+            borderColor: "#14192d",
+            color: "#fff",
+            backgroundColor: "#826BF5",
+            "&&:hover": {
+              backgroundColor: "#7958D6",
+            },
+            "&&:focus": {
+              backgroundColor: "#7958D6",
+            },
+          }}
+          onClick={() => googleLogin()}
+        >
+          Sign in with Google 🚀{" "}
+        </Button>
+        <Button
           type="submit"
           className="button"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          style={{ backgroundColor: "#FFD9C0", color: "black" }}
+          sx={{
+            my: 0.5,
+            px: 4,
+            py: 0.8,
+            fontSize: "0.9rem",
+            textTransform: "capitalize",
+            borderRadius: 1,
+            borderColor: "#14192d",
+            color: "#fff",
+            backgroundColor: "#826BF5",
+            "&&:hover": {
+              backgroundColor: "#7958D6",
+            },
+            "&&:focus": {
+              backgroundColor: "#7958D6",
+            },
+          }}
         >
           Sign In
         </Button>
