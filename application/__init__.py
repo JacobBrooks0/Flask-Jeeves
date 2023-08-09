@@ -35,7 +35,10 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    from application.user.routes import user
-    app.register_blueprint(user)
+    from application.user.routes import user_routes
+    from application.homepage.routes import homepage_routes
+
+    app.register_blueprint(user_routes)
+    app.register_blueprint(homepage_routes)
 
     return app

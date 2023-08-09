@@ -2,10 +2,10 @@ from application import db
 from flask import request, jsonify, Blueprint
 from application.models import User
 
-user = Blueprint("user", __name__)
+user_route = Blueprint("user", __name__)
 
 # Route to Create a New User(add data to database w. POST route:)
-@user.route('/user', methods=['POST'])
+@user_route.route('/user', methods=['POST'])
 def create_user():
     #retrieved data from client 
     data = request.json
@@ -23,7 +23,7 @@ def create_user():
     return jsonify({"message": "User created successfully!"}), 201
 
 # Route to Get All Users
-@user.route('/users', methods=['GET'])
+@user_route.route('/users', methods=['GET'])
 def get_all_users():
     users = User.query.all()
     user_list = []
@@ -38,7 +38,7 @@ def get_all_users():
     return jsonify(user_list), 200
 
 # Route to Get a Specific User by ID
-@user.route('/user/<id>', methods=['GET'])
+@user_route.route('/user/<id>', methods=['GET'])
 def get_user_by_id(user_id):
     user = User.query.filter_by(id=id).first()
     user_data = {
@@ -50,7 +50,7 @@ def get_user_by_id(user_id):
     return jsonify(user_data), 200
 
 # Route to Update a User by ID
-@user.route('/user/<id>', methods=['PUT'])
+@user_route.route('/user/<id>', methods=['PUT'])
 def update_user_by_id(user_id):
     user = User.query.get_or_404(user_id)
     data = request.get_json()
@@ -62,7 +62,7 @@ def update_user_by_id(user_id):
     return jsonify({"message": "User updated successfully!"}), 200
 
 # Route to Delete a User by ID
-@user.route('/user/<id>', methods=['DELETE'])
+@user_route.route('/user/<id>', methods=['DELETE'])
 def delete_user_by_id(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
