@@ -369,8 +369,8 @@ export default function Navbar() {
           </div>
 
           <div className="row">
-            Cat Care Copyright © 2023 - All rights reserved || Designed By: Cat
-            Care
+            Cat Care Copyright © 2023 - All rights reserved || Designed By:
+            Flask Jeeves
           </div>
         </div>
       </footer>

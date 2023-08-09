@@ -36,3 +36,22 @@ export const CredentialsProvider = ({ children }) => {
 };
 
 export const useCredentials = () => useContext(CredentialsContext);
+
+const LocationContext = createContext();
+
+export const LocationProvider = ({ children }) => {
+  const [details, setDetails] = useState({});
+
+  return (
+    <LocationContext.Provider
+      value={{
+        details,
+        setDetails,
+      }}
+    >
+      {children}
+    </LocationContext.Provider>
+  );
+};
+
+export const useLocations = () => useContext(LocationContext);

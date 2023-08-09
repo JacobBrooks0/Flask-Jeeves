@@ -1,52 +1,38 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
-export default function WebSocketCall({socket}){
+export default function WebSocketCall({ socket }) {
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
-	const[message, setMessage] = React.useState("")
-	const[messages, setMessages] = React.useState([])
+  const handleText = (e) => {
+    const inputMessage = e.target.value;
+    setMessage(inputMessage);
+  };
 
-	const handleText = (e) => {
-		const inputMessage = e.target.value
-		setMessage(inputMessage)
-	}
+  const handleSubmit = () => {
+    if (!message) {
+      return;
+    }
+    socket.emit("data", message);
+    setMessage("");
+  };
 
-	const handleSubmit = () => {
-		if(!message){
-			return
-		}
+  useEffect(() => {
+    socket.on("data", (data) => {
+      setMessages([...messages, data.data]);
+    });
+  }, [socket, messages]);
 
-		socket.emit('data', message)
-		setMessage("")
-	}
-
-	const handleData = (data) => {
-    setMessages((prevMessages) => [...prevMessages, data.data]);
-	};
-
-
-	React.useEffect(() => {
-		socket.on('data', (data) => {
-			setMessages([...messages, data.data])
-
-		})
-
-		return() => {
-			socket.off('data', handleData);
-        	console.log("data event was removed");
-		}
-	}, [socket, messages])
-
-	return (
-		<div>
-			<h2>Websocket Communication</h2>
-			<input type="text" value={message} onChange={handleText}/>
-			<button onClick={handleSubmit}>Submit</button>
-
-			<ul>
-				{messages.map((message, index) => {
-					return <li key={index}>{message}</li>
-				})}
-			</ul>
-		</div>
-	)
+  return (
+    <div>
+      <h2>WebSocket Communication</h2>
+      <input type="text" value={message} onChange={handleText} />
+      <button onClick={handleSubmit}>submit</button>
+      <ul>
+        {messages.map((message, ind) => {
+          return <li key={ind}>{message}</li>;
+        })}
+      </ul>
+    </div>
+  );
 }
