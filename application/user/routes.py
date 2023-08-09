@@ -4,6 +4,10 @@ from application.models import User
 
 user = Blueprint("user", __name__)
 
+@user.route("/")
+def index():
+    return "<p>Hello, World!</p>"
+
 # Route to Create a New User(add data to database w. POST route:)
 @user.route('/user', methods=['POST'])
 def create_user():
