@@ -19,6 +19,11 @@ export default function WebSocketCall({socket}){
 		setMessage("")
 	}
 
+	const handleData = (data) => {
+    setMessages((prevMessages) => [...prevMessages, data.data]);
+	};
+
+
 	React.useEffect(() => {
 		socket.on('data', (data) => {
 			setMessages([...messages, data.data])
@@ -26,9 +31,8 @@ export default function WebSocketCall({socket}){
 		})
 
 		return() => {
-			socket.off('data', () => {
-				console.log("data event was removed")
-			})
+			socket.off('data', handleData);
+        	console.log("data event was removed");
 		}
 	}, [socket, messages])
 

@@ -23,7 +23,9 @@ export default function ChatPage() {
           origin: "http://localhost:5173/"
         }
       })
+
       setSocketInstance(socket)
+
       socket.on('connect', (data) => {
         console.log(data)
       })
@@ -38,6 +40,7 @@ export default function ChatPage() {
         socket.disconnect()
       }
     }
+
   }, [buttonStatus])
 
   return(
@@ -48,12 +51,14 @@ export default function ChatPage() {
         </div>
         {!buttonStatus ? (
           <button onClick={handleClick}>Turn Chat on</button>
-        ) : <>
-        <button onClick={handleClick}>Turn Chat off</button>
-        <div className="line">
-          {!loading && <WebSocketCall socket={socketInstance} />}
-        </div>
-        </>}
+        ) : (
+        <>
+          <button onClick={handleClick}>Turn Chat off</button>
+          <div className="line">
+            {!loading && <WebSocketCall socket={socketInstance} />}
+          </div>
+        </>
+        )}
     </div>
     )
 }
