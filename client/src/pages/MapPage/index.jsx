@@ -149,6 +149,7 @@ const MapPage = () => {
         </h1>
         <p>Click on or tap a marker to see information about Vets near you</p>
       </div>
+
       <div className={style["map-container"]}>
         {!loadMap ? <div>Loading...</div> : <GMap />}
         <InfoBar />

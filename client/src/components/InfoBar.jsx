@@ -138,7 +138,7 @@ export default function InfoBar() {
     <div
       style={{
         width: "40%",
-        height: "600px",
+        height: "750px",
         padding: "0",
         backgroundColor: "#D3CCFA",
         display: "flex",
@@ -161,30 +161,17 @@ export default function InfoBar() {
         >
           <div
             style={{
-              flex: 0.5,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-          >
-            <PetsIcon style={{ height: "90%", width: "90%" }} />
-          </div>
-          <div
-            style={{
               textAlign: "center",
               padding: "0 20px",
-              flex: 0.5,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "flex-start",
+              justifyContent: "center",
               fontFamily: "Jua",
             }}
           >
-            <h2 style={{ paddingBottom: "20px" }}>
-              Don't 'paws' to read this!
-            </h2>
+            <PetsIcon style={{ height: "50%", width: "50%" }} />
+            <h2 style={{ padding: "20px 0" }}>Don't 'paws' to read this!</h2>
             <h3>
               Select a marker to see information about that Veterinary business
             </h3>
