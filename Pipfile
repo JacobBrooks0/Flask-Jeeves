@@ -25,6 +25,7 @@ numpy = "*"
 flask-socketio = "*"
 python-socketio = "*"
 python-engineio = "*"
+simple-websocket = "*"
 
 [dev-packages]
 pytest = "*"
