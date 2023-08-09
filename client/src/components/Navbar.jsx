@@ -22,6 +22,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import "../App.css";
+import { useCredentials } from "../contexts";
 
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
@@ -87,6 +88,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { dark, setDark } = useCredentials();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -96,15 +98,20 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  React.useEffect(() => {
+    dark
+      ? document.body.classList.add("dark")
+      : document.body.classList.remove("dark");
+  }, [dark]);
+  // document.body.style.backgroundColor = "whitesmoke";
+
   const handleThemeChange = () => {
-    if (document.body.style.backgroundColor == "black") {
+    if (dark) {
       return <Brightness7Icon />;
     } else {
       return <Brightness4Icon />;
     }
   };
-
-  // document.body.style.backgroundColor = "whitesmoke";
 
   return (
     <>
@@ -231,11 +238,7 @@ export default function Navbar() {
               <IconButton
                 sx={{ ml: 1 }}
                 color="inherit"
-                onClick={() =>
-                  document.body.style.backgroundColor === "whitesmoke"
-                    ? (document.body.style.backgroundColor = "black")
-                    : (document.body.style.backgroundColor = "whitesmoke")
-                }
+                onClick={() => (dark ? setDark(false) : setDark(true))}
               >
                 {handleThemeChange()}
               </IconButton>

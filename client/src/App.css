@@ -11,6 +11,10 @@ html {
   background-color: whitesmoke;
 }
 
+.dark {
+  background-color: #121212;
+}
+
 .glfuN {
   background: #826bf5 !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { createNewRoom } from "../API";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,11 +8,13 @@ import LandingTitle from "../../../components/LandingTitle";
 import Typography from "@mui/material/Typography";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Snackbar } from "@mui/material";
+import { useCredentials } from "../../../contexts";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
   const [nextAppointment, setNextAppointment] = useState({});
   const [open, setOpen] = useState(false);
+  const { dark, setDark } = useCredentials();
 
   const appointments = [
     {
@@ -75,7 +77,10 @@ const WelcomeScreenContainer = ({ setAppData }) => {
   }, [nextAppointment]);
 
   return (
-    <div className="video-page">
+    <div
+      className="video-page"
+      style={{ backgroundColor: dark ? "#121212" : "whitesmoke" }}
+    >
       <div
         style={{
           display: "flex",
@@ -83,14 +88,24 @@ const WelcomeScreenContainer = ({ setAppData }) => {
       >
         <div
           style={{
-            backgroundColor: "whitesmoke",
+            backgroundColor: dark ? "#121212" : "whitesmoke",
             paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
             width: "50%",
           }}
         >
-          <LandingTitle text={"Your Video Page"} textAlign={"left"} />
+          <Typography
+            variant="h3"
+            component="header"
+            sx={{
+              fontFamily: "'Jua', sans-serif",
+              color: dark ? "whitesmoke" : "#121212",
+              fontSize: "3rem",
+            }}
+          >
+            Your Video Page
+          </Typography>
           <Typography
             variant="h6"
             component="p"
@@ -98,7 +113,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               py: 3,
               display: "block",
               lineHeight: 1.6,
-              color: "black",
+              color: dark ? "whitesmoke" : "#121212",
             }}
           >
             On your video page, you can join a face-to-face <br /> call with
@@ -109,7 +124,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
         </div>
         <div
           style={{
-            backgroundColor: "whitesmoke",
+            backgroundColor: dark ? "#121212" : "whitesmoke",
             paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
@@ -121,11 +136,15 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           }}
         >
           <TextField
-            variant="outlined"
+            variant="filled"
             label="Meeting ID"
             onChange={(e) => setMeetingId(e.target.value)}
             value={meetingId}
-            sx={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+            color="secondary"
+            sx={{
+              backgroundColor: "whitesmoke",
+              borderRadius: "5px",
+            }}
           />
           <Button
             variant="contained"
@@ -175,53 +194,27 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           >
             Create new Meeting
           </Button>
-          {/* <LandingTitle text={"Your Next Appointment"} textAlign={"left"} />
-          <Typography
-            variant="h6"
-            component="p"
-            sx={{
-              py: 3,
-              display: "block",
-              lineHeight: 1.6,
-              color: "black",
-            }}
-          >
-            Date:
-            {nextAppointment[0] ? nextAppointment[0].date : "loading"}
-            <br />
-            Pet:
-            {nextAppointment[0] ? nextAppointment[0].petName : "loading"}
-            <br />
-            Time:
-            {nextAppointment[0] ? nextAppointment[0].time : "loading"}
-            <br />
-            Meeting ID:
-            {nextAppointment[0] ? nextAppointment[0].meetingId : "loading"}{" "}
-            <IconButton onClick={handleClick} color="#826BF5">
-              <ContentCopyIcon
-                sx={{
-                  width: "1.5rem",
-                  height: "fit-content",
-                  mb: -0.5,
-                }}
-              />
-            </IconButton>
-          </Typography>
-          <Snackbar
-            message="Copied to clipboard"
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            autoHideDuration={2000}
-            onClose={() => setOpen(false)}
-            open={open}
-          /> */}
         </div>
       </div>
       <br />
       <br />
       <br />
-      <div className="welcome-controls">
+      <div
+        className="welcome-controls"
+        style={{ backgroundColor: dark ? "#7958D6" : "#D3CCFA" }}
+      >
         <div>
-          <LandingTitle text={"Upcoming Appointment"} textAlign={"left"} />
+          <Typography
+            variant="h3"
+            component="header"
+            sx={{
+              fontFamily: "'Jua', sans-serif",
+              color: dark ? "whitesmoke" : "#121212",
+              fontSize: "2rem",
+            }}
+          >
+            Upcoming Appointment
+          </Typography>
           <Typography
             variant="h6"
             component="p"
@@ -229,7 +222,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               py: 3,
               display: "block",
               lineHeight: 1.6,
-              color: "black",
+              color: dark ? "whitesmoke" : "#121212",
             }}
           >
             Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}{" "}
@@ -245,6 +238,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
                   width: "1.5rem",
                   height: "fit-content",
                   mb: -0.5,
+                  color: dark ? "whitesmoke" : "#121212",
                 }}
               />
             </IconButton>
@@ -262,61 +256,6 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           alt="doctor"
           style={{ height: "100%" }}
         />
-        {/* <Button
-          sx={{
-            my: 0.5,
-            px: 4,
-            py: 0.8,
-            fontSize: "0.9rem",
-            textTransform: "capitalize",
-            borderRadius: 1,
-            borderColor: "#14192d",
-            color: "white",
-            backgroundColor: "#826BF5",
-            "&&:hover": {
-              backgroundColor: "#D3CCFA",
-            },
-            "&&:focus": {
-              backgroundColor: "#D3CCFA",
-            },
-          }}
-          variant="outlined"
-          endIcon={<AddIcon />}
-          onClick={createClick}
-        >
-          Create new Meeting
-        </Button>
-        <TextField
-          variant="outlined"
-          label="Meeting ID"
-          onChange={(e) => setMeetingId(e.target.value)}
-          value={meetingId}
-          sx={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-        />
-        <Button
-          variant="outlined"
-          sx={{
-            my: 0.5,
-            px: 4,
-            py: 0.8,
-            fontSize: "0.9rem",
-            textTransform: "capitalize",
-            borderRadius: 1,
-            borderColor: "#14192d",
-            color: "black",
-            backgroundColor: "whitesmoke",
-            "&&:hover": {
-              backgroundColor: "#D3CCFA",
-            },
-            "&&:focus": {
-              backgroundColor: "#D3CCFA",
-            },
-          }}
-          endIcon={<CallIcon />}
-          onClick={hostClick}
-        >
-          Join
-        </Button> */}
       </div>
     </div>
   );
