@@ -3,7 +3,10 @@ import React from 'react'
 export default function HttpCall(){
 
 	const[data, setData] = React.useState("")
-
+	console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+	console.log(data)
+	console.log(setData)
+	console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 	React.useEffect(() => {
 		fetch("/http-call", {
 			headers: {
@@ -20,10 +23,15 @@ export default function HttpCall(){
 			response.json()
 		})
 		.then((responseData) => {
-			console.log(responseData, "<<<<<<<<")
-			setData(responseData.data)
+			console.log("LLLLLLLLLLL")
+			// console.log(responseData, "<<<<<<<<")
+			if (responseData) {
+				setData(responseData.data)
+			}
+			console.log("NADA MESMO")
 		})
 		.catch((error) => {
+		console.log(responseData, "<<<<<<<<")
         console.error("Error fetching data:", error);
         // Handle the error (e.g., show an error message)
     	});
