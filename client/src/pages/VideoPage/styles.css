@@ -1,17 +1,21 @@
 .video-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 75vh;
   width: 100%;
   margin-top: 16px;
 }
 
 .welcome-controls {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: row;
   gap: 20px;
+  z-index: 0;
+  height: 60%;
   align-items: center;
-  height: 100vh;
+  padding-top: 30px;
+  background-color: #d3ccfa;
 }
 
 .meeting-controls {

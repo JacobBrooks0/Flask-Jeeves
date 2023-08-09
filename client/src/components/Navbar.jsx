@@ -29,6 +29,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import MapIcon from "@mui/icons-material/Map";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -94,7 +96,15 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  document.body.style.backgroundColor = "whitesmoke";
+  const handleThemeChange = () => {
+    if (document.body.style.backgroundColor == "black") {
+      return <Brightness7Icon />;
+    } else {
+      return <Brightness4Icon />;
+    }
+  };
+
+  // document.body.style.backgroundColor = "whitesmoke";
 
   return (
     <>
@@ -219,6 +229,17 @@ export default function Navbar() {
                 </div>
               </NavLink>
               <IconButton
+                sx={{ ml: 1 }}
+                color="inherit"
+                onClick={() =>
+                  document.body.style.backgroundColor === "whitesmoke"
+                    ? (document.body.style.backgroundColor = "black")
+                    : (document.body.style.backgroundColor = "whitesmoke")
+                }
+              >
+                {handleThemeChange()}
+              </IconButton>
+              <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={handleDrawerOpen}
@@ -307,7 +328,7 @@ export default function Navbar() {
 
       <Outlet />
       <CatBot />
-      <footer>
+      <footer style={{ display: "block" }}>
         <div className="footer">
           <div className="row icons">
             <a href="#">
