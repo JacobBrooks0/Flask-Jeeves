@@ -31,7 +31,7 @@ simple-websocket = "*"
 pytest = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.9"
 
 [scripts]
 dev = "flask run"
