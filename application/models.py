@@ -31,13 +31,12 @@ class Appointments(db.Model):
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table
     pet = db.relationship('Pet', backref=db.backref('appointments', lazy=True))
-    
+
     #initialiase all the class values as the instance values
     def __init__(self, date, pet_id, description):
         self.date = date
         self.pet_id = pet_id
-        self.description = description 
-                 
+        self.description = description
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,9 +46,20 @@ class Pets(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     outdoor = db.Column(db.Boolean, nullable=False)
     neutered = db.Column(db.Boolean, nullable=False)
-    history = db.Column(db.JSON)  # JSON column to store an array of history
+    history_id = db.Column(db.Integer, db.ForeignKey('history.id'), nullable=False)  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet):
+        self.user_id = user_id
+        self.name = name
+        self.dob = dob
+        self.breed = breed
+        self.outdoor = outdoor
+        self.neutered = neutered
+        self.history_id = history_id
+        self.sex = sex
+        self.diet = diet
 
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -59,33 +69,53 @@ class Diary(db.Model):
     diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
     field = db.Column(db.String(100))
 
-class Questions(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(200), nullable=False)
-
-class Specialtys(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-
-class Answers(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    answer = db.Column(db.Integer, nullable=False)
-
-class Symptoms(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    def __init__(self, pet_id, name, date, diagnosis, field):
+        self.pet_id = pet_id
+        self.name = name
+        self.date = date
+        self.diagnosis = diagnosis
+        self.field = field
 
 class Diseases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    symptom_id = db.Column(db.Integer, db.ForeignKey('symptoms.id'), nullable=False)
-    specialty_id = db.Column(db.Integer, db.ForeignKey('specialty.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    specialty = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
 
-#####chatgpt, have to test that
-question_specialty_association = db.Table('question_specialty_association',
-    db.Column('question_id', db.Integer, db.ForeignKey('question.id'), primary_key=True),
-    db.Column('specialty_id', db.Integer, db.ForeignKey('specialty.id'), primary_key=True)
-)
+    def __init__(self, specialty, name):
+        self.symptom_id = symptom_id
+        self.specialty = specialty
+        self.name = name
+        self.description = description
+
+class DiseasesVariables(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    specialty = db.Column(db.JSON)
+    feature = db.Column(db.String(100), nullable=False)
+    question = db.Column(db.String(200), nullable=False)
+    defaultQuestion = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self, specialty, feature, question, defaultQuestion):
+        self.specialty = specialty
+        self.feature = feature
+        self.question = question
+        self.defaultQuestion = defaultQuestion
+
+class UsersAnswersCount(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)
+    diseasesVariables_id = db.Column(db.Integer, db.ForeignKey('diseasesVariables.id'), nullable=False)
+    no = db.Column(db.Integer)
+    probablyNot = db.Column(db.Integer)
+    iDontKnow = db.Column(db.Integer)
+    propablyYes = db.Column(db.Integer)
+    yes = db.Column(db.Integer)
+
+    def __init__(self, disease_id, diseasesVariables_id, no, probablyNot, iDontKnow, propablyYes, yes):
+        self.disease_id = disease_id
+        self.diseasesVariables_id = diseasesVariables_id
+        self.no = no
+        self.probablyNot = probablyNot
+        self.iDontKnow = iDontKnow
+        self.propablyYes = propablyYes
+        self.yes = yes
