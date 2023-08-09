@@ -19,7 +19,7 @@ def connected():
 	print('Client connected<<<<<<<<<')
 	emit("connect", {
 		"data": f"id:{request.sid} is connected"
-		}, broadcast=True)
+		})
 
 @socketio.on('disconnect')
 def disconnected():

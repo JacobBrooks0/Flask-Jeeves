@@ -16,10 +16,11 @@ export default function HttpCall(){
 			if (!response.ok) {
             	throw new Error("Network response was not OK");
         	}
-
-			return response.json()
+        	console.log(response)
+			response.json()
 		})
 		.then((responseData) => {
+			console.log(responseData, "<<<<<<<<")
 			setData(responseData.data)
 		})
 		.catch((error) => {
