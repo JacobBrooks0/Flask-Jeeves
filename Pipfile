@@ -23,9 +23,12 @@ typing-extensions = "==4.7.1"
 werkzeug = "==2.3.6"
 numpy = "*"
 flask-socketio = "*"
+<<<<<<< HEAD
 python-socketio = "*"
 python-engineio = "*"
 simple-websocket = "*"
+=======
+>>>>>>> 6d545cc5c4cfecc20baf571092118d8db02237f3
 
 [dev-packages]
 pytest = "*"
