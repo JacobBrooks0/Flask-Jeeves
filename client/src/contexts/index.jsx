@@ -9,6 +9,7 @@ export const CredentialsProvider = ({ children }) => {
   const [lastNameValue, setLastNameValue] = useState("");
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+  const [dark, setDark] = React.useState(false);
 
   return (
     <CredentialsContext.Provider
@@ -25,6 +26,8 @@ export const CredentialsProvider = ({ children }) => {
         setUser,
         profile,
         setProfile,
+        dark,
+        setDark,
       }}
     >
       {children}
