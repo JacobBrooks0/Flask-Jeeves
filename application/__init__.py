@@ -4,8 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 import os #imbuilt python module
 from dotenv import load_dotenv
 
-
-#load env virables.
 load_dotenv()
 
 """ application factory 
@@ -31,6 +29,7 @@ def create_app(env=None):
         app.config["DEBUG"] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+    print(env, app.config)
 #initialising the db and connecting to app
     db.init_app(app)
     app.app_context().push()
@@ -38,6 +37,7 @@ def create_app(env=None):
 
     #BLUEPRINTS
     from application.homepage.routes import homepage
+
     from application.user.routes import user
     #Blueprints registration
     app.register_blueprint(user)
