@@ -4,6 +4,10 @@ import { IconButton, Snackbar } from "@mui/material/";
 import LanguageIcon from "@mui/icons-material/Language";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import StarHalfIcon from "@mui/icons-material/StarHalf";
+
 export default function InfoBar() {
   const [open, setOpen] = useState(false);
   const { details, setDetails } = useLocations();
@@ -15,20 +19,132 @@ export default function InfoBar() {
     );
   };
 
-  //   console.log(details.photos[0].html_attributions[0]);
+  function roundHalf(num) {
+    if (Math.round(num * 2) / 2 === 5) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 4.5) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarHalfIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 4) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 3.5) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarHalfIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 3) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 2.5) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarHalfIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 2) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 1.5) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarHalfIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 1) {
+      return (
+        <>
+          <StarIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else if (Math.round(num * 2) / 2 === 0.5) {
+      return (
+        <>
+          <StarHalfIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+          <StarBorderIcon style={{ marginBottom: "3px" }} />
+        </>
+      );
+    }
+  }
 
   return (
     <div
       style={{
         width: "40%",
-        height: "75%",
+        height: "600px",
         padding: "0",
         backgroundColor: "#D3CCFA",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         flexWrap: "no-wrap",
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
       }}
     >
       {Object.keys(details).length == 0 ? (
@@ -38,7 +154,8 @@ export default function InfoBar() {
           <div
             style={{
               width: "100%",
-              //   minHeight: "250px",
+              display: "flex",
+              justifyContent: "space-between",
               border: "1px solid #D3CCFA",
             }}
           >
@@ -64,20 +181,24 @@ export default function InfoBar() {
               />
             )}
           </div>
-
-          {console.log(details)}
-          {/* {parse(details.photos[0].html_attributions[0])} */}
-          {/* {details.photos[0].html_attributions[0]} */}
           <h2
             style={{
+              fontFamily: "Jua",
               textAlign: "center",
-              marginTop: "20px",
               padding: "0 20px",
             }}
           >
             {details.name}
           </h2>
-          <div style={{ margin: "10px 10px 0 10px" }}>
+          <div
+            style={{
+              margin: "10px 10px 0 10px",
+              width: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -104,12 +225,18 @@ export default function InfoBar() {
               open={open}
             />
           </div>
-          <p style={{ textAlign: "center", margin: "20px 0" }}>
+          <p
+            style={{ textAlign: "center", margin: "20px 0", padding: "0 20px" }}
+          >
             {details.formatted_address}
           </p>
-          <p>Phone Number: {details.formatted_phone_number}</p>
-          <p style={{ textAlign: "center", margin: "20px 0" }}>
-            Rating: {details.rating}
+          <p style={{ textAlign: "center", padding: "0 20px" }}>
+            Phone Number: {details.formatted_phone_number}
+          </p>
+          <p
+            style={{ textAlign: "center", margin: "20px 0", padding: "0 20px" }}
+          >
+            Rating: {roundHalf(details.rating)}
           </p>
         </>
       )}
