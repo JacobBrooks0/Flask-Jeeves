@@ -35,8 +35,7 @@ def create_pet():
         outdoor=data['outdoor'],
         neutered=data['neutered'],
         sex=data['sex'],
-        diet=data['diet'],
-        history_id=data['history_id']
+        diet=data['diet']
     )
     db.session.add(new_pet)
     db.session.commit()

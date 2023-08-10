@@ -33,10 +33,7 @@ def create_user():
         first_name=data['first_name'],
         last_name=data['last_name'],
         email=data['email'],
-        password=data['password'],
-        pets=data['pets'],
-        dob=data['dob'],
-        appointment_history=data['appointment_history']
+        password=data['password']
     )
     #send user to DB
     db.session.add(new_user)

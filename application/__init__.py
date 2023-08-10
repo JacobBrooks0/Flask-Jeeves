@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-import os #imbuilt python module
+import os #inbuilt python module
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,10 +39,19 @@ def create_app(env=None):
     from application.appointments.routes import appointment
     from application.user.routes import user
     from application.pets.routes import pet
+    from application.diary.routes import diary
+    from application.disease.routes import disease
+    from application.variables.routes import variables
+    from application.user_answer_count.routes import users_answers_count
+
     #Blueprints registration
     app.register_blueprint(user)
     app.register_blueprint(homepage)
     app.register_blueprint(appointment)
     app.register_blueprint(pet)
+    app.register_blueprint(diary)
+    app.register_blueprint(disease)
+    app.register_blueprint(variables)
+    app.register_blueprint(users_answers_count)
 
     return app

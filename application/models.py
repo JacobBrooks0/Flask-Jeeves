@@ -7,22 +7,13 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    # JSON column to store an array of pets
-    pets = db.Column(db.JSON, nullable = True)
-    # Date of Birth (DOB)
-    dob = db.Column(db.Date, nullable=True)
-    # JSON column to store an array of appointment history
-    appointment_history = db.Column(db.JSON, nullable=True)
-
+    
 #initialiase all the class values as the instance values
-    def __init__(self, first_name, last_name, email, password, pets, dob, appointment_history):
+    def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
-        self.pets = pets
-        self.dob = dob
-        self.appointment_history = appointment_history
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,19 +37,17 @@ class Pets(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     outdoor = db.Column(db.Boolean, nullable=False)
     neutered = db.Column(db.Boolean, nullable=False)
-    #history_id = db.Column(db.Integer, db.ForeignKey('diary.id'), nullable=False)  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
     user = db.relationship('User', backref=db.backref('users', lazy=True, cascade="all,delete-orphan"))
 
-    def __init__(self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet):
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, sex, diet):
         self.user_id = user_id
         self.name = name
         self.dob = dob
         self.breed = breed
         self.outdoor = outdoor
         self.neutered = neutered
-        self.history_id = history_id
         self.sex = sex
         self.diet = diet
 
