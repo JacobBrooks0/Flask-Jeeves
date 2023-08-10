@@ -1,5 +1,6 @@
-#Here we will build all out tables (DB). 
+# Here we will build all out tables (DB).
 from application import db
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,14 +9,16 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     # JSON column to store an array of pets
-    pets = db.Column(db.JSON, nullable = True)
+    pets = db.Column(db.JSON, nullable=True)
     # Date of Birth (DOB)
     dob = db.Column(db.Date, nullable=True)
     # JSON column to store an array of appointment history
     appointment_history = db.Column(db.JSON, nullable=True)
 
-#initialiase all the class values as the instance values
-    def __init__(self, first_name, last_name, email, password, pets, dob, appointment_history):
+    # initialiase all the class values as the instance values
+    def __init__(
+        self, first_name, last_name, email, password, pets, dob, appointment_history
+    ):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -24,33 +27,39 @@ class User(db.Model):
         self.dob = dob
         self.appointment_history = appointment_history
 
+
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
-    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'), nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table
-    pet = db.relationship('Pet', backref=db.backref('appointments', lazy=True))
+    pet = db.relationship("Pet", backref=db.backref("appointments", lazy=True))
 
-    #initialiase all the class values as the instance values
+    # initialiase all the class values as the instance values
     def __init__(self, date, pet_id, description):
         self.date = date
         self.pet_id = pet_id
         self.description = description
 
+
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
     breed = db.Column(db.String(100), nullable=False)
     outdoor = db.Column(db.Boolean, nullable=False)
     neutered = db.Column(db.Boolean, nullable=False)
-    history_id = db.Column(db.Integer, db.ForeignKey('history.id'), nullable=False)  # JSON column to store an array of history
+    history_id = db.Column(
+        db.Integer, db.ForeignKey("history.id"), nullable=False
+    )  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet):
+    def __init__(
+        self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet
+    ):
         self.user_id = user_id
         self.name = name
         self.dob = dob
@@ -61,9 +70,10 @@ class Pets(db.Model):
         self.sex = sex
         self.diet = diet
 
+
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    pet_id = db.Column(db.Integer, db.ForeignKey('pets.id'), nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=False)
     diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
@@ -76,6 +86,7 @@ class Diary(db.Model):
         self.diagnosis = diagnosis
         self.field = field
 
+
 class Diseases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -86,6 +97,7 @@ class Diseases(db.Model):
         self.specialty = specialty
         self.name = name
         self.description = description
+
 
 class DiseasesVariables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,17 +112,29 @@ class DiseasesVariables(db.Model):
         self.question = question
         self.defaultQuestion = defaultQuestion
 
+
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)
-    diseasesVariables_id = db.Column(db.Integer, db.ForeignKey('diseasesVariables.id'), nullable=False)
+    disease_id = db.Column(db.Integer, db.ForeignKey("diseases.id"), nullable=False)
+    diseasesVariables_id = db.Column(
+        db.Integer, db.ForeignKey("diseasesVariables.id"), nullable=False
+    )
     no = db.Column(db.Integer)
     probablyNot = db.Column(db.Integer)
     iDontKnow = db.Column(db.Integer)
     propablyYes = db.Column(db.Integer)
     yes = db.Column(db.Integer)
 
-    def __init__(self, disease_id, diseasesVariables_id, no, probablyNot, iDontKnow, propablyYes, yes):
+    def __init__(
+        self,
+        disease_id,
+        diseasesVariables_id,
+        no,
+        probablyNot,
+        iDontKnow,
+        propablyYes,
+        yes,
+    ):
         self.disease_id = disease_id
         self.diseasesVariables_id = diseasesVariables_id
         self.no = no

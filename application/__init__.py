@@ -4,8 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 import os #inbuilt python module
 from dotenv import load_dotenv
 
-
-#load env virables.
 load_dotenv()
 
 """ application factory 
@@ -36,11 +34,15 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    #BLUEPRINTS
+     #BLUEPRINTS
     from application.homepage.routes import homepage
+    from application.appointments.routes import appointment
     from application.user.routes import user
+    from application.pets.routes import pet
     #Blueprints registration
     app.register_blueprint(user)
     app.register_blueprint(homepage)
+    app.register_blueprint(appointment)
+    app.register_blueprint(pet)
 
     return app

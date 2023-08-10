@@ -22,6 +22,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import "../App.css";
+import { useCredentials } from "../contexts";
 
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
@@ -29,6 +30,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import MapIcon from "@mui/icons-material/Map";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -85,6 +88,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { dark, setDark } = useCredentials();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -94,7 +98,20 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  document.body.style.backgroundColor = "whitesmoke";
+  React.useEffect(() => {
+    dark
+      ? document.body.classList.add("dark")
+      : document.body.classList.remove("dark");
+  }, [dark]);
+  // document.body.style.backgroundColor = "whitesmoke";
+
+  const handleThemeChange = () => {
+    if (dark) {
+      return <Brightness7Icon />;
+    } else {
+      return <Brightness4Icon />;
+    }
+  };
 
   return (
     <>
@@ -219,6 +236,13 @@ export default function Navbar() {
                 </div>
               </NavLink>
               <IconButton
+                sx={{ ml: 1 }}
+                color="inherit"
+                onClick={() => (dark ? setDark(false) : setDark(true))}
+              >
+                {handleThemeChange()}
+              </IconButton>
+              <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={handleDrawerOpen}
@@ -307,7 +331,7 @@ export default function Navbar() {
 
       <Outlet />
       <CatBot />
-      <footer>
+      <footer style={{ display: "block" }}>
         <div className="footer">
           <div className="row icons">
             <a href="#">
@@ -345,8 +369,8 @@ export default function Navbar() {
           </div>
 
           <div className="row">
-            Cat Care Copyright © 2023 - All rights reserved || Designed By: Cat
-            Care
+            Cat Care Copyright © 2023 - All rights reserved || Designed By:
+            Flask Jeeves
           </div>
         </div>
       </footer>
