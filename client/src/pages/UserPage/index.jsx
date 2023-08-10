@@ -51,6 +51,7 @@ export default function UserPage() {
       className="profile-page"
       style={{
         backgroundColor: dark ? "#121212" : "whitesmoke",
+        marginBottom: "-100px",
       }}
     >
       <div
@@ -65,7 +66,6 @@ export default function UserPage() {
             alignItems: "center",
             backgroundColor: dark ? "#826BF5" : "#D3CCFA",
             paddingTop: "50px",
-            marginBottom: "-100px",
           }}
         >
           <img
