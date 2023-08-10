@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-import os #imbuilt python module
+import os #inbuilt python module
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,7 +34,7 @@ def create_app(env=None):
     app.app_context().push()
     CORS(app)
 
-    #BLUEPRINTS
+     #BLUEPRINTS
     from application.homepage.routes import homepage
     from application.appointments.routes import appointment
     from application.user.routes import user

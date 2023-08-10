@@ -9,6 +9,7 @@ export const CredentialsProvider = ({ children }) => {
   const [lastNameValue, setLastNameValue] = useState("");
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+  const [dark, setDark] = React.useState(false);
 
   return (
     <CredentialsContext.Provider
@@ -25,6 +26,8 @@ export const CredentialsProvider = ({ children }) => {
         setUser,
         profile,
         setProfile,
+        dark,
+        setDark,
       }}
     >
       {children}
@@ -33,3 +36,22 @@ export const CredentialsProvider = ({ children }) => {
 };
 
 export const useCredentials = () => useContext(CredentialsContext);
+
+const LocationContext = createContext();
+
+export const LocationProvider = ({ children }) => {
+  const [details, setDetails] = useState({});
+
+  return (
+    <LocationContext.Provider
+      value={{
+        details,
+        setDetails,
+      }}
+    >
+      {children}
+    </LocationContext.Provider>
+  );
+};
+
+export const useLocations = () => useContext(LocationContext);
