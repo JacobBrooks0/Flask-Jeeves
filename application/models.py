@@ -51,9 +51,9 @@ class Pets(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     outdoor = db.Column(db.Boolean, nullable=False)
     neutered = db.Column(db.Boolean, nullable=False)
-    history_id = db.Column(
-        db.Integer, db.ForeignKey("history.id"), nullable=False
-    )  # JSON column to store an array of history
+    # history_id = db.Column(
+    #     db.Integer, db.ForeignKey("history.id"), nullable=False
+    # )  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
 

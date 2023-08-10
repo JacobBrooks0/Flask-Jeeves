@@ -132,7 +132,6 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
-            paddingBottom: "3rem",
           }}
         >
           <TextField

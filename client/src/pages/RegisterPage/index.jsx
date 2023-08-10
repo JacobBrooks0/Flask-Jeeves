@@ -33,18 +33,15 @@ export default function RegisterPage() {
       body: JSON.stringify({
         email: formData.email,
         password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
       }),
     };
-    const response = await fetch(
-      "http://localhost:3000/user/register",
-      options
-    );
+    const response = await fetch("http://localhost:3001/user", options);
     const data = await response.json();
 
     if (response.status == 201) {
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
       navigate("/login");
     } else {
       alert(data.error);
