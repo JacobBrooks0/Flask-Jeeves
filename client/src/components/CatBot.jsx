@@ -66,9 +66,9 @@ export default function CatBot() {
     console.log(data.choices[0].message.content);
   };
 
-  useEffect(() => {
-    openAIFunc();
-  }, []);
+  // useEffect(() => {
+  //   openAIFunc();
+  // }, []);
 
   return (
     <>
