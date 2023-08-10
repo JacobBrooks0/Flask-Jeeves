@@ -33,6 +33,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CatLogo from "../../assets/cat-logo.png";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -126,10 +127,7 @@ export default function Navbar() {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ justifyContent: "flex-start" }}>
               <Link to="/home">
-                <img
-                  src="src/assets/cat-logo.png"
-                  style={{ width: "70px", height: "60px" }}
-                />
+                <img src={CatLogo} style={{ width: "70px", height: "60px" }} />
               </Link>
             </div>
             <div
