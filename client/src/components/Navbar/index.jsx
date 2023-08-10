@@ -127,7 +127,7 @@ export default function Navbar() {
             <div style={{ justifyContent: "flex-start" }}>
               <Link to="/home">
                 <img
-                  src="src/assets/cat-logo.png"
+                  src="./src/assets/cat-logo.png"
                   style={{ width: "70px", height: "60px" }}
                 />
               </Link>

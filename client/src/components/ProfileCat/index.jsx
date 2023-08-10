@@ -20,7 +20,7 @@ export default function ProfileCat({ cat }) {
       }}
     >
       <img
-        src="src/assets/alex.jpg"
+        src="./src/assets/alex.jpg"
         alt=""
         style={{ width: "40%", borderRadius: "50%", height: "fit-content" }}
       />

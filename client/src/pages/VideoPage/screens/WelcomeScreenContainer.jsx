@@ -251,7 +251,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           open={open}
         />
         <img
-          src="src/assets/doctor.png"
+          src="./src/assets/doctor.png"
           alt="doctor"
           style={{ height: "100%" }}
         />

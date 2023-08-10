@@ -25,7 +25,7 @@ export default function AboutPage() {
       </Typography>
       <div className="us">
         <div className="person">
-          <img src="src/assets/alex.jpg" alt="alex" />
+          <img src="./src/assets/alex.jpg" alt="alex" />
           <Typography
             variant="h6"
             component="h6"
@@ -38,7 +38,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/lais.png" alt="lais" />
+          <img src="./src/assets/lais.png" alt="lais" />
           <Typography
             variant="h6"
             component="h6"
@@ -51,7 +51,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/jacob.jpg" alt="jacob" />
+          <img src="./src/assets/jacob.jpg" alt="jacob" />
           <Typography
             variant="h6"
             component="h6"
@@ -64,7 +64,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/roberta.png" alt="roberta" />
+          <img src="./src/assets/roberta.png" alt="roberta" />
           <Typography
             variant="h6"
             component="h6"
@@ -77,7 +77,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/harry.jpg" alt="harry" />
+          <img src="./src/assets/harry.jpg" alt="harry" />
           <Typography
             variant="h6"
             component="h6"
