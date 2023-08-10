@@ -11,9 +11,7 @@ import {
   SymptomPage,
   UserPage,
   VideoPage,
-  AboutPage,
-  SupportAdmin,
-  SupportEngine
+  AboutPage
 } from "./pages";
 
 function App() {
@@ -22,8 +20,6 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/support" element={<SupportAdmin />} />
-      <Route path="/support2" element={<SupportEngine />} />
       <Route element={<Navbar />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
