@@ -26,25 +26,24 @@ export default function RegisterPage() {
   const registerRequest = async (formData) => {
     const options = {
       method: "POST",
+      mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        first_name: formData.firstName,
+        last_name: formData.lastName,
         email: formData.email,
         password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
       }),
     };
-    const response = await fetch(
-      "http://localhost:3000/user/register",
-      options
-    );
+    const response = await fetch("http://127.0.0.1:5000/user", options);
+    console.log(response);
     const data = await response.json();
 
     if (response.status == 201) {
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
       navigate("/login");
     } else {
       alert(data.error);
@@ -137,6 +136,7 @@ export default function RegisterPage() {
         />
         <TextField
           margin="normal"
+          type="password"
           fullWidth
           required
           value={passwordValue}
@@ -152,7 +152,7 @@ export default function RegisterPage() {
           label="I want to receive inspiration, marketing promotions and updates via email."
         />
         <Button
-          type="submit"
+          onClick={registerRequest}
           className="button"
           fullWidth
           variant="contained"

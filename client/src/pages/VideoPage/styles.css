@@ -1,7 +1,6 @@
 .video-page {
   display: flex;
   flex-direction: column;
-  height: 76vh;
   width: 100%;
   margin-top: 16px;
 }
@@ -12,7 +11,8 @@
   flex-direction: row;
   gap: 20px;
   z-index: 10;
-  height: 60%;
+  height: 500px;
+  margin-bottom: -100px;
   align-items: center;
   padding-top: 30px;
   background-color: #d3ccfa;

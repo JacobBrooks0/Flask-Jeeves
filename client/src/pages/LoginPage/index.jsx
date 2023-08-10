@@ -138,6 +138,7 @@ export default function LoginPage() {
           variant="standard"
           id="password"
           label="Password"
+          type="password"
           name="password"
           autoComplete="current-password"
           onChange={handlePasswordChange}

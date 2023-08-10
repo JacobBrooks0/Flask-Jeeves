@@ -7,6 +7,7 @@ import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
+import PetsIcon from "@mui/icons-material/Pets";
 
 export default function InfoBar() {
   const [open, setOpen] = useState(false);
@@ -137,7 +138,7 @@ export default function InfoBar() {
     <div
       style={{
         width: "40%",
-        height: "600px",
+        height: "750px",
         padding: "0",
         backgroundColor: "#D3CCFA",
         display: "flex",
@@ -148,7 +149,34 @@ export default function InfoBar() {
       }}
     >
       {Object.keys(details).length == 0 ? (
-        <p>No details to show </p>
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              padding: "0 20px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "Jua",
+            }}
+          >
+            <PetsIcon style={{ height: "50%", width: "50%" }} />
+            <h2 style={{ padding: "20px 0" }}>Don't 'paws' to read this!</h2>
+            <h3>
+              Select a marker to see information about that Veterinary business
+            </h3>
+          </div>
+        </div>
       ) : (
         <>
           <div
@@ -175,76 +203,90 @@ export default function InfoBar() {
                   objectFit: "contain",
                   maxHeight: "250px",
                   width: "100%",
-                  backgroundColor: "whitesmoke",
+                  backgroundColor: "black",
                 }}
                 src={details.photos[0].getUrl()}
               />
             )}
           </div>
-          <h2
-            style={{
-              fontFamily: "Jua",
-              textAlign: "center",
-              padding: "0 20px",
-            }}
-          >
-            {details.name}
-          </h2>
           <div
             style={{
-              margin: "10px 10px 0 10px",
-              width: "50%",
               display: "flex",
+              height: "100%",
               alignItems: "center",
               justifyContent: "space-evenly",
+              flexDirection: "column",
             }}
           >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => window.open(`${details.website}`)}
-              edge="end"
-              sx={{ mr: 0.5 }}
+            <h2
+              style={{
+                fontFamily: "Jua",
+                textAlign: "center",
+                padding: "0 20px",
+              }}
             >
-              <LanguageIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleClick}
-              edge="end"
-              sx={{ mr: 0.5 }}
+              {details.name}
+            </h2>
+            <div
+              style={{
+                margin: "10px 10px 0 10px",
+                width: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
             >
-              <PhoneEnabledIcon />
-            </IconButton>
-            <Snackbar
-              message="Copied to clipboard"
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              autoHideDuration={2000}
-              onClose={() => setOpen(false)}
-              open={open}
-            />
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => window.open(`${details.website}`)}
+                edge="end"
+                sx={{ mr: 0.5 }}
+              >
+                <LanguageIcon />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleClick}
+                edge="end"
+                sx={{ mr: 0.5 }}
+              >
+                <PhoneEnabledIcon />
+              </IconButton>
+              <Snackbar
+                message="Copied to clipboard"
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={2000}
+                onClose={() => setOpen(false)}
+                open={open}
+              />
+            </div>
+            <p
+              style={{
+                textAlign: "center",
+                margin: "20px 0",
+                padding: "0 20px",
+              }}
+            >
+              {details.formatted_address}
+            </p>
+            <p style={{ textAlign: "center", padding: "0 20px" }}>
+              Phone Number: {details.formatted_phone_number}
+            </p>
+            <p
+              style={{
+                textAlign: "center",
+                margin: "20px 0",
+                padding: "0 20px",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              {roundHalf(details.rating)}
+            </p>
           </div>
-          <p
-            style={{ textAlign: "center", margin: "20px 0", padding: "0 20px" }}
-          >
-            {details.formatted_address}
-          </p>
-          <p style={{ textAlign: "center", padding: "0 20px" }}>
-            Phone Number: {details.formatted_phone_number}
-          </p>
-          <p
-            style={{
-              textAlign: "center",
-              margin: "20px 0",
-              padding: "0 20px",
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {roundHalf(details.rating)}
-          </p>
         </>
       )}
     </div>
