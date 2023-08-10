@@ -32,7 +32,6 @@
     "react-simple-chatbot": "^0.6.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^2.5.0",
-    "use-places-autocomplete": "^4.0.0",
     "vite-plugin-svgr": "^3.2.0",
     "vite": "^4.4.5",
     "vitest": "^0.34.1",
