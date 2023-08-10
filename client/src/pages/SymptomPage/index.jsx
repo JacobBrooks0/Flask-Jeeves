@@ -1,7 +1,7 @@
 import { useState } from "react";
 import style from "./style.module.css";
 import CatList from "../../components/CatList";
-import CatRegisterForm from "../../components/CatRegisterForm";
+import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
 import Button from "@mui/material/Button";
 
 const testData = [
@@ -19,21 +19,6 @@ const testData = [
     name: "Peter",
     gender: "Female",
     breed: "Tabby",
-  },
-  {
-    name: "Squirtle",
-    gender: "Male",
-    breed: "Siamese",
-  },
-  {
-    name: "Meowth",
-    gender: "Female",
-    breed: "Tabby",
-  },
-  {
-    name: "Persian",
-    gender: "Male",
-    breed: "Siamese",
   },
 ];
 
@@ -87,8 +72,11 @@ export default function SymptomPage() {
       </div>
       <div className={style["second-container"]}>
         <h1 className={style["text"]}>Register a cat</h1>
-        <div className={style["registered-div"]}>
+        <div className={style["registered-div-second"]}>
           <CatRegisterForm />
+          <div className={style["image-container"]}>
+            <img className={style["cat-image"]} src="src/assets/cat-9152.png" />
+          </div>
         </div>
       </div>
     </div>
