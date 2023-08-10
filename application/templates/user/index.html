@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+</head>
+<body>
+    <h1>User Management</h1>
+
+    <!-- Form to create a new user -->
+    <form method="POST" action="{{ url_for('user.create_user') }}">
+        <h2>Create User</h2>
+        <input type="text" name="first_name" placeholder="First Name">
+        <input type="text" name="last_name" placeholder="Last Name">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" id="dob">
+
+        <label for="appointment_history">Appointment History:</label>
+        <textarea name="appointment_history" id="appointment_history" rows="4" cols="50"></textarea>
+
+        <input type="text" name="pets" placeholder="Pets">
+
+        <button type="submit">Create User</button>
+
+    </form>
+
+    <!-- List all users -->
+    <h2>All Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.first_name }} {{ user.last_name }} ({{ user.email }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

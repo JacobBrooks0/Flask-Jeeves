@@ -29,7 +29,6 @@ def create_app(env=None):
         app.config["DEBUG"] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-    print(env, app.config)
 #initialising the db and connecting to app
     db.init_app(app)
     app.app_context().push()
@@ -37,10 +36,13 @@ def create_app(env=None):
 
      #BLUEPRINTS
     from application.homepage.routes import homepage
-
+    from application.appointments.routes import appointment
     from application.user.routes import user
+    from application.pets.routes import pet
     #Blueprints registration
     app.register_blueprint(user)
     app.register_blueprint(homepage)
+    app.register_blueprint(appointment)
+    app.register_blueprint(pet)
 
     return app
