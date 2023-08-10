@@ -102,19 +102,6 @@ class Variables(db.Model):
         self.question = question
         self.defaultQuestion = defaultQuestion
 
-#     def create(cls, **kwargs):
-#         variable = cls(**kwargs)
-#         db.session.add(variable)
-#         db.session.commit()
-#         return variable
-    
-# new_variable = Variables.create(
-#     specialty= "urinary",
-#     feature="symptom",
-#     question="pain?",
-#     defaultQuestion=False    
-# )
-
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)

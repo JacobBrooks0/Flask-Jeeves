@@ -1,8 +1,8 @@
 # Import necessary modules
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
 from __init__ import *
-from models import Variables
+from models import Variables, Diseases
 
 # Replace with your PostgreSQL database URL
 DATABASE_URL = "postgresql://uazibwdf:XdbukCnOj7-f6C53_EURIyCEMXDEssdE@horton.db.elephantsql.com/uazibwdf"
@@ -15,7 +15,6 @@ session = Session()
 # Create tables if they don't exist
 app=create_app()
 
-
 # Data to insert
 variables_to_insert = [
                 {'name':'Frequent Urination' , 'type':'symptom', 'question': 'Is your cat going to the litter more than usual?', 'specialty':['Urinary'], 'defaultQuestion': False},
@@ -26,8 +25,8 @@ variables_to_insert = [
                 {'name':'Straining to Urinate' , 'type':'symptom', 'question':'Does it seem that your cat is having difficulty urinating?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
                 {'name':'Abdominal Pain' , 'type':'symptom', 'question':'Does it seem that your cat has abdominal pain?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
                 {'name':'Vomiting and Nausea' , 'type':'symptom', 'question':'Is your cat vomiting or nauseous?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
-                {'name':'Polydipsia' , 'type':'symptom', 'question':'Is your cat drinking more water than usual?', 'specialty':['Musculoskeletal'], 'defaultQuestion': False},
-                {'name':'Limping' , 'type':'symptom', 'question':'Is your cat limping?', 'specialty':['Urinary', 'Musculoskeletal'], 'defaultQuestion': False},
+                {'name':'Polydipsia' , 'type':'symptom', 'question':'Is your cat drinking more water than usual?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Limping' , 'type':'symptom', 'question':'Is your cat limping?', 'specialty':['Musculoskeletal'], 'defaultQuestion': False},
                 {'name':'Swelling members' , 'type':'symptom', 'question':'Does your cat have swelling members?', 'specialty':['Urinary, Muskuloskeletal'], 'defaultQuestion': False},
                 {'name':'Fever' , 'type':'symptom','question':'Does your cat seem to have a higher temperature than usual?', 'specialty':['Urinary' ,'Gastrointestinal'], 'defaultQuestion': False},
                 {'name':'Loss Appetite' , 'type':'symptom', 'question':'Is your cat eating less than usual?', 'specialty':['Urinary' ,'Gastrointestinal'], 'defaultQuestion': False},
@@ -56,6 +55,19 @@ variables_to_insert = [
                 {'name':'Processed Diet' , 'type':'animalAtribute', 'question':'Does your cat eat processed food?', 'specialty':[], 'defaultQuestion': True},
               ]
 
+diseases_to_insert = [
+                {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
+                {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract, often causing discomfort and frequent urination.'},
+                {'name': 'Renal Disease', 'specialty': 'Urinary', 'description': 'Chronic kidney disease that impairs the kidney function and can lead to various symptoms and complications.'},
+                {'name': 'Luxation', 'specialty': 'Musculoskeletal', 'description': 'Dislocation or displacement of a joint, causing pain and mobility issues.'},
+                {'name': 'Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
+                {'name': 'Intestinal Parasites', 'specialty': 'Gastrointestinal', 'description': 'Infections caused by various parasites that affect the gastrointestinal system.'},
+                {'name': 'Hairball Obstruction', 'specialty': 'Gastrointestinal', 'description': 'Accumulation of hair in the stomach or intestines, causing blockages and discomfort.'},
+                {'name': 'Scabies', 'specialty': 'Dermatology', 'description': 'A skin infestation caused by mites, leading to intense itching and skin irritation.'},
+                {'name': 'Flea Allergy', 'specialty': 'Dermatology', 'description': 'An allergic reaction to flea bites, causing skin inflammation and discomfort.'},
+                {'name': 'Atopic Dermatitis', 'specialty': 'Dermatology', 'description': 'Chronic skin inflammation and itching caused by allergic reactions to environmental factors.'}
+            ]
+
 # Insert data into the database
 for item in variables_to_insert:
     new_variable = Variables(
@@ -65,6 +77,14 @@ for item in variables_to_insert:
         defaultQuestion=item['defaultQuestion']
     )
     session.add(new_variable)
+
+for disease in diseases_to_insert:   
+    new_disease = Diseases(
+        name = disease['name'],
+        specialty = disease['specialty'], 
+        description = disease['description']
+    )
+    session.add(new_disease)
 
 # Commit the changes
 session.commit()
