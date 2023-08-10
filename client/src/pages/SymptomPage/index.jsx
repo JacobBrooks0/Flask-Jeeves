@@ -1,3 +1,8 @@
 export default function SymptomPage() {
-  return <h1>SymptomPage</h1>;
+  return (
+    <div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 }

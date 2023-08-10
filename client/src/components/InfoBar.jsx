@@ -203,76 +203,90 @@ export default function InfoBar() {
                   objectFit: "contain",
                   maxHeight: "250px",
                   width: "100%",
-                  backgroundColor: "whitesmoke",
+                  backgroundColor: "black",
                 }}
                 src={details.photos[0].getUrl()}
               />
             )}
           </div>
-          <h2
-            style={{
-              fontFamily: "Jua",
-              textAlign: "center",
-              padding: "0 20px",
-            }}
-          >
-            {details.name}
-          </h2>
           <div
             style={{
-              margin: "10px 10px 0 10px",
-              width: "50%",
               display: "flex",
+              height: "100%",
               alignItems: "center",
               justifyContent: "space-evenly",
+              flexDirection: "column",
             }}
           >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => window.open(`${details.website}`)}
-              edge="end"
-              sx={{ mr: 0.5 }}
+            <h2
+              style={{
+                fontFamily: "Jua",
+                textAlign: "center",
+                padding: "0 20px",
+              }}
             >
-              <LanguageIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleClick}
-              edge="end"
-              sx={{ mr: 0.5 }}
+              {details.name}
+            </h2>
+            <div
+              style={{
+                margin: "10px 10px 0 10px",
+                width: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
             >
-              <PhoneEnabledIcon />
-            </IconButton>
-            <Snackbar
-              message="Copied to clipboard"
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              autoHideDuration={2000}
-              onClose={() => setOpen(false)}
-              open={open}
-            />
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => window.open(`${details.website}`)}
+                edge="end"
+                sx={{ mr: 0.5 }}
+              >
+                <LanguageIcon />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleClick}
+                edge="end"
+                sx={{ mr: 0.5 }}
+              >
+                <PhoneEnabledIcon />
+              </IconButton>
+              <Snackbar
+                message="Copied to clipboard"
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={2000}
+                onClose={() => setOpen(false)}
+                open={open}
+              />
+            </div>
+            <p
+              style={{
+                textAlign: "center",
+                margin: "20px 0",
+                padding: "0 20px",
+              }}
+            >
+              {details.formatted_address}
+            </p>
+            <p style={{ textAlign: "center", padding: "0 20px" }}>
+              Phone Number: {details.formatted_phone_number}
+            </p>
+            <p
+              style={{
+                textAlign: "center",
+                margin: "20px 0",
+                padding: "0 20px",
+                justifyContent: "center",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              {roundHalf(details.rating)}
+            </p>
           </div>
-          <p
-            style={{ textAlign: "center", margin: "20px 0", padding: "0 20px" }}
-          >
-            {details.formatted_address}
-          </p>
-          <p style={{ textAlign: "center", padding: "0 20px" }}>
-            Phone Number: {details.formatted_phone_number}
-          </p>
-          <p
-            style={{
-              textAlign: "center",
-              margin: "20px 0",
-              padding: "0 20px",
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {roundHalf(details.rating)}
-          </p>
         </>
       )}
     </div>
