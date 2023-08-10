@@ -1,13 +1,21 @@
 import { useState } from "react";
 import React from "react";
 
-export default function CatList({ cat, selectedCat, setSelectedCat }) {
+export default function CatList({
+  cat,
+  selectedCat,
+  setSelectedCat,
+  setErrorText,
+}) {
   const [backgroundButtonColor, setBackgroundButtonColor] = useState("#d3ccfa");
   //   const [selectedCatButton, setSelectedCatButton] = useState;
 
   return (
     <button
-      onClick={() => setSelectedCat(cat)}
+      onClick={() => {
+        setSelectedCat(cat);
+        setErrorText(false);
+      }}
       onMouseEnter={() => setBackgroundButtonColor("#826bf5")}
       onMouseLeave={() => setBackgroundButtonColor("#d3ccfa")}
       style={{
