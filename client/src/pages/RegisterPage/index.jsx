@@ -32,14 +32,15 @@ export default function RegisterPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
         first_name: formData.firstName,
         last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
       }),
     };
-    const response = await fetch("http://localhost:5000/user", options);
-    const data = await response;
+    const response = await fetch("http://127.0.0.1:5000/user", options);
+    console.log(response);
+    const data = await response.json();
 
     if (response.status == 201) {
       // localStorage.setItem("token", JSON.stringify(data.token));

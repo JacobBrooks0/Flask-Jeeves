@@ -50,7 +50,6 @@ export default function UserPage() {
     <div
       className="profile-page"
       style={{
-        paddingTop: "50px",
         backgroundColor: dark ? "#121212" : "whitesmoke",
       }}
     >
@@ -63,9 +62,10 @@ export default function UserPage() {
           style={{
             display: "flex",
             flexDirection: "column",
-            borderRight: "1px dotted",
-            borderColor: dark ? "purple" : "#121212",
             alignItems: "center",
+            backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+            paddingTop: "50px",
+            marginBottom: "-100px",
           }}
         >
           <img
@@ -97,13 +97,7 @@ export default function UserPage() {
             <br />
           </Typography>
         </div>
-        <div
-          className="calender-section"
-          style={{
-            borderBottom: "1px dotted",
-            borderColor: dark ? "purple" : "#121212",
-          }}
-        >
+        <div className="calender-section">
           <Calendar
             onChange={onChange}
             showWeekNumbers
@@ -111,7 +105,7 @@ export default function UserPage() {
             className="calender"
           />
           {pets.map((pet) => {
-            return <ProfileCat cat={pet} />;
+            return <ProfileCat cat={pet} key={pet.petId} />;
           })}
         </div>
       </div>

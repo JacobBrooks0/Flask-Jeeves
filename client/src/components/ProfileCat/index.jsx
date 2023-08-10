@@ -11,17 +11,18 @@ export default function ProfileCat({ cat }) {
         flexDirection: "row",
         marginBottom: "20px",
         padding: "20px",
-        width: "90%",
+        width: "100%",
         justifyContent: "space-around",
         gap: "5rem",
         backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         borderRadius: "10px",
+        alignItems: "center",
       }}
     >
       <img
         src="src/assets/alex.jpg"
         alt=""
-        style={{ width: "40%", borderRadius: "50%" }}
+        style={{ width: "40%", borderRadius: "50%", height: "fit-content" }}
       />
       <div
         className="cat-info"
