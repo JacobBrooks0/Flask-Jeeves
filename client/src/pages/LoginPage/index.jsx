@@ -106,7 +106,7 @@ export default function LoginPage() {
   return (
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
-        <img className="logo" src="./src/assets/cat-logo.png" alt="logo" />
+        <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
         <Typography
           component="h1"
           variant="h4"

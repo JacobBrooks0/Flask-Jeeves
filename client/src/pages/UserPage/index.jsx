@@ -69,7 +69,7 @@ export default function UserPage() {
           }}
         >
           <img
-            src="./src/assets/alex.jpg"
+            src="src/assets/alex.jpg"
             alt="user picture"
             style={{ width: "80%", borderRadius: "50%", marginBottom: "2rem" }}
           />

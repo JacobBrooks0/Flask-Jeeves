@@ -195,7 +195,7 @@ export default function InfoBar() {
                   width: "100%",
                   backgroundColor: "whitesmoke",
                 }}
-                src="./src/assets/cat-logo.png"
+                src="src/assets/cat-logo.png"
               />
             ) : (
               <img
