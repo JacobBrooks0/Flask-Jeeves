@@ -1,6 +1,6 @@
 import { Button, Stack } from "@mui/material";
-import LandingTitle from "./LandingTitle";
-import LandingParagraph from "./LandingParagraph";
+import LandingTitle from "../LandingTitle";
+import LandingParagraph from "../LandingParagraph";
 import { Link } from "react-router-dom";
 
 export default function JoinUs() {
