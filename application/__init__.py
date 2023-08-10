@@ -35,10 +35,10 @@ def create_app(env=None):
     CORS(app)
 
      #BLUEPRINTS
-    from application.homepage.routes import homepage
-    from application.appointments.routes import appointment
-    from application.user.routes import user
-    from application.pets.routes import pet
+    from homepage.routes import homepage
+    from appointments.routes import appointment
+    from user.routes import user
+    from pets.routes import pet
     #Blueprints registration
     app.register_blueprint(user)
     app.register_blueprint(homepage)

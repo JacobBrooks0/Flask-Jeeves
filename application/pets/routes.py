@@ -1,5 +1,5 @@
 from flask import request, jsonify, Blueprint, render_template
-from application.models import Pets, db
+from models import Pets, db
 
 pet = Blueprint("pet", __name__)
 

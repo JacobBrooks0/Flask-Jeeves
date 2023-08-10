@@ -1,6 +1,6 @@
-from application import db
+from __init__ import db
 from flask import request, jsonify, Blueprint
-from application.models import User
+from models import User
 from flask import render_template
 
 

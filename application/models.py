@@ -1,5 +1,5 @@
 #Here we will build all out tables (DB). 
-from application import db
+from __init__ import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -101,6 +101,19 @@ class Variables(db.Model):
         self.feature = feature
         self.question = question
         self.defaultQuestion = defaultQuestion
+
+#     def create(cls, **kwargs):
+#         variable = cls(**kwargs)
+#         db.session.add(variable)
+#         db.session.commit()
+#         return variable
+    
+# new_variable = Variables.create(
+#     specialty= "urinary",
+#     feature="symptom",
+#     question="pain?",
+#     defaultQuestion=False    
+# )
 
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
