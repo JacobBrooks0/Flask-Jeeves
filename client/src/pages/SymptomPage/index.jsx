@@ -3,22 +3,39 @@ import style from "./style.module.css";
 import CatList from "../../components/CatList";
 import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
 import Button from "@mui/material/Button";
+import SymptomForm from "../../components/SymptomForm/SymptomForm";
+import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
 
 const testData = [
   {
     name: "Kat",
     gender: "Female",
     breed: "Tabby",
+    dateOfBirth: "22nd Sept",
+    outdoor: true,
+    neutered: true,
+    diet: "processed",
+    contactWithPets: true,
   },
   {
     name: "Harry",
     gender: "Male",
     breed: "Siamese",
+    dateOfBirth: "22nd Sept",
+    outdoor: true,
+    neutered: true,
+    diet: "processed",
+    contactWithPets: true,
   },
   {
     name: "Peter",
     gender: "Female",
     breed: "Tabby",
+    dateOfBirth: "22nd Sept",
+    outdoor: true,
+    neutered: true,
+    diet: "processed",
+    contactWithPets: true,
   },
 ];
 
@@ -94,7 +111,14 @@ export default function SymptomPage() {
           </div>
         </div>
       ) : (
-        <div>Hi</div>
+        <div className={style["main-page"]}>
+          <div className={style["top-container"]}>
+            <QuestionContainer cat={selectedCat} />
+          </div>
+          <div className={style["bottom-container"]}>
+            <SymptomForm />
+          </div>
+        </div>
       )}
     </>
   );

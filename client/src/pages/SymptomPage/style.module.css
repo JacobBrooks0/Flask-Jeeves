@@ -67,3 +67,20 @@
   margin-top: 5px;
   color: red;
 }
+
+.main-page {
+  height: 900px;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  margin-bottom: -100px;
+}
+
+.top-container {
+  flex: 0.5;
+}
+
+.bottom-container {
+  background-color: #d3ccfa;
+  flex: 0.5;
+}
