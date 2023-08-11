@@ -3,6 +3,7 @@ import { useLocations } from "../contexts/";
 import { IconButton, Snackbar } from "@mui/material/";
 import LanguageIcon from "@mui/icons-material/Language";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
+import { useCredentials } from "../contexts";
 
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -12,6 +13,7 @@ import PetsIcon from "@mui/icons-material/Pets";
 export default function InfoBar() {
   const [open, setOpen] = useState(false);
   const { details, setDetails } = useLocations();
+  const { dark, setDark } = useCredentials();
 
   const handleClick = () => {
     setOpen(true);
@@ -140,7 +142,8 @@ export default function InfoBar() {
         width: "40%",
         height: "750px",
         padding: "0",
-        backgroundColor: "#D3CCFA",
+        backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+        color: dark ? "whitesmoke" : "black",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
