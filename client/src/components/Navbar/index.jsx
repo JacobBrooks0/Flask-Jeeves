@@ -107,9 +107,10 @@ export default function Navbar() {
     backgroundMapsButtonColor,
     setBackgroundMapsButtonColor,
   ] = React.useState(false);
-  // const [backgroundUserButtonColor, setBackgroundUserButtonColor] = React.useState(
-  //   false
-  // );
+  const [
+    backgroundUserButtonColor,
+    setBackgroundUserButtonColor,
+  ] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -188,9 +189,15 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/user"
+                onMouseEnter={() => setBackgroundUserButtonColor(true)}
+                onMouseLeave={() => setBackgroundUserButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundUserButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
