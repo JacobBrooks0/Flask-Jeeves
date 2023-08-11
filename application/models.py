@@ -89,6 +89,17 @@ class Diseases(db.Model):
         self.name = name
         self.description = description
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "specialty": self.specialty,
+            "description": self.description
+        }
+    
+    def __repr__(self):
+        return f"<Diseases(id={self.id}, specialty={self.specialty}, name={self.name}, description={self.description})>"
+
 class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     specialty = db.Column(db.JSON)
@@ -102,19 +113,18 @@ class Variables(db.Model):
         self.question = question
         self.defaultQuestion = defaultQuestion
 
-#     def create(cls, **kwargs):
-#         variable = cls(**kwargs)
-#         db.session.add(variable)
-#         db.session.commit()
-#         return variable
-    
-# new_variable = Variables.create(
-#     specialty= "urinary",
-#     feature="symptom",
-#     question="pain?",
-#     defaultQuestion=False    
-# )
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "specialty": self.specialty,
+            "feature": self.feature,
+            "question": self.question,
+            "defaultQuestion": self.defaultQuestion
+        }
 
+    def __repr__(self):
+        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, defaultQuestion={self.defaultQuestion})>"
+    
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)

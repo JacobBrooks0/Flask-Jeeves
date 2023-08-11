@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-import os #imbuilt python module
+import os #inbuilt python module
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "==2.3.2"
+flask = "*"
 python-dotenv = "==1.0.0"
 flask-cors = "==4.0.0"
 flask-sqlalchemy = "==3.0.5"
@@ -26,7 +26,10 @@ flask-socketio = "*"
 python-socketio = "*"
 python-engineio = "*"
 simple-websocket = "*"
+<<<<<<< HEAD
 requests = "*"
+=======
+>>>>>>> ea326f4e3bc2bee4ccc5716c61f13f66b48cbd30
 
 [dev-packages]
 pytest = "*"

@@ -5,39 +5,45 @@ from flask import render_template
 
 
 user = Blueprint("user", __name__)
+
+
 @user.route('/')
 def index():
     users = User.query.all()
-    return render_template('user/index.html', users=users)
+    
+    # Create a list of user data dictionaries
+    user_list = [
+        {
+            'id': user.id,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
+        }
+        for user in users
+    ]
+    
+    # Return the user data as JSON response
+    return jsonify(user_list)
 
-# Route to Create a New User (add data to database w. POST route)
+# Route to Create a New User(add data to database w. POST route:)
 @user.route('/user', methods=['POST'])
 def create_user():
-    # Retrieve data from form
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    email = request.form['email']
-    password = request.form['password']
-    pets = request.form['pets']
-    dob = request.form['dob']
-    appointment_history = request.form['appointment_history']
-
-    # Create a new user using the form data
+    #retrieved data from client 
+    data = request.json
+    #created new user using the data
     new_user = User(
-        first_name=first_name,
-        last_name=last_name,
-        email=email,
-        password=password,
-        pets=pets,
-        dob=dob,
-        appointment_history=appointment_history
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        email=data['email'],
+        password=data['password'],
+        pets=data['pets'],
+        dob=data['dob'],
+        appointment_history=data['appointment_history']
     )
-
-    # Send user to DB
+    #send user to DB
     db.session.add(new_user)
     db.session.commit()
-
-    # Return JSON response to the client
+    #return JSON response to the client 
     return jsonify({"message": "User created successfully!"}), 201
 
 

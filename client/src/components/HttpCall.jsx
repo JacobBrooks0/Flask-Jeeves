@@ -1,7 +1,9 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
-export default function HttpCall(){
+export default function HttpCall() {
+  const [data, setData] = useState("");
 
+<<<<<<< HEAD
 	const[data, setData] = React.useState("")
 	console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 	console.log(data)
@@ -42,3 +44,23 @@ export default function HttpCall(){
 		<h3>{data}</h3>
 	)
 }
+=======
+  useEffect(() => {
+    fetch("http://localhost:5001/http-call", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        setData(responseData.data);
+      });
+  });
+  return (
+    <>
+      <h2>HTTP Communication</h2>
+      <h3 className="http">{data}</h3>
+    </>
+  );
+}
+>>>>>>> ea326f4e3bc2bee4ccc5716c61f13f66b48cbd30
