@@ -1,5 +1,6 @@
 // import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import style from "./style.module.css";
+import { useCredentials } from "../../contexts";
 // import {
 //   GoogleMap,
 //   Marker,
@@ -120,6 +121,7 @@ const GOOGLE_MAP_API_KEY = import.meta.env.VITE_MAPS_API_KEY;
 
 const MapPage = () => {
   const [loadMap, setLoadMap] = useState(false);
+  const { dark, setDark } = useCredentials();
 
   useEffect(() => {
     const options = {
@@ -144,10 +146,18 @@ const MapPage = () => {
   return (
     <div className={style["map-page"]}>
       <div className={style["header-text-container"]}>
-        <h1 style={{ fontFamily: "Jua", marginBottom: "20px" }}>
+        <h1
+          style={{
+            fontFamily: "Jua",
+            marginBottom: "20px",
+            color: dark ? "whitesmoke" : "black",
+          }}
+        >
           See nearby vets in our own Google Map
         </h1>
-        <p>Click on or tap a marker to see information about Vets near you</p>
+        <p style={{ color: dark ? "whitesmoke" : "black" }}>
+          Click on or tap a marker to see information about Vets near you
+        </p>
       </div>
 
       <div className={style["map-container"]}>

@@ -259,7 +259,7 @@ export default function Navbar() {
                 </div>
               </NavLink>
               <IconButton
-                sx={{ ml: 1 }}
+                sx={{ mr: 2 }}
                 color="inherit"
                 onClick={() => (dark ? setDark(false) : setDark(true))}
               >
