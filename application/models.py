@@ -8,24 +8,13 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    # JSON column to store an array of pets
-    pets = db.Column(db.JSON, nullable=True)
-    # Date of Birth (DOB)
-    dob = db.Column(db.Date, nullable=True)
-    # JSON column to store an array of appointment history
-    appointment_history = db.Column(db.JSON, nullable=True)
 
     # initialiase all the class values as the instance values
-    def __init__(
-        self, first_name, last_name, email, password, pets, dob, appointment_history
-    ):
+    def __init__(self, first_name, last_name, email, password):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
-        self.pets = pets
-        self.dob = dob
-        self.appointment_history = appointment_history
 
 
 class Appointments(db.Model):
@@ -34,7 +23,10 @@ class Appointments(db.Model):
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table
-    pet = db.relationship("Pet", backref=db.backref("appointments", lazy=True))
+    pets = db.relationship(
+        "Pets",
+        backref=db.backref("appointments", lazy=True, cascade="all,delete-orphan"),
+    )
 
     # initialiase all the class values as the instance values
     def __init__(self, date, pet_id, description):
@@ -51,11 +43,12 @@ class Pets(db.Model):
     breed = db.Column(db.String(100), nullable=False)
     outdoor = db.Column(db.Boolean, nullable=False)
     neutered = db.Column(db.Boolean, nullable=False)
-    history_id = db.Column(
-        db.Integer, db.ForeignKey("history.id"), nullable=False
-    )  # JSON column to store an array of history
+    # history_id = db.Column(db.Integer, db.ForeignKey('diary.id'), nullable=False)  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
+    user = db.relationship(
+        "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
+    )
 
     def __init__(
         self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet
@@ -78,6 +71,9 @@ class Diary(db.Model):
     date = db.Column(db.Date, nullable=False)
     diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
     field = db.Column(db.String(100))
+    pets = db.relationship(
+        "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
+    )
 
     def __init__(self, pet_id, name, date, diagnosis, field):
         self.pet_id = pet_id
@@ -99,7 +95,7 @@ class Diseases(db.Model):
         self.description = description
 
 
-class DiseasesVariables(db.Model):
+class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     specialty = db.Column(db.JSON)
     feature = db.Column(db.String(100), nullable=False)
@@ -117,7 +113,7 @@ class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     disease_id = db.Column(db.Integer, db.ForeignKey("diseases.id"), nullable=False)
     diseasesVariables_id = db.Column(
-        db.Integer, db.ForeignKey("diseasesVariables.id"), nullable=False
+        db.Integer, db.ForeignKey("variables.id"), nullable=False
     )
     no = db.Column(db.Integer)
     probablyNot = db.Column(db.Integer)

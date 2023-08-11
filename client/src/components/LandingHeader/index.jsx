@@ -1,7 +1,7 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 //img
-import headerImg from "../assets/cat-logo.png";
+import headerImg from "../../assets/cat-logo.png";
 
 export default function LandingHeader() {
   const CustomBox = styled(Box)(({ theme }) => ({

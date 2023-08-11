@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
-import CatBot from "./CatBot";
+import CatBot from "../CatBot";
 import { NavLink, Link } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -21,8 +21,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import "../App.css";
-import { useCredentials } from "../contexts";
+import "../../App.css";
+import { useCredentials } from "../../contexts";
 
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
@@ -32,6 +32,8 @@ import MapIcon from "@mui/icons-material/Map";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CatLogo from "../../assets/cat-logo.png";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -144,10 +146,7 @@ export default function Navbar() {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ justifyContent: "flex-start" }}>
               <Link to="/home">
-                <img
-                  src="src/assets/cat-logo.png"
-                  style={{ width: "70px", height: "60px" }}
-                />
+                <img src={CatLogo} style={{ width: "70px", height: "60px" }} />
               </Link>
             </div>
             <div
@@ -185,6 +184,30 @@ export default function Navbar() {
                 >
                   <InfoIcon />
                   About
+                </div>
+              </NavLink>
+              <NavLink
+                to="/user"
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <AccountCircleIcon />
+                  Account
                 </div>
               </NavLink>
               <NavLink
@@ -324,6 +347,7 @@ export default function Navbar() {
             {[
               { name: "Home", icon: <HomeIcon />, route: "/home" },
               { name: "About", icon: <InfoIcon />, route: "/about" },
+              { name: "Account", icon: <AccountCircleIcon />, route: "/user" },
               {
                 name: "Symptom Checker",
                 icon: <AssignmentIcon />,
