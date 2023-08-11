@@ -1,3 +1,14 @@
+import os
+import sys
+sys.path.append(str(os.path.dirname(os.path.abspath(__file__))))
+
+# import homepage
+import diary
+import user
+import pets
+import appointments
+
+
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -29,20 +40,20 @@ def create_app(env=None):
         app.config["DEBUG"] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-#initialising the db and connecting to app
+    #initialising the db and connecting to app
     db.init_app(app)
     app.app_context().push()
     CORS(app)
 
-     #BLUEPRINTS
-    from homepage.routes import homepage
-    from appointments.routes import appointment
-    from user.routes import user
-    from pets.routes import pet
+    #BLUEPRINTS  
+
+    # from appointments.routes import appointment
+    # from user.routes import user
+    # from pets.routes import pet
     #Blueprints registration
-    app.register_blueprint(user)
-    app.register_blueprint(homepage)
-    app.register_blueprint(appointment)
-    app.register_blueprint(pet)
+    # app.register_blueprint (user)
+    # app.register_blueprint (homepage.homepage)
+    # app.register_blueprint (appointments)
+    # app.register_blueprint (pets)
 
     return app

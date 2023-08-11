@@ -1,3 +1,4 @@
+from datetime import datetime
 
 def filter_symptoms_specialty(symptoms, flag):
     local_symptoms = []
@@ -15,17 +16,19 @@ def filter_disease_name(diseases, flag):
             local_diseases.append(dis['name'])
     return local_diseases
 
-def answerDefaultAnamnese(age, sex, contactWithOtherPets, diet, neutered, outdoor):
+def answerDefaultAnamnese(age, sex, diet, neutered, outdoor, contactWithOtherPets = 'No'):
+    current_date = datetime.now().date()
+    age_in_years = ((current_date - age).days)/360 
     answers = []
 
-    def ageConversion(age):
-        if age < 1:
+    def ageConversion(age_in_years):
+        if age_in_years < 1:
             answers.append(0.00)
-        elif age >= 1 and age < 2:
+        elif age_in_years >= 1 and age_in_years < 2:
             answers.append(0.25)
-        elif age >= 2 and age < 5:
+        elif age_in_years >= 2 and age_in_years < 5:
             answers.append(0.50)
-        elif age >= 5 and age < 7:
+        elif age_in_years >= 5 and age_in_years < 7:
             answers.append(0.75)
         else:
             answers.append(1.00)
@@ -51,18 +54,18 @@ def answerDefaultAnamnese(age, sex, contactWithOtherPets, diet, neutered, outdoo
             answers.append(0.00)
 
     def neuteredConversion(neutered):
-        if neutered == 'Yes':
+        if neutered == True:
             answers.append(1.00)
         else:
             answers.append(0.00)
 
     def outdoorConversion(outdoor):
-        if outdoor == 'Yes':
+        if outdoor == True:
             answers.append(1.00)
         else:
             answers.append(0.00)
 
-    ageConversion(age)
+    ageConversion(age_in_years)
     sexConversion(sex)
     contactWithOtherPetsConversion(contactWithOtherPets)
     dietConversion(diet)

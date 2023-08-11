@@ -1,5 +1,7 @@
 #Here we will build all out tables (DB). 
-from __init__ import db
+import sys
+sys.path.append('../')
+from application import *
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,16 +15,17 @@ class User(db.Model):
     dob = db.Column(db.Date, nullable=True)
     # JSON column to store an array of appointment history
     appointment_history = db.Column(db.JSON, nullable=True)
+    
 
 #initialiase all the class values as the instance values
-    def __init__(self, first_name, last_name, email, password, pets, dob, appointment_history):
+    def __init__(self, first_name, last_name, email, password): #pets, dob, appointment_history):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
-        self.pets = pets
-        self.dob = dob
-        self.appointment_history = appointment_history
+        # self.pets = pets
+        # self.dob = dob
+        # self.appointment_history = appointment_history
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,16 +54,31 @@ class Pets(db.Model):
     diet = db.Column(db.String(100), nullable=False)
     user = db.relationship('User', backref=db.backref('users', lazy=True, cascade="all,delete-orphan"))
 
-    def __init__(self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet):
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, sex, diet):#history_id:
         self.user_id = user_id
         self.name = name
         self.dob = dob
         self.breed = breed
         self.outdoor = outdoor
         self.neutered = neutered
-        self.history_id = history_id
+        #self.history_id = history_id
         self.sex = sex
         self.diet = diet
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "user_id": self.user_id,
+            "dob": self.dob,
+            "neutered": self.neutered,
+            "sex": self.sex,
+            "diet": self.diet,
+            "outdoor": self.outdoor
+        }
+
+    def __repr__(self):
+        return f"<Pets(id={self.id}, name={self.name} user_id={self.user_id}, dob={self.dob}, neutered={self.neutered}, sex={self.sex}, diet={self.diet}, outdoor={self.outdoor})>"    
 
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
