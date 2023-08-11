@@ -81,12 +81,13 @@ const WelcomeScreenContainer = ({ setAppData }) => {
       <div
         style={{
           display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
         }}
       >
         <div
           style={{
             backgroundColor: dark ? "#121212" : "whitesmoke",
-            paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
             width: "50%",
@@ -108,27 +109,27 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             component="p"
             sx={{
               py: 3,
+              pr: 10,
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            On your video page, you can join a face-to-face <br /> call with
-            your registered vet. <br /> Just copy the meeting ID from your
-            appointment <br /> and paste it into the box, join, and you're good
-            to go.
+            On your video page, you can join a face-to-face call with your
+            registered vet. Just copy the meeting ID from your appointment and
+            paste it into the box, join, and you're good to go.
           </Typography>
         </div>
         <div
           style={{
             backgroundColor: dark ? "#121212" : "whitesmoke",
-            paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
-            width: "40%",
+            width: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
+            maxWidth: "400px",
           }}
         >
           <TextField
