@@ -146,6 +146,7 @@ export default function Navbar() {
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -170,6 +171,7 @@ export default function Navbar() {
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -194,6 +196,7 @@ export default function Navbar() {
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -218,6 +221,7 @@ export default function Navbar() {
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -242,6 +246,7 @@ export default function Navbar() {
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}

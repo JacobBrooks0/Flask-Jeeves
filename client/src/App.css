@@ -87,3 +87,7 @@ html {
     margin: 0% 3%;
   }
 }
+
+.fade:not(.show) {
+  opacity: inherit !important;
+}

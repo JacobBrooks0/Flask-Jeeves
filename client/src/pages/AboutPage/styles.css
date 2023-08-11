@@ -1,9 +1,7 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   margin-top: 20px;
-  align-items: center;
 }
 .us {
   display: flex;
