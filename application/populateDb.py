@@ -16,6 +16,17 @@ session = Session()
 # Create tables if they don't exist
 app=create_app()
 
+# print("Tables before dropping:", db.metadata.tables.keys())
+# db.session.rollback()
+# db.drop_all()
+# print("Tables after dropping:", db.metadata.tables.keys())
+# db.drop_all()
+# session.query(Pets).delete()
+# session.query(User).delete()
+# session.query(Variables).delete()
+# session.query(Diseases).delete()
+# session.commit()
+# db.create_all()
 
 # Data to insert
 variables_to_insert = [
@@ -53,22 +64,22 @@ variables_to_insert = [
                 {'name':'Indoor' , 'type':'animalAtribute', 'question':'Does your cat goes outside?', 'specialty':['general'], 'defaultQuestion': True},
                 {'name':'Contact with other pets' , 'type':'animalAtribute', 'question':'Does your cat have contact with other pets?', 'specialty':['general'], 'defaultQuestion': True},
                 {'name':'Neutered' , 'type':'animalAtribute', 'question':'Is your cat neutered?', 'specialty':['general'], 'defaultQuestion': True},
-                {'name':'Start of the symptoms', 'type':'symptomatribute', 'question':'When was the first time that the symptoms started?', 'specialty':['general'], 'defaultQuestion': False},
+                {'name':'Start of the symptoms', 'type':'symptomAtribute', 'question':'When was the first time that the symptoms started?', 'specialty':['general'], 'defaultQuestion': False},
                 {'name':'Processed Diet' , 'type':'animalAtribute', 'question':'Does your cat eat processed food?', 'specialty':['general'], 'defaultQuestion': True},
               ]
 
-# diseases_to_insert = [
-#                 {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
-#                 {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract, often causing discomfort and frequent urination.'},
-#                 {'name': 'Renal Disease', 'specialty': 'Urinary', 'description': 'Chronic kidney disease that impairs the kidney function and can lead to various symptoms and complications.'},
-#                 {'name': 'Luxation', 'specialty': 'Musculoskeletal', 'description': 'Dislocation or displacement of a joint, causing pain and mobility issues.'},
-#                 {'name': 'Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
-#                 {'name': 'Intestinal Parasites', 'specialty': 'Gastrointestinal', 'description': 'Infections caused by various parasites that affect the gastrointestinal system.'},
-#                 {'name': 'Hairball Obstruction', 'specialty': 'Gastrointestinal', 'description': 'Accumulation of hair in the stomach or intestines, causing blockages and discomfort.'},
-#                 {'name': 'Scabies', 'specialty': 'Dermatology', 'description': 'A skin infestation caused by mites, leading to intense itching and skin irritation.'},
-#                 {'name': 'Flea Allergy', 'specialty': 'Dermatology', 'description': 'An allergic reaction to flea bites, causing skin inflammation and discomfort.'},
-#                 {'name': 'Atopic Dermatitis', 'specialty': 'Dermatology', 'description': 'Chronic skin inflammation and itching caused by allergic reactions to environmental factors.'}
-#             ]
+diseases_to_insert = [
+                {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
+                {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract, often causing discomfort and frequent urination.'},
+                {'name': 'Renal Disease', 'specialty': 'Urinary', 'description': 'Chronic kidney disease that impairs the kidney function and can lead to various symptoms and complications.'},
+                {'name': 'Luxation', 'specialty': 'Musculoskeletal', 'description': 'Dislocation or displacement of a joint, causing pain and mobility issues.'},
+                {'name': 'Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
+                {'name': 'Intestinal Parasites', 'specialty': 'Gastrointestinal', 'description': 'Infections caused by various parasites that affect the gastrointestinal system.'},
+                {'name': 'Hairball Obstruction', 'specialty': 'Gastrointestinal', 'description': 'Accumulation of hair in the stomach or intestines, causing blockages and discomfort.'},
+                {'name': 'Scabies', 'specialty': 'Dermatology', 'description': 'A skin infestation caused by mites, leading to intense itching and skin irritation.'},
+                {'name': 'Flea Allergy', 'specialty': 'Dermatology', 'description': 'An allergic reaction to flea bites, causing skin inflammation and discomfort.'},
+                {'name': 'Atopic Dermatitis', 'specialty': 'Dermatology', 'description': 'Chronic skin inflammation and itching caused by allergic reactions to environmental factors.'}
+            ]
 
 users_to_insert = [
 
@@ -78,9 +89,9 @@ users_to_insert = [
 ]
 
 pets_to_insert = [
-    {'user_id':1, 'name':'Buddy', 'dob':date(2019, 5, 15), 'breed':'Labrador', 'outdoor':True, 'neutered':True, 'sex':'Male', 'diet':'Processed'},
-    {'user_id':2, 'name':'Luna', 'dob':date(2020, 2, 10), 'breed':'Siamese', 'outdoor':False, 'neutered':False, 'sex':'Female', 'diet':'Mixed'},
-    {'user_id':3, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Golden Retriever', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural'}
+    {'user_id':21, 'name':'Buddy', 'dob':date(2019, 5, 15), 'breed':'Labrador', 'outdoor':True, 'neutered':True, 'sex':'Male', 'diet':'Processed'},
+    {'user_id':22, 'name':'Luna', 'dob':date(2020, 2, 10), 'breed':'Siamese', 'outdoor':False, 'neutered':False, 'sex':'Female', 'diet':'Mixed'},
+    {'user_id':20, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Golden Retriever', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural'}
     ]
 
 for user in users_to_insert:
@@ -106,25 +117,23 @@ for pet in pets_to_insert:
     )
     session.add(new_pet)    
 
-# Insert data into the database
-# for item in variables_to_insert:
-#     new_variable = Variables(
-#         specialty=item['specialty'],
-#         feature=item['name'],
-#         question=item['question'],
-#         defaultQuestion=item['defaultQuestion']
-#     )
-#     session.add(new_variable)
+#Insert data into the database
+for item in variables_to_insert:
+    new_variable = Variables(
+        specialty=item['specialty'],
+        feature=item['name'],
+        question=item['question'],
+        defaultQuestion=item['defaultQuestion']
+    )
+    session.add(new_variable)
 
-# for disease in diseases_to_insert:   
-#     new_disease = Diseases(
-#         name = disease['name'],
-#         specialty = disease['specialty'], 
-#         description = disease['description']
-#     )
-#     session.add(new_disease)
-
-
+for disease in diseases_to_insert:   
+    new_disease = Diseases(
+        name = disease['name'],
+        specialty = disease['specialty'], 
+        description = disease['description']
+    )
+    session.add(new_disease)
 
 # Commit the changes
 session.commit()

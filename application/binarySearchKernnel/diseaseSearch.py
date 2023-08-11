@@ -19,15 +19,18 @@ def GetAnswer(symptoms, symptom_Question):
     print('1 - No\n2 - Probably not\n3 - Don\'t Know\n4 - Probably yes\n5 - Yes')
     return(input())
 
-
-questions_so_far = []
-answers_So_Far = answerDefaultAnamnese(2, 'Male', 'No', 'Processed', 'Yes', 'No')
+questions_so_far = [{'name':'Age', 'type':'animalAtribute', 'question':'How old are your cat?', 'specialty':[], 'defaultQuestion': 'yes'},{'name':'Male' , 'type':'animalAtribute', 'question':'Is your cat male?', 'specialty':[], 'defaultQuestion': 'yes'},{'name':'Processed Diet' , 'type':'animalAtribute', 'question':'Does your cat eat processed food?', 'specialty':[], 'defaultQuestion': 'yes'}, {'name':'Neutered' , 'type':'animalAtribute', 'question':'Is your cat neutered?', 'specialty':[], 'defaultQuestion': 'yes'}, {'name':'Indoor' , 'type':'animalAtribute', 'question':'Does your cat goes outside?', 'specialty':[], 'defaultQuestion': 'yes'}, {'name':'Contact with other pets' , 'type':'animalAtribute', 'question':'Does your cat have contact with other pets?', 'specialty':[], 'defaultQuestion': 'yes'},   ]
+answers_So_Far = answerDefaultAnamnese(2, 'Male', 'Mixed', 'Yes', 'Yes', 'No')
 max_Number_of_Questions = 20
+
+print(len(questions_so_far))
+print(answers_So_Far)
+input()
 
 for i in range(max_Number_of_Questions):
 
     questions_so_far.append(GenerateQuestion(AllVariables, questions_so_far))
-    answers_So_Far.append( AnswerValues[GetAnswer(AllVariables, questions_so_far[-1])] )
+    answers_So_Far.append( AnswerValues[GetAnswer(AllVariables, questions_so_far[-1])])
     input()
     # Calculating Probabilities based on Bayes theorem
     probabilities = by.CalculateProbabilites(AllDiseases, DiseaseRules, questions_so_far, answers_So_Far)
@@ -35,7 +38,7 @@ for i in range(max_Number_of_Questions):
 
 print("The three most probable diseases are:")
 for i in range(-1, -4, -1):
-    print(probabilities[i]['name'])
+    print(probabilities[i]['name'], probabilities[i])
 
 # FUTURO
 # 1 - Criar o banco de dados para salvar:

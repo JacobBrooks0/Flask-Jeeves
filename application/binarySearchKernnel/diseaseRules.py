@@ -394,6 +394,7 @@ DiseaseRules =  {
                'Processed Diet': [0, 0, 1, 0, 0],
 
     },
+
     # 'Feline Lower Urinary Tract Disease': {
     # 		   'Frequent Urination' : [0, 0, 0, 0, 0],
     #            'Blood in Urine' : [0, 0, 0, 0, 0],
@@ -436,3 +437,62 @@ DiseaseRules =  {
     #            'Natural Diet': [0, 0, 0, 0, 0],
     # },
 }
+
+
+DicSym = {
+'Frequent Urination' : 361,
+'Blood in Urine' : 362,
+'Painful Urination' : 363,
+'Licking Genital Area' : 364,
+'Lethargy and Weakness' : 365,
+'Straining to Urinate' : 366,
+'Abdominal Pain' : 367,
+'Vomiting and Nausea' : 368,
+'Polydipsia' : 369,
+'Limping' : 370,
+'Swelling members' : 371,
+'Fever' : 372,
+'Loss Appetite' : 373,
+'Weight loss' : 374,
+'PotBellied Appearance' : 375,
+'Diarrhea' : 376,
+'Constipation' : 377,
+'Visible Worms' : 378,
+'Anal Itching or Scooting' : 379,
+'Intense itching and scratching' : 380,
+'Hair loss or thinning of fur' : 381,
+'Formation of small raised bumps or pustules' : 382,
+'Irritated or weepy eyes' : 383,
+'Restlessness and Agitation' : 384,
+'Over-Grooming' : 385,
+'Ear Infection' : 386,
+'Presence of fleas' : 387,
+'Overweight' : 388,
+'Age' : 389,
+'Vaccination updated' : 390,
+'Male' : 391,
+'Indoor' : 392,
+'Contact with other pets' : 393,
+'Neutered' : 394,
+'Start of the symptoms' : 395,
+'Processed Diet' : 396,
+}
+
+
+file = open("TESTEDB.txt", 'w')
+for disease, symptoms in DiseaseRules.items():
+    for symptom, values in symptoms.items():
+            
+        string = disease + " | " + str(DicSym[symptom]) + " | " + str(values[0]) + " | " + str(values[1]) + " | " + str(values[2]) + " | " + str(values[3]) + " | " + str(values[4]) + "\n"
+        print(string)
+        file.write(string)
+
+file.close()
+        
+
+
+
+
+
+
+    
