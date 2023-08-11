@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import CatImage from "../assets/images/pitr-Kitty-icon.svg";
 
 export default function CatList({
   cat,
@@ -8,12 +9,12 @@ export default function CatList({
   setErrorText,
 }) {
   const [backgroundButtonColor, setBackgroundButtonColor] = useState("#d3ccfa");
-  //   const [selectedCatButton, setSelectedCatButton] = useState;
 
   return (
     <button
       onClick={() => {
         setSelectedCat(cat);
+        console.log(selectedCat);
         setErrorText(false);
       }}
       onMouseEnter={() => setBackgroundButtonColor("#826bf5")}
@@ -46,10 +47,9 @@ export default function CatList({
             justifyContent: "center",
           }}
         >
-          <img
-            style={{ width: "90%", height: "90%" }}
-            src="src/assets/images/pitr-Kitty-icon.svg"
-          />
+          <div style={{ width: "90%", height: "90%" }}>
+            <CatImage />
+          </div>
         </div>
       </div>
 

@@ -14,3 +14,15 @@
   align-items: center;
   justify-content: center;
 }
+
+.end-of-quiz-text {
+  font-family: "Jua";
+  text-align: center;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

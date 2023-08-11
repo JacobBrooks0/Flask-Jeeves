@@ -55,3 +55,28 @@ export const LocationProvider = ({ children }) => {
 };
 
 export const useLocations = () => useContext(LocationContext);
+
+const SymptomsContext = createContext();
+
+export const SymptomsProvider = ({ children }) => {
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
+
+  return (
+    <SymptomsContext.Provider
+      value={{
+        questionNumber,
+        setQuestionNumber,
+        questions,
+        setQuestions,
+        answers,
+        setAnswers,
+      }}
+    >
+      {children}
+    </SymptomsContext.Provider>
+  );
+};
+
+export const useSymptoms = () => useContext(SymptomsContext);

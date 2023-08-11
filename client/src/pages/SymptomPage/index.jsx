@@ -5,6 +5,7 @@ import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
 import Button from "@mui/material/Button";
 import SymptomForm from "../../components/SymptomForm/SymptomForm";
 import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
+import { useSymptoms } from "../../contexts/";
 
 const testData = [
   {
@@ -44,6 +45,18 @@ export default function SymptomPage() {
   const [selectedCat, setSelectedCat] = useState({});
   const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);
   const [errorText, setErrorText] = useState(false);
+  const {
+    questionNumber,
+    setQuestionNumber,
+    setAnswers,
+    setQuestions,
+  } = useSymptoms();
+
+  useEffect(() => {
+    setQuestionNumber(0);
+    setAnswers([]);
+    setQuestions([]);
+  }, []);
 
   const goToForm = () => {
     Object.keys(selectedCat).length == 0
