@@ -91,6 +91,26 @@ export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const { dark, setDark } = useCredentials();
+  const [
+    backgroundAboutButtonColor,
+    setBackgroundAboutButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundSymptomsButtonColor,
+    setBackgroundSymptomsButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundVideoButtonColor,
+    setBackgroundVideoButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundMapsButtonColor,
+    setBackgroundMapsButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundUserButtonColor,
+    setBackgroundUserButtonColor,
+  ] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -139,9 +159,15 @@ export default function Navbar() {
             >
               <NavLink
                 to="/about"
+                onMouseEnter={() => setBackgroundAboutButtonColor(true)}
+                onMouseLeave={() => setBackgroundAboutButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundAboutButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
@@ -164,9 +190,15 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/user"
+                onMouseEnter={() => setBackgroundUserButtonColor(true)}
+                onMouseLeave={() => setBackgroundUserButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundUserButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
@@ -189,9 +221,15 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/symptom"
+                onMouseEnter={() => setBackgroundSymptomsButtonColor(true)}
+                onMouseLeave={() => setBackgroundSymptomsButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundSymptomsButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
@@ -214,9 +252,15 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/video"
+                onMouseEnter={() => setBackgroundVideoButtonColor(true)}
+                onMouseLeave={() => setBackgroundVideoButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundVideoButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
@@ -239,9 +283,15 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/map"
+                onMouseEnter={() => setBackgroundMapsButtonColor(true)}
+                onMouseLeave={() => setBackgroundMapsButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundMapsButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
