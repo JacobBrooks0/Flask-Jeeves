@@ -162,7 +162,7 @@ export default function CatRegisterForm() {
         </TextField>
         <TextField
           variant="filled"
-          label="Sex"
+          label="Diet"
           select
           defaultValue="Processed"
           color="secondary"
@@ -174,6 +174,25 @@ export default function CatRegisterForm() {
           }}
         >
           {dietProps.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.value}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          variant="filled"
+          label="Contact with Pets"
+          select
+          defaultValue="Yes"
+          color="secondary"
+          sx={{
+            backgroundColor: "whitesmoke",
+            borderRadius: "5px",
+            marginTop: "40px",
+            width: "75%",
+          }}
+        >
+          {neuteredProps.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.value}
             </MenuItem>

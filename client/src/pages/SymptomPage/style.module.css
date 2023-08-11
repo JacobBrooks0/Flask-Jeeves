@@ -44,13 +44,13 @@
 }
 
 .cat-image {
-  width: 650px;
-  height: 650px;
+  width: 750px;
+  height: 750px;
 }
 
 .second-container {
   margin-top: 15px;
-  height: 900px;
+  height: 980px;
   background-color: whitesmoke;
   display: flex;
   align-items: center;
