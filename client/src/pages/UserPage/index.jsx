@@ -56,6 +56,9 @@ export default function UserPage() {
   useEffect(() => {
     console.log(selectedTime);
   }, [selectedTime]);
+  useEffect(() => {
+    console.log(appointmentDate);
+  }, [appointmentDate]);
 
   const testUser = {
     userId: 1,
@@ -225,6 +228,7 @@ export default function UserPage() {
             }}
           >
             <Button
+              onClick={handleAppointment}
               sx={{
                 my: 0.5,
                 px: 4,

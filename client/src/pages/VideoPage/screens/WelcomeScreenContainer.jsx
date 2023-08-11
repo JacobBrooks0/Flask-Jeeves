@@ -21,16 +21,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
     {
       id: 1,
       date: "08/10/2023",
-      PetId: 1,
-      petName: "Stan",
       time: "16:00",
       meetingId: "sux9-iiri-58gt",
     },
     {
       id: 2,
       date: "08/13/2023",
-      PetId: 1,
-      petName: "Stan",
       time: "12:00",
       meetingId: "sux9-iiri-58gt",
     },
@@ -225,10 +221,9 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}{" "}
-            Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
+            Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
             <br />
-            Pet: {nextAppointment[0] ? nextAppointment[0].petName : "loading"}
+            Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
             <br />
             Meeting ID:{" "}
             {nextAppointment[0] ? nextAppointment[0].meetingId : "loading"}{" "}
