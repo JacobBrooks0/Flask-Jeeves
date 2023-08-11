@@ -12,7 +12,7 @@ import {
   UserPage,
   VideoPage,
   AboutPage,
-  ChatPage
+  ChatPage,
 } from "./pages";
 
 function App() {

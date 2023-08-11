@@ -26,6 +26,7 @@ flask-socketio = "*"
 python-socketio = "*"
 python-engineio = "*"
 simple-websocket = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
