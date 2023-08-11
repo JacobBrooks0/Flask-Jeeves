@@ -41,12 +41,15 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
     # return JSON response to the client
-    return jsonify(
-        id=new_user.id,
-        first_name=new_user.first_name,
-        last_name=new_user.last_name,
-        email=new_user.email,
-        password=new_user.password,
+    return (
+        jsonify(
+            id=new_user.id,
+            first_name=new_user.first_name,
+            last_name=new_user.last_name,
+            email=new_user.email,
+            password=new_user.password,
+        ),
+        201,
     )
 
 

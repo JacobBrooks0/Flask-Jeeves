@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Snackbar } from "@mui/material";
 import { useCredentials } from "../../../contexts";
+import Doctor from "../../../assets/doctor.png";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
@@ -250,11 +251,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           onClose={() => setOpen(false)}
           open={open}
         />
-        <img
-          src="src/assets/doctor.png"
-          alt="doctor"
-          style={{ height: "100%" }}
-        />
+        <img src={Doctor} alt="doctor" style={{ height: "100%" }} />
       </div>
     </div>
   );

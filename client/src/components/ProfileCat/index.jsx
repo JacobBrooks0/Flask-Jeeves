@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { useCredentials } from "../../contexts";
+import Alex from "../../assets/alex.jpg";
 
 export default function ProfileCat({ cat }) {
   const { dark, setDark } = useCredentials();
@@ -20,7 +21,7 @@ export default function ProfileCat({ cat }) {
       }}
     >
       <img
-        src="src/assets/alex.jpg"
+        src={Alex}
         alt=""
         style={{ width: "40%", borderRadius: "50%", height: "fit-content" }}
       />
