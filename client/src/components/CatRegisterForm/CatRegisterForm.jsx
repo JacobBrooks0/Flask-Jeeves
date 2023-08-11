@@ -181,7 +181,7 @@ export default function CatRegisterForm() {
         </TextField>
         <TextField
           variant="filled"
-          label="Contact with Pets"
+          label="Contact with other Pets"
           select
           defaultValue="Yes"
           color="secondary"

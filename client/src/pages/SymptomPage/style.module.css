@@ -37,15 +37,17 @@
 
 .image-container {
   width: 50%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: "100%";
+  overflow-x: hidden;
 }
 
 .cat-image {
-  width: 750px;
-  height: 750px;
+  width: 650px;
+  height: 650px;
 }
 
 .second-container {
