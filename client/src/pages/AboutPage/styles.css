@@ -1,9 +1,8 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   margin-top: 20px;
-  align-items: center;
+  margin-bottom: -100px;
 }
 .us {
   display: flex;

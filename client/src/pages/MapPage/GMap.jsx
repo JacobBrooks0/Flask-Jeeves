@@ -93,8 +93,7 @@ const GMap = () => {
       zoom: 11,
     });
     // infowindow = new window.google.maps.InfoWindow({ content: "Hello" });
-    console.log(googMap.center.lat());
-    console.log(googMap.center.lng());
+
     return { googMap: googMap };
   };
 
