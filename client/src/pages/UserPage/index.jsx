@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { ProfileCat } from "../../components";
+import Alex from "../../assets/alex.jpg";
 
 export default function UserPage() {
   const { dark, setDark } = useCredentials();
@@ -69,7 +70,7 @@ export default function UserPage() {
           }}
         >
           <img
-            src="src/assets/alex.jpg"
+            src={Alex}
             alt="user picture"
             style={{ width: "80%", borderRadius: "50%", marginBottom: "2rem" }}
           />

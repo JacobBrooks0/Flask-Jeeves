@@ -5,6 +5,11 @@ import Button from "@mui/material/Button";
 import "./styles.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import IconButton from "@mui/material/IconButton";
+import Alex from "../../assets/alex.jpg";
+import Harry from "../../assets/harry.jpg";
+import Jacob from "../../assets/jacob.jpg";
+import Lais from "../../assets/lais.png";
+import Roberta from "../../assets/roberta.png";
 
 export default function AboutPage() {
   const { dark, setDark } = useCredentials();
@@ -25,7 +30,7 @@ export default function AboutPage() {
       </Typography>
       <div className="us">
         <div className="person">
-          <img src="src/assets/alex.jpg" alt="alex" />
+          <img src={Alex} alt="alex" />
           <Typography
             variant="h6"
             component="h6"
@@ -38,7 +43,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/lais.png" alt="lais" />
+          <img src={Lais} alt="lais" />
           <Typography
             variant="h6"
             component="h6"
@@ -51,7 +56,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/jacob.jpg" alt="jacob" />
+          <img src={Jacob} alt="jacob" />
           <Typography
             variant="h6"
             component="h6"
@@ -64,7 +69,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/roberta.png" alt="roberta" />
+          <img src={Roberta} alt="roberta" />
           <Typography
             variant="h6"
             component="h6"
@@ -77,7 +82,7 @@ export default function AboutPage() {
           </Typography>
         </div>
         <div className="person">
-          <img src="src/assets/harry.jpg" alt="harry" />
+          <img src={Harry} alt="harry" />
           <Typography
             variant="h6"
             component="h6"
