@@ -162,21 +162,4 @@ class UsersAnswersCount(db.Model):
         self.propablyYes = propablyYes
         self.yes = yes
 
-class UsersAnswersCount(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)
-    diseasesVariables_id = db.Column(db.Integer, db.ForeignKey('variables.id'), nullable=False)
-    no = db.Column(db.Integer)
-    probablyNot = db.Column(db.Integer)
-    iDontKnow = db.Column(db.Integer)
-    propablyYes = db.Column(db.Integer)
-    yes = db.Column(db.Integer)
 
-    def __init__(self, disease_id, diseasesVariables_id, no, probablyNot, iDontKnow, propablyYes, yes):
-        self.disease_id = disease_id
-        self.diseasesVariables_id = diseasesVariables_id
-        self.no = no
-        self.probablyNot = probablyNot
-        self.iDontKnow = iDontKnow
-        self.propablyYes = propablyYes
-        self.yes = yes

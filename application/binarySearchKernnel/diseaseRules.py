@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+
 DiseaseRules =  {
     'Urethal Obstruction': {
     			# No, prob not, dont know, prob, yes
@@ -32,7 +35,7 @@ DiseaseRules =  {
                'Age': [0, 1, 1, 1, 1],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 0, 0, 1],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [1, 1, 0, 0, 0],
@@ -71,7 +74,7 @@ DiseaseRules =  {
                'Age': [0, 1, 1, 1, 1],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 1, 0, 0],
@@ -110,7 +113,7 @@ DiseaseRules =  {
                'Age': [0, 0, 0, 1, 1],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [1, 0, 0, 0, 0],
@@ -149,7 +152,7 @@ DiseaseRules =  {
                'Age': [0, 0, 0, 0, 0],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 0, 0, 1],
+               'Indoor': [1, 0, 0, 0, 0],
                'Contact with other pets': [0, 0, 0, 0, 1],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 0, 0, 1],
@@ -186,13 +189,9 @@ DiseaseRules =  {
                'Ear Infection' : [0, 0, 1, 0, 0],
                'Overweight': [0, 0, 1, 0, 0],
                'Age': [1, 1, 0, 0, 0],
-               'Young adult': [0, 0, 0, 0, 1],
-               'Adult': [0, 0, 1, 0, 0],
-               'Mature Adult': [1, 0, 0, 0, 0],
-               'Old': [1, 0, 0, 0, 0],
                'Vaccination updated': [1, 0, 0, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 0, 0, 1],
+               'Indoor': [1, 0, 0, 0, 0],
                'Contact with other pets': [0, 0, 0, 0, 1],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 0, 0, 1],
@@ -231,7 +230,7 @@ DiseaseRules =  {
                'Age': [1, 1, 0, 0, 0],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 0, 0, 1],
+               'Indoor': [1, 0, 0, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 1, 0, 0],
@@ -270,7 +269,7 @@ DiseaseRules =  {
                'Age': [0, 0, 1, 1, 1],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [1, 0, 0, 0, 0],
@@ -309,14 +308,14 @@ DiseaseRules =  {
                'Age': [1, 1, 0, 0, 0],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 0, 0, 1],
+               'Indoor': [1, 0, 0, 0, 0],
                'Contact with other pets': [0, 0, 0, 0, 1],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 1, 0, 0],
                'Processed Diet': [0, 0, 1, 0, 0],
 
     },
-    'Flea Alergy': {
+    'Flea Allergy': {
     		   'Frequent Urination' : [0, 0, 1, 0, 0],
                'Blood in Urine' : [0, 0, 1, 0, 0],
                'Painful Urination' : [0, 0, 1, 0, 0],
@@ -348,7 +347,7 @@ DiseaseRules =  {
                'Age': [0, 0, 1, 1, 1],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [0, 0, 1, 0, 0],
@@ -387,7 +386,7 @@ DiseaseRules =  {
                'Age': [0, 0, 1, 1, 0],
                'Vaccination updated': [0, 0, 1, 0, 0],
                'Male': [0, 0, 1, 0, 0],
-               'Outdoor': [0, 0, 1, 0, 0],
+               'Indoor': [0, 0, 1, 0, 0],
                'Contact with other pets': [0, 0, 1, 0, 0],
                'Neutered': [0, 0, 1, 0, 0],
                'Start of the symptoms': [1, 0, 0, 0, 0],
@@ -426,7 +425,7 @@ DiseaseRules =  {
     #            'Overweight': [0, 0, 0, 0, 0],
     #            'Age': [0, 0, 0, 0, 0
     #            'Male': [0, 0, 0, 0, 0],
-    #            'Outdoor': [0, 0, 0, 0, 0],
+    #            'Indoor': [0, 0, 0, 0, 0],
     #            'Contact with other pets': [0, 0, 0, 0, 0],
     #            'Neutered': [0, 0, 0, 0, 0],
     #            'Symptoms started Less than a day': [0, 0, 0, 0, 0],
@@ -478,18 +477,41 @@ DicSym = {
 'Processed Diet' : 396,
 }
 
+DicDis ={
+'Urethal Obstruction': 101,
+'Feline Lower Urinary Tract Disease': 102,
+'Renal Disease': 103,
+'Luxation': 104,
+'Panleukopenia': 105,
+'Intestinal Parasites': 106,
+'Hairball Obstruction': 107,
+'Scabies': 108,
+'Flea Allergy': 109,
+'Atopic Dermatitis': 110
+}
 
-file = open("TESTEDB.txt", 'w')
-for disease, symptoms in DiseaseRules.items():
-    for symptom, values in symptoms.items():
+
+# file = open("TESTEDB.txt", 'w')
+# for disease, symptoms in DiseaseRules.items():
+#     for symptom, values in symptoms.items():
             
-        string = disease + " | " + str(DicSym[symptom]) + " | " + str(values[0]) + " | " + str(values[1]) + " | " + str(values[2]) + " | " + str(values[3]) + " | " + str(values[4]) + "\n"
-        print(string)
-        file.write(string)
+#         string = str(DicDis[disease]) + " | " + str(DicSym[symptom]) + " | " + str(values[0]) + " | " + str(values[1]) + " | " + str(values[2]) + " | " + str(values[3]) + " | " + str(values[4]) + "\n"
+#         print(string)
+#         file.write(string)
 
-file.close()
+# file.close()
+
+# file = open("DiseaseRules.csv", 'w')
+# for disease, symptoms in DiseaseRules.items():
+#     for symptom, values in symptoms.items():
+            
+#         string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
+#         file.write(string)
+
+# file.close()
         
-
+df = pd.read_csv('DiseaseRules.csv')
+print(df)
 
 
 

@@ -1,9 +1,12 @@
 # Import necessary modules
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
-from __init__ import *
-from models import Variables, Diseases, Pets, User
+import sys
+sys.path.append('../../')
+from application import *
+from application.models import Variables, Diseases, Pets, User, UsersAnswersCount
 from datetime import date
+import pandas as pd
 
 # Replace with your PostgreSQL database URL
 DATABASE_URL = "postgresql://uazibwdf:XdbukCnOj7-f6C53_EURIyCEMXDEssdE@horton.db.elephantsql.com/uazibwdf"
@@ -15,6 +18,20 @@ session = Session()
 
 # Create tables if they don't exist
 app=create_app()
+
+# df = pd.read_csv('DiseaseRules.csv')
+
+# # Rename the index column to 'id' and reset the index to start from 1
+# df.rename_axis('id', inplace=True)
+# df.reset_index(drop=True, inplace=True)
+# df.index += 1  # Shift the index by 1 to start from 1
+# df.to_sql('UsersAnswersCount', con=engine, if_exists='replace', index=True)
+
+
+# session.commit()
+
+# # Close the session
+# session.close()
 
 # print("Tables before dropping:", db.metadata.tables.keys())
 # db.session.rollback()
@@ -68,6 +85,34 @@ variables_to_insert = [
                 {'name':'Processed Diet' , 'type':'animalAtribute', 'question':'Does your cat eat processed food?', 'specialty':['general'], 'defaultQuestion': True},
               ]
 
+file = open("DiseaseVariables.csv", 'w')
+for variables in variables_to_insert:
+    string = ""
+    for key, value in variables.items():        
+        if key == 'specialty':
+            for i in range(len(value)):                
+                if i == len(value) - 1:
+                    string += str(value[i]) + ","
+                else:
+                    string += str(value[i]) + ";"
+        else:
+            string += str(value) + ","
+
+    final_string = string[:-1]
+    final_string += '\n'
+    file.write(string)
+        
+            
+        # string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
+        # file.write(string)
+
+# file.close()
+
+# for disease, symptoms in DiseaseRules.items():
+#     for symptom, values in symptoms.items():
+            
+#         string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
+#  
 diseases_to_insert = [
                 {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
                 {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract, often causing discomfort and frequent urination.'},
@@ -94,50 +139,46 @@ pets_to_insert = [
     {'user_id':20, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Golden Retriever', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural'}
     ]
 
-for user in users_to_insert:
-    new_user = User(
-        first_name=user['first_name'],
-        last_name=user['last_name'],        
-        email=user['email'],
-        password=user['password']     
+# for user in users_to_insert:
+#     new_user = User(
+#         first_name=user['first_name'],
+#         last_name=user['last_name'],        
+#         email=user['email'],
+#         password=user['password']     
 
-    )
-    session.add(new_user)
+#     )
+#     session.add(new_user)
 
-for pet in pets_to_insert:
-    new_pet = Pets(
-        name=pet['name'],
-        user_id=pet['user_id'],        
-        dob=pet['dob'],
-        breed=pet['breed'],
-        outdoor=pet['outdoor'],
-        neutered=pet['neutered'],
-        sex=pet['sex'],
-        diet=pet['diet'],
-    )
-    session.add(new_pet)    
+# for pet in pets_to_insert:
+#     new_pet = Pets(
+#         name=pet['name'],
+#         user_id=pet['user_id'],        
+#         dob=pet['dob'],
+#         breed=pet['breed'],
+#         outdoor=pet['outdoor'],
+#         neutered=pet['neutered'],
+#         sex=pet['sex'],
+#         diet=pet['diet'],
+#     )
+#     session.add(new_pet)    
 
-#Insert data into the database
-for item in variables_to_insert:
-    new_variable = Variables(
-        specialty=item['specialty'],
-        feature=item['name'],
-        question=item['question'],
-        defaultQuestion=item['defaultQuestion']
-    )
-    session.add(new_variable)
+# #Insert data into the database
+# for item in variables_to_insert:
+#     new_variable = Variables(
+#         specialty=item['specialty'],
+#         feature=item['name'],
+#         question=item['question'],
+#         defaultQuestion=item['defaultQuestion']
+#     )
+#     session.add(new_variable)
 
-for disease in diseases_to_insert:   
-    new_disease = Diseases(
-        name = disease['name'],
-        specialty = disease['specialty'], 
-        description = disease['description']
-    )
-    session.add(new_disease)
+# for disease in diseases_to_insert:   
+#     new_disease = Diseases(
+#         name = disease['name'],
+#         specialty = disease['specialty'], 
+#         description = disease['description']
+#     )
+#     session.add(new_disease)
 
 # Commit the changes
-session.commit()
-
-# Close the session
-session.close()
 

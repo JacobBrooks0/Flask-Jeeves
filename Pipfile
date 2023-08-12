@@ -26,16 +26,14 @@ flask-socketio = "*"
 python-socketio = "*"
 python-engineio = "*"
 simple-websocket = "*"
-<<<<<<< HEAD
 requests = "*"
-=======
->>>>>>> ea326f4e3bc2bee4ccc5716c61f13f66b48cbd30
+pandas = "*"
 
 [dev-packages]
 pytest = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
 
 [scripts]
 dev = "flask run"
