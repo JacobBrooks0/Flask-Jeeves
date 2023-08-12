@@ -16,7 +16,7 @@ def filter_disease_name(diseases, flag):
             local_diseases.append(dis['name'])
     return local_diseases
 
-def answerDefaultAnamnese(age_in_years, sex, diet, neutered, outdoor, contactWithOtherPets = 'No'):
+def answerDefaultAnamnese(age_in_years, sex, diet, neutered, indoor, contactWithOtherPets = 'No'):
     # current_date = datetime.now().date()
     # age_in_years = ((current_date - datetime.date(age)).days)/360 
     answers = []
@@ -60,24 +60,11 @@ def answerDefaultAnamnese(age_in_years, sex, diet, neutered, outdoor, contactWit
         else:
             answers.append(0.00)
 
-    def outdoorConversion(outdoor):
-        if outdoor == True:
-            answers.append(1.00)
-        else:
+    def indoorConversion(indoor):
+        if indoor == True:
             answers.append(0.00)
-
-    print("Lais perdendo meu tempo e não me deu 1: ", len(answers))
-    ageConversion(age_in_years)
-    print("Lais perdendo meu tempo e não me deu 2: ", len(answers))
-    sexConversion(sex)
-    print("Lais perdendo meu tempo e não me deu 3: ", len(answers))
-    dietConversion(diet)
-    print("Lais perdendo meu tempo e não me deu 4: ", diet, len(answers))
-    neuteredConversion(neutered)
-    print("Lais perdendo meu tempo e não me deu 5: ", len(answers))
-    outdoorConversion(outdoor)
-    print("Lais perdendo meu tempo e não me deu 6: ", len(answers))
-    contactWithOtherPetsConversion(contactWithOtherPets)
-    print("Lais perdendo meu tempo e não me deu 7: ", len(answers))
+        else:
+            answers.append(1.00)
     return answers
+
 

@@ -9,7 +9,7 @@ from datetime import date
 import pandas as pd
 
 # Replace with your PostgreSQL database URL
-DATABASE_URL = "postgresql://uazibwdf:XdbukCnOj7-f6C53_EURIyCEMXDEssdE@horton.db.elephantsql.com/uazibwdf"
+DATABASE_URL = "postgresql://shcnxtvf:wrnhv3gUs8h3ARKeFWvghUG8gwcGbXxK@trumpet.db.elephantsql.com/shcnxtvf"
 
 # Create an engine and bind it to a session
 engine = create_engine(DATABASE_URL)
