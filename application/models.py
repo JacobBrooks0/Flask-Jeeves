@@ -1,7 +1,9 @@
 #Here we will build all out tables (DB). 
+import os
 import sys
 sys.path.append('../')
-from application import *
+sys.path.append(str(os.path.dirname(os.path.abspath(__file__))))
+from application import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -123,13 +125,13 @@ class Variables(db.Model):
     specialty = db.Column(db.JSON)
     feature = db.Column(db.String(100), nullable=False)
     question = db.Column(db.String(200), nullable=False)
-    defaultQuestion = db.Column(db.Boolean, nullable=False)
+    default = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, specialty, feature, question, defaultQuestion):
+    def __init__(self, specialty, feature, question, default):
         self.specialty = specialty
         self.feature = feature
         self.question = question
-        self.defaultQuestion = defaultQuestion
+        self.default = default
 
     def as_dict(self):
         return {
@@ -137,11 +139,11 @@ class Variables(db.Model):
             "specialty": self.specialty,
             "feature": self.feature,
             "question": self.question,
-            "defaultQuestion": self.defaultQuestion
+            "default": self.default
         }
 
     def __repr__(self):
-        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, defaultQuestion={self.defaultQuestion})>"
+        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, default={self.default})>"
     
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)

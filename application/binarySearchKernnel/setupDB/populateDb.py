@@ -2,14 +2,14 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 import sys
-sys.path.append('../../')
+sys.path.append('../../../')
 from application import *
 from application.models import Variables, Diseases, Pets, User, UsersAnswersCount
 from datetime import date
 import pandas as pd
 
 # Replace with your PostgreSQL database URL
-DATABASE_URL = "postgresql://shcnxtvf:wrnhv3gUs8h3ARKeFWvghUG8gwcGbXxK@trumpet.db.elephantsql.com/shcnxtvf"
+DATABASE_URL = "postgresql://uazibwdf:XdbukCnOj7-f6C53_EURIyCEMXDEssdE@horton.db.elephantsql.com/uazibwdf"
 
 # Create an engine and bind it to a session
 engine = create_engine(DATABASE_URL)

@@ -57,3 +57,13 @@ def create_app(env=None):
     # app.register_blueprint (pets)
 
     return app
+
+def recreate_tables():
+    with app.app_context():
+        db.drop_all()  # Drop existing tables
+        db.create_all()  # Create new tables
+
+if __name__ == '__main__':
+    app = create_app()  # Create the app instance
+    with app.app_context():
+        recreate_tables()  # Drop and create the tables

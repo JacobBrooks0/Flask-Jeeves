@@ -1,4 +1,4 @@
-id,feature,question,specialty,defaultQuestion 
+id,feature,question,specialty,default 
 1,Frequent Urination,Is your cat going to the litter more than usual?,Urinary,False
 2,Blood in Urine,Does the urine has blood?,Urinary,False
 3,Painful Urination,Does it seem it is having pain to urinate?,Urinary,False

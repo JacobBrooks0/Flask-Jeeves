@@ -2,6 +2,8 @@ import numpy as np
 import random as rd
 import bayes_lib as by
 from functions import *
+from definitions import *
+from diseaseRules import *
 
 def GenerateQuestion(symptoms, questions_so_far):
     # Start with a random algorithm
@@ -21,9 +23,9 @@ questions_so_far = [{'name':'Age', 'type':'animalAtribute', 'question':'How old 
 answers_So_Far = answerDefaultAnamnese(2, 'Male', 'Mixed', 'Yes', 'Yes', 'No')
 max_Number_of_Questions = 20
 
-print(len(questions_so_far))
-print(answers_So_Far)
-input()
+# print(len(questions_so_far))
+# print(answers_So_Far)
+# input()
 
 for i in range(max_Number_of_Questions):
 
