@@ -18,7 +18,7 @@ def filter_disease_name(diseases, flag):
 
 def answerDefaultAnamnese(age_in_years, sex, diet, neutered, outdoor, contactWithOtherPets = 'No'):
     # current_date = datetime.now().date()
-    # age_in_years = ((current_date - age).days)/360 
+    # age_in_years = ((current_date - datetime.date(age)).days)/360 
     answers = []
     
 

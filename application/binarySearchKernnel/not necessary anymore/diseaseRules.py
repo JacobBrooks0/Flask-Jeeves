@@ -460,8 +460,6 @@ DiseaseRules =  {
 
 # file.close()
         
-df = pd.read_csv('DiseaseRules.csv')
-print(df)
 
 
 

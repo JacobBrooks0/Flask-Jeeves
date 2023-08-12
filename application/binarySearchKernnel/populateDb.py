@@ -1,5 +1,5 @@
 # Import necessary modules
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 import sys
 sys.path.append('../../')
@@ -19,25 +19,41 @@ session = Session()
 # Create tables if they don't exist
 app=create_app()
 
-dfDiseaseRules = pd.read_csv('DiseaseRules.csv')
+table_name = 'diseases, variables, UsersAnswersCount'
+drop_table_sql = text(f"DROP TABLE IF EXISTS {table_name}")
+with engine.connect() as connection:
+    try:
+        connection.execute(drop_table_sql)
+        connection.commit()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+dfDiseaseRules = pd.read_csv('DiseaseRules.csv', index_col="id")
 # Rename the index column to 'id' and reset the index to start from 1
 dfDiseaseRules.rename_axis('id', inplace=True)
 dfDiseaseRules.reset_index(drop=True, inplace=True)
 dfDiseaseRules.index += 1  # Shift the index by 1 to start from 1
-dfDiseaseRules.to_sql('UsersAnswersCount', con=engine, if_exists='replace', index=True)
+dfDiseaseRules.to_sql('users_answers_count', con=engine, if_exists='replace', index=True)
 
-dfDiseasesVariables = pd.read_csv('DiseasesVariables.csv')
+dfDiseasesVariables = pd.read_csv('DiseasesVariables.csv', index_col="id")
 # Rename the index column to 'id' and reset the index to start from 1
 dfDiseasesVariables.rename_axis('id', inplace=True)
 dfDiseasesVariables.reset_index(drop=True, inplace=True)
 dfDiseasesVariables.index += 1  # Shift the index by 1 to start from 1
-dfDiseasesVariables.to_sql('Variables', con=engine, if_exists='replace', index=True)
+dfDiseasesVariables.to_sql('variables', con=engine, if_exists='replace', index=True)
 
-dfDiseases = pd.read_csv('Diseases.csv')
+dfDiseases = pd.read_csv('Diseases.csv', index_col="id")
 dfDiseases.rename_axis('id', inplace=True)
 dfDiseases.reset_index(drop=True, inplace=True)
 dfDiseases.index += 1  # Shift the index by 1 to start from 1
 dfDiseases.to_sql('diseases', con=engine, if_exists='replace', index=True)
+
+# Commit the changes
+session.commit()
+
+# Close the session
+session.close()
+
 
 
 # for user in users_to_insert:
@@ -80,10 +96,3 @@ dfDiseases.to_sql('diseases', con=engine, if_exists='replace', index=True)
 #         description = disease['description']
 #     )
 #     session.add(new_disease)
-
-# Commit the changes
-session.commit()
-
-# Close the session
-session.close()
-

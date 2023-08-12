@@ -2,8 +2,6 @@ import numpy as np
 import random as rd
 import bayes_lib as by
 from functions import *
-from definitions import *
-from diseaseRules import *
 
 def GenerateQuestion(symptoms, questions_so_far):
     # Start with a random algorithm

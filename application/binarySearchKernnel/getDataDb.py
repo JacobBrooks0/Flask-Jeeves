@@ -51,6 +51,6 @@ for p in pet:
     var_dict = p.as_dict()
     selected_pet = var_dict
 
-answers = fun.answerDefaultAnamnese(selected_pet['dob'], selected_pet['sex'], selected_pet['diet'], selected_pet['neutered'], selected_pet['outdoor'], 'No')
+print(selected_pet['dob'], "<<<<<<<<<")
+# answers = fun.answerDefaultAnamnese(selected_pet['dob'], selected_pet['sex'], selected_pet['diet'], selected_pet['neutered'], selected_pet['outdoor'], 'No')
 
-print(answers)

@@ -480,7 +480,7 @@ variables_to_insert = [
                 {'name':'Restlessness and Agitation' ,  'question':'Does you cat seem to be restlessness and agitated?', 'specialty':['Dermatology', 'Urinary'], 'defaultQuestion': False},
                 {'name':'Over-Grooming' ,  'question':'Is you cat licking itself more than usual?', 'specialty':['Dermatology', 'Gastrointestinal'], 'defaultQuestion': False},
                 {'name':'Ear Infection' ,  'question':'Does you cat\'s year seem to be infected?', 'specialty':['Dermatology'], 'defaultQuestion': False},
-                {'name':'Presence of fleas' ,  'question':'Have you even seen fleas on your cat?', 'specialty':['General'], 'defaultQuestion': False},
+                {'name':'Presence of fleas' ,  'question':'Have you even seen fleas on your cat?', 'specialty':['Dermatology'], 'defaultQuestion': False},
                 {'name':'Overweight' ,  'question':'Does your cat seem to be overwheight?', 'specialty':['General'], 'defaultQuestion': False},
                 {'name':'Age',  'question':'How old are your cat?', 'specialty':['General'], 'defaultQuestion': True},
                 {'name':'Vaccination updated' ,  'question':'Is the vaccination of your cat updated?', 'specialty':['General'], 'defaultQuestion': False},
@@ -520,9 +520,9 @@ pets_to_insert = [
     ]
 
 file = open("DiseasesVariables.csv", 'w')
-file.write('feature,question,specialty,defaultQuestion \n')
-for variables in variables_to_insert:
-    string = ""
+file.write('id,feature,question,specialty,defaultQuestion \n')
+for idx, variables in enumerate(variables_to_insert, start=1):
+    string = str(idx) + ","
     for key, value in variables.items():        
         if key == 'specialty':
             for i in range(len(value)):                
@@ -539,16 +539,16 @@ for variables in variables_to_insert:
 file.close() 
 
 file = open("DiseaseRules.csv", 'w')
-file.write('disease_id,diseasesVariables_id,no,probablyNot,iDontKnow,propablyYes,yes \n')
+file.write('id,disease_id,diseasesVariables_id,no,probablyNot,iDontKnow,propablyYes,yes \n')
 for disease, symptoms in DiseaseRules.items():
-    for symptom, values in symptoms.items():            
-        string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
+    for idx, (symptom, values) in enumerate(symptoms.items(), start = 1):            
+        string = str(idx) + "," + str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
         file.write(string)
 file.close()
 
 file = open("Diseases.csv", 'w')
-file.write('name,specialty,description \n')
-for disease in diseases_to_insert:
-    string = disease['name'] + "," + disease['specialty'] + "," + disease['description'] + "\n"         
+file.write('id,name,specialty,description \n')
+for idx, disease in enumerate(diseases_to_insert, start=1):
+    string = str(idx) + "," + disease['name'] + "," + disease['specialty'] + "," + disease['description'] + "\n"         
     file.write(string)
 file.close()

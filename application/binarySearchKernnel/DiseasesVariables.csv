@@ -1,37 +1,37 @@
-feature,question,specialty,defaultQuestion 
-Frequent Urination,Is your cat going to the litter more than usual?,Urinary,False
-Blood in Urine,Does the urine has blood?,Urinary,False
-Painful Urination,Does it seem it is having pain to urinate?,Urinary,False
-Licking Genital Area,Is your cat licking the genital area more than usual?,Urinary;Gastrointestinal,False
-Lethargy and Weakness,Is you cat more lethargic or week?,Urinary,False
-Straining to Urinate,Does it seem that your cat is having difficulty urinating?,Urinary;Gastrointestinal,False
-Abdominal Pain,Does it seem that your cat has abdominal pain?,Urinary;Gastrointestinal,False
-Vomiting and Nausea,Is your cat vomiting or nauseous?,Urinary;Gastrointestinal,False
-Polydipsia,Is your cat drinking more water than usual?,Urinary,False
-Limping,Is your cat limping?,Musculoskeletal,False
-Swelling members,Does your cat have swelling members?,Urinary;Muskuloskeletal,False
-Fever,Does your cat seem to have a higher temperature than usual?,Urinary;Gastrointestinal,False
-Loss Appetite,Is your cat eating less than usual?,Urinary;Gastrointestinal,False
-Weight loss,Is your cat losing weight?,Urinary;Gastrointestinal,False
-PotBellied Appearance,Does the belly of your cat seem to be dillated?,Gastrointestinal,False
-Diarrhea,Are your cat's stools softer?,Gastrointestinal,False
-Constipation,Does your cat seem to be constipated? (Trying to poop but nothing comes out),Gastrointestinal,False
-Visible Worms,Does your cat's stools have visible worms?,Gastrointestinal;Dermatology,False
-Anal Itching or Scooting,Is your cat having anal itching or scooting?,Dermatology;Gastrointestinal,False
-Intense itching and scratching,Is your cat having intense itching and scratching?,Dermatology,False
-Hair loss or thinning of fur,Is your cat having hair loss or thinning fur?,Dermatology,False
-Formation of small raised bumps or pustules,Does you cat have wounds or pimples on its skin?,Dermatology,False
-Irritated or weepy eyes,Does you cat have irritaded or weepy eyes,Dermatology;Gastrointestinal,False
-Restlessness and Agitation,Does you cat seem to be restlessness and agitated?,Dermatology;Urinary,False
-Over-Grooming,Is you cat licking itself more than usual?,Dermatology;Gastrointestinal,False
-Ear Infection,Does you cat's year seem to be infected?,Dermatology,False
-Presence of fleas,Have you even seen fleas on your cat?,General,False
-Overweight,Does your cat seem to be overwheight?,General,False
-Age,How old are your cat?,General,True
-Vaccination updated,Is the vaccination of your cat updated?,General,False
-Male,Is your cat male?,General,True
-Indoor,Does your cat goes outside?,General,True
-Contact with other pets,Does your cat have contact with other pets?,General,True
-Neutered,Is your cat neutered?,General,True
-Start of the symptoms,When was the first time that the symptoms started?,General,False
-Processed Diet,Does your cat eat processed food?,General,True
+id,feature,question,specialty,defaultQuestion 
+1,Frequent Urination,Is your cat going to the litter more than usual?,Urinary,False
+2,Blood in Urine,Does the urine has blood?,Urinary,False
+3,Painful Urination,Does it seem it is having pain to urinate?,Urinary,False
+4,Licking Genital Area,Is your cat licking the genital area more than usual?,Urinary;Gastrointestinal,False
+5,Lethargy and Weakness,Is you cat more lethargic or week?,Urinary,False
+6,Straining to Urinate,Does it seem that your cat is having difficulty urinating?,Urinary;Gastrointestinal,False
+7,Abdominal Pain,Does it seem that your cat has abdominal pain?,Urinary;Gastrointestinal,False
+8,Vomiting and Nausea,Is your cat vomiting or nauseous?,Urinary;Gastrointestinal,False
+9,Polydipsia,Is your cat drinking more water than usual?,Urinary,False
+10,Limping,Is your cat limping?,Musculoskeletal,False
+11,Swelling members,Does your cat have swelling members?,Urinary;Muskuloskeletal,False
+12,Fever,Does your cat seem to have a higher temperature than usual?,Urinary;Gastrointestinal,False
+13,Loss Appetite,Is your cat eating less than usual?,Urinary;Gastrointestinal,False
+14,Weight loss,Is your cat losing weight?,Urinary;Gastrointestinal,False
+15,PotBellied Appearance,Does the belly of your cat seem to be dillated?,Gastrointestinal,False
+16,Diarrhea,Are your cat's stools softer?,Gastrointestinal,False
+17,Constipation,Does your cat seem to be constipated? (Trying to poop but nothing comes out),Gastrointestinal,False
+18,Visible Worms,Does your cat's stools have visible worms?,Gastrointestinal;Dermatology,False
+19,Anal Itching or Scooting,Is your cat having anal itching or scooting?,Dermatology;Gastrointestinal,False
+20,Intense itching and scratching,Is your cat having intense itching and scratching?,Dermatology,False
+21,Hair loss or thinning of fur,Is your cat having hair loss or thinning fur?,Dermatology,False
+22,Formation of small raised bumps or pustules,Does you cat have wounds or pimples on its skin?,Dermatology,False
+23,Irritated or weepy eyes,Does you cat have irritaded or weepy eyes,Dermatology;Gastrointestinal,False
+24,Restlessness and Agitation,Does you cat seem to be restlessness and agitated?,Dermatology;Urinary,False
+25,Over-Grooming,Is you cat licking itself more than usual?,Dermatology;Gastrointestinal,False
+26,Ear Infection,Does you cat's year seem to be infected?,Dermatology,False
+27,Presence of fleas,Have you even seen fleas on your cat?,Dermatology,False
+28,Overweight,Does your cat seem to be overwheight?,General,False
+29,Age,How old are your cat?,General,True
+30,Vaccination updated,Is the vaccination of your cat updated?,General,False
+31,Male,Is your cat male?,General,True
+32,Indoor,Does your cat goes outside?,General,True
+33,Contact with other pets,Does your cat have contact with other pets?,General,True
+34,Neutered,Is your cat neutered?,General,True
+35,Start of the symptoms,When was the first time that the symptoms started?,General,False
+36,Processed Diet,Does your cat eat processed food?,General,True
