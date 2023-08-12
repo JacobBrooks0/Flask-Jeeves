@@ -1,8 +1,9 @@
-#Here we will build all out tables (DB). 
 import os
 import sys
-sys.path.append('../')
-sys.path.append(str(os.path.dirname(os.path.abspath(__file__))))
+from pathlib import Path
+full_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(str(Path(full_path).parents[0]))
+ 
 from application import db
 
 class User(db.Model):
@@ -19,8 +20,9 @@ class User(db.Model):
     appointment_history = db.Column(db.JSON, nullable=True)
     
 
-#initialiase all the class values as the instance values
+    #initialiase all the class values as the instance values
     def __init__(self, first_name, last_name, email, password): #pets, dob, appointment_history):
+        print("SDFBVASDFBSDFGBSDFBSDF")
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -122,29 +124,30 @@ class Diseases(db.Model):
 
 class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    specialty = db.Column(db.JSON)
     feature = db.Column(db.String(100), nullable=False)
     question = db.Column(db.String(200), nullable=False)
-    default = db.Column(db.Boolean, nullable=False)
+    # specialty = db.Column(db.JSON)
+    specialty = db.Column(db.String(200))
+    defaultQuestion = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, specialty, feature, question, default):
+    def __init__(self, specialty, feature, question, defaultQuestion):
         self.specialty = specialty
         self.feature = feature
         self.question = question
-        self.default = default
+        self.defaultQuestion = defaultQuestion
 
     def as_dict(self):
         return {
             "id": self.id,
-            "specialty": self.specialty,
             "feature": self.feature,
             "question": self.question,
-            "default": self.default
+            "specialty": self.specialty,
+            "defaultQuestion": self.defaultQuestion
         }
 
     def __repr__(self):
-        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, default={self.default})>"
-    
+        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, defaultQuestion={self.defaultQuestion})>"
+
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     disease_id = db.Column(db.Integer, db.ForeignKey('diseases.id'), nullable=False)

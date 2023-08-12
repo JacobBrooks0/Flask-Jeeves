@@ -1,4 +1,4 @@
-id,disease_id,diseasesVariables_id,no,probablyNot,iDontKnow,propablyYes,yes 
+id,disease_id,diseasesVariables_id,no,probablyNot,iDontKnow,propablyYes,yes
 1,1,1,0,0,0,0,1
 2,1,2,0,0,0,0,1
 3,1,3,0,0,0,0,1
