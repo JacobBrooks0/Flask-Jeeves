@@ -1,5 +1,11 @@
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import sessionmaker
+import sys
+sys.path.append('../../')
+from application import *
+from application.models import Variables, Diseases, Pets, User, UsersAnswersCount
+from datetime import date
 import pandas as pd
-import numpy as np
 
 DiseaseRules =  {
     'Urethal Obstruction': {
@@ -393,78 +399,156 @@ DiseaseRules =  {
                'Processed Diet': [0, 0, 1, 0, 0],
 
     },
-
-    # 'Feline Lower Urinary Tract Disease': {
-    # 		   'Frequent Urination' : [0, 0, 0, 0, 0],
-    #            'Blood in Urine' : [0, 0, 0, 0, 0],
-    #            'Painful Urination' : [0, 0, 0, 0, 0],
-    #            'Licking Genital Area' : [0, 0, 0, 0, 0],
-    #            'Lethargy and Weakness' : [0, 0, 0, 0, 0],
-    #            'Straining to Urinate' : [0, 0, 0, 0, 0],
-    #            'Abdominal Pain' : [0, 0, 0, 0, 0],
-    #            'Vomiting and Nausea' : [0, 0, 0, 0, 0],
-    #            'Polydipsia' : [0, 0, 0, 0, 0],
-    #            'Limping' : [0, 0, 0, 0, 0],
-    #            'Swelling members' : [0, 0, 0, 0, 0],
-    #            'Fever' : [0, 0, 0, 0, 0],
-    #            'Loss Appetite' : [0, 0, 0, 0, 0],
-    #            'Weight loss' : [0, 0, 0, 0, 0],
-    #            'PotBellied Appearance' : [0, 0, 0, 0, 0],
-    #            'Diarrhea' : [0, 0, 0, 0, 0],
-    #            'Constipation' : [0, 0, 0, 0, 0],
-    #            'Visible Worms' : [0, 0, 0, 0, 0],
-    #            'Anal Itching or Scooting' : [0, 0, 0, 0, 0],
-    #            'Intense itching and scratching' : [0, 0, 0, 0, 0],
-    #            'Hair loss or thinning of fur' : [0, 0, 0, 0, 0],
-    #            'Formation of small raised bumps or pustules' : [0, 0, 0, 0, 0],
-    #            'Irritated or weepy eyes' : [0, 0, 0, 0, 0],
-    #            'Restlessness and Agitation' : [0, 0, 0, 0, 0],
-    #            'Over-Grooming' : [0, 0, 0, 0, 0],
-    #            'Presence of fleas' : [0, 0, 0, 0, 0],
-    #            'Ear Infection' : [0, 0, 0, 0, 0],
-    #            'Overweight': [0, 0, 0, 0, 0],
-    #            'Age': [0, 0, 0, 0, 0
-    #            'Male': [0, 0, 0, 0, 0],
-    #            'Indoor': [0, 0, 0, 0, 0],
-    #            'Contact with other pets': [0, 0, 0, 0, 0],
-    #            'Neutered': [0, 0, 0, 0, 0],
-    #            'Symptoms started Less than a day': [0, 0, 0, 0, 0],
-    #            'Symptoms started in one day to a week': [0, 0, 0, 0, 0],
-    #            'Symptoms started in a week to a month': [0, 0, 0, 0, 0],
-    #            'Symptoms started more than a month': [0, 0, 0, 0, 0],
-    #            'Processed Diet': [0, 0, 0, 0, 0],
-    #            'Natural Diet': [0, 0, 0, 0, 0],
-    # },
 }
 
+DicSym = {
+    'Frequent Urination' : 1,
+    'Blood in Urine' : 2,
+    'Painful Urination' : 3,
+    'Licking Genital Area' : 4,
+    'Lethargy and Weakness' : 5,
+    'Straining to Urinate' : 6,
+    'Abdominal Pain' : 7,
+    'Vomiting and Nausea' : 8,
+    'Polydipsia' : 9,
+    'Limping' : 10,
+    'Swelling members' : 11,
+    'Fever' : 12,
+    'Loss Appetite' : 13,
+    'Weight loss' : 14,
+    'PotBellied Appearance' : 15,
+    'Diarrhea' : 16,
+    'Constipation' : 17,
+    'Visible Worms' : 18,
+    'Anal Itching or Scooting' : 19,
+    'Intense itching and scratching' : 20,
+    'Hair loss or thinning of fur' : 21,
+    'Formation of small raised bumps or pustules' : 22,
+    'Irritated or weepy eyes' : 23,
+    'Restlessness and Agitation' : 24,
+    'Over-Grooming' : 25,
+    'Ear Infection' : 26,
+    'Presence of fleas' : 27,
+    'Overweight' : 28,
+    'Age' : 29,
+    'Vaccination updated' : 30,
+    'Male' : 31,
+    'Indoor' : 32,
+    'Contact with other pets' : 33,
+    'Neutered' : 34,
+    'Start of the symptoms' : 35,
+    'Processed Diet' : 36,
+}
+
+DicDis ={
+'Urethal Obstruction': 1,
+'Feline Lower Urinary Tract Disease': 2,
+'Renal Disease': 3,
+'Luxation': 4,
+'Panleukopenia': 5,
+'Intestinal Parasites': 6,
+'Hairball Obstruction': 7,
+'Scabies': 8,
+'Flea Allergy': 9,
+'Atopic Dermatitis': 10
+}
+
+variables_to_insert = [
+                {'name':'Frequent Urination' ,  'question': 'Is your cat going to the litter more than usual?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Blood in Urine' ,  'question':'Does the urine has blood?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Painful Urination' ,  'question':'Does it seem it is having pain to urinate?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Licking Genital Area' ,  'question':'Is your cat licking the genital area more than usual?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Lethargy and Weakness' ,  'question':'Is you cat more lethargic or week?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Straining to Urinate' ,  'question':'Does it seem that your cat is having difficulty urinating?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Abdominal Pain' ,  'question':'Does it seem that your cat has abdominal pain?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Vomiting and Nausea' ,  'question':'Is your cat vomiting or nauseous?', 'specialty':['Urinary', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Polydipsia' ,  'question':'Is your cat drinking more water than usual?', 'specialty':['Urinary'], 'defaultQuestion': False},
+                {'name':'Limping' ,  'question':'Is your cat limping?', 'specialty':['Musculoskeletal'], 'defaultQuestion': False},
+                {'name':'Swelling members' ,  'question':'Does your cat have swelling members?', 'specialty':['Urinary', 'Muskuloskeletal'], 'defaultQuestion': False},
+                {'name':'Fever' , 'question':'Does your cat seem to have a higher temperature than usual?', 'specialty':['Urinary' ,'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Loss Appetite' ,  'question':'Is your cat eating less than usual?', 'specialty':['Urinary' ,'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Weight loss' ,  'question':'Is your cat losing weight?', 'specialty':['Urinary','Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'PotBellied Appearance' ,  'question':'Does the belly of your cat seem to be dillated?', 'specialty':['Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Diarrhea' , 'question':'Are your cat\'s stools softer?', 'specialty':['Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Constipation' ,  'question':'Does your cat seem to be constipated? (Trying to poop but nothing comes out)', 'specialty':['Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Visible Worms' ,  'question':'Does your cat\'s stools have visible worms?' , 'specialty':['Gastrointestinal', 'Dermatology'], 'defaultQuestion': False},
+                {'name':'Anal Itching or Scooting' ,  'question':'Is your cat having anal itching or scooting?', 'specialty':['Dermatology', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Intense itching and scratching' ,  'question':'Is your cat having intense itching and scratching?', 'specialty':['Dermatology'], 'defaultQuestion': False},
+                {'name':'Hair loss or thinning of fur' ,  'question': 'Is your cat having hair loss or thinning fur?', 'specialty':['Dermatology'], 'defaultQuestion': False},
+                {'name':'Formation of small raised bumps or pustules',  'question':'Does you cat have wounds or pimples on its skin?', 'specialty':['Dermatology'], 'defaultQuestion': False},
+                {'name':'Irritated or weepy eyes' ,  'question': 'Does you cat have irritaded or weepy eyes', 'specialty':['Dermatology', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Restlessness and Agitation' ,  'question':'Does you cat seem to be restlessness and agitated?', 'specialty':['Dermatology', 'Urinary'], 'defaultQuestion': False},
+                {'name':'Over-Grooming' ,  'question':'Is you cat licking itself more than usual?', 'specialty':['Dermatology', 'Gastrointestinal'], 'defaultQuestion': False},
+                {'name':'Ear Infection' ,  'question':'Does you cat\'s year seem to be infected?', 'specialty':['Dermatology'], 'defaultQuestion': False},
+                {'name':'Presence of fleas' ,  'question':'Have you even seen fleas on your cat?', 'specialty':['General'], 'defaultQuestion': False},
+                {'name':'Overweight' ,  'question':'Does your cat seem to be overwheight?', 'specialty':['General'], 'defaultQuestion': False},
+                {'name':'Age',  'question':'How old are your cat?', 'specialty':['General'], 'defaultQuestion': True},
+                {'name':'Vaccination updated' ,  'question':'Is the vaccination of your cat updated?', 'specialty':['General'], 'defaultQuestion': False},
+                {'name':'Male' ,  'question':'Is your cat male?', 'specialty':['General'], 'defaultQuestion': True},
+                {'name':'Indoor' ,  'question':'Does your cat goes outside?', 'specialty':['General'], 'defaultQuestion': True},
+                {'name':'Contact with other pets' ,  'question':'Does your cat have contact with other pets?', 'specialty':['General'], 'defaultQuestion': True},
+                {'name':'Neutered' ,  'question':'Is your cat neutered?', 'specialty':['General'], 'defaultQuestion': True},
+                {'name':'Start of the symptoms',  'question':'When was the first time that the symptoms started?', 'specialty':['General'], 'defaultQuestion': False},
+                {'name':'Processed Diet' ,  'question':'Does your cat eat processed food?', 'specialty':['General'], 'defaultQuestion': True},                
+              ]
 
 
+diseases_to_insert = [
+                {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
+                {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract; often causing discomfort and frequent urination.'},
+                {'name': 'Renal Disease', 'specialty': 'Urinary', 'description': 'Chronic kidney disease that impairs the kidney function and can lead to various symptoms and complications.'},
+                {'name': 'Luxation', 'specialty': 'Musculoskeletal', 'description': 'Dislocation or displacement of a joint; causing pain and mobility issues.'},
+                {'name': 'Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
+                {'name': 'Intestinal Parasites', 'specialty': 'Gastrointestinal', 'description': 'Infections caused by various parasites that affect the gastrointestinal system.'},
+                {'name': 'Hairball Obstruction', 'specialty': 'Gastrointestinal', 'description': 'Accumulation of hair in the stomach or intestines; causing blockages and discomfort.'},
+                {'name': 'Scabies', 'specialty': 'Dermatology', 'description': 'A skin infestation caused by mites; leading to intense itching and skin irritation.'},
+                {'name': 'Flea Allergy', 'specialty': 'Dermatology', 'description': 'An allergic reaction to flea bites; causing skin inflammation and discomfort.'},
+                {'name': 'Atopic Dermatitis', 'specialty': 'Dermatology', 'description': 'Chronic skin inflammation and itching caused by allergic reactions to environmental factors.'}
+            ]
 
+users_to_insert = [
 
-# file = open("TESTEDB.txt", 'w')
-# for disease, symptoms in DiseaseRules.items():
-#     for symptom, values in symptoms.items():
-            
-#         string = str(DicDis[disease]) + " | " + str(DicSym[symptom]) + " | " + str(values[0]) + " | " + str(values[1]) + " | " + str(values[2]) + " | " + str(values[3]) + " | " + str(values[4]) + "\n"
-#         print(string)
-#         file.write(string)
+    {'first_name':'John', 'last_name':'Doe', 'email':'john@example.com', 'password':'hashed_password_1', 'pets': '????', 'dob': date(1990, 5, 15), 'appointment_history' : '????'},
+    {'first_name':'Jane', 'last_name':'Smith', 'email':'jane@example.com', 'password':'hashed_password_2', 'pets': '????', 'dob': date(1990, 5, 15), 'appointment_history' : '????'},
+    {'first_name':'Alice','last_name':'Johnson', 'email':'alice@example.com', 'password':'hashed_password_3', 'pets': '????', 'dob': date(1990, 5, 15), 'appointment_history' : '????'}
+]
 
-# file.close()
+pets_to_insert = [
+    {'user_id':21, 'name':'Buddy', 'dob':date(2019, 5, 15), 'breed':'Labrador', 'outdoor':True, 'neutered':True, 'sex':'Male', 'diet':'Processed'},
+    {'user_id':22, 'name':'Luna', 'dob':date(2020, 2, 10), 'breed':'Siamese', 'outdoor':False, 'neutered':False, 'sex':'Female', 'diet':'Mixed'},
+    {'user_id':20, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Golden Retriever', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural'}
+    ]
 
-# file = open("DiseaseRules.csv", 'w')
-# for disease, symptoms in DiseaseRules.items():
-#     for symptom, values in symptoms.items():
-            
-#         string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
-#         file.write(string)
+file = open("DiseasesVariables.csv", 'w')
+file.write('feature,question,specialty,defaultQuestion \n')
+for variables in variables_to_insert:
+    string = ""
+    for key, value in variables.items():        
+        if key == 'specialty':
+            for i in range(len(value)):                
+                if i == len(value) - 1:
+                    string += str(value[i]) + ","
+                else:
+                    string += str(value[i]) + ";"
+        else:
+            string += str(value) + ","
 
-# file.close()
-        
-df = pd.read_csv('DiseaseRules.csv')
-print(df)
+    final_string = string[:-1]
+    final_string += '\n'
+    file.write(final_string)
+file.close() 
 
+file = open("DiseaseRules.csv", 'w')
+file.write('disease_id,diseasesVariables_id,no,probablyNot,iDontKnow,propablyYes,yes \n')
+for disease, symptoms in DiseaseRules.items():
+    for symptom, values in symptoms.items():            
+        string = str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"        
+        file.write(string)
+file.close()
 
-
-
-
-    
+file = open("Diseases.csv", 'w')
+file.write('name,specialty,description \n')
+for disease in diseases_to_insert:
+    string = disease['name'] + "," + disease['specialty'] + "," + disease['description'] + "\n"         
+    file.write(string)
+file.close()
