@@ -1,9 +1,6 @@
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import sessionmaker
 import sys
 sys.path.append('../../')
 from datetime import date
-import pandas as pd
 
 DiseaseRules =  {
     'Urethal Obstruction': {
