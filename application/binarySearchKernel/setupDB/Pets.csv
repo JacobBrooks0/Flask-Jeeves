@@ -1,0 +1,4 @@
+id,user_id,name,dob,breed,outdoor,neutered,sex,diet,contactWithOtherPets
+1,1,Buddy,2019-05-15,Labrador,True,True,Male,Processed,True
+2,2,Luna,2020-02-10,Siamese,False,False,Female,Mixed,False
+3,3,Max,2018-09-03,Golden Retriever,True,False,Male,Natural,False
