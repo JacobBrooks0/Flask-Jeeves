@@ -12,7 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://qbmdycoi:dvg0nKw0ZAZ5cvAZH
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# migrate = Migrate(app, db)
-# app.config["TESTING"] = False
-# app.config["DEBUG"] = False
-# app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+from application import routes
+
+# @app.route('/')
+# def hello():
+#     return {"hello": "world"}

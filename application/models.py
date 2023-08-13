@@ -6,14 +6,12 @@ sys.path.append(str(Path(full_path).parents[0]))
  
 from application import db
 
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    # JSON column to store an array of pets
-    pets = db.Column(db.JSON, nullable = True)
     # Date of Birth (DOB)
     dob = db.Column(db.Date, nullable=True)
     # JSON column to store an array of appointment history
@@ -21,15 +19,13 @@ class User(db.Model):
     
 
     #initialiase all the class values as the instance values
-    def __init__(self, first_name, last_name, email, password): #pets, dob, appointment_history):
-        print("SDFBVASDFBSDFGBSDFBSDF")
+    def __init__(self, first_name, last_name, email, password,dob, appointment_history): #pets, dob, appointment_history):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
-        # self.pets = pets
-        # self.dob = dob
-        # self.appointment_history = appointment_history
+        self.dob = dob
+        self.appointment_history = appointment_history
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +43,7 @@ class Appointments(db.Model):
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
     breed = db.Column(db.String(100), nullable=False)
@@ -56,9 +52,10 @@ class Pets(db.Model):
     #history_id = db.Column(db.Integer, db.ForeignKey('diary.id'), nullable=False)  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
-    user = db.relationship('User', backref=db.backref('users', lazy=True, cascade="all,delete-orphan"))
+    contactWithOtherPets = db.Column(db.Boolean, nullable=False)
+    user = db.relationship('Users', backref=db.backref('users', lazy=True, cascade="all,delete-orphan"))
 
-    def __init__(self, user_id, name, dob, breed, outdoor, neutered, sex, diet):#history_id:
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, sex, diet,contactWithOtherPets):
         self.user_id = user_id
         self.name = name
         self.dob = dob
@@ -68,6 +65,7 @@ class Pets(db.Model):
         #self.history_id = history_id
         self.sex = sex
         self.diet = diet
+        self.contactWithOtherPets = contactWithOtherPets
 
     def as_dict(self):
         return {
@@ -78,11 +76,12 @@ class Pets(db.Model):
             "neutered": self.neutered,
             "sex": self.sex,
             "diet": self.diet,
-            "outdoor": self.outdoor
+            "outdoor": self.outdoor,
+            "contactWithOtherPets": self.contactWithOtherPets
         }
 
     def __repr__(self):
-        return f"<Pets(id={self.id}, name={self.name} user_id={self.user_id}, dob={self.dob}, neutered={self.neutered}, sex={self.sex}, diet={self.diet}, outdoor={self.outdoor})>"    
+        return f"<Pets(id={self.id}, name={self.name} user_id={self.user_id}, dob={self.dob}, neutered={self.neutered}, sex={self.sex}, diet={self.diet}, outdoor={self.outdoor}, contactWithOtherPets = {self.contactWithOtherPets})>"    
 
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -166,5 +165,15 @@ class UsersAnswersCount(db.Model):
         self.iDontKnow = iDontKnow
         self.probablyYes = probablyYes
         self.yes = yes
+
+    def as_dict_for_probability_function(self):
+        return {
+            "disease_id": self.disease_id,
+            "diseasesVariables_id": self.diseasesVariables_id,
+            "rules": [self.no, self.probablyNot, self.iDontKnow, self.yes, self.probablyYes]
+        }
+
+    def __repr__(self):
+        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, yes={self.yes}, probablyYes={self.probablyYes})>"
 
 
