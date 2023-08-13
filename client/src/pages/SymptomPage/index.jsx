@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import SymptomForm from "../../components/SymptomForm/SymptomForm";
 import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
+import { useCredentials } from "../../contexts";
 
 const testData = [
   {
@@ -45,6 +46,7 @@ export default function SymptomPage() {
   const [selectedCat, setSelectedCat] = useState({});
   const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);
   const [errorText, setErrorText] = useState(false);
+  const { dark, setDark } = useCredentials();
   const {
     questionNumber,
     setQuestionNumber,
@@ -68,8 +70,16 @@ export default function SymptomPage() {
     <>
       {showCatSelectionPage ? (
         <div>
-          <div className={style["first-container"]}>
-            <h1 className={style["text"]}>Choose a registered cat</h1>
+          <div
+            className={style["first-container"]}
+            style={{ backgroundColor: dark ? "#121212" : "whitesmoke" }}
+          >
+            <h1
+              className={style["text"]}
+              style={{ color: dark ? "whitesmoke" : "#121212" }}
+            >
+              Choose a registered cat
+            </h1>
             <div className={style["registered-div"]}>
               {catData.map((cat) => {
                 return (
@@ -110,8 +120,16 @@ export default function SymptomPage() {
               <p className={style["error-text"]}>You must select a cat!</p>
             ) : null}
           </div>
-          <div className={style["second-container"]}>
-            <h1 className={style["text"]}>Register a cat</h1>
+          <div
+            className={style["second-container"]}
+            style={{ backgroundColor: dark ? "#826BF5" : "#D3CCFA" }}
+          >
+            <h1
+              className={style["text"]}
+              style={{ color: dark ? "whitesmoke" : "#121212" }}
+            >
+              Register a cat
+            </h1>
             <div className={style["registered-div-second"]}>
               <CatRegisterForm />
               <div className={style["image-container"]}>
@@ -128,7 +146,10 @@ export default function SymptomPage() {
           <div className={style["top-container"]}>
             <QuestionContainer cat={selectedCat} />
           </div>
-          <div className={style["bottom-container"]}>
+          <div
+            className={style["bottom-container"]}
+            style={{ backgroundColor: dark ? "#826BF5" : "#D3CCFA" }}
+          >
             <SymptomForm />
           </div>
         </div>
