@@ -1,0 +1,15 @@
+.calender-section {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  padding-top: 50px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.calender {
+  width: 100%;
+  margin-bottom: 50px;
+}

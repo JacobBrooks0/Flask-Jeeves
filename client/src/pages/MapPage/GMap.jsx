@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useLocations } from "../../contexts/";
+import style from "./style.module.css";
 
 const GMap = () => {
   const googleMapRef = useRef(null);
   const [map, setMap] = useState(null);
-  const [marker, setMarker] = useState([]);
+  const [marker, setMarker] = useState([{ lat: 100, lng: 100 }]);
   const { details, setDetails } = useLocations();
 
   let infowindow;
@@ -74,30 +75,33 @@ const GMap = () => {
 
   useEffect(() => {
     const googleMap = initGoogleMap();
-
     setMap(googleMap.googMap);
   }, [marker]);
 
-  useEffect(() => {
-    if (!map) return;
+  // useEffect(() => {
+  //   if (!map) return;
 
-    // new window.google.maps.Marker({
-    //   position: marker[0],
-    //   map: map,
-    // });
-  }, [map]);
+  //   // new window.google.maps.Marker({
+  //   //   position: marker[0],
+  //   //   map: map,
+  //   // });
+  // }, [map]);
 
   const initGoogleMap = () => {
     let googMap = new window.google.maps.Map(googleMapRef.current, {
       center: marker[0],
       zoom: 11,
     });
-
     // infowindow = new window.google.maps.InfoWindow({ content: "Hello" });
+
     return { googMap: googMap };
   };
 
-  return <div ref={googleMapRef} style={{ width: "60%", height: "600px" }} />;
+  return (
+    <>
+      <div ref={googleMapRef} style={{ width: "60%", height: "750px" }} />
+    </>
+  );
 };
 
 export default GMap;

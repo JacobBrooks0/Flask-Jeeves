@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Snackbar } from "@mui/material";
 import { useCredentials } from "../../../contexts";
+import Doctor from "../../../assets/doctor.png";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
@@ -20,16 +21,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
     {
       id: 1,
       date: "08/10/2023",
-      PetId: 1,
-      petName: "Stan",
       time: "16:00",
       meetingId: "sux9-iiri-58gt",
     },
     {
       id: 2,
       date: "08/13/2023",
-      PetId: 1,
-      petName: "Stan",
       time: "12:00",
       meetingId: "sux9-iiri-58gt",
     },
@@ -84,12 +81,13 @@ const WelcomeScreenContainer = ({ setAppData }) => {
       <div
         style={{
           display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
         }}
       >
         <div
           style={{
             backgroundColor: dark ? "#121212" : "whitesmoke",
-            paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
             width: "50%",
@@ -111,28 +109,27 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             component="p"
             sx={{
               py: 3,
+              pr: 10,
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            On your video page, you can join a face-to-face <br /> call with
-            your registered vet. <br /> Just copy the meeting ID from your
-            appointment <br /> and paste it into the box, join, and you're good
-            to go.
+            On your video page, you can join a face-to-face call with your
+            registered vet. Just copy the meeting ID from your appointment and
+            paste it into the box, join, and you're good to go.
           </Typography>
         </div>
         <div
           style={{
             backgroundColor: dark ? "#121212" : "whitesmoke",
-            paddingLeft: "3rem",
             paddingTop: "3rem",
             paddingBottom: "2rem",
-            width: "40%",
+            width: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-around",
-            paddingBottom: "3rem",
+            maxWidth: "400px",
           }}
         >
           <TextField
@@ -225,10 +222,9 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}{" "}
-            Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
+            Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
             <br />
-            Pet: {nextAppointment[0] ? nextAppointment[0].petName : "loading"}
+            Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
             <br />
             Meeting ID:{" "}
             {nextAppointment[0] ? nextAppointment[0].meetingId : "loading"}{" "}
@@ -251,11 +247,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           onClose={() => setOpen(false)}
           open={open}
         />
-        <img
-          src="src/assets/doctor.png"
-          alt="doctor"
-          style={{ height: "100%" }}
-        />
+        <img src={Doctor} alt="doctor" style={{ height: "100%" }} />
       </div>
     </div>
   );

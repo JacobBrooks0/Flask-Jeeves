@@ -1,7 +1,14 @@
 import style from "./style.module.css";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import Doctor from "../../assets/doctor.png";
+import Map from "../../assets/map.png";
+import Calender from "../../assets/calender.png";
+import { useCredentials } from "../../contexts";
 
 export default function HomePage() {
+  const { dark, setDark } = useCredentials();
   return (
     <>
       <div className={style["first-content"]}>
@@ -22,8 +29,8 @@ export default function HomePage() {
           </p>
           <Button
             variant="contained"
-            // component={Link}
-            to="/register"
+            component={Link}
+            to="/symptom"
             sx={{
               mr: 2,
               px: 4,
@@ -47,14 +54,211 @@ export default function HomePage() {
           </Button>
         </div>
       </div>
-      <div className={style["second-content"]}>
-        <p>Book an appointment</p>
+      <div
+        className="mission"
+        style={{
+          backgroundColor: dark ? "#7958D6" : "#D3CCFA",
+          padding: "3rem",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          height: "fit-content",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ width: "50%" }}>
+          <Typography
+            variant="h3"
+            component="header"
+            sx={{
+              fontFamily: "'Jua', sans-serif",
+              color: dark ? "whitesmoke" : "#121212",
+              fontSize: "3rem",
+            }}
+          >
+            Book an Appointment
+          </Typography>
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{
+              py: 3,
+              pr: 10,
+              display: "block",
+              lineHeight: 1.6,
+              color: dark ? "whitesmoke" : "#121212",
+            }}
+          >
+            Head to your profile page using the link below to book a videochat
+            appointment with your vet! <br /> <br /> You can also view your
+            information and the information of your registered cats.
+          </Typography>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/user"
+            sx={{
+              mr: 2,
+              px: 4,
+              py: 1,
+              fontSize: "0.9rem",
+              textTransform: "capitalize",
+              borderRadius: 0,
+              borderColor: "#14192d",
+              margin: "30px 0",
+              color: "whitesmoke",
+              backgroundColor: "#826BF5",
+              "&&:hover": {
+                backgroundColor: "#7958D6",
+              },
+              "&&:focus": {
+                backgroundColor: "#7958D6",
+              },
+            }}
+          >
+            Profile
+          </Button>
+        </div>
+        <img src={Doctor} alt="doctor" style={{ height: "350px" }} />
       </div>
-      <div className={style["third-content"]}>
-        <p>Book an appointment</p>
+      <div
+        className="mission"
+        style={{
+          backgroundColor: dark ? "#121212" : "whitesmoke",
+          padding: "3rem",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+          height: "fit-content",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={Map}
+          alt="map"
+          style={{ height: "250px", marginRight: "3rem" }}
+        />
+        <div style={{ width: "50%" }}>
+          <Typography
+            variant="h3"
+            component="header"
+            sx={{
+              fontFamily: "'Jua', sans-serif",
+              color: dark ? "whitesmoke" : "#121212",
+              fontSize: "3rem",
+            }}
+          >
+            Find your nearby vet
+          </Typography>
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{
+              py: 3,
+              pr: 10,
+              display: "block",
+              lineHeight: 1.6,
+              color: dark ? "whitesmoke" : "#121212",
+            }}
+          >
+            Head to the map page using the link below to search for nearby vets
+            to your location. <br /> <br /> You can also see information about
+            the vets, including their website, contact number and rating.
+          </Typography>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/map"
+            sx={{
+              mr: 2,
+              px: 4,
+              py: 1,
+              fontSize: "0.9rem",
+              textTransform: "capitalize",
+              borderRadius: 0,
+              borderColor: "#14192d",
+              margin: "30px 0",
+              color: "whitesmoke",
+              backgroundColor: "#826BF5",
+              "&&:hover": {
+                backgroundColor: "#7958D6",
+              },
+              "&&:focus": {
+                backgroundColor: "#7958D6",
+              },
+            }}
+          >
+            Maps
+          </Button>
+        </div>
       </div>
-      <div className={style["fourth-content"]}>
-        <p>Book an appointment</p>
+      <div
+        className="mission"
+        style={{
+          backgroundColor: dark ? "#7958D6" : "#D3CCFA",
+          padding: "3rem",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          height: "fit-content",
+          alignItems: "center",
+          marginBottom: "-100px",
+        }}
+      >
+        <div style={{ width: "50%" }}>
+          <Typography
+            variant="h3"
+            component="header"
+            sx={{
+              fontFamily: "'Jua', sans-serif",
+              color: dark ? "whitesmoke" : "#121212",
+              fontSize: "3rem",
+            }}
+          >
+            Have your appointment
+          </Typography>
+          <Typography
+            variant="h6"
+            component="p"
+            sx={{
+              py: 3,
+              pr: 10,
+              display: "block",
+              lineHeight: 1.6,
+              color: dark ? "whitesmoke" : "#121212",
+            }}
+          >
+            Head to the video appointment page using the link below to access
+            your video appointment. <br /> <br /> You can view when your next
+            appointment is and information about it.
+          </Typography>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/video"
+            sx={{
+              mr: 2,
+              px: 4,
+              py: 1,
+              fontSize: "0.9rem",
+              textTransform: "capitalize",
+              borderRadius: 0,
+              borderColor: "#14192d",
+              margin: "30px 0",
+              color: "whitesmoke",
+              backgroundColor: "#826BF5",
+              "&&:hover": {
+                backgroundColor: "#7958D6",
+              },
+              "&&:focus": {
+                backgroundColor: "#7958D6",
+              },
+            }}
+          >
+            Appointments
+          </Button>
+        </div>
+        <img src={Calender} alt="calender" style={{ height: "250px" }} />
       </div>
     </>
   );

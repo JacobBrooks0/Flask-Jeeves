@@ -32,6 +32,8 @@ import MapIcon from "@mui/icons-material/Map";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CatLogo from "../../assets/cat-logo.png";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -89,6 +91,26 @@ export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const { dark, setDark } = useCredentials();
+  const [
+    backgroundAboutButtonColor,
+    setBackgroundAboutButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundSymptomsButtonColor,
+    setBackgroundSymptomsButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundVideoButtonColor,
+    setBackgroundVideoButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundMapsButtonColor,
+    setBackgroundMapsButtonColor,
+  ] = React.useState(false);
+  const [
+    backgroundUserButtonColor,
+    setBackgroundUserButtonColor,
+  ] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,10 +147,7 @@ export default function Navbar() {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div style={{ justifyContent: "flex-start" }}>
               <Link to="/home">
-                <img
-                  src="src/assets/cat-logo.png"
-                  style={{ width: "70px", height: "60px" }}
-                />
+                <img src={CatLogo} style={{ width: "70px", height: "60px" }} />
               </Link>
             </div>
             <div
@@ -140,13 +159,20 @@ export default function Navbar() {
             >
               <NavLink
                 to="/about"
+                onMouseEnter={() => setBackgroundAboutButtonColor(true)}
+                onMouseLeave={() => setBackgroundAboutButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundAboutButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -163,14 +189,52 @@ export default function Navbar() {
                 </div>
               </NavLink>
               <NavLink
-                to="/symptom"
+                to="/user"
+                onMouseEnter={() => setBackgroundUserButtonColor(true)}
+                onMouseLeave={() => setBackgroundUserButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundUserButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <AccountCircleIcon />
+                  Account
+                </div>
+              </NavLink>
+              <NavLink
+                to="/symptom"
+                onMouseEnter={() => setBackgroundSymptomsButtonColor(true)}
+                onMouseLeave={() => setBackgroundSymptomsButtonColor(false)}
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundSymptomsButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -188,13 +252,20 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/video"
+                onMouseEnter={() => setBackgroundVideoButtonColor(true)}
+                onMouseLeave={() => setBackgroundVideoButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundVideoButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -212,13 +283,20 @@ export default function Navbar() {
               </NavLink>
               <NavLink
                 to="/map"
+                onMouseEnter={() => setBackgroundMapsButtonColor(true)}
+                onMouseLeave={() => setBackgroundMapsButtonColor(false)}
                 style={({ isActive, isPending }) => {
                   return {
-                    color: isActive ? "whitesmoke" : "rgba(0, 0, 0, 0.54)",
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundMapsButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
                     textDecoration: "none",
                     width: "100%",
                     marginTop: "5px",
                     marginRight: "30px",
+                    backgroundColor: "#826bf5",
                     // backgroundColor: isActive ? "#eee" : null,
                   };
                 }}
@@ -236,7 +314,7 @@ export default function Navbar() {
                 </div>
               </NavLink>
               <IconButton
-                sx={{ ml: 1 }}
+                sx={{ mr: 2 }}
                 color="inherit"
                 onClick={() => (dark ? setDark(false) : setDark(true))}
               >
@@ -281,6 +359,7 @@ export default function Navbar() {
             {[
               { name: "Home", icon: <HomeIcon />, route: "/home" },
               { name: "About", icon: <InfoIcon />, route: "/about" },
+              { name: "Account", icon: <AccountCircleIcon />, route: "/user" },
               {
                 name: "Symptom Checker",
                 icon: <AssignmentIcon />,

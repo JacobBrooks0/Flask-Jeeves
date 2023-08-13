@@ -10,6 +10,8 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import { useCredentials } from "../../contexts";
 import "../LoginPage/styles.css";
+import { useNavigate } from "react-router-dom";
+import CatLogo from "../../assets/cat-logo.png";
 
 export default function RegisterPage() {
   const {
@@ -23,29 +25,34 @@ export default function RegisterPage() {
     setLastNameValue,
   } = useCredentials();
 
-  const registerRequest = async (formData) => {
+  const navigate = useNavigate();
+
+  const registerRequest = async () => {
     const options = {
       method: "POST",
+      mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        withCredentials: true,
       },
       body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        first_name: firstNameValue,
+        last_name: lastNameValue,
+        email: emailValue,
+        password: passwordValue,
       }),
     };
-    const response = await fetch(
-      "http://localhost:3000/user/register",
-      options
-    );
+    const response = await fetch("http://127.0.0.1:5000/user", options);
     const data = await response.json();
 
     if (response.status == 201) {
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
       navigate("/login");
+      setEmailValue("");
+      setPasswordValue("");
+      setFirstNameValue("");
+      setLastNameValue("");
     } else {
       alert(data.error);
     }
@@ -69,21 +76,12 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerRequest({
-      email: emailValue,
-      password: passwordValue,
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-    });
-    setEmailValue("");
-    setPasswordValue("");
-    setFirstNameValue("");
-    setLastNameValue("");
+    registerRequest();
   };
   return (
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
-        <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
+        <img className="logo" src={CatLogo} alt="logo" />
         <Typography
           component="h1"
           variant="h4"
@@ -137,6 +135,7 @@ export default function RegisterPage() {
         />
         <TextField
           margin="normal"
+          type="password"
           fullWidth
           required
           value={passwordValue}
@@ -152,7 +151,7 @@ export default function RegisterPage() {
           label="I want to receive inspiration, marketing promotions and updates via email."
         />
         <Button
-          type="submit"
+          onClick={registerRequest}
           className="button"
           fullWidth
           variant="contained"
