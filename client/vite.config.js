@@ -10,13 +10,13 @@ export default defineConfig({
       exportAsDefault: true,
     }),
   ],
-
-
-
+  
   test: {
     environment: "jsdom",
     coverage: {
-      reporter: ['text', 'json', 'html'],
-    },
+      provider: 'v8' ,
+      reporter: ['text', 'json', 'html']
   },
-})
+
+    },
+  })
