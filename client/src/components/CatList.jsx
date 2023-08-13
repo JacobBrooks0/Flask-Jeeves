@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import CatImage from "../assets/images/pitr-Kitty-icon.svg";
+import { useCredentials } from "../contexts";
 
 export default function CatList({
   cat,
@@ -8,6 +9,7 @@ export default function CatList({
   setSelectedCat,
   setErrorText,
 }) {
+  const { dark, setDark } = useCredentials();
   const [backgroundButtonColor, setBackgroundButtonColor] = useState("#d3ccfa");
 
   return (

@@ -4,6 +4,7 @@ import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
 import Tooltip from "@mui/material/Tooltip";
 import { useSymptoms } from "../../contexts";
 import Results from "../Results/Results";
+import { useCredentials } from "../../contexts";
 
 const questionsTest = [
   {
@@ -66,6 +67,7 @@ export default function QuestionContainer({ cat }) {
     answers,
     setAnswers,
   } = useSymptoms();
+  const { dark, setDark } = useCredentials();
 
   useEffect(() => {
     //this may change
@@ -104,7 +106,13 @@ export default function QuestionContainer({ cat }) {
         {questions.length === 0 ? null : questionNumber == 15 ? (
           <Results />
         ) : (
-          <h1 className={style["question-text"]}>
+          <h1
+            className={style["question-text"]}
+            style={{
+              backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+              color: dark ? "whitesmoke" : "#121212",
+            }}
+          >
             Q{questionNumber + 1}: {questions[questionNumber].question}
           </h1>
         )}

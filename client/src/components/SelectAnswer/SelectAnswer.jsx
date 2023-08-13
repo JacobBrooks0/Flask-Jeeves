@@ -8,11 +8,13 @@ import Divider from "@mui/material/Divider";
 import DoneIcon from "@mui/icons-material/Done";
 import Button from "@mui/material/Button";
 import { useSymptoms } from "../../contexts";
+import { useCredentials } from "../../contexts";
 
 export default function SelectAnswer() {
   const [selectedIndex, setSelectedIndex] = React.useState(null);
   const [selectedTick, setSelectedTick] = React.useState(null);
   const [errorText, setErrorText] = useState(false);
+  const { dark, setDark } = useCredentials();
   const {
     questionNumber,
     setQuestionNumber,
@@ -42,7 +44,10 @@ export default function SelectAnswer() {
     <div className={style["container"]}>
       {questionNumber == 15 ? (
         <>
-          <h2 className={style["end-of-quiz-text"]}>
+          <h2
+            className={style["end-of-quiz-text"]}
+            style={{ color: dark ? "whitesmoke" : "#121212" }}
+          >
             It is important that you seek the correct medical help as our
             calculations may not always be correct. You can book a video
             appointment in with one of our vets or see where local vets are in
@@ -101,7 +106,10 @@ export default function SelectAnswer() {
       ) : (
         <>
           <div>
-            <List component="nav">
+            <List
+              component="nav"
+              sx={{ color: dark ? "whitesmoke" : "#121212" }}
+            >
               <Divider />
               <ListItemButton
                 selected={selectedIndex === 0}
