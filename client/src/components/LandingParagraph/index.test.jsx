@@ -12,7 +12,7 @@ import JoinUs from ".";
 
 expect.extend(matchers);
 
-describe("Join US", () => {
+describe("Landing Header", () => {
 
     
         beforeAll(() => {

@@ -27,6 +27,8 @@ python-socketio = "*"
 python-engineio = "*"
 simple-websocket = "*"
 gunicorn = "*"
+flask-login = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 pytest = "*"

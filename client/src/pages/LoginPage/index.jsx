@@ -171,7 +171,7 @@ export default function LoginPage() {
           }}
           onClick={() => googleLogin()}
         >
-          Sign in with Google 🚀{" "}
+          Sign in with Google
         </Button>
         <Button
           onClick={loginRequest}
