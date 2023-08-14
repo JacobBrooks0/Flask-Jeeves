@@ -8,6 +8,8 @@ import Navbar from "../../components/Navbar";
 import { CredentialsProvider, useCredentials ,CredentialsContext} from "../../contexts";
 
 import { Outlet } from "react-router-dom";
+import { Info } from "@mui/icons-material";
+
 
 expect.extend(matchers);
 
@@ -38,7 +40,7 @@ describe("Navbar", () => {
 
     it("Should send to about",() => {
         const nav = screen.getByRole("navigation"); 
-        // const { getByText } = render(<Navbar number="one" word="about" />);
+        
         expect(nav.childNodes[0].href).toBe("http://localhost:3000/about")
     })
 
@@ -56,4 +58,6 @@ describe("Navbar", () => {
         const nav = screen.getByRole("navigation"); 
         expect(nav.childNodes[3].href).toBe("http://localhost:3000/video")
     })
+
+
 })

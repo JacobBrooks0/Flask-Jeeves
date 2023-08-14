@@ -30,19 +30,7 @@ describe("ChatPage", () => {
     });
 
 
-    // it("renders without crashing", async () => {
-    //     render(
-    //       <Router>
-    //         <GoogleOAuthProvider>
-    //         <CredentialsProvider>
-    //             <Routes>
-    //                 <Route path="/http-call" element={<ChatPage />} />
-    //             </Routes>   
-    //         </CredentialsProvider>
-    //         </GoogleOAuthProvider>
-    //       </Router>
-    //     );
-    //   });
+    
 
     
 })
