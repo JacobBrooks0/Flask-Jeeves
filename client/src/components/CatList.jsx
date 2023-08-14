@@ -66,7 +66,7 @@ export default function CatList({
         }}
       >
         <h1 style={{ fontFamily: "Jua" }}>
-          {cat.name} - {cat.gender}
+          {cat.name} - {cat.sex}
         </h1>
         <h1
           style={{
