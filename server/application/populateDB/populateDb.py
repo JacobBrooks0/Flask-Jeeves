@@ -2,7 +2,7 @@ import os
 import sys
 from pathlib import Path
 full_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(str(Path(full_path).parents[2]))
+sys.path.append(str(Path(full_path).parents[1]))
 
 # Import necessary modules
 from sqlalchemy import create_engine, text

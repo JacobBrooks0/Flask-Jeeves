@@ -1,4 +1,4 @@
-id,first_name,last_name,email,password,dob,appointment_history
-1,John,Doe,john@example.com,hashed_password_1,1990-05-15,????
-2,Jane,Smith,jane@example.com,hashed_password_2,1990-05-15,????
-3,Alice,Johnson,alice@example.com,hashed_password_3,1990-05-15,????
+id,first_name,last_name,email,password
+1,John,Doe,john@example.com,hashed_password_1
+2,Jane,Smith,jane@example.com,hashed_password_2
+3,Alice,Johnson,alice@example.com,hashed_password_3
