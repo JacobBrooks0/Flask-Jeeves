@@ -16,7 +16,6 @@ db = SQLAlchemy()
 def create_app(env=None):
     # initialise the app
     app = Flask(__name__)
-
     # config setup for different environment
     if env == "TEST":
         app.config["TESTING"] = True
@@ -35,14 +34,25 @@ def create_app(env=None):
 
     # BLUEPRINTS
     from application.homepage.routes import homepage
+
+    from application.login.routes import auth
     from application.appointments.routes import appointment
     from application.user.routes import user
     from application.pets.routes import pet
+    from application.diary.routes import diary
+    from application.variables.routes import variables
+    from application.user_answer_count.routes import users_answers_count
+    from application.diseases.routes import diseases
 
     # Blueprints registration
     app.register_blueprint(user)
     app.register_blueprint(homepage)
+    app.register_blueprint(auth)
     app.register_blueprint(appointment)
     app.register_blueprint(pet)
+    app.register_blueprint(diary)
+    app.register_blueprint(variables)
+    app.register_blueprint(users_answers_count)
+    app.register_blueprint(diseases)
 
     return app
