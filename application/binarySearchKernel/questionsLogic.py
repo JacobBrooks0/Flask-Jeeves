@@ -14,25 +14,30 @@ allDiseases = getAllDiseasesIds()
 allRules = getAllDiseaseRules()
 
 # Initiate BayesLib
-BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=10)
+BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=15)
 
 # Fill the anamnese questions calling functions
-variableID = getAllTrueDefaultVariablesIds()
+trueVariableIDs = getAllTrueDefaultVariablesIds()
+falseVariableIDs =  getAllFalseDefaultVariablesIds()
+randomQuestions = BayesLibObj.getRandomQuestions(falseVariableIDs)
+variableID = trueVariableIDs + randomQuestions
 petDetails = getPetDetailsbyId(1)
-answer = answerDefaultAnamnese(petDetails)
+answerDefaultAnamnese = answerDefaultAnamnese(petDetails)
+answerRandomAnamnese = answerRandomAnamnese([1,2,3,1,2,5,5,1,3,4,1,1,5,4,2])
+answer = answerDefaultAnamnese + answerRandomAnamnese
 BayesLibObj.setQuestionAnswer(variableID, answer)
+print(len(variableID), len(answer))
 
 # Main Loop
 while (not BayesLibObj.converged()):
 
     # Request next variable
-    nextVarID = BayesLibObj.getNextVariable()
+    nextVarID = BayesLibObj.getRandomQuestions(falseVariableIDs)
 
     # Send variable to front end
     print("nextVarID", nextVarID)
     # Pass the variable ID to front and set the answer in the kernel
     # BayesLibObj.setQuestionAnswer(nextVarID, nextanswer)
-    input()
     
   
 #     questions_so_far.append(GenerateQuestion(AllVariables, questions_so_far))

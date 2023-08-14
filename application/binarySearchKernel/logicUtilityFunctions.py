@@ -137,3 +137,23 @@ def getPetDetailsbyId(id):
         selected_pet = var_dict
     
     return selected_pet
+
+def answerRandomAnamnese(answers):
+    answersConverted = []
+    # for answer in answers:
+    #     answersConverted.append(CalculateAnswer(answer))
+    for answer in answers:
+        if answer == 1:
+            answersConverted.append(0.0)
+        elif answer == 2:
+            answersConverted.append(0.25)
+        elif answer == 3:
+            answersConverted.append(0.5)
+        elif answer == 4:
+            answersConverted.append(0.75)
+        elif answer == 5:
+            answersConverted.append(1.0)
+        else:
+            raise TypeError("Numbers must be from 1 to 5")
+        
+    return answersConverted
