@@ -82,5 +82,9 @@ describe("Register Page", () => {
         
     });
 
+    it("Should send to login",() => {
+      expect(screen.getByRole("link").href).toBe("http://localhost:3000/login")
+  })
+
     
 })
