@@ -1,4 +1,5 @@
 # Here we will build all out tables (DB).
+from sqlalchemy import ARRAY
 from application import db
 
 
@@ -96,15 +97,15 @@ class Diary(db.Model):
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     #name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=True)
-    questionsIds = db.Column(db.String(100), nullable=False)
-    answersValues = db.Column(db.String(100), nullable=False)
-    possiblesDiagnosis = db.Column(db.String(200), nullable=False) 
+    questionsIds = db.Column(ARRAY(db.Integer), nullable=False)
+    answersValues = db.Column(ARRAY(db.Integer), nullable=False)
+    possiblesDiagnosis = db.Column(ARRAY(db.String(200)), nullable=False) 
     #field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
     )
 
-    def __init__(self, pet_id, date, questionsIds, answersValues, possiblesDiagnosis, field):
+    def __init__(self, pet_id, date, questionsIds, answersValues, possiblesDiagnosis):
         self.pet_id = pet_id
         #self.name = name
         self.date = date

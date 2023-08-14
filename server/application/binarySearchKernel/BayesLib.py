@@ -62,9 +62,7 @@ class BayesLib:
                     LikeCalc = self.allRules[self.allDiseases[dis]][self.diseasesVariables_so_far[ans]]
                 except:
                     LikeCalc = 0.5
-                DisLikelihood[self.allDiseases[dis]] *= max( 0.01, 1.0 - abs( LikeCalc - self.answers_so_far[ans] ) )
-                # print("P_Likelihood", DisLikelihood[self.allDiseases[dis]], ",", self.allDiseases[dis], ",", self.diseasesVariables_so_far[ans], "Correct Answer: ", self.allRules[self.allDiseases[dis]][self.diseasesVariables_so_far[ans]], "self.answers_so_far", self.answers_so_far[ans])
-                # input()
+                DisLikelihood[self.allDiseases[dis]] *= max( 0.01, 1.0 - abs( LikeCalc - self.answers_so_far[ans] ))
 
         ProbabilitiesList = []
         for dis in self.allDiseases:
