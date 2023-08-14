@@ -17,23 +17,22 @@ def create_diary():
     current_date = datetime.now().date()
     data = request.json
     pet_id = data['pet_id']
-    questionsIds = data['questionsArray']
+    questions = data['questionsArray']
     answers = data['answersArray']
     #answersValues = answerRandomAnamnese(answers)
-    result = findDiagnosis(pet_id, questionsIds, answers)
+    result = findDiagnosis(pet_id, questions, answers)
 
     listDiseases = []
     for diagnosis in result:
         listDiseases.append(Diseases.query.get_or_404(diagnosis['disease_id']))
 
-
     new_diary_entry = Diary(
         pet_id=pet_id,
         #name=data["name"],
         date=current_date,
-        questionsIds=questionsIds,
-        answersValues = answersValues,
-        possibleDiagnosis= listDiseases
+        questions=questions,
+        answers = answers,
+        possiblesDiagnosis= listDiseases
         #field=data["field"],
     )
     db.session.add(new_diary_entry)

@@ -34,15 +34,17 @@ class BayesLib:
             self.diseasesVariables_so_far.append(variableID)
             self.answers_so_far.append(answer)
  
-    def getRandomQuestions(self, falseVariableIDs): 
+    def getRandomQuestions(self, falseVariableQuestions): 
         # Start with a random algorithm
-        randomQuestionsIds = []        
-        while len(randomQuestionsIds) < self.maxIter:
-            question_ID = rd.randint(1, len(falseVariableIDs))
-            if question_ID not in self.diseasesVariables_so_far:
-                if question_ID not in randomQuestionsIds:
-                    randomQuestionsIds.append(question_ID)
-        return randomQuestionsIds
+        randomQuestions = []
+        idx = []      
+        while len(randomQuestions) < self.maxIter:
+            question_Idx = rd.randint(0, len(falseVariableQuestions)-1) 
+            print(question_Idx)           
+            if question_Idx not in idx:
+                idx.append(question_Idx)
+                randomQuestions.append(falseVariableQuestions[question_Idx])
+        return randomQuestions
 
     def Solve(self):
         # Calculating Probabilities based on Bayes theorem

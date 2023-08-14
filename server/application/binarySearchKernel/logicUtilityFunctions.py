@@ -44,23 +44,23 @@ def getAllDiseasesIds():
     return allDiseasesIds
 
 #GETTING ALL VARIABLES' IDS THAT TYPE IS TRUE 
-def getAllTrueDefaultVariablesIds():
+def getAllTrueDefaultVariablesQuestions():
     true_default_variables = session.query(Variables).filter_by(defaultQuestion = True).all()
     all_true_default_variables= []
 
     for var in true_default_variables:
         var_dict = var.as_dict()
-        all_true_default_variables.append(var_dict['id']) 
+        all_true_default_variables.append(var_dict['question']) 
 
     return all_true_default_variables
 
-def getAllFalseDefaultVariablesIds():
+def getAllFalseDefaultVariablesQuestions():
     false_default_variables = session.query(Variables).filter_by(defaultQuestion = False).all()
     all_false_default_variables= []
 
     for var in false_default_variables:
         var_dict = var.as_dict()
-        all_false_default_variables.append(var_dict['id']) 
+        all_false_default_variables.append(var_dict['question']) 
 
     return all_false_default_variables
 

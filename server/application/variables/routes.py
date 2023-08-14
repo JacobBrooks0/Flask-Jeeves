@@ -32,6 +32,13 @@ def get_variable_by_id(id):
     }
     return jsonify(variable_data), 200
 
+@variables.route("/variables_questions", methods=["GET"])
+def get_variables_questions():
+
+    questions = sendQuestions()
+    
+    return jsonify(questions), 200
+
 
 # Update a variable by ID
 @variables.route("/variables/<id>", methods=["PUT"])

@@ -29,7 +29,7 @@ class Appointments(db.Model):
         backref=db.backref("appointments", lazy=True, cascade="all,delete-orphan"),
     )
 
-    # initialiase all the class values as the instance values
+    # initialise all the class values as the instance values
     def __init__(self, date, pet_id, description):
         self.date = date
         self.pet_id = pet_id
@@ -97,20 +97,20 @@ class Diary(db.Model):
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     #name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=True)
-    questionsIds = db.Column(ARRAY(db.Integer), nullable=False)
-    answersValues = db.Column(ARRAY(db.Integer), nullable=False)
+    questions = db.Column(ARRAY(db.Integer), nullable=False)
+    answers = db.Column(ARRAY(db.String(100)), nullable=False)
     possiblesDiagnosis = db.Column(ARRAY(db.String(200)), nullable=False) 
     #field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
     )
 
-    def __init__(self, pet_id, date, questionsIds, answersValues, possiblesDiagnosis):
+    def __init__(self, pet_id, date, questions, answers, possiblesDiagnosis):
         self.pet_id = pet_id
         #self.name = name
         self.date = date
-        self.questionsIds = questionsIds
-        self.answersValues = answersValues
+        self.questions = questions
+        self.answers = answers
         self.possiblesDiagnosis = possiblesDiagnosis
         #self.field = field
 
