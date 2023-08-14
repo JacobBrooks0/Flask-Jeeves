@@ -9,8 +9,13 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from application import *
 import pandas as pd
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
  
 # Create an engine and bind it to a session
+DATABASE_URL = os.environ["DATABASE_URL"]
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
 session = Session()

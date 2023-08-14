@@ -459,7 +459,7 @@ variables_to_insert = [
                 {'name':'Vomiting and Nausea' ,  'question':'Is your cat vomiting or showing signs of nausea?', 'specialty':['Urinary', 'Gastrointestinal'], 'default': False},
                 {'name':'Polydipsia' ,  'question':'Have you observed your cat drinking more water than usual?', 'specialty':['Urinary'], 'default': False},
                 {'name':'Limping' ,  'question':'Is your cat limping or favoring any particular leg?', 'specialty':['Musculoskeletal'], 'default': False},
-                {'name':'Swelling members' ,  'question':'Does your cat have swollen limbs?', 'specialty':['Urinary', 'Muskuloskeletal'], 'default': False},
+                {'name':'Swelling members' ,  'question':'Does your cat have swollen limbs?', 'specialty':['Urinary', 'Musculoskeletal'], 'default': False},
                 {'name':'Fever' , 'question':'Does your cat\'s body temperature seem elevated?', 'specialty':['Urinary' ,'Gastrointestinal'], 'default': False},
                 {'name':'Loss Appetite' ,  'question':'Is your cat eating less food than usual?', 'specialty':['Urinary' ,'Gastrointestinal'], 'default': False},
                 {'name':'Weight loss' ,  'question':'Have you noticed your cat losing weight?', 'specialty':['Urinary','Gastrointestinal'], 'default': False},
@@ -489,11 +489,11 @@ variables_to_insert = [
 
 
 diseases_to_insert = [
-                {'name': 'Urethal Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
+                {'name': 'Urethral Obstruction', 'specialty': 'Urinary', 'description': 'A blockage in the urethra that can cause difficulty urinating and other urinary issues.'},
                 {'name': 'Feline Lower Urinary Tract Disease', 'specialty': 'Urinary', 'description': 'A group of conditions affecting the lower urinary tract; often causing discomfort and frequent urination.'},
                 {'name': 'Renal Disease', 'specialty': 'Urinary', 'description': 'Chronic kidney disease that impairs the kidney function and can lead to various symptoms and complications.'},
                 {'name': 'Luxation', 'specialty': 'Musculoskeletal', 'description': 'Dislocation or displacement of a joint; causing pain and mobility issues.'},
-                {'name': 'Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
+                {'name': 'Feline Panleukopenia', 'specialty': 'Gastrointestinal', 'description': 'A highly contagious viral disease that affects the gastrointestinal tract and immune system.'},
                 {'name': 'Intestinal Parasites', 'specialty': 'Gastrointestinal', 'description': 'Infections caused by various parasites that affect the gastrointestinal system.'},
                 {'name': 'Hairball Obstruction', 'specialty': 'Gastrointestinal', 'description': 'Accumulation of hair in the stomach or intestines; causing blockages and discomfort.'},
                 {'name': 'Scabies', 'specialty': 'Dermatology', 'description': 'A skin infestation caused by mites; leading to intense itching and skin irritation.'},
@@ -509,9 +509,9 @@ users_to_insert = [
 ]
 
 pets_to_insert = [
-    {'user_id':1, 'name':'Buddy', 'dob':date(2019, 5, 15), 'breed':'Labrador', 'outdoor':True, 'neutered':True, 'sex':'Male', 'diet':'Processed', 'contactWithOtherPets': True},
+    {'user_id':1, 'name':'Buddy', 'dob':date(2019, 5, 15), 'breed':'Mixed', 'outdoor':True, 'neutered':True, 'sex':'Male', 'diet':'Processed', 'contactWithOtherPets': True},
     {'user_id':2, 'name':'Luna', 'dob':date(2020, 2, 10), 'breed':'Siamese', 'outdoor':False, 'neutered':False, 'sex':'Female', 'diet':'Mixed', 'contactWithOtherPets': False},
-    {'user_id':3, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Golden Retriever', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural', 'contactWithOtherPets': False}
+    {'user_id':3, 'name':'Max', 'dob':date(2018, 9, 3), 'breed':'Persian', 'outdoor':True, 'neutered':False, 'sex':'Male', 'diet':'Natural', 'contactWithOtherPets': False}
     ]
 
 file = open("DiseasesVariables.csv", 'w')
