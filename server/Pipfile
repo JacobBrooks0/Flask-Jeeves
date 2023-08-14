@@ -42,6 +42,7 @@ tzdata = "==2023.3"
 wsproto = "==1.2.0"
 wtforms = "==3.0.1"
 zipp = "==3.16.2"
+pytest = "*"
 
 [dev-packages]
 pytest = "*"

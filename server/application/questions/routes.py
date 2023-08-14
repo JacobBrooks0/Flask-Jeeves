@@ -66,3 +66,5 @@ def delete_question(id):
     db.session.delete(question)
     db.session.commit()
     return jsonify({"message": "Question deleted successfully!"}), 200
+
+

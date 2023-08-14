@@ -94,20 +94,24 @@ class Pets(db.Model):
 class Diary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
-    field = db.Column(db.String(100))
+    #name = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.Date, nullable=True)
+    questionsIds = db.Column(db.String(100), nullable=False)
+    answersValues = db.Column(db.String(100), nullable=False)
+    possiblesDiagnosis = db.Column(db.String(200), nullable=False) 
+    #field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
     )
 
-    def __init__(self, pet_id, name, date, diagnosis, field):
+    def __init__(self, pet_id, date, questionsIds, answersValues, possiblesDiagnosis, field):
         self.pet_id = pet_id
-        self.name = name
+        #self.name = name
         self.date = date
-        self.diagnosis = diagnosis
-        self.field = field
+        self.questionsIds = questionsIds
+        self.answersValues = answersValues
+        self.possiblesDiagnosis = possiblesDiagnosis
+        #self.field = field
 
 
 class Diseases(db.Model):
