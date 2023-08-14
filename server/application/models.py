@@ -50,16 +50,14 @@ class Pets(db.Model):
         "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
     )
 
-    def __init__(
-        self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet
-    ):
+    def __init__(self, user_id, name, dob, breed, outdoor, neutered, sex, diet):
         self.user_id = user_id
         self.name = name
         self.dob = dob
         self.breed = breed
         self.outdoor = outdoor
         self.neutered = neutered
-        self.history_id = history_id
+        # self.history_id = history_id
         self.sex = sex
         self.diet = diet
 

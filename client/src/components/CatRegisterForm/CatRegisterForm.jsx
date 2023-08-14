@@ -61,13 +61,13 @@ export default function CatRegisterForm() {
   const [cat, setCat] = useState({});
 
   const handleName = (e) => {
-    e.target.value ? setName(e.target.value) : "loading";
+    setName(e.target.value);
   };
   const handleBreed = (e) => {
     setBreed(e.target.value);
   };
   const handleDob = (value) => {
-    setDob(value.toLocaleDateString("en-GB"));
+    setDob(value.toISOString().split("T")[0]);
   };
   const handleOutdoor = (e) => {
     setOutdoor(e.target.value === "Indoor" ? false : true);
@@ -86,6 +86,7 @@ export default function CatRegisterForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setCat({
       user_id: 1,
       name: name,
@@ -97,7 +98,37 @@ export default function CatRegisterForm() {
       diet: diet,
       contact: contact,
     });
-    console.log(cat);
+
+    postCat();
+  };
+
+  const postCat = async () => {
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        name: cat.name,
+        dob: cat.dob,
+        breed: cat.breed,
+        outdoor: cat.outdoor,
+        neutered: cat.neutered,
+        sex: cat.sex,
+        diet: cat.diet,
+      }),
+    };
+    const response = await fetch("http://127.0.0.1:5000/pet", options);
+    const data = await response.json();
+    if (response.status == 201) {
+      alert(`${cat.name} registered!`);
+    } else {
+      alert(data.error);
+    }
   };
 
   return (
@@ -111,7 +142,6 @@ export default function CatRegisterForm() {
           flexDirection: "column",
           backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         }}
-        onSubmit={handleSubmit}
       >
         <TextField
           variant="filled"
@@ -268,7 +298,7 @@ export default function CatRegisterForm() {
 
         <Button
           variant="contained"
-          type="submit"
+          onClick={handleSubmit}
           sx={{
             my: 4,
             // mx: 2,
