@@ -133,7 +133,6 @@ export default function UserPage() {
         style={{
           display: "flex",
           flexDirection: "row",
-          borderBottom: "4px solid black",
         }}
       >
         <div
@@ -142,7 +141,7 @@ export default function UserPage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+            backgroundColor: dark ? "#121212" : "whitesmoke",
             paddingTop: "50px",
           }}
         >
