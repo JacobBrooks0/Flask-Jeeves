@@ -16,20 +16,12 @@ export default function ProfileCat({ cat }) {
         width: "100%",
         height: "175px",
         justifyContent: "space-evenly",
-        // gap: "5rem",
         backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         borderRadius: "10px",
         alignItems: "center",
       }}
     >
-      {/* <div style={{ width: "40%" }}> */}
       <CatImage style={{ width: "100px" }} />
-      {/* </div> */}
-      {/* <img
-        src={Alex}
-        alt=""
-        style={{ width: "40%", borderRadius: "50%", height: "fit-content" }}
-      /> */}
       <div
         className="cat-info"
         style={{
