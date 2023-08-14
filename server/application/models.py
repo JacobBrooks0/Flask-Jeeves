@@ -118,7 +118,7 @@ class UsersAnswersCount(db.Model):
     no = db.Column(db.Integer)
     probablyNot = db.Column(db.Integer)
     iDontKnow = db.Column(db.Integer)
-    propablyYes = db.Column(db.Integer)
+    probablyYes = db.Column(db.Integer)
     yes = db.Column(db.Integer)
 
     def __init__(
@@ -128,7 +128,7 @@ class UsersAnswersCount(db.Model):
         no,
         probablyNot,
         iDontKnow,
-        propablyYes,
+        probablyYes,
         yes,
     ):
         self.disease_id = disease_id
@@ -136,5 +136,5 @@ class UsersAnswersCount(db.Model):
         self.no = no
         self.probablyNot = probablyNot
         self.iDontKnow = iDontKnow
-        self.propablyYes = propablyYes
+        self.probablyYes = probablyYes
         self.yes = yes

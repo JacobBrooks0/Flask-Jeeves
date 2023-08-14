@@ -69,9 +69,6 @@ export default function SelectAnswer() {
                 "&&:hover": {
                   backgroundColor: "#7958D6",
                 },
-                "&&:focus": {
-                  backgroundColor: "#7958D6",
-                },
               }}
               // onClick={nextQuestion}
             >
@@ -91,9 +88,6 @@ export default function SelectAnswer() {
                 color: "#fff",
                 backgroundColor: "#826BF5",
                 "&&:hover": {
-                  backgroundColor: "#7958D6",
-                },
-                "&&:focus": {
                   backgroundColor: "#7958D6",
                 },
               }}
