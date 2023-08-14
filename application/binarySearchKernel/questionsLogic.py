@@ -3,28 +3,37 @@ import sys
 from pathlib import Path
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[0]))
+sys.path.append(str(Path(full_path).parents[1]))
 
+from application import *
 from binarySearchKernel import *
+from logicUtilityFunctions import *
 
-# allVariables -> Lista com os IDs
-# allDiseases -> Lista com os IDs
-# allRules -> Matriz
+allVariables = getAllDiseaseVariablesIds()
+allDiseases = getAllDiseasesIds()
+allRules = getAllDiseaseRules()
 
-# Initiate BayesClassifier
-# BayesClassifierObj = BayesClassifier(allVariables, allDiseases, allRules, maxIter=10)
+# Initiate BayesLib
+BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=10)
 
 # Fill the anamnese questions calling functions
-# BayesClassifierObj.setQuestionAnswer(variableID, answer)
+variableID = getAllTrueDefaultVariablesIds()
+petDetails = getPetDetailsbyId(1)
+answer = answerDefaultAnamnese(petDetails)
+BayesLibObj.setQuestionAnswer(variableID, answer)
 
 # Main Loop
-while (not BayesClassifierObj.converged()):
+while (not BayesLibObj.converged()):
 
     # Request next variable
-    # nextVarID = BayesClassifierObj.getNextVariable()
-    
+    nextVarID = BayesLibObj.getNextVariable()
+
+    # Send variable to front end
+    print("nextVarID", nextVarID)
     # Pass the variable ID to front and set the answer in the kernel
-    # BayesClassifierObj.setQuestionAnswer(nextVarID, nextanswer)
-    pass
+    # BayesLibObj.setQuestionAnswer(nextVarID, nextanswer)
+    input()
+    
   
 #     questions_so_far.append(GenerateQuestion(AllVariables, questions_so_far))
 #     answers_So_Far.append( AnswerValues[GetAnswer(AllVariables, questions_so_far[-1])])

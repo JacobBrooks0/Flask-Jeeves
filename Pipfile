@@ -28,6 +28,7 @@ python-engineio = "*"
 simple-websocket = "*"
 requests = "*"
 pandas = "*"
+flask-session = "*"
 
 [dev-packages]
 pytest = "*"

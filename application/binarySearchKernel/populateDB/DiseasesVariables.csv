@@ -30,7 +30,7 @@ id,feature,question,specialty,defaultQuestion
 29,Age,How old are your cat?,General,True
 30,Vaccination updated,Are your cat's vaccinations up-to-date?,General,False
 31,Male,Is your cat male?,General,True
-32,Indoor,Does your cat goes outside?,General,True
+32,Outdoor,Does your cat goes outside?,General,True
 33,Contact with other pets,Does your cat have contact with other pets?,General,True
 34,Neutered,Is your cat neutered?,General,True
 35,Start of the symptoms,When did you first notice these symptoms in your cat?,General,False

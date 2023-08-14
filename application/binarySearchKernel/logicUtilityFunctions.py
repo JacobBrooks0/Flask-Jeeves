@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from application import *
 from datetime import *
 from application.models import *
-#from binarySearchKernel.BayesClassifier import CalculateAnswer
+from binarySearchKernel import *
 import numpy as np
 
 
@@ -52,17 +52,17 @@ def getAllTrueDefaultVariablesIds():
 
     return all_true_default_variables
 
-# def getAllDiseaseRulesForProbabilityFunction():
-#     diseaseRulesQuery = session.query(UsersAnswersCount).all()
-#     lenDiseaseVariables = len(session.query(Variables).all())
-#     lenDiseases = len(session.query(Diseases).all())
-#     rulesMatrix = np.zeros((lenDiseases + 1, lenDiseaseVariables + 1))
+def getAllDiseaseRules():
+    diseaseRulesQuery = session.query(UsersAnswersCount).all()
+    lenDiseaseVariables = len(session.query(Variables).all())
+    lenDiseases = len(session.query(Diseases).all())
+    rulesMatrix = np.zeros((lenDiseases + 1, lenDiseaseVariables + 1))
 
-#     for rule in diseaseRulesQuery:
-#         rule_dict = rule.as_dict_for_probability_function()
-#         rulesMatrix[rule_dict['disease_id']][rule_dict['diseasesVariables_id']] = CalculateAnswer(rule_dict['rules'])
+    for rule in diseaseRulesQuery:
+        rule_dict = rule.as_dict_for_probability_function()
+        rulesMatrix[rule_dict['disease_id']][rule_dict['diseasesVariables_id']] = CalculateAnswer(rule_dict['rules'])
 
-#     return rulesMatrix  
+    return rulesMatrix  
     
 #GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS
 def answerDefaultAnamnese(obj):

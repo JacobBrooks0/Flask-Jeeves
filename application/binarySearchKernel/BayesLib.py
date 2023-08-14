@@ -1,6 +1,17 @@
 import numpy as np
+import random as rd
 
-class BayesClassifier:
+
+def CalculateAnswer(AnswerCounts):
+    if sum(AnswerCounts) == 0.0:
+        # Disease nor cataloged yet.
+        return 0.5
+
+    AvgAnswer = AnswerCounts[0]*0.00 + AnswerCounts[1]*0.25 + AnswerCounts[2]*0.50 + AnswerCounts[3]*0.75 + AnswerCounts[4]*1.0
+    AvgAnswer /= sum(AnswerCounts)
+    return AvgAnswer
+
+class BayesLib:
 
     def __init__(self, allDiseasesVariables, allDiseases, allRules, maxIter):
         self.allDiseasesVariables = np.copy(allDiseasesVariables)
@@ -11,14 +22,18 @@ class BayesClassifier:
         self.answers_so_far = []
         self.Iter = 0
 
-    def setQuestionAnswer(self, variableID, answer):
+    def setQuestionAnswer(self, variableID, answer):  
         if type(variableID) == type(list()) or type(answer) == type(list()):
-            for var, ans in variableID, answer:
+            if len(variableID) != len(answer):
+                print("Error: List with different sizes.")
+            
+            for var in variableID:
                 self.diseasesVariables_so_far.append(var)
+            for ans in answer:
                 self.answers_so_far.append(ans)
         else:
-                self.diseasesVariables_so_far.append(variableID)
-                self.answers_so_far.append(answer)
+            self.diseasesVariables_so_far.append(variableID)
+            self.answers_so_far.append(answer)
 
     def converged(self):
         if self.Iter < self.maxIter:
@@ -62,15 +77,6 @@ class BayesClassifier:
     #         })
 
     #     return ProbabilitiesList
-
-    # def CalculateAnswer(self, AnswerCounts):
-    #     if sum(AnswerCounts) == 0.0:
-    #         # Disease nor cataloged yet.
-    #         return 0.5
-
-    #     AvgAnswer = AnswerCounts[0]*0.00 + AnswerCounts[1]*0.25 + AnswerCounts[2]*0.50 + AnswerCounts[3]*0.75 + AnswerCounts[4]*1.0
-    #     AvgAnswer /= sum(AnswerCounts)
-    #     return AvgAnswer
 
     # def CalculateDiseaseProbability(self, GivenDisease, Diseases, DisLikelihood, DiseaseRules, QuestionsSoFar, AnswersSoFar):
     #     # Bayesian Classifier Algorithm (http://cs.wellesley.edu/~anderson/writing/naive-bayes.pdf)
