@@ -12,6 +12,8 @@ import { useCredentials } from "../../contexts";
 import "./styles.css";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import CatLogo from "../../assets/cat-logo.png";
 
 export default function LoginPage() {
   const {
@@ -24,6 +26,8 @@ export default function LoginPage() {
     profile,
     setProfile,
   } = useCredentials();
+
+  const navigate = useNavigate();
 
   const googleLogin = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -70,17 +74,18 @@ export default function LoginPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
+        email: emailValue,
+        password: passwordValue,
       }),
     };
-    const response = await fetch("http://localhost:3000/user/login", options);
+    const response = await fetch("http://127.0.0.1:5000/users", options);
     const data = await response.json();
-    console.log(data);
 
     if (response.status == 200) {
       localStorage.setItem("token", JSON.stringify(data.token));
-      navigate("/");
+      navigate("/home");
+      setEmailValue("");
+      setPasswordValue("");
     } else {
       alert(data.error);
     }
@@ -96,17 +101,13 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginRequest({ email: emailValue, password: passwordValue });
-    setEmailValue("");
-    setPasswordValue("");
+    loginRequest();
   };
-
-  const googleStyling = { width: "100%", backgroundColor: "black" };
 
   return (
     <div className="login-body">
       <form action="" className="login-form" onSubmit={handleSubmit}>
-        <img className="logo" src="src/assets/cat-logo.png" alt="logo" />
+        <img className="logo" src={CatLogo} alt="logo" />
         <Typography
           component="h1"
           variant="h4"
@@ -138,6 +139,7 @@ export default function LoginPage() {
           variant="standard"
           id="password"
           label="Password"
+          type="password"
           name="password"
           autoComplete="current-password"
           onChange={handlePasswordChange}
@@ -169,10 +171,10 @@ export default function LoginPage() {
           }}
           onClick={() => googleLogin()}
         >
-          Sign in with Google 🚀{" "}
+          Sign in with Google
         </Button>
         <Button
-          type="submit"
+          onClick={loginRequest}
           className="button"
           fullWidth
           variant="contained"

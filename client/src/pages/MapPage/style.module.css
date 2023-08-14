@@ -5,7 +5,20 @@
   display: flex;
 }
 
-.map-container {
-  height: 75%;
+.map-page {
+  margin-top: 60px;
+}
+
+.header-text-container {
   width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  margin-bottom: -100px;
 }
