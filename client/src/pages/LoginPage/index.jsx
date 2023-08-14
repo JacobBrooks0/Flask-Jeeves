@@ -66,7 +66,7 @@ export default function LoginPage() {
     console.log(error);
   };
 
-  const loginRequest = async (formData) => {
+  const loginRequest = async () => {
     const options = {
       method: "POST",
       headers: {
@@ -82,7 +82,7 @@ export default function LoginPage() {
     const data = await response.json();
 
     if (response.status == 200) {
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
       navigate("/home");
       setEmailValue("");
       setPasswordValue("");
