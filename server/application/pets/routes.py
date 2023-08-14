@@ -20,6 +20,7 @@ def list_pets():
             "neutered": pet.neutered,
             "sex": pet.sex,
             "diet": pet.diet,
+            "contactWithOtherPets": pet.contactWithOtherPets,
         }
         pet_list.append(pet_data)
     return jsonify(pet_list), 200
@@ -38,6 +39,7 @@ def create_pet():
         neutered=data["neutered"],
         sex=data["sex"],
         diet=data["diet"],
+        contactWithOtherPets=data["contactWithOtherPets"]
         # history_id=data['history_id']
     )
     db.session.add(new_pet)

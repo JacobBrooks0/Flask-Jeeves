@@ -96,7 +96,7 @@ export default function CatRegisterForm() {
       neutered: neutered,
       sex: sex,
       diet: diet,
-      contact: contact,
+      contactWithOtherPets: contact,
     });
 
     postCat();
@@ -113,13 +113,14 @@ export default function CatRegisterForm() {
       },
       body: JSON.stringify({
         user_id: 1,
-        name: cat.name,
-        dob: cat.dob,
-        breed: cat.breed,
-        outdoor: cat.outdoor,
-        neutered: cat.neutered,
-        sex: cat.sex,
-        diet: cat.diet,
+        name: name,
+        dob: dob,
+        breed: breed,
+        outdoor: outdoor,
+        neutered: neutered,
+        sex: sex,
+        diet: diet,
+        contactWithOtherPets: contact,
       }),
     };
     const response = await fetch("http://127.0.0.1:5000/pet", options);

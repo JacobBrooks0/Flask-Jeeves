@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_user
 from werkzeug.security import check_password_hash
-from application.models import User  # Import the User model
+from application.models import Users  # Import the User model
 
 # from application import login_manager  # Import the login_manager instance
 
@@ -21,7 +21,7 @@ def login():
     email = request.json.get("email")
     password = request.json.get("password")
     # Query the User model for the provided email
-    user = User.query.filter_by(email=email).first()
+    user = Users.query.filter_by(email=email).first()
     # Check if the user exists and the password is correct
     if user and check_password_hash(user.password, password):
         # Use the login_user function to log in the user
