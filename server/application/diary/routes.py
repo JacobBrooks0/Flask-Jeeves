@@ -1,6 +1,11 @@
+# import os
+# import sys
+# from pathlib import Path
+# full_path = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(str(Path(full_path).parents[1]))
 from flask import Blueprint, request, jsonify
 from application.models import Diary, db
-from application.binarySearchKernel.logicUtilityFunctions import *
+from application.binarySearchKernel.questionsLogic import findDiagnosis
 from datetime import *
 
 diary = Blueprint("diary", __name__)
@@ -15,6 +20,8 @@ def create_diary():
     questionsIds = data['questionsArray']
     answers = data['answersArray']
     #answersValues = answerRandomAnamnese(answers)
+    result = findDiagnosis(pet_id, questionsIds, answers)
+    
 
     new_diary_entry = Diary(
         pet_id=pet_id,
@@ -22,7 +29,7 @@ def create_diary():
         date=current_date,
         questionsIds=questionsIds,
         answersValues = answersValues,
-        possibleDiagnosis= None,
+        possibleDiagnosis= result,
         #field=data["field"],
     )
     db.session.add(new_diary_entry)

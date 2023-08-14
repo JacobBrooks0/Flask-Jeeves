@@ -19,7 +19,7 @@ class Users(db.Model):
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Date, nullable=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     # Relationship with Pet table

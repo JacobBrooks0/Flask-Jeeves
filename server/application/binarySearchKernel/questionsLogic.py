@@ -17,22 +17,19 @@ allRules = getAllDiseaseRules()
 BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=15)
 
 # Fill the anamnese questions calling functions
-defaultVariableIDs = getAllTrueDefaultVariablesIds()
-falseVariableIDs =  getAllFalseDefaultVariablesIds()
-petDetails = getPetDetailsbyId(1)
-answerDefaultAnamnese = answerDefaultAnamnese(petDetails)
-BayesLibObj.setQuestionAnswer(defaultVariableIDs, answerDefaultAnamnese)
-randomQuestions = BayesLibObj.getRandomQuestions(falseVariableIDs)
-answerRandomAnamnese = answerRandomAnamnese([1,2,3,1,2,5,5,1,3,4,1,1,5,4,2])
-BayesLibObj.setQuestionAnswer(randomQuestions, answerRandomAnamnese)
+def sendQuestions() :
+    falseVariableIDs =  getAllFalseDefaultVariablesIds()
+    randomQuestions = BayesLibObj.getRandomQuestions(falseVariableIDs)
+    return randomQuestions
 
-#print("diseasesVariables_so_far", len(BayesLibObj.diseasesVariables_so_far), BayesLibObj.diseasesVariables_so_far)
-#print("answers_so_far", len(BayesLibObj.answers_so_far), BayesLibObj.answers_so_far)
+def findDiagnosis(pet_id=1, questionsAnswered=[1, 2, 3, 4, 5, 6, 7, 8, 13, 27, 25, 22, 21, 20, 19], answersUser=[1, 1, 1 ,1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5]):    
+    defaultVariableIDs = getAllTrueDefaultVariablesIds()
+    petDetails = getPetDetailsbyId(pet_id)
+    answersTrueDefaultAnamnese = answerDefaultAnamnese(petDetails)
+    BayesLibObj.setQuestionAnswer(defaultVariableIDs, answersTrueDefaultAnamnese)
+    answersRandomAnamnese = answerRandomAnamnese(answersUser)
+    BayesLibObj.setQuestionAnswer(questionsAnswered, answersRandomAnamnese)
+    probabilities = BayesLibObj.Solve()
+    return probabilities
 
-# Solving the Problem
-probabilities = BayesLibObj.Solve()
 
-print(probabilities)
-# # print("The three most probable diseases are:")
-# # for i in range(-1, -4, -1):
-# #     print(probabilities[i]['name'], probabilities[i])

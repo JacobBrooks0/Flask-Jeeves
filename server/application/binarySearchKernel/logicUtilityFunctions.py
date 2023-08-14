@@ -7,12 +7,12 @@ full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 
 # Import necessary modules
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from application import *
 from datetime import *
 from application.models import *
-from binarySearchKernel import *
+from binarySearchKernel import CalculateAnswer
 import numpy as np
 
 

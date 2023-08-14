@@ -49,7 +49,7 @@ class BayesLib:
         probabilities = self.CalculateProbabilites()
         probabilities = sorted( probabilities, key= lambda d:d['Likelihood'] )
         probabilities.reverse()
-        return probabilities
+        return probabilities[:3]
 
     def CalculateProbabilites(self):
 
@@ -69,7 +69,7 @@ class BayesLib:
         ProbabilitiesList = []
         for dis in self.allDiseases:
             ProbabilitiesList.append({
-                'Disease_ID': dis,
+                'disease_id': dis,
                 'Likelihood': self.CalculateDiseaseProbability(dis, DisLikelihood)
             })
 
