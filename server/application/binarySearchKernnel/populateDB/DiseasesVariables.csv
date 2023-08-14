@@ -1,0 +1,37 @@
+id,feature,question,specialty,defaultQuestion
+1,Frequent Urination,Is your cat going to the litter more than usual?,Urinary,False
+2,Blood in Urine,Have you noticed any blood in your cat's urine?,Urinary,False
+3,Painful Urination,Does your cat seem to experience discomfort while urinating?,Urinary,False
+4,Licking Genital Area,Is your cat excessively licking its genital area?,Urinary;Gastrointestinal,False
+5,Lethargy and Weakness,Has your cat been less active or weaker than usual?,Urinary,False
+6,Straining to Urinate,Does your cat struggle or show difficulty when trying to urinate?,Urinary;Gastrointestinal,False
+7,Abdominal Pain,Has your cat displayed signs of abdominal pain?,Urinary;Gastrointestinal,False
+8,Vomiting and Nausea,Is your cat vomiting or showing signs of nausea?,Urinary;Gastrointestinal,False
+9,Polydipsia,Have you observed your cat drinking more water than usual?,Urinary,False
+10,Limping,Is your cat limping or favoring any particular leg?,Musculoskeletal,False
+11,Swelling members,Does your cat have swollen limbs?,Urinary;Muskuloskeletal,False
+12,Fever,Does your cat's body temperature seem elevated?,Urinary;Gastrointestinal,False
+13,Loss Appetite,Is your cat eating less food than usual?,Urinary;Gastrointestinal,False
+14,Weight loss,Have you noticed your cat losing weight?,Urinary;Gastrointestinal,False
+15,PotBellied Appearance,Is your cat's belly visibly swollen or distended?,Gastrointestinal,False
+16,Diarrhea,Are your cat's stools softer or looser?,Gastrointestinal,False
+17,Constipation,Is your cat having difficulty passing stools or seems constipated?,Gastrointestinal;Urinary,False
+18,Visible Worms,Have you seen any visible worms in your cat's stools?,Gastrointestinal;Dermatology,False
+19,Anal Itching or Scooting,Is your cat showing signs of anal itching or scooting?,Dermatology;Gastrointestinal,False
+20,Intense itching and scratching,Is your cat excessively itching; scratching; or showing signs of irritation?,Dermatology,False
+21,Hair loss or thinning of fur,Is your cat experiencing hair loss or thinning fur?,Dermatology,False
+22,Formation of small raised bumps or pustules,Have you noticed any wounds or pimples on your cat's skin?,Dermatology,False
+23,Irritated or weepy eyes,Are your cat's eyes irritated or producing excessive tears?,Dermatology;Gastrointestinal,False
+24,Restlessness and Agitation,Is your cat unusually restless or agitated?,Dermatology;Urinary,False
+25,Over-Grooming,Does your cat excessively groom or lick itself?,Dermatology;Gastrointestinal,False
+26,Ear Infection,Is your cat's ear showing signs of infection?,Dermatology,False
+27,Presence of fleas,Have you observed any fleas on your cat? Even if it was a while ago.,Dermatology,False
+28,Overweight,Is your cat overweight?,General,False
+29,Age,How old are your cat?,General,True
+30,Vaccination updated,Are your cat's vaccinations up-to-date?,General,False
+31,Male,Is your cat male?,General,True
+32,Outdoor,Does your cat goes outside?,General,True
+33,Contact with other pets,Does your cat have contact with other pets?,General,True
+34,Neutered,Is your cat neutered?,General,True
+35,Start of the symptoms,When did you first notice these symptoms in your cat?,General,False
+36,Processed Diet,Does your cat eat processed food?,General,True
