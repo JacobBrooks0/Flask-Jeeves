@@ -1,38 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ChatBot from "react-simple-chatbot";
 import { Configuration, OpenAIApi } from "openai";
 
 export default function CatBot() {
   const styles = { backgroundColor: "#826bf5" };
+  const [botResponse, setBotResponse] = useState(
+    `Hi! Can you tell me what is wrong with your cat today? It's important to understand that I am just a bot! My advice isn't always going to be 100% right, so make sure you seek help from a real vet. Explore the website to see how you can book an appointment.`
+  );
+  const [responseFromAI, setResponseFromAI] = useState("G");
 
-  const steps = [
-    {
-      id: "1",
-      message: "Hi! Can you tell me what is wrong with your cat today?",
-      trigger: "2",
-    },
-    {
-      id: "2",
-      options: [
-        { value: 1, label: "Gastrointestinal", trigger: "3" },
-        { value: 2, label: "Respiratory", trigger: "3" },
-        { value: 3, label: "Respiratory", trigger: "3" },
-        // { value: 4, label: "Urinal", trigger: "5" },
-        // { value: 5, label: "Dermatological", trigger: "6" },
-        // { value: 6, label: "Musculoskeletal", trigger: "7" },
-        // { value: 7, label: "Neurological", trigger: "8" },
-        // { value: 8, label: "Ocular", trigger: "9" },
-        // { value: 9, label: "I Don't know", trigger: "10" },
-      ],
-    },
-    {
-      id: "3",
-      message: "Hi {previousValue}, nice to meet you!",
-      end: true,
-    },
-  ];
-
-  const openAIFunc = async () => {
+  const openAIFunc = async (value) => {
     const bearer = "Bearer " + import.meta.env.VITE_OPENAI_KEY;
     const options = {
       method: "POST",
@@ -51,7 +28,7 @@ export default function CatBot() {
           },
           {
             role: "user",
-            content: "Hello! My Cat is being sick",
+            content: value,
           },
         ],
       }),
@@ -64,14 +41,52 @@ export default function CatBot() {
 
     const data = await response.json();
     console.log(data.choices[0].message.content);
+    setResponseFromAI(data.choices[0].message.content);
   };
 
-  // useEffect(() => {
-  //   openAIFunc();
-  // }, []);
+  const steps = [
+    {
+      id: "1",
+      message: botResponse,
+      trigger: "2",
+    },
+    {
+      id: "2",
+      user: true,
+      trigger: 3,
+    },
+    {
+      id: "3",
+      delay: 7000,
+      message: ({ previousValue, steps }) => {
+        setChatBotMessageList(previousValue);
+        // return "I'm just having a think";
+      },
+      trigger: 4,
+    },
+    {
+      id: "4",
+      message: responseFromAI,
+      trigger: 5,
+    },
+    {
+      id: "5",
+      user: true,
+      trigger: 3,
+    },
+  ];
+
+  const [chatBotMessageList, setChatBotMessageList] = useState(
+    "Hi my cat is sick"
+  );
+
+  useEffect(() => {
+    openAIFunc(chatBotMessageList);
+  }, [chatBotMessageList]);
 
   return (
     <>
+      {botResponse}
       <ChatBot
         style={{ zIndex: 10000 }}
         floating

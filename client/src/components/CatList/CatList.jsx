@@ -1,7 +1,8 @@
 import { useState } from "react";
 import React from "react";
-import CatImage from "../assets/images/pitr-Kitty-icon.svg";
-import { useCredentials } from "../contexts";
+import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
+import { useCredentials } from "../../contexts";
+import style from "./style.module.css";
 
 export default function CatList({
   cat,
@@ -10,20 +11,16 @@ export default function CatList({
   setErrorText,
 }) {
   const { dark, setDark } = useCredentials();
-  const [backgroundButtonColor, setBackgroundButtonColor] = useState("#d3ccfa");
 
   return (
     <button
       onClick={() => {
         setSelectedCat(cat);
-        console.log(selectedCat);
         setErrorText(false);
       }}
-      onMouseEnter={() => setBackgroundButtonColor("#826bf5")}
-      onMouseLeave={() => setBackgroundButtonColor("#d3ccfa")}
+      className={style["cat-container"]}
       style={{
         width: "50%",
-        backgroundColor: backgroundButtonColor,
         border: selectedCat.name === cat.name ? "3px solid #826bf5" : null,
         display: "flex",
         marginTop: "20px",

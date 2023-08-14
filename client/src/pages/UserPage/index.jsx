@@ -277,7 +277,7 @@ export default function UserPage() {
       <div
         style={{
           width: "100%",
-          backgroundColor: "#D3CCFA",
+          backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         }}
       >
         <h1
