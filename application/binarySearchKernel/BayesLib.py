@@ -42,14 +42,15 @@ class BayesLib:
         else:
             return True
 
-    def getNextVariable(self): 
+    def getQuestions(self, allFalseDiseasesVariables): 
         # Start with a random algorithm
-        is_Question_OK = False
-        while not is_Question_OK:
-            question_ID = rd.randint(0, len(self.allDiseasesVariables)-1)
-            if not self.allDiseasesVariables[question_ID] in self.diseasesVariables_so_far:
-                is_Question_OK = True
-        return self.allDiseasesVariables[question_ID]
+        randomQuestionsIds = []        
+        while len(randomQuestionsIds) < self.maxIter:
+            question_ID = rd.randint(0, len(allFalseDiseasesVariables)-1)
+            if question_ID not in randomQuestionsIds:
+                question_ID.append(question_ID)
+                self.allDiseasesVariables.append(question_ID)
+        return randomQuestionsIds
 
 
 

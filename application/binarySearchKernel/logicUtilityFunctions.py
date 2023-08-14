@@ -52,6 +52,16 @@ def getAllTrueDefaultVariablesIds():
 
     return all_true_default_variables
 
+def getAllFalseDefaultVariablesIds():
+    false_default_variables = session.query(Variables).filter_by(defaultQuestion = False).all()
+    all_false_default_variables= []
+
+    for var in false_default_variables:
+        var_dict = var.as_dict()
+        all_false_default_variables.append(var_dict['id']) 
+
+    return all_false_default_variables
+
 def getAllDiseaseRules():
     diseaseRulesQuery = session.query(UsersAnswersCount).all()
     lenDiseaseVariables = len(session.query(Variables).all())
@@ -64,7 +74,7 @@ def getAllDiseaseRules():
 
     return rulesMatrix  
     
-#GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS
+#GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS, RECEIVES THE OBJ FROM PET DETAILS 
 def answerDefaultAnamnese(obj):
     current_date = datetime.now().date()
     age = datetime.strptime(obj['dob'], '%Y-%m-%d')    
