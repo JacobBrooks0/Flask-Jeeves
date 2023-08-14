@@ -3,15 +3,15 @@ from flask_login import login_user
 from werkzeug.security import check_password_hash
 from application.models import User  # Import the User model
 
-# from application import login_manager  # Import the login_manager instance
+from application import login_manager  # Import the login_manager instance
 
 auth = Blueprint("auth", __name__)
 
 
 # Configure the user_loader callback to retrieve a user by ID
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.query.get(int(user_id))
+@login_manager.user_loader
+def load_user(user_id):
+     return User.query.get(int(user_id))
 
 
 # Define the login route

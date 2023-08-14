@@ -1,6 +1,7 @@
 from application import db
 from flask import request, jsonify, Blueprint
 from application.models import User
+from flask_bcrypt import generate_password_hash
 
 user = Blueprint("user", __name__)
 
@@ -35,7 +36,7 @@ def create_user():
         first_name=data["first_name"],
         last_name=data["last_name"],
         email=data["email"],
-        password=data["password"],
+        password=generate_password_hash(data["password"]).decode("utf-8")
     )
     # send user to DB
     db.session.add(new_user)
