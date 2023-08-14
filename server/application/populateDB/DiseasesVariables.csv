@@ -9,7 +9,7 @@ id,feature,question,specialty,defaultQuestion
 8,Vomiting and Nausea,Is your cat vomiting or showing signs of nausea?,Urinary;Gastrointestinal,False
 9,Polydipsia,Have you observed your cat drinking more water than usual?,Urinary,False
 10,Limping,Is your cat limping or favoring any particular leg?,Musculoskeletal,False
-11,Swelling members,Does your cat have swollen limbs?,Urinary;Muskuloskeletal,False
+11,Swelling members,Does your cat have swollen limbs?,Urinary;Musculoskeletal,False
 12,Fever,Does your cat's body temperature seem elevated?,Urinary;Gastrointestinal,False
 13,Loss Appetite,Is your cat eating less food than usual?,Urinary;Gastrointestinal,False
 14,Weight loss,Have you noticed your cat losing weight?,Urinary;Gastrointestinal,False
