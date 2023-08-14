@@ -49,7 +49,7 @@ const dietProps = [
 // error={text === ""}
 
 export default function CatRegisterForm() {
-  const { dark, setDark } = useCredentials();
+  const { dark, setDark, profile, setProfile } = useCredentials();
   const [name, setName] = useState();
   const [breed, setBreed] = useState();
   const [dob, setDob] = useState();
@@ -88,7 +88,7 @@ export default function CatRegisterForm() {
     e.preventDefault();
 
     setCat({
-      user_id: 1,
+      user_id: JSON.parse(localStorage.getItem("user")).id,
       name: name,
       dob: dob,
       breed: breed,
@@ -112,7 +112,7 @@ export default function CatRegisterForm() {
         withCredentials: true,
       },
       body: JSON.stringify({
-        user_id: 1,
+        user_id: JSON.parse(localStorage.getItem("user")).id,
         name: name,
         dob: dob,
         breed: breed,
