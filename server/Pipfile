@@ -29,6 +29,7 @@ simple-websocket = "*"
 gunicorn = "*"
 flask-login = "*"
 flask-bcrypt = "*"
+flask-migrate = "*"
 
 [dev-packages]
 pytest = "*"

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { useCredentials } from "../../contexts";
 
@@ -50,6 +50,88 @@ const dietProps = [
 
 export default function CatRegisterForm() {
   const { dark, setDark } = useCredentials();
+  const [name, setName] = useState();
+  const [breed, setBreed] = useState();
+  const [dob, setDob] = useState();
+  const [outdoor, setOutdoor] = useState(true);
+  const [neutered, setNeutered] = useState(true);
+  const [sex, setSex] = useState("Male");
+  const [diet, setDiet] = useState("Processed");
+  const [contact, setContact] = useState(true);
+  const [cat, setCat] = useState({});
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const handleBreed = (e) => {
+    setBreed(e.target.value);
+  };
+  const handleDob = (value) => {
+    setDob(value.toISOString().split("T")[0]);
+  };
+  const handleOutdoor = (e) => {
+    setOutdoor(e.target.value === "Indoor" ? false : true);
+  };
+  const handleNeutered = (e) => {
+    setNeutered(e.target.value === "No" ? false : true);
+  };
+  const handleSex = (e) => {
+    setSex(e.target.value);
+  };
+  const handleDiet = (e) => {
+    setDiet(e.target.value);
+  };
+  const handleContact = (e) => {
+    setContact(e.target.value === "No" ? false : true);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setCat({
+      user_id: 1,
+      name: name,
+      dob: dob,
+      breed: breed,
+      outdoor: outdoor,
+      neutered: neutered,
+      sex: sex,
+      diet: diet,
+      contactWithOtherPets: contact,
+    });
+
+    postCat();
+  };
+
+  const postCat = async () => {
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        name: name,
+        dob: dob,
+        breed: breed,
+        outdoor: outdoor,
+        neutered: neutered,
+        sex: sex,
+        diet: diet,
+        contactWithOtherPets: contact,
+      }),
+    };
+    const response = await fetch("http://127.0.0.1:5000/pet", options);
+    const data = await response.json();
+    if (response.status == 201) {
+      alert(`${cat.name} registered!`);
+    } else {
+      alert(data.error);
+    }
+  };
+
   return (
     <>
       <form
@@ -65,8 +147,8 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Name"
-          onChange={(e) => e.target.value}
-          value=""
+          onChange={handleName}
+          value={name}
           color="secondary"
           sx={{
             backgroundColor: "whitesmoke",
@@ -78,8 +160,8 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Breed"
-          onChange={(e) => e.target.value}
-          value=""
+          onChange={handleBreed}
+          value={breed}
           color="secondary"
           sx={{
             backgroundColor: "whitesmoke",
@@ -92,6 +174,8 @@ export default function CatRegisterForm() {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             label="Date of Birth"
+            onChange={(value) => handleDob(value)}
+            format="dd/MM/yyyy"
             slotProps={{
               textField: {
                 variant: "filled",
@@ -109,6 +193,7 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Outdoor/Indoor"
+          onChange={handleOutdoor}
           select
           defaultValue="Outdoor"
           color="secondary"
@@ -128,6 +213,7 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Neutered"
+          onChange={handleNeutered}
           select
           defaultValue="Yes"
           color="secondary"
@@ -139,7 +225,11 @@ export default function CatRegisterForm() {
           }}
         >
           {neuteredProps.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem
+              key={option.value}
+              value={option.value}
+              onChange={handleNeutered}
+            >
               {option.value}
             </MenuItem>
           ))}
@@ -147,6 +237,8 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Sex"
+          onChange={handleSex}
+          value={sex}
           select
           defaultValue="Male"
           color="secondary"
@@ -166,6 +258,8 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Diet"
+          onChange={handleDiet}
+          value={diet}
           select
           defaultValue="Processed"
           color="secondary"
@@ -185,6 +279,7 @@ export default function CatRegisterForm() {
         <TextField
           variant="filled"
           label="Contact with other Pets"
+          onChange={handleContact}
           select
           defaultValue="Yes"
           color="secondary"
@@ -204,6 +299,7 @@ export default function CatRegisterForm() {
 
         <Button
           variant="contained"
+          onClick={handleSubmit}
           sx={{
             my: 4,
             // mx: 2,
