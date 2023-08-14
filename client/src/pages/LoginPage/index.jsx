@@ -69,6 +69,7 @@ export default function LoginPage() {
   const loginRequest = async () => {
     const options = {
       method: "POST",
+      mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -78,7 +79,7 @@ export default function LoginPage() {
         password: passwordValue,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/users", options);
+    const response = await fetch("http://127.0.0.1:5000/login", options);
     const data = await response.json();
 
     if (response.status == 200) {
@@ -87,7 +88,7 @@ export default function LoginPage() {
       setEmailValue("");
       setPasswordValue("");
     } else {
-      alert(data.error);
+      alert("Your email or password is incorrect");
     }
   };
 
