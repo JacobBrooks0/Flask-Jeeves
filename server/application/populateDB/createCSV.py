@@ -503,9 +503,9 @@ diseases_to_insert = [
 
 users_to_insert = [
 
-    {'first_name':'John', 'last_name':'Doe', 'email':'john@example.com', 'password':'hashed_password_1', 'dob': date(1990, 5, 15), 'appointment_history' : '????'},
-    {'first_name':'Jane', 'last_name':'Smith', 'email':'jane@example.com', 'password':'hashed_password_2', 'dob': date(1990, 5, 15), 'appointment_history' : '????'},
-    {'first_name':'Alice','last_name':'Johnson', 'email':'alice@example.com', 'password':'hashed_password_3', 'dob': date(1990, 5, 15), 'appointment_history' : '????'}
+    {'first_name':'John', 'last_name':'Doe', 'email':'john@example.com', 'password':'hashed_password_1'},
+    {'first_name':'Jane', 'last_name':'Smith', 'email':'jane@example.com', 'password':'hashed_password_2'},
+    {'first_name':'Alice','last_name':'Johnson', 'email':'alice@example.com', 'password':'hashed_password_3'}
 ]
 
 pets_to_insert = [
@@ -558,8 +558,8 @@ for idx, pet in enumerate(pets_to_insert, start=1):
 file.close()
 
 file = open("Users.csv", 'w')
-file.write('id,first_name,last_name,email,password,dob,appointment_history\n')
+file.write('id,first_name,last_name,email,password\n')
 for idx, user in enumerate(users_to_insert, start=1):
-    string = str(idx) + "," + user['first_name'] + "," + user['last_name'] + "," + user['email']+ "," + user['password'] + "," + str(user['dob']) + "," + user['appointment_history'] + "\n"         
+    string = str(idx) + "," + user['first_name'] + "," + user['last_name'] + "," + user['email']+ "," + user['password'] + "\n"         
     file.write(string)
 file.close()
