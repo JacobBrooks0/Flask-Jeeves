@@ -2,7 +2,7 @@
 from application import db
 
 
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -37,7 +37,7 @@ class Appointments(db.Model):
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
     breed = db.Column(db.String(100), nullable=False)
@@ -46,12 +46,22 @@ class Pets(db.Model):
     # history_id = db.Column(db.Integer, db.ForeignKey('diary.id'), nullable=False)  # JSON column to store an array of history
     sex = db.Column(db.String(10), nullable=False)
     diet = db.Column(db.String(100), nullable=False)
+    contactWithOtherPets = db.Column(db.Boolean, nullable=False)
     user = db.relationship(
-        "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
+        "Users", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
     )
 
     def __init__(
-        self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet
+        self,
+        user_id,
+        name,
+        dob,
+        breed,
+        outdoor,
+        neutered,
+        sex,
+        diet,
+        contactWithOtherPets,
     ):
         self.user_id = user_id
         self.name = name
@@ -59,9 +69,26 @@ class Pets(db.Model):
         self.breed = breed
         self.outdoor = outdoor
         self.neutered = neutered
-        self.history_id = history_id
+        # self.history_id = history_id
         self.sex = sex
         self.diet = diet
+        self.contactWithOtherPets = contactWithOtherPets
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "user_id": self.user_id,
+            "dob": self.dob,
+            "neutered": self.neutered,
+            "sex": self.sex,
+            "diet": self.diet,
+            "outdoor": self.outdoor,
+            "contactWithOtherPets": self.contactWithOtherPets,
+        }
+
+    def __repr__(self):
+        return f"<Pets(id={self.id}, name={self.name} user_id={self.user_id}, dob={self.dob}, neutered={self.neutered}, sex={self.sex}, diet={self.diet}, outdoor={self.outdoor}, contactWithOtherPets = {self.contactWithOtherPets})>"
 
 
 class Diary(db.Model):
@@ -94,6 +121,17 @@ class Diseases(db.Model):
         self.name = name
         self.description = description
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "specialty": self.specialty,
+            "description": self.description,
+        }
+
+    def __repr__(self):
+        return f"<Diseases(id={self.id}, specialty={self.specialty}, name={self.name}, description={self.description})>"
+
 
 class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -108,6 +146,18 @@ class Variables(db.Model):
         self.question = question
         self.defaultQuestion = defaultQuestion
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "feature": self.feature,
+            "question": self.question,
+            "specialty": self.specialty,
+            "defaultQuestion": self.defaultQuestion,
+        }
+
+    def __repr__(self):
+        return f"<Variables(id={self.id}, specialty={self.specialty}, feature={self.feature}, question={self.question}, defaultQuestion={self.defaultQuestion})>"
+
 
 class UsersAnswersCount(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -118,7 +168,7 @@ class UsersAnswersCount(db.Model):
     no = db.Column(db.Integer)
     probablyNot = db.Column(db.Integer)
     iDontKnow = db.Column(db.Integer)
-    propablyYes = db.Column(db.Integer)
+    probablyYes = db.Column(db.Integer)
     yes = db.Column(db.Integer)
 
     def __init__(
@@ -128,7 +178,7 @@ class UsersAnswersCount(db.Model):
         no,
         probablyNot,
         iDontKnow,
-        propablyYes,
+        probablyYes,
         yes,
     ):
         self.disease_id = disease_id
@@ -136,5 +186,21 @@ class UsersAnswersCount(db.Model):
         self.no = no
         self.probablyNot = probablyNot
         self.iDontKnow = iDontKnow
-        self.propablyYes = propablyYes
+        self.probablyYes = probablyYes
         self.yes = yes
+
+    def as_dict_for_probability_function(self):
+        return {
+            "disease_id": self.disease_id,
+            "diseasesVariables_id": self.diseasesVariables_id,
+            "rules": [
+                self.no,
+                self.probablyNot,
+                self.iDontKnow,
+                self.yes,
+                self.probablyYes,
+            ],
+        }
+
+    def __repr__(self):
+        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, yes={self.yes}, probablyYes={self.probablyYes})>"

@@ -7,6 +7,7 @@ import SymptomForm from "../../components/SymptomForm";
 import QuestionContainer from "../../components/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
+import SymptomCat from "../../assets/cat-9152.png";
 
 const testData = [
   {
@@ -133,10 +134,7 @@ export default function SymptomPage() {
             <div className={style["registered-div-second"]}>
               <CatRegisterForm />
               <div className={style["image-container"]}>
-                <img
-                  className={style["cat-image"]}
-                  src="src/assets/cat-9152.png"
-                />
+                <img className={style["cat-image"]} src={SymptomCat} />
               </div>
             </div>
           </div>
