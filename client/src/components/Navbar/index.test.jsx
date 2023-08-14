@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from "react";
-import { describe, it, expect, beforeAll,beforeEach,afterEach, afterAll, vi } from "vitest";
+import { describe, it, expect, beforeEach,afterEach, vi } from "vitest";
 import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
@@ -19,20 +19,21 @@ describe("Navbar", () => {
     
         // });
         
-
-    it("Navbar is rendered", () => {
-        
-        render(
-            
-            
-            <Router>
+     
+    beforeEach(() => {
+      render(
+        <Router>
                 <CredentialsProvider>
                     <Navbar/>
                 </CredentialsProvider>
-            </Router>
-            
-        )
-      });
+        </Router>
+      );
+    });
+
+    afterEach(() => {
+        cleanup();
+    })
+
     //   Doesnt run
     it("Displays a nav bar with 8 children", () => {
         const nav = screen.getAllByRole("link");

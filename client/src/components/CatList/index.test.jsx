@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from "react";
-import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, render, cleanup, within , getByText} from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
@@ -16,21 +16,18 @@ expect.extend(matchers);
 
 describe("CatList", () => {
 
-    
-      
-        
-
-    it("Component is rendered", () => {
+    beforeEach(() => {
         render(
             <Router>
                 <CredentialsProvider>
                     <CatList/>
                 </CredentialsProvider>
             </Router>
-        );
-      });
-
-     
-      
+        )
+    })
     
+     
+    afterEach(() => {
+        cleanup();
+    })
 })
