@@ -40,6 +40,7 @@ export default function AboutPage() {
   const captionStyle = {
     fontSize: "2em",
     fontWeight: "bold",
+    fontFamily: "'Jua', sans-serif",
   };
   const slideNumberStyle = {
     fontSize: "20px",
@@ -61,6 +62,7 @@ export default function AboutPage() {
           alignItems: "center",
           paddingLeft: "5rem",
           paddingRight: "5rem",
+          marginBottom: "3rem",
         }}
       >
         <Typography
@@ -152,6 +154,7 @@ export default function AboutPage() {
           justifyContent: "space-around",
           height: "fit-content",
           alignItems: "center",
+          marginBottom: "3rem",
         }}
       >
         <div style={{ width: "50%" }}>
@@ -188,7 +191,7 @@ export default function AboutPage() {
         </div>
         <img src={MissionCat} alt="cat" style={{ height: "500px" }} />
       </div>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", height: "900px" }}>
         <Typography
           variant="h3"
           component="header"

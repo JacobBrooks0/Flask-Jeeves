@@ -5,6 +5,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import React from "react";
 import style from "./style.module.css";
+import { useCredentials } from "../../contexts";
 
 const outdoorProps = [
   {
@@ -48,6 +49,7 @@ const dietProps = [
 // error={text === ""}
 
 export default function CatRegisterForm() {
+  const { dark, setDark } = useCredentials();
   return (
     <>
       <form
@@ -57,6 +59,7 @@ export default function CatRegisterForm() {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
+          backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         }}
       >
         <TextField
