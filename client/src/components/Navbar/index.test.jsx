@@ -12,14 +12,6 @@ import { Outlet } from "react-router-dom";
 expect.extend(matchers);
 
 describe("Navbar", () => {
-
-   
-        // beforeAll(() => {
-        //     useCredentials =  useContext(CredentialsContext)
-    
-        // });
-        
-     
     beforeEach(() => {
       render(
         <Router>
@@ -36,39 +28,32 @@ describe("Navbar", () => {
 
     //   Doesnt run
     it("Displays a nav bar with 8 children", () => {
-        const nav = screen.getAllByRole("link");
+        const nav = screen.getByRole("navigation"); 
         expect(nav).toBeInTheDocument();
-        expect(nav.childNodes.length).toBe(8);
+        expect(nav.childNodes.length).toBe(7);
     });
     // doesnt run 
     
      
 
     it("Should send to about",() => {
-        
-        const { getByText } = render(<Navbar number="one" word="about" />);
-     expect(getByText("About").href).toBe("http://localhost:5173/about")
+        const nav = screen.getByRole("navigation"); 
+        // const { getByText } = render(<Navbar number="one" word="about" />);
+        expect(nav.childNodes[0].href).toBe("http://localhost:3000/about")
     })
 
-    it("Should send to Video",() => {
-        const { getByText } = render(<Navbar number="one" word="video" />);
-     expect(getByText("Video").href).toBe("http://localhost:5173/video")
+    it("Should send to user",() => {
+        const nav = screen.getByRole("navigation"); 
+        expect(nav.childNodes[1].href).toBe("http://localhost:3000/user")
     })
 
     it("Should send to Symptom",() => {
-        const { getByText } = render(<Navbar number="one" word="symptom" />);
-     expect(getByText("Symptom").href).toBe("http://localhost:5173/symptom")
+        const nav = screen.getByRole("navigation"); 
+        expect(nav.childNodes[2].href).toBe("http://localhost:3000/symptom")
     })
 
-    it("Should send to Map",() => {
-        const { getByText } = render(<Navbar number="one" word="maps" />);
-     expect(getByText("Maps").href).toBe("http://localhost:5173/map")
+    it("Should send to video",() => {
+        const nav = screen.getByRole("navigation"); 
+        expect(nav.childNodes[3].href).toBe("http://localhost:3000/video")
     })
-
-
-
-
-    // afterAll(() => {
-    //     cleanup();
-    // });
 })

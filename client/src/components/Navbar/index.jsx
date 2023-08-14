@@ -151,6 +151,7 @@ export default function Navbar() {
               </Link>
             </div>
             <div
+              role="navigation"
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
