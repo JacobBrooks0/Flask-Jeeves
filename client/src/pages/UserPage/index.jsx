@@ -15,6 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import DoneIcon from "@mui/icons-material/Done";
 import { createNewRoom } from "../VideoPage/API";
+import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
 
 export default function UserPage() {
   const { dark, setDark } = useCredentials();
@@ -129,7 +130,11 @@ export default function UserPage() {
     >
       <div
         className="top-section"
-        style={{ display: "flex", flexDirection: "row" }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          borderBottom: "4px solid black",
+        }}
       >
         <div
           className="side-section"
@@ -151,22 +156,26 @@ export default function UserPage() {
             component="p"
             sx={{
               py: 3,
-              pl: 6,
+              px: 3,
+              // pl: 6,
               width: "100%",
               display: "block",
               lineHeight: 1.6,
+              fontFamily: "Jua",
+              textAlign: "center",
               color: dark ? "whitesmoke" : "#121212",
-              borderTop: "1px dotted",
+              // borderTop: "1px solid",
               borderColor: dark ? "purple" : "#121212",
             }}
           >
             First Name: {testUser.firstName}
             <br />
+            <br />
             Last Name: {testUser.lastName}
+            <br />
             <br />
             Email: {testUser.email}
             <br />
-            DOB: {testUser.DOB}
             <br />
           </Typography>
         </div>
@@ -266,6 +275,23 @@ export default function UserPage() {
           </div>
         </Box>
       </Modal>
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: "#D3CCFA",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Jua",
+            padding: "40px 20px",
+          }}
+        >
+          Want to register another cat?
+        </h1>
+        <CatRegisterForm backgroundColor="#D3CCFA" width="100%" />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { useCredentials } from "../../contexts";
 import Alex from "../../assets/alex.jpg";
+import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
 
 export default function ProfileCat({ cat }) {
   const { dark, setDark } = useCredentials();
@@ -13,18 +14,22 @@ export default function ProfileCat({ cat }) {
         marginBottom: "20px",
         padding: "20px",
         width: "100%",
-        justifyContent: "space-around",
-        gap: "5rem",
+        height: "175px",
+        justifyContent: "space-evenly",
+        // gap: "5rem",
         backgroundColor: dark ? "#826BF5" : "#D3CCFA",
         borderRadius: "10px",
         alignItems: "center",
       }}
     >
-      <img
+      {/* <div style={{ width: "40%" }}> */}
+      <CatImage style={{ width: "100px" }} />
+      {/* </div> */}
+      {/* <img
         src={Alex}
         alt=""
         style={{ width: "40%", borderRadius: "50%", height: "fit-content" }}
-      />
+      /> */}
       <div
         className="cat-info"
         style={{
@@ -38,10 +43,11 @@ export default function ProfileCat({ cat }) {
           component="p"
           sx={{
             py: 3,
-            pl: 6,
+            pl: 4,
             width: "100%",
             display: "block",
             lineHeight: 1.6,
+            fontFamily: "Jua",
             color: dark ? "whitesmoke" : "#121212",
             textTransform: "capitalize",
           }}
@@ -52,6 +58,30 @@ export default function ProfileCat({ cat }) {
           <br />
           Breed: {cat.breed}
           <br />
+        </Typography>
+      </div>
+      <div
+        className="cat-info"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="p"
+          sx={{
+            py: 3,
+            pl: 4,
+            width: "100%",
+            display: "block",
+            lineHeight: 1.6,
+            fontFamily: "Jua",
+            color: dark ? "whitesmoke" : "#121212",
+            textTransform: "capitalize",
+          }}
+        >
           Outdoor: {cat.outdoor.toString()}
           <br />
           Neutered: {cat.neutered.toString()}
