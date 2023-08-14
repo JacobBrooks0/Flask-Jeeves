@@ -37,7 +37,7 @@ class Appointments(db.Model):
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
     breed = db.Column(db.String(100), nullable=False)
@@ -48,7 +48,7 @@ class Pets(db.Model):
     diet = db.Column(db.String(100), nullable=False)
     contactWithOtherPets = db.Column(db.Boolean, nullable=False)
     user = db.relationship(
-        "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
+        "Users", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
     )
 
     def __init__(
