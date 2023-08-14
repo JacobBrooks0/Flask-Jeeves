@@ -201,10 +201,10 @@ class UsersAnswersCount(db.Model):
                 self.no,
                 self.probablyNot,
                 self.iDontKnow,
-                self.yes,
                 self.probablyYes,
+                self.yes,
             ],
         }
 
     def __repr__(self):
-        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, yes={self.yes}, probablyYes={self.probablyYes})>"
+        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, probablyYes={self.probablyYes}, yes={self.yes})>"

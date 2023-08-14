@@ -14,7 +14,7 @@ def create_diary():
     pet_id = data['pet_id']
     questionsIds = data['questionsArray']
     answers = data['answersArray']
-    answersValues = answerRandomAnamnese(answers)
+    #answersValues = answerRandomAnamnese(answers)
 
     new_diary_entry = Diary(
         pet_id=pet_id,
@@ -27,7 +27,7 @@ def create_diary():
     )
     db.session.add(new_diary_entry)
     db.session.commit()
-    return jsonify({"message": "Diary entry created successfully!", "id": new_diary_entry['id']}), 201
+    return jsonify({"pet_id": new_diary_entry['pet_id'], "instance_id": new_diary_entry['id']}), 201
 
 
 # Retrieve a diary entry by ID

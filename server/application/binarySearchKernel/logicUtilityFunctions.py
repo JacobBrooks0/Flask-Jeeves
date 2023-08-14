@@ -1,6 +1,8 @@
 import os
 import sys
 from pathlib import Path
+
+from application.populateDB.populateDb import DATABASE_URL
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 

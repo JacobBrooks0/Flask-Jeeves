@@ -21,63 +21,61 @@ class BayesLib:
         self.answers_so_far = []
         self.Iter = 0
 
-    # def setQuestionAnswer(self, variableID, answer):  
-    #     if type(variableID) == type(list()) or type(answer) == type(list()):
-    #         if len(variableID) != len(answer):
-    #             print("Error: List with different sizes.")
+    def setQuestionAnswer(self, variableID, answer):  
+        if type(variableID) == type(list()) or type(answer) == type(list()):
+            if len(variableID) != len(answer):
+                print("Error: List with different sizes.")
             
-    #         for var in variableID:
-    #             self.diseasesVariables_so_far.append(var)
-    #         for ans in answer:
-    #             self.answers_so_far.append(ans)
-    #     else:
-    #         self.diseasesVariables_so_far.append(variableID)
-    #         self.answers_so_far.append(answer)
-
-    # def converged(self):
-    #     if self.Iter < self.maxIter:
-    #          self.Iter += 1
-    #          return False
-    #     else:
-    #         return True
-
-    def getRandomQuestions(self, allFalseDiseasesVariables): 
+            for var in variableID:
+                self.diseasesVariables_so_far.append(var)
+            for ans in answer:
+                self.answers_so_far.append(ans)
+        else:
+            self.diseasesVariables_so_far.append(variableID)
+            self.answers_so_far.append(answer)
+ 
+    def getRandomQuestions(self, falseVariableIDs): 
         # Start with a random algorithm
         randomQuestionsIds = []        
         while len(randomQuestionsIds) < self.maxIter:
-            question_ID = rd.randint(0, len(allFalseDiseasesVariables)-1)
-            if question_ID not in randomQuestionsIds:
-                randomQuestionsIds.append(question_ID)
+            question_ID = rd.randint(1, len(falseVariableIDs))
+            if question_ID not in self.diseasesVariables_so_far:
+                if question_ID not in randomQuestionsIds:
+                    randomQuestionsIds.append(question_ID)
         return randomQuestionsIds
 
+    def Solve(self):
+        # Calculating Probabilities based on Bayes theorem
+        probabilities = self.CalculateProbabilites()
+        probabilities = sorted( probabilities, key= lambda d:d['Likelihood'] )
+        probabilities.reverse()
+        return probabilities
 
-
-    def CalculateProbabilites(self, Diseases, DiseaseRules, QuestionsSoFar, AnswersSoFar):
+    def CalculateProbabilites(self):
 
         # Calculating the Disease Likelihood for all Diseases
-        DisLikelihood = {}
-        for dis in range(len(Diseases)):
-            DisLikelihood[Diseases[dis]['name']] =  1.0
-            for ans in range(len(AnswersSoFar)):
-                # print("Disease:", Diseases[dis]['name'], ", Question:", QuestionsSoFar[ans]['name'])
+        DisLikelihood = np.ones(len(self.allDiseases)+1)
+        for dis in range(len(self.allDiseases)):
+            for ans in range(len(self.answers_so_far)):
                 LikeCalc = 0.0
                 try:
-                    LikeCalc = CalculateAnswer(DiseaseRules[Diseases[dis]['name']][QuestionsSoFar[ans]['name']])
+                    LikeCalc = self.allRules[self.allDiseases[dis]][self.diseasesVariables_so_far[ans]]
                 except:
                     LikeCalc = 0.5
-                DisLikelihood[Diseases[dis]['name']] *= max( 0.01, 1.0 - abs( LikeCalc - AnswersSoFar[ans] ) )
-                # print("P_Likelihood", DisLikelihood[Diseases[dis]['name']], ",", Diseases[dis]['name'], ",", QuestionsSoFar[ans]['name'], "Correct Answer: ", DiseaseRules[Diseases[dis]['name']][QuestionsSoFar[ans]['name']], "AnswersSoFar", AnswersSoFar[ans])
+                DisLikelihood[self.allDiseases[dis]] *= max( 0.01, 1.0 - abs( LikeCalc - self.answers_so_far[ans] ) )
+                # print("P_Likelihood", DisLikelihood[self.allDiseases[dis]], ",", self.allDiseases[dis], ",", self.diseasesVariables_so_far[ans], "Correct Answer: ", self.allRules[self.allDiseases[dis]][self.diseasesVariables_so_far[ans]], "self.answers_so_far", self.answers_so_far[ans])
+                # input()
 
         ProbabilitiesList = []
-        for dis in Diseases:
+        for dis in self.allDiseases:
             ProbabilitiesList.append({
-                'name': dis['name'],
-                'probability': CalculateDiseaseProbability(dis, Diseases, DisLikelihood, DiseaseRules, QuestionsSoFar, AnswersSoFar)
+                'Disease_ID': dis,
+                'Likelihood': self.CalculateDiseaseProbability(dis, DisLikelihood)
             })
 
         return ProbabilitiesList
 
-    def CalculateDiseaseProbability(self, GivenDisease, Diseases, DisLikelihood, DiseaseRules, QuestionsSoFar, AnswersSoFar):
+    def CalculateDiseaseProbability(self, GivenDisease, DisLikelihood):
         # Bayesian Classifier Algorithm (http://cs.wellesley.edu/~anderson/writing/naive-bayes.pdf)
         # We want to calculate the probability of the GivenDisease be the correct, given the
         # likelihood between the answers and the the expected answers for that disease.
@@ -88,15 +86,15 @@ class BayesLib:
         # Where Prod is the productory function
 
         # Probability of a random disease being the correct one
-        P_Disease = 1 / len(Diseases)
+        P_Disease = 1 / len(self.allDiseases)
 
-        P_Likelihood = DisLikelihood[GivenDisease['name']]
+        P_Likelihood = DisLikelihood[GivenDisease]
 
         P_AvgNonLikelihood = 0.0
-        for ans in range(len(Diseases)):
-            if Diseases[ans]['name'] != GivenDisease['name']:
-                P_AvgNonLikelihood += DisLikelihood[Diseases[ans]['name']]
-        P_AvgNonLikelihood /= ( len(Diseases) - 1.0 )
+        for ans in range(len(self.allDiseases)):
+            if self.allDiseases[ans] != GivenDisease:
+                P_AvgNonLikelihood += DisLikelihood[self.allDiseases[ans]]
+        P_AvgNonLikelihood /= ( len(self.allDiseases) - 1.0 )
         P_AvgNonLikelihood = max(P_AvgNonLikelihood, 0.01)
 
         # Bayes Theorem
