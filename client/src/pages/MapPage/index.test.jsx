@@ -4,18 +4,7 @@ import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import MapPage from ".";
-import {
-    GoogleMap,
-    Marker,
-    InfoWindow,
-    useLoadScript,
-    StandaloneSearchBox,
-  } from "@react-google-maps/api";
-  import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-  } from "use-places-autocomplete";
- 
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { CredentialsProvider } from "../../contexts";
 
@@ -26,11 +15,11 @@ describe("Map Page", () => {
     it("renders without crashing", async () => {
         render(
           <Router>
-            <CredentialsProvider>
-                <Routes>
-                    <Route path="/map" element={<MapPage />} />
-                </Routes>   
-            </CredentialsProvider>
+            <GoogleOAuthProvider>
+                      <CredentialsProvider>
+                          <MapPage />
+                      </CredentialsProvider>
+                      </GoogleOAuthProvider>
           </Router>
         );
       });

@@ -1,9 +1,9 @@
-import HttpCall from "../../components/HttpCall";
-import WebSocketCall from "../../components/WebSocketCall";
+import HttpCall from "../../components";
+import WebSocketCall from "../../components";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 
-function App() {
+export default function ChatPage() {
   const [socketInstance, setSocketInstance] = useState("");
   const [loading, setLoading] = useState(true);
   const [buttonStatus, setButtonStatus] = useState(false);
@@ -64,4 +64,4 @@ function App() {
   );
 }
 
-export default App;
+

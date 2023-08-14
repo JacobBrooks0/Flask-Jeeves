@@ -37,6 +37,12 @@ describe("Join US", () => {
         expect(button).toBeInTheDocument();
         
       });
+      
+      it('should render 1 button', () => {
+        
+        expect(screen.getByRole('link', { name: "Join Us" })).toBeTruthy();
+        })
+
 
       it("Links to register", () => {
        
@@ -44,10 +50,7 @@ describe("Join US", () => {
         expect(screen.getByText("Join Us").href).toBe("http://localhost:3000/register")
       })
     
-     
-
-
-
+      
     afterAll(() => {
         cleanup();
     });

@@ -7,10 +7,11 @@ import { NavLink, Link } from "react-router-dom";
 import LandingTitle from "../LandingTitle";
 import LandingParagraph from "../LandingParagraph";
 import { CredentialsProvider } from "../../contexts";
+import ProfileCat from ".";
 
 expect.extend(matchers);
 
-describe("Landing Paragraph", () => {
+describe("Cat Profile", () => {
 
     
       
@@ -20,7 +21,7 @@ describe("Landing Paragraph", () => {
         render(
             <Router>
                 <CredentialsProvider>
-                    <LandingParagraph/>
+                    <ProfileCat/>
                 </CredentialsProvider>
             </Router>
         );

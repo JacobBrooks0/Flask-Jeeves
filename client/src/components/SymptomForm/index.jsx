@@ -1,5 +1,5 @@
 import React from "react";
-import SelectAnswer from "../SelectAnswer/SelectAnswer";
+import SelectAnswer from "../SelectAnswer";
 import style from "./style.module.css";
 
 export default function SymptomForm() {

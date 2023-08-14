@@ -7,10 +7,14 @@ import { NavLink, Link } from "react-router-dom";
 import LandingTitle from "../LandingTitle";
 import LandingParagraph from "../LandingParagraph";
 import { CredentialsProvider } from "../../contexts";
+import { Outlet } from "react-router-dom";
+import JoinUs from ".";
+import CatBot from ".";
+import CatList from ".";
 
 expect.extend(matchers);
 
-describe("Landing Paragraph", () => {
+describe("CatList", () => {
 
     
       
@@ -20,7 +24,7 @@ describe("Landing Paragraph", () => {
         render(
             <Router>
                 <CredentialsProvider>
-                    <LandingParagraph/>
+                    <CatList/>
                 </CredentialsProvider>
             </Router>
         );

@@ -10,7 +10,7 @@ import { CredentialsProvider } from "../../contexts";
 
 expect.extend(matchers);
 
-describe("Landing Paragraph", () => {
+describe("Landing Title", () => {
 
     
       
@@ -20,7 +20,7 @@ describe("Landing Paragraph", () => {
         render(
             <Router>
                 <CredentialsProvider>
-                    <LandingParagraph/>
+                    <LandingTitle/>
                 </CredentialsProvider>
             </Router>
         );

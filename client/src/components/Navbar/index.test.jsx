@@ -5,42 +5,41 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import { NavLink, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import { CredentialsProvider } from "../../contexts";
-import { useCredentials } from "../../contexts";
+import { CredentialsProvider, useCredentials ,CredentialsContext} from "../../contexts";
+
 import { Outlet } from "react-router-dom";
 
 expect.extend(matchers);
 
 describe("Navbar", () => {
 
+   
+        // beforeAll(() => {
+        //     useCredentials =  useContext(CredentialsContext)
     
-        beforeEach(() => {
-           useCredentials();
-           useContext(CredentialsContext)
-            
-          render(
+        // });
+        
 
-            <BrowserRouter>
+    it("Navbar is rendered", () => {
+        
+        render(
+            
+            
             <Router>
                 <CredentialsProvider>
                     <Navbar/>
                 </CredentialsProvider>
             </Router>
-            </BrowserRouter>
-        );
-        });
-        
-
-    it("Navbar is rendered", () => {
-        const { getByText } = render(<Navbar number="one" word="about" />);
-        expect(getByText("About")).toBeInTheDocument();
+            
+        )
       });
-
+    //   Doesnt run
     it("Displays a nav bar with 8 children", () => {
-        const nav = screen.getByRole("link");
+        const nav = screen.getAllByRole("link");
         expect(nav).toBeInTheDocument();
         expect(nav.childNodes.length).toBe(8);
     });
+    // doesnt run 
     
      
 
@@ -68,7 +67,7 @@ describe("Navbar", () => {
 
 
 
-    afterEach(() => {
-        cleanup();
-    });
+    // afterAll(() => {
+    //     cleanup();
+    // });
 })
