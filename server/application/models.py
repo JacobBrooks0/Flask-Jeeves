@@ -37,7 +37,7 @@ class Appointments(db.Model):
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
     breed = db.Column(db.String(100), nullable=False)
@@ -48,11 +48,20 @@ class Pets(db.Model):
     diet = db.Column(db.String(100), nullable=False)
     contactWithOtherPets = db.Column(db.Boolean, nullable=False)
     user = db.relationship(
-        "User", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
+        "Users", backref=db.backref("users", lazy=True, cascade="all,delete-orphan")
     )
 
     def __init__(
-        self, user_id, name, dob, breed, outdoor, neutered, history_id, sex, diet, contactWithOtherPets
+        self,
+        user_id,
+        name,
+        dob,
+        breed,
+        outdoor,
+        neutered,
+        sex,
+        diet,
+        contactWithOtherPets,
     ):
         self.user_id = user_id
         self.name = name
@@ -60,7 +69,7 @@ class Pets(db.Model):
         self.breed = breed
         self.outdoor = outdoor
         self.neutered = neutered
-        self.history_id = history_id
+        # self.history_id = history_id
         self.sex = sex
         self.diet = diet
         self.contactWithOtherPets = contactWithOtherPets
@@ -75,7 +84,7 @@ class Pets(db.Model):
             "sex": self.sex,
             "diet": self.diet,
             "outdoor": self.outdoor,
-            "contactWithOtherPets": self.contactWithOtherPets
+            "contactWithOtherPets": self.contactWithOtherPets,
         }
 
     def __repr__(self):
@@ -117,9 +126,9 @@ class Diseases(db.Model):
             "id": self.id,
             "name": self.name,
             "specialty": self.specialty,
-            "description": self.description
+            "description": self.description,
         }
-    
+
     def __repr__(self):
         return f"<Diseases(id={self.id}, specialty={self.specialty}, name={self.name}, description={self.description})>"
 
@@ -143,7 +152,7 @@ class Variables(db.Model):
             "feature": self.feature,
             "question": self.question,
             "specialty": self.specialty,
-            "defaultQuestion": self.defaultQuestion
+            "defaultQuestion": self.defaultQuestion,
         }
 
     def __repr__(self):
@@ -184,7 +193,13 @@ class UsersAnswersCount(db.Model):
         return {
             "disease_id": self.disease_id,
             "diseasesVariables_id": self.diseasesVariables_id,
-            "rules": [self.no, self.probablyNot, self.iDontKnow, self.yes, self.probablyYes]
+            "rules": [
+                self.no,
+                self.probablyNot,
+                self.iDontKnow,
+                self.yes,
+                self.probablyYes,
+            ],
         }
 
     def __repr__(self):
