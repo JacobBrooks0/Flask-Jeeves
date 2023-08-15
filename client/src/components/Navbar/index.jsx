@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
 import CatBot from "../CatBot";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -90,7 +90,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const { dark, setDark } = useCredentials();
+  const { dark, setDark, profile, setProfile } = useCredentials();
+  const navigate = useNavigate();
   const [
     backgroundAboutButtonColor,
     setBackgroundAboutButtonColor,
@@ -118,6 +119,11 @@ export default function Navbar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
   };
 
   React.useEffect(() => {
@@ -384,7 +390,7 @@ export default function Navbar() {
             ))}
             <Divider />
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
