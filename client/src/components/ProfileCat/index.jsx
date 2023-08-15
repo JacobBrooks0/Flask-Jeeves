@@ -46,7 +46,7 @@ export default function ProfileCat({ cat }) {
         >
           Name: {cat.name}
           <br />
-          DOB: {cat.DOB}
+          DOB: {new Date(cat.dob).toLocaleDateString("en-GB")}
           <br />
           Breed: {cat.breed}
           <br />

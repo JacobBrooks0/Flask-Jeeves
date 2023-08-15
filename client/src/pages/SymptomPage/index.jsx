@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import style from "./style.module.css";
-import CatList from "../../components/CatList/CatList";
-import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
+import CatList from "../../components/CatList";
+import CatRegisterForm from "../../components/CatRegisterForm";
 import Button from "@mui/material/Button";
-import SymptomForm from "../../components/SymptomForm/SymptomForm";
-import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
+import SymptomForm from "../../components/SymptomForm";
+import QuestionContainer from "../../components/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
 import SymptomCat from "../../assets/cat-9152.png";
+import { useNavigate } from "react-router-dom";
 
 export default function SymptomPage() {
   const [catData, setCatData] = useState([]);
@@ -15,6 +16,10 @@ export default function SymptomPage() {
   const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);
   const [errorText, setErrorText] = useState(false);
   const { dark, setDark, profile, setProfile } = useCredentials();
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
   const {
     questionNumber,
     setQuestionNumber,
