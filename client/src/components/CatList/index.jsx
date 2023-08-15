@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
-import CatImage from "../assets/images/pitr-Kitty-icon.svg";
-import { useCredentials } from "../contexts";
+import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
+import { useCredentials } from "../../contexts";
 
 export default function CatList({
   cat,

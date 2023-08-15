@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
 import Tooltip from "@mui/material/Tooltip";
 import { useSymptoms } from "../../contexts";
-import Results from "../Results/Results";
+import Results from "../Results";
 import { useCredentials } from "../../contexts";
 
 const questionsTest = [
