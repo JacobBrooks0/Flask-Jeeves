@@ -1,10 +1,5 @@
-from application import db
-from application.models import Users
 import pytest
 from unittest import mock
-from flask import Flask
-
-import pytest
 from application.models import Users
 
 @pytest.mark.parametrize(
@@ -25,15 +20,12 @@ def test_new_user(first_name, last_name, email, password):
     assert user.email == email
     assert user.password == password
 
-
-
 def test_user_attributes():
     user = Users('Roberta', 'Capuano', 'roberta@example.com', 'password123')
     assert user.first_name == 'Roberta'
     assert user.last_name == 'Capuano'
     assert user.email == 'roberta@example.com'
     assert user.password == 'password123'
-
 
 def test_user_equality():
     user1 = Users('Harry', 'T.', 'harry@example.com', 'securepassword')
@@ -42,22 +34,21 @@ def test_user_equality():
 
 def test_user_inequality():
     user1 = Users('Harry', 'T.', 'harry@example.com', 'securepassword')
-    user2 = Users('Jacob','Brooks','Jacob@email.com', 'Password')
+    user2 = Users('Jacob', 'Brooks', 'Jacob@email.com', 'Password')
     assert user1 != user2
 
-#test different sets of parameters
-@pytest.mark.parametrize()
-
 def test_user_instance_variables():
-    user = Users('Bob', 'Brown', 'bob@example.com', 'mypassword')
-    assert hasattr(user, 'first_name')
-    assert hasattr(user, 'last_name')
-    assert hasattr(user, 'email')
-    assert hasattr(user, 'password')
+    with mock.patch("application.models.Users"):
+        user = Users('Bob', 'Brown', 'bob@example.com', 'mypassword')
+        assert hasattr(user, 'first_name')
+        assert hasattr(user, 'last_name')
+        assert hasattr(user, 'email')
+        assert hasattr(user, 'password')
 
 def test_user_instance_initialization():
-    user = Users('Sam', 'Smith', 'sam@example.com', 'testpassword')
-    assert user.first_name == 'Sam'
-    assert user.last_name == 'Smith'
-    assert user.email == 'sam@example.com'
-    assert user.password == 'testpassword'
+    with mock.patch("application.models.Users"):
+        user = Users('Sam', 'Smith', 'sam@example.com', 'testpassword')
+        assert user.first_name == 'Sam'
+        assert user.last_name == 'Smith'
+        assert user.email == 'sam@example.com'
+        assert user.password == 'testpassword'
