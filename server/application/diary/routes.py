@@ -12,8 +12,16 @@ from datetime import *
 
 diary = Blueprint("diary", __name__)
 
+def check_database_connection():
+    try:
+        with db.engine.connect():
+            print("Database connection established", "<<<<<<<<<<<<<<<<")
+    except Exception as e:
+        print("Error connecting to the database:", str(e), ">>>>>>>>>>>>>>>>>")
+        sys.exit(1)  # Exit the application with an error code
 
-# Create a new diary entry
+check_database_connection()
+#Create a new diary entry
 @diary.route("/diary", methods=["POST"])
 def create_diary():
     current_date = datetime.now().date()
@@ -39,7 +47,7 @@ def create_diary():
             possiblesDiagnosis= listDiseases
             #field=data["field"],
         )
-        print(listDiseases, "!?!?!?!?!")
+        print(new_diary_entry.as_dict())
 
         db.session.add(new_diary_entry)
         db.session.commit()
@@ -84,3 +92,4 @@ def create_diary():
 #     db.session.delete(diary_entry)
 #     db.session.commit()
 #     return jsonify({"message": "Diary entry deleted successfully!"}), 200
+

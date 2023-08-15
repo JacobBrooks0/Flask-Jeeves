@@ -1,10 +1,6 @@
 import os
 import sys
 from pathlib import Path
-
-# from application.populateDB.populateDb import DATABASE_URL
-DATABASE_URL = os.environ["DATABASE_URL"]
-
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 
@@ -83,7 +79,7 @@ def getAllDiseaseRules():
 #GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS, RECEIVES THE OBJ FROM PET DETAILS 
 def answerDefaultAnamnese(obj):
     current_date = datetime.now().date()
-    age = datetime.strptime(obj['dob'], '%Y-%m-%d')    
+    age = datetime.strptime(str(obj['dob']), '%Y-%m-%d')    
     age_in_years = ((current_date - datetime.date(age)).days)/360
     sex = obj['sex']
     diet= obj['diet']

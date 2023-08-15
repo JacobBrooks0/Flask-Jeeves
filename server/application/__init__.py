@@ -2,6 +2,10 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import os  # inbuilt python module
+from dotenv import load_dotenv
+from flask_migrate import Migrate
+
+load_dotenv()
 
 """ application factory 
 function to call with diff setting (dev or testing environment)
@@ -10,10 +14,12 @@ setup app factory """
 
 # create an instance of the db
 db = SQLAlchemy()
+migrate = Migrate()
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 def create_app(env=None):
     # initialise the app
-    app = Flask(__name__)
+    app = Flask(__name__)    
     # config setup for different environment
     if env == "TEST":
         app.config["TESTING"] = True
@@ -25,8 +31,10 @@ def create_app(env=None):
         app.config["DEBUG"] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
+        print(os.environ["DATABASE_URL"], "!!!!!!!!!!!!!!!!!!!!")
     # initialising the db and connecting to app
     db.init_app(app)
+    migrate.init_app(app, db)
     app.app_context().push()
     CORS(app)
 
