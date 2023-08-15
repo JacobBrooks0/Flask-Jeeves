@@ -16,6 +16,7 @@ import { FixedSizeList } from "react-window";
 import DoneIcon from "@mui/icons-material/Done";
 import { createNewRoom } from "../VideoPage/API";
 import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
   const { dark, setDark } = useCredentials();
@@ -25,14 +26,40 @@ export default function UserPage() {
   const [selectedTime, setSelectedTime] = useState();
   const [time, setTime] = useState();
   const [catData, setCatData] = useState([]);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [initials, setInitials] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
+
+  function handleName() {
+    const names =
+      localStorage.length !== 0 ? name.split(" ") : ["Alex", "Earle"];
+    setInitials([names[0][0], names[1][0]]);
+  }
 
   async function getCats() {
-    const response = await fetch("http://127.0.0.1:5000/pets");
-    const array = await response.json();
-    const cats = array.filter(
-      (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+    setName(
+      `${JSON.parse(localStorage.getItem("user")).first_name} ${
+        JSON.parse(localStorage.getItem("user")).last_name
+      }`
     );
-    setCatData(cats);
+
+    setEmail(JSON.parse(localStorage.getItem("user")).email);
+    const response = await fetch("http://127.0.0.1:5000/pets");
+    if (response.status == 200) {
+      const array = await response.json();
+      const cats = array.filter(
+        (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+      );
+      setCatData(cats);
+      handleName();
+    } else {
+      null;
+    }
   }
 
   async function postAppointment() {
@@ -158,8 +185,7 @@ export default function UserPage() {
               fontSize: "3rem",
             }}
           >
-            {JSON.parse(localStorage.getItem("user")).first_name[0]}
-            {JSON.parse(localStorage.getItem("user")).last_name[0]}
+            {catData ? `${initials[0]}${initials[1]}` : "loading"}
           </div>
           <Typography
             variant="h6"
@@ -178,12 +204,10 @@ export default function UserPage() {
               borderColor: dark ? "purple" : "#121212",
             }}
           >
-            {`${JSON.parse(localStorage.getItem("user")).first_name} ${
-              JSON.parse(localStorage.getItem("user")).last_name
-            }`}
+            {catData ? name : "loading"}
             <br />
             <br />
-            {JSON.parse(localStorage.getItem("user")).email}
+            {catData ? email : "loading"}
             <br />
             <br />
           </Typography>

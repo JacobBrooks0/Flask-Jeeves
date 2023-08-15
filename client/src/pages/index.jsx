@@ -8,3 +8,4 @@ export { default as UserPage } from "./UserPage";
 export { default as VideoPage } from "./VideoPage";
 export { default as AboutPage } from "./AboutPage";
 export { default as ChatPage } from "./ChatPage";
+export { default as NotFoundPage } from "./NotFoundPage";

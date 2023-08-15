@@ -13,6 +13,7 @@ import {
   VideoPage,
   AboutPage,
   ChatPage,
+  NotFoundPage,
 } from "./pages";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/video" element={<VideoPage />} />
       </Route>
+      <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   );
 }
