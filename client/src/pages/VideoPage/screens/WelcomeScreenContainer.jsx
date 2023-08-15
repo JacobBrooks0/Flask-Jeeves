@@ -13,24 +13,24 @@ import Doctor from "../../../assets/doctor.png";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
+  const [appointments, setAppointments] = useState([]);
   const [nextAppointment, setNextAppointment] = useState({});
   const [open, setOpen] = useState(false);
   const { dark, setDark } = useCredentials();
 
-  const appointments = [
-    {
-      id: 1,
-      date: "08/10/2023",
-      time: "16:00",
-      meetingId: "sux9-iiri-58gt",
-    },
-    {
-      id: 2,
-      date: "08/13/2023",
-      time: "12:00",
-      meetingId: "sux9-iiri-58gt",
-    },
-  ];
+  async function getAppointments() {
+    const response = await fetch("http://127.0.0.1:5000/appointments");
+    const array = await response.json();
+    const appointments = array.filter(
+      (appointment) =>
+        appointment.user_id == JSON.parse(localStorage.getItem("user")).id
+    );
+    setAppointments(appointments);
+  }
+
+  useEffect(() => {
+    getAppointments();
+  }, []);
 
   // const timestamp = new Date().getTime();
   // const date = new Date(timestamp);
@@ -212,37 +212,53 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           >
             Upcoming Appointment
           </Typography>
-          <Typography
-            variant="h6"
-            component="p"
-            sx={{
-              py: 3,
-              display: "block",
-              lineHeight: 1.6,
-              color: dark ? "whitesmoke" : "#121212",
-            }}
-          >
-            Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
-            <br />
-            Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
-            <br />
-            Meeting ID:{" "}
-            {nextAppointment[0] ? nextAppointment[0].meetingId : "loading"}{" "}
-            <IconButton onClick={handleClick} color="#826BF5">
-              <ContentCopyIcon
-                sx={{
-                  width: "1.5rem",
-                  height: "fit-content",
-                  mb: -0.5,
-                  color: dark ? "whitesmoke" : "#121212",
-                }}
-              />
-            </IconButton>
-          </Typography>
+          {appointments ? (
+            <Typography
+              variant="h6"
+              component="p"
+              sx={{
+                py: 3,
+                display: "block",
+                lineHeight: 1.6,
+                color: dark ? "whitesmoke" : "#121212",
+              }}
+            >
+              Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
+              <br />
+              Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
+              <br />
+              Meeting ID:{" "}
+              {nextAppointment[0]
+                ? nextAppointment[0].meetingId
+                : "loading"}{" "}
+              <IconButton onClick={handleClick} color="#826BF5">
+                <ContentCopyIcon
+                  sx={{
+                    width: "1.5rem",
+                    height: "fit-content",
+                    mb: -0.5,
+                    color: dark ? "whitesmoke" : "#121212",
+                  }}
+                />
+              </IconButton>
+            </Typography>
+          ) : (
+            <Typography
+              variant="h3"
+              component="header"
+              sx={{
+                fontFamily: "'Jua', sans-serif",
+                color: dark ? "whitesmoke" : "#121212",
+                fontSize: "2rem",
+              }}
+            >
+              You have no appointments
+            </Typography>
+          )}
         </div>
         <Snackbar
           message="Copied to clipboard"
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           autoHideDuration={2000}
           onClose={() => setOpen(false)}
           open={open}

@@ -26,6 +26,15 @@ def login():
     if check_password_hash(user.password, password):
         # Use the login_user function to log in the user
         login_user(user)
-        return jsonify({"message": "Login successful!"}), 200
+        return (
+            jsonify(
+                id=user.id,
+                first_name=user.first_name,
+                last_name=user.last_name,
+                email=user.email,
+                password=user.password,
+            ),
+            200,
+        )
     # Return an error response if authentication fails
     return jsonify({"message": "Invalid email or password"}), 401
