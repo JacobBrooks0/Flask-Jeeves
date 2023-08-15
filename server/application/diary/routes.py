@@ -30,19 +30,22 @@ def create_diary():
         id = int(diagnosis['disease_id'])
         listDiseases.append(Diseases.query.get_or_404(id).as_dict()['name'])
 
-    
-    print(questions, answers, current_date, listDiseases,"!!!!!!!!!!!!!!!")
-    new_diary_entry = Diary(
-        pet_id=pet_id,
-        date=current_date,
-        questions=questions,
-        answers = answers,
-        possiblesDiagnosis= listDiseases
-        #field=data["field"],
-    )    
-    db.session.add(new_diary_entry)
-    db.session.commit()
-    return jsonify({"pet_id": new_diary_entry['pet_id'], "instance_id": new_diary_entry['id']}), 201
+    try:
+        new_diary_entry = Diary(
+            pet_id=pet_id,
+            date=current_date,
+            questions=questions,
+            answers = answers,
+            possiblesDiagnosis= listDiseases
+            #field=data["field"],
+        )
+        print(listDiseases, "!?!?!?!?!")
+
+        db.session.add(new_diary_entry)
+        db.session.commit()
+        return jsonify({"message": 'sent'}), 201
+    except Exception as e:
+        print("ERROR!!!!!!!!!!", str(e))
 
 
 # # Retrieve a diary entry by ID

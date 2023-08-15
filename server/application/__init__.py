@@ -11,7 +11,6 @@ setup app factory """
 # create an instance of the db
 db = SQLAlchemy()
 
-
 def create_app(env=None):
     # initialise the app
     app = Flask(__name__)

@@ -114,6 +114,15 @@ class Diary(db.Model):
         self.possiblesDiagnosis = possiblesDiagnosis
         #self.field = field
 
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "date": self.date,
+            "questions": self.questions,
+            "answers": self.answers,
+            "possiblesDiagnosis": self.possiblesDiagnosis
+        }
+
 
 class Diseases(db.Model):
     id = db.Column(db.Integer, primary_key=True)
