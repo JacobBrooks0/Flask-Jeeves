@@ -1,14 +1,20 @@
 import style from "./style.module.css";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Doctor from "../../assets/doctor.png";
 import Map from "../../assets/map.png";
 import Calender from "../../assets/calender.png";
 import { useCredentials } from "../../contexts";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const { dark, setDark } = useCredentials();
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
+
   return (
     <>
       <div className={style["first-content"]}>

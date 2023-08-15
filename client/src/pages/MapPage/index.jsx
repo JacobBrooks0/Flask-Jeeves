@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import GMap from "./GMap";
 import InfoBar from "../../components/InfoBar";
+import { useNavigate } from "react-router-dom";
 
 // API key of the google map
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_MAPS_API_KEY;
@@ -11,6 +12,10 @@ const GOOGLE_MAP_API_KEY = import.meta.env.VITE_MAPS_API_KEY;
 const MapPage = () => {
   const [loadMap, setLoadMap] = useState(false);
   const { dark, setDark } = useCredentials();
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
 
   useEffect(() => {
     const options = {

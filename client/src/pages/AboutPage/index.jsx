@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCredentials } from "../../contexts";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -20,9 +20,14 @@ import Cat5 from "../../assets/carousel/cat5.jpg";
 import Cat6 from "../../assets/carousel/cat6.jpg";
 import Cat7 from "../../assets/carousel/cat7.jpg";
 import Cat8 from "../../assets/carousel/cat8.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function AboutPage() {
   const { dark, setDark } = useCredentials();
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
   const data = [
     {
       image: Cat1,
