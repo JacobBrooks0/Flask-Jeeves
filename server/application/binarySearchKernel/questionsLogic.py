@@ -16,7 +16,6 @@ allRules = getAllDiseaseRules()
 # Initiate BayesLib
 BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=15)
 
-# Fill the anamnese questions calling functions
 def sendQuestions() :
     falseVariableQuestions =  getAllFalseDefaultVariablesQuestions()
     print(falseVariableQuestions)
@@ -32,5 +31,3 @@ def findDiagnosis(pet_id=1, questionsAnswered=[1, 2, 3, 4, 5, 6, 7, 8, 13, 27, 2
     BayesLibObj.setQuestionAnswer(questionsAnswered, answersRandomAnamnese)
     probabilities = BayesLibObj.Solve()
     return probabilities
-
-print(findDiagnosis())

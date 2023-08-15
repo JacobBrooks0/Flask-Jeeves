@@ -20,6 +20,9 @@ DATABASE_URL = os.environ["DATABASE_URL"]
 # Session = sessionmaker(bind=engine)
 # session = Session()
 
+# dfDiary = pd.read_csv('Diary.csv')
+# dfDiary.to_sql('diary', con=engine, if_exists='replace', index=False)
+
 # dfDiseaseRules = pd.read_csv('DiseaseRules.csv')
 # # Rename the index column to 'id' and reset the index to start from 1
 # dfDiseaseRules.rename_axis('id', inplace=True)

@@ -93,13 +93,13 @@ class Pets(db.Model):
 
 
 class Diary(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     #name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=True)
-    questions = db.Column(ARRAY(db.Integer), nullable=False)
+    questions = db.Column(ARRAY(db.String(500)), nullable=False)
     answers = db.Column(ARRAY(db.String(100)), nullable=False)
-    possiblesDiagnosis = db.Column(ARRAY(db.String(200)), nullable=False) 
+    possiblesDiagnosis = db.Column(ARRAY(db.String(500)), nullable=False) 
     #field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")

@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 from application import *
 from datetime import *
 from application.models import *
-from binarySearchKernel import CalculateAnswer
+from BayesLib import CalculateAnswer
 import numpy as np
 
 
