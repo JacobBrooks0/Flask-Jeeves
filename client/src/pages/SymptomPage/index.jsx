@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import style from "./style.module.css";
-import CatList from "../../components/CatList/CatList";
-import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
+import CatList from "../../components/CatList";
+import CatRegisterForm from "../../components/CatRegisterForm";
 import Button from "@mui/material/Button";
-import SymptomForm from "../../components/SymptomForm/SymptomForm";
-import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
+import SymptomForm from "../../components/SymptomForm";
+import QuestionContainer from "../../components/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
 import SymptomCat from "../../assets/cat-9152.png";

@@ -90,7 +90,7 @@ export default function AboutPage() {
               }}
             >
               Alex Earle
-              <IconButton href="https://github.com/ajearle11">
+              <IconButton name="Alex" href="https://github.com/ajearle11">
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>

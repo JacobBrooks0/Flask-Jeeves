@@ -157,6 +157,7 @@ export default function Navbar() {
               </Link>
             </div>
             <div
+              role="navigation"
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
@@ -339,17 +340,7 @@ export default function Navbar() {
           </Toolbar>
         </AppBar>
         <Drawer
-          anchor="right"
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant="persistent"
-          open={open}
+          role="menubar"open={open}
         >
           <DrawerHeader sx={{ justifyContent: "flex-start" }}>
             <IconButton onClick={handleDrawerClose}>
@@ -361,7 +352,7 @@ export default function Navbar() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List>
+          <List role="menubar">
             {[
               { name: "Home", icon: <HomeIcon />, route: "/home" },
               { name: "About", icon: <InfoIcon />, route: "/about" },

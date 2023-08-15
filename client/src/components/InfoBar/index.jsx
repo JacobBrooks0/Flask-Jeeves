@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useLocations } from "../contexts/";
+import { useLocations } from "../../contexts";
 import { IconButton, Snackbar } from "@mui/material/";
 import LanguageIcon from "@mui/icons-material/Language";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
-import { useCredentials } from "../contexts";
+import { useCredentials } from "../../contexts";
 
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";

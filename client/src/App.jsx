@@ -12,7 +12,6 @@ import {
   UserPage,
   VideoPage,
   AboutPage,
-  ChatPage,
   NotFoundPage,
 } from "./pages";
 
@@ -22,7 +21,6 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/http-call" element={<ChatPage />} />
       <Route element={<Navbar />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

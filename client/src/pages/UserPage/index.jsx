@@ -15,7 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import DoneIcon from "@mui/icons-material/Done";
 import { createNewRoom } from "../VideoPage/API";
-import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
+import CatRegisterForm from "../../components/CatRegisterForm/";
 import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
