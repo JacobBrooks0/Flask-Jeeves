@@ -66,9 +66,10 @@ export default function LoginPage() {
     console.log(error);
   };
 
-  const loginRequest = async (formData) => {
+  const loginRequest = async () => {
     const options = {
       method: "POST",
+      mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -78,16 +79,17 @@ export default function LoginPage() {
         password: passwordValue,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/users", options);
+    const response = await fetch("http://127.0.0.1:5000/login", options);
     const data = await response.json();
+    localStorage.setItem("user", JSON.stringify(data));
 
     if (response.status == 200) {
-      localStorage.setItem("token", JSON.stringify(data.token));
+      // localStorage.setItem("token", JSON.stringify(data.token));
       navigate("/home");
       setEmailValue("");
       setPasswordValue("");
     } else {
-      alert(data.error);
+      alert("Your email or password is incorrect");
     }
   };
 

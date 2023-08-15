@@ -48,10 +48,7 @@ const dietProps = [
 
 // error={text === ""}
 
-export default function CatRegisterForm({
-  width = "50%",
-  backgroundColor = "#D3CCFA",
-}) {
+export default function CatRegisterForm() {
   const { dark, setDark } = useCredentials();
   const [name, setName] = useState();
   const [breed, setBreed] = useState();
@@ -64,13 +61,13 @@ export default function CatRegisterForm({
   const [cat, setCat] = useState({});
 
   const handleName = (e) => {
-    e.target.value ? setName(e.target.value) : "loading";
+    setName(e.target.value);
   };
   const handleBreed = (e) => {
     setBreed(e.target.value);
   };
   const handleDob = (value) => {
-    setDob(value.toLocaleDateString("en-GB"));
+    setDob(value.toISOString().split("T")[0]);
   };
   const handleOutdoor = (e) => {
     setOutdoor(e.target.value === "Indoor" ? false : true);
@@ -89,8 +86,9 @@ export default function CatRegisterForm({
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setCat({
-      user_id: 1,
+      user_id: JSON.parse(localStorage.getItem("user")).id,
       name: name,
       dob: dob,
       breed: breed,
@@ -98,9 +96,40 @@ export default function CatRegisterForm({
       neutered: neutered,
       sex: sex,
       diet: diet,
-      contact: contact,
+      contactWithOtherPets: contact,
     });
-    console.log(cat);
+
+    postCat();
+  };
+
+  const postCat = async () => {
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        user_id: JSON.parse(localStorage.getItem("user")).id,
+        name: name,
+        dob: dob,
+        breed: breed,
+        outdoor: outdoor,
+        neutered: neutered,
+        sex: sex,
+        diet: diet,
+        contactWithOtherPets: contact,
+      }),
+    };
+    const response = await fetch("http://127.0.0.1:5000/pet", options);
+    const data = await response.json();
+    if (response.status == 201) {
+      alert(`${cat.name} registered!`);
+    } else {
+      alert(data.error);
+    }
   };
 
   return (
@@ -114,7 +143,6 @@ export default function CatRegisterForm({
           flexDirection: "column",
           backgroundColor: dark ? "#826BF5" : backgroundColor,
         }}
-        onSubmit={handleSubmit}
       >
         <TextField
           variant="filled"
@@ -271,7 +299,7 @@ export default function CatRegisterForm({
 
         <Button
           variant="contained"
-          type="submit"
+          onClick={handleSubmit}
           sx={{
             my: 4,
             // mx: 2,

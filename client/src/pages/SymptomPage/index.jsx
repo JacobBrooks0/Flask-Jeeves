@@ -9,45 +9,12 @@ import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
 import SymptomCat from "../../assets/cat-9152.png";
 
-const testData = [
-  {
-    name: "Kat",
-    gender: "Female",
-    breed: "Tabby",
-    dateOfBirth: "22nd Sept",
-    outdoor: true,
-    neutered: true,
-    diet: "processed",
-    contactWithPets: true,
-  },
-  {
-    name: "Harry",
-    gender: "Male",
-    breed: "Siamese",
-    dateOfBirth: "22nd Sept",
-    outdoor: true,
-    neutered: true,
-    diet: "processed",
-    contactWithPets: true,
-  },
-  {
-    name: "Peter",
-    gender: "Female",
-    breed: "Tabby",
-    dateOfBirth: "22nd Sept",
-    outdoor: true,
-    neutered: true,
-    diet: "processed",
-    contactWithPets: true,
-  },
-];
-
 export default function SymptomPage() {
-  const [catData, setCatData] = useState(testData);
+  const [catData, setCatData] = useState([]);
   const [selectedCat, setSelectedCat] = useState({});
   const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);
   const [errorText, setErrorText] = useState(false);
-  const { dark, setDark } = useCredentials();
+  const { dark, setDark, profile, setProfile } = useCredentials();
   const {
     questionNumber,
     setQuestionNumber,
@@ -55,10 +22,20 @@ export default function SymptomPage() {
     setQuestions,
   } = useSymptoms();
 
+  async function getCats() {
+    const response = await fetch("http://127.0.0.1:5000/pets");
+    const array = await response.json();
+    const cats = array.filter(
+      (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+    );
+    setCatData(cats);
+  }
+
   useEffect(() => {
     setQuestionNumber(0);
     setAnswers([]);
     setQuestions([]);
+    getCats();
   }, []);
 
   const goToForm = () => {

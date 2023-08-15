@@ -1,21 +1,49 @@
-from flask import Flask
-from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-import os  # inbuilt python module
-
-
 """ application factory 
 function to call with diff setting (dev or testing environment)
 run different version of the app (multiple instances with different config)
 setup app factory """
+from dotenv import load_dotenv
+from flask import Flask
+from flask_cors import CORS
+import os  # inbuilt python module
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate  # db migration
 
-# create an instance of the db
+# methods from Flask-Login for session management.
+from flask_login import (
+    UserMixin,
+    login_user,
+    LoginManager,
+    current_user,
+    logout_user,
+    login_required,
+)
+
+# create a flask_login instance
+login_manager = LoginManager()
+login_manager.session_protection = "strong"
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
+
+# create an instance of SQLAlchemy, Migrate, and Bcrypt.
 db = SQLAlchemy()
+migrate = Migrate()
+bcrypt = Bcrypt()
 
 
 def create_app(env=None):
     # initialise the app
     app = Flask(__name__)
+    # Flask instance
+    app.secret_key = "secret-key"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+
+    login_manager.init_app(app)
+    migrate.init_app(app, db)
+    bcrypt.init_app(app)
+
     # config setup for different environment
     if env == "TEST":
         app.config["TESTING"] = True

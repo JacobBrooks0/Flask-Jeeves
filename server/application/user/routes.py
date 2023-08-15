@@ -1,13 +1,14 @@
 from application import db
 from flask import request, jsonify, Blueprint
-from application.models import User
+from application.models import Users
+from flask_bcrypt import generate_password_hash
 
 user = Blueprint("user", __name__)
 
 
 @user.route("/")
 def index():
-    users = User.query.all()
+    users = Users.query.all()
 
     # Create a list of user data dictionaries
     user_list = [
@@ -31,11 +32,11 @@ def create_user():
     data = request.json
     print(data)
     # created new user using the data
-    new_user = User(
+    new_user = Users(
         first_name=data["first_name"],
         last_name=data["last_name"],
         email=data["email"],
-        password=data["password"],
+        password=generate_password_hash(data["password"]).decode("utf-8"),
     )
     # send user to DB
     db.session.add(new_user)
@@ -56,7 +57,7 @@ def create_user():
 # Route to Get All Users
 @user.route("/users", methods=["GET"])
 def get_all_users():
-    users = User.query.all()
+    users = Users.query.all()
     user_list = []
     for user in users:
         user_data = {
@@ -72,7 +73,7 @@ def get_all_users():
 # Route to Get a Specific User by ID
 @user.route("/user/<id>", methods=["GET"])
 def get_user_by_id(id):
-    user = User.query.filter_by(id=id).first()
+    user = Users.query.filter_by(id=id).first()
     user_data = {
         "id": user.id,
         "first_name": user.first_name,
@@ -85,7 +86,7 @@ def get_user_by_id(id):
 # Route to Update a User by ID
 @user.route("/user/<id>", methods=["PUT"])
 def update_user_by_id(id):
-    user = User.query.get_or_404(id)
+    user = Users.query.get_or_404(id)
     data = request.get_json()
     user.first_name = data["first_name"]
     user.last_name = data["last_name"]
@@ -98,7 +99,7 @@ def update_user_by_id(id):
 # Route to Delete a User by ID
 @user.route("/user/<id>", methods=["DELETE"])
 def delete_user_by_id(id):
-    user = User.query.get_or_404(id)
+    user = Users.query.get_or_404(id)
     db.session.delete(user)
     db.session.commit()
     return jsonify({"message": "User deleted successfully!"}), 200
