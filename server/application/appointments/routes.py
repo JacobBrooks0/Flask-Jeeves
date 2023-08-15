@@ -12,9 +12,10 @@ def list_appointments():
     for appointment in appointments:
         appointment_data = {
             "id": appointment.id,
-            "date": appointment.date.strftime("%Y-%m-%d"),
+            "date": appointment.date.strftime("%d-%m-%Y"),
             "user_id": appointment.user_id,
             "time": appointment.time,
+            "meeting_id": appointment.meeting_id,
         }
         appointment_list.append(appointment_data)
     return jsonify(appointment_list), 200
@@ -28,6 +29,7 @@ def create_appointment():
         date=data["date"],
         time=data["time"],
         user_id=data["user_id"],
+        meeting_id=data["meeting_id"],
     )
     db.session.add(new_appointment)
     db.session.commit()
@@ -43,6 +45,7 @@ def get_appointment_by_id(id):
         "date": appointment.date.strftime("%Y-%m-%d"),
         "user_id": appointment.user_id,
         "time": appointment.time,
+        "meeting_id": appointment.meeting_id,
     }
     return jsonify(appointment_data), 200
 
@@ -55,6 +58,7 @@ def update_appointment(id):
     appointment.date = data["date"]
     appointment.user_id = data["user_id"]
     appointment.time = data["time"]
+    appointment.meeting_id = data["meeting_id"]
     db.session.commit()
     return jsonify({"message": "Appointment updated successfully!"}), 200
 

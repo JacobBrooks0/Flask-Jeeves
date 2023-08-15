@@ -129,7 +129,8 @@ export default function CatRegisterForm({
     const response = await fetch("http://127.0.0.1:5000/pet", options);
     const data = await response.json();
     if (response.status == 201) {
-      alert(`${cat.name} registered!`);
+      alert(`Cat registered!`);
+      window.location.reload();
     } else {
       alert(data.error);
     }

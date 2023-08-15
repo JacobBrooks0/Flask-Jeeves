@@ -45,7 +45,7 @@ export default function UserPage() {
         withCredentials: true,
       },
       body: JSON.stringify({
-        date: appointmentDate,
+        date: new Date(appointmentDate).toLocaleDateString("en-GB"),
         time: time,
         user_id: JSON.parse(localStorage.getItem("user")).id,
       }),
@@ -217,13 +217,12 @@ export default function UserPage() {
               borderColor: dark ? "purple" : "#121212",
             }}
           >
-            First Name: {JSON.parse(localStorage.getItem("user")).first_name}
+            {`${JSON.parse(localStorage.getItem("user")).first_name} ${
+              JSON.parse(localStorage.getItem("user")).last_name
+            }`}
             <br />
             <br />
-            Last Name: {JSON.parse(localStorage.getItem("user")).last_name}
-            <br />
-            <br />
-            Email: {JSON.parse(localStorage.getItem("user")).email}
+            {JSON.parse(localStorage.getItem("user")).email}
             <br />
             <br />
           </Typography>

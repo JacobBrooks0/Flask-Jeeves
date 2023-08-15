@@ -26,12 +26,14 @@ class Appointments(db.Model):
     date = db.Column(db.Date, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
     time = db.Column(db.String(100), nullable=False)
+    meeting_id = db.Column(db.String(100), nullable=False)
 
     # initialiase all the class values as the instance values
-    def __init__(self, date, user_id, time):
+    def __init__(self, date, user_id, time, meeting_id):
         self.date = date
         self.user_id = user_id
         self.time = time
+        self.meeting_id = meeting_id
 
 
 class Pets(db.Model):
