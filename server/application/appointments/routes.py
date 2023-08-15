@@ -12,7 +12,7 @@ def list_appointments():
     for appointment in appointments:
         appointment_data = {
             "id": appointment.id,
-            "date": appointment.date.strftime("%d-%m-%Y"),
+            "date": appointment.date,
             "user_id": appointment.user_id,
             "time": appointment.time,
             "meeting_id": appointment.meeting_id,
@@ -42,7 +42,7 @@ def get_appointment_by_id(id):
     appointment = Appointments.query.get_or_404(id)
     appointment_data = {
         "id": appointment.id,
-        "date": appointment.date.strftime("%Y-%m-%d"),
+        "date": appointment.date,
         "user_id": appointment.user_id,
         "time": appointment.time,
         "meeting_id": appointment.meeting_id,

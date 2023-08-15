@@ -14,7 +14,6 @@ import Doctor from "../../../assets/doctor.png";
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
   const [appointments, setAppointments] = useState([]);
-  const [nextAppointment, setNextAppointment] = useState({});
   const [open, setOpen] = useState(false);
   const { dark, setDark } = useCredentials();
 
@@ -32,14 +31,6 @@ const WelcomeScreenContainer = ({ setAppData }) => {
     getAppointments();
   }, []);
 
-  // const timestamp = new Date().getTime();
-  // const date = new Date(timestamp);
-  // const hours = date.getHours();
-  // const minutes = "0" + date.getMinutes();
-  // const seconds = "0" + date.getSeconds();
-  // const time = hours + ":" + minutes.substring(0) + ":" + seconds.substring(1);
-  // console.log(time);
-
   const createClick = async () => {
     const meetingId = await createNewRoom();
 
@@ -47,31 +38,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
   };
   const hostClick = () => setAppData({ mode: "CONFERENCE", meetingId });
 
-  const findSoonestAppointment = () => {
-    const timestamps = appointments.map(
-      (appointment) => Date.parse(appointment.date) / 1000
-    );
-    const soonestTimestamp = Math.min(...timestamps);
-    const soonestAppointment = appointments.filter((appointment) => {
-      return Date.parse(appointment.date) / 1000 === soonestTimestamp;
-    });
-    setNextAppointment(soonestAppointment);
-  };
-
-  useEffect(() => {
-    findSoonestAppointment();
-  }, []);
-
   const handleClick = () => {
     setOpen(true);
     navigator.clipboard.writeText(
-      nextAppointment[0] ? nextAppointment[0].meetingId : null
+      appointments[0] ? appointments[0].meeting_id : null
     );
   };
-
-  useEffect(() => {
-    console.log(nextAppointment);
-  }, [nextAppointment]);
 
   return (
     <div
@@ -198,7 +170,11 @@ const WelcomeScreenContainer = ({ setAppData }) => {
       <br />
       <div
         className="welcome-controls"
-        style={{ backgroundColor: dark ? "#7958D6" : "#D3CCFA" }}
+        style={{
+          backgroundColor: dark ? "#7958D6" : "#D3CCFA",
+          marginBottom: "-100px",
+          height: "500px",
+        }}
       >
         <div>
           <Typography
@@ -223,14 +199,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
                 color: dark ? "whitesmoke" : "#121212",
               }}
             >
-              Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
+              Date: {appointments[0] ? appointments[0].date : "loading"}
               <br />
-              Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
+              Time: {appointments[0] ? appointments[0].time : "loading"}
               <br />
               Meeting ID:{" "}
-              {nextAppointment[0]
-                ? nextAppointment[0].meetingId
-                : "loading"}{" "}
+              {appointments[0] ? appointments[0].meeting_id : "loading"}{" "}
               <IconButton onClick={handleClick} color="#826BF5">
                 <ContentCopyIcon
                   sx={{

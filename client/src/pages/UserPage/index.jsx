@@ -36,6 +36,7 @@ export default function UserPage() {
   }
 
   async function postAppointment() {
+    const date = appointmentDate.date.toLocaleDateString("en-GB");
     const options = {
       method: "POST",
       mode: "cors",
@@ -45,12 +46,14 @@ export default function UserPage() {
         withCredentials: true,
       },
       body: JSON.stringify({
-        date: new Date(appointmentDate).toLocaleDateString("en-GB"),
-        time: time,
+        date: date,
+        time: appointmentDate.time,
         user_id: JSON.parse(localStorage.getItem("user")).id,
+        meeting_id: appointmentDate.meetingId,
       }),
     };
     const response = await fetch("http://127.0.0.1:5000/appointment", options);
+    setModalOpen(false);
     const data = await response.json();
   }
 
@@ -85,48 +88,6 @@ export default function UserPage() {
     });
     postAppointment();
   };
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-  useEffect(() => {
-    console.log(selectedTime);
-  }, [selectedTime]);
-  useEffect(() => {
-    console.log(appointmentDate);
-  }, [appointmentDate]);
-
-  const testUser = {
-    userId: 1,
-    firstName: "Alex",
-    lastName: "Earle",
-    email: "stinkyal@hotmail.com",
-    DOB: "21/12/1970",
-    petsId: [1, 2],
-  };
-
-  const pets = [
-    {
-      petId: 1,
-      name: "Stan",
-      DOB: "04/02/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-    {
-      petId: 2,
-      name: "Alfie",
-      DOB: "21/04/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-  ];
 
   function renderRow(props) {
     const { index, style } = props;

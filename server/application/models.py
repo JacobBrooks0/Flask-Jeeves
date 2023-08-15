@@ -23,7 +23,7 @@ class Users(UserMixin, db.Model):
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
     time = db.Column(db.String(100), nullable=False)
     meeting_id = db.Column(db.String(100), nullable=False)
