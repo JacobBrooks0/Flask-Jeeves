@@ -31,7 +31,6 @@ def create_app(env=None):
         app.config["DEBUG"] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-        print(os.environ["DATABASE_URL"], "!!!!!!!!!!!!!!!!!!!!")
     # initialising the db and connecting to app
     db.init_app(app)
     migrate.init_app(app, db)
@@ -40,7 +39,6 @@ def create_app(env=None):
 
     # BLUEPRINTS
     from application.homepage.routes import homepage
-
     from application.login.routes import auth
     from application.appointments.routes import appointment
     from application.user.routes import user

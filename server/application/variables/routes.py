@@ -1,10 +1,8 @@
 from flask import Blueprint, request, jsonify
 from application.models import Variables, db
-#from application.binarySearchKernel.questionsLogic import sendQuestions
-
+from application.binarySearchKernel.questionsLogic import sendQuestions
 
 variables = Blueprint("variables", __name__)
-
 
 # Create a new variable
 @variables.route("/variables", methods=["POST"])

@@ -13,7 +13,6 @@ from application.models import *
 from BayesLib import CalculateAnswer
 import numpy as np
 
-
 # Create an engine and bind it to a session
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
@@ -29,8 +28,6 @@ def getAllDiseaseVariablesIds():
         allDiseaseVariablesIds.append(diseaseVariable_dict['id'])
 
     return allDiseaseVariablesIds
-
-
 
 #GETTING ALL DISEASES' IDS
 def getAllDiseasesIds():
@@ -142,8 +139,6 @@ def getPetDetailsbyId(id):
 
 def answerRandomAnamnese(answers):
     answersConverted = []
-    # for answer in answers:
-    #     answersConverted.append(CalculateAnswer(answer))
     for answer in answers:
         if answer == 1:
             answersConverted.append(0.0)

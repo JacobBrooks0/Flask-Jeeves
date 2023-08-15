@@ -12,15 +12,6 @@ from datetime import *
 
 diary = Blueprint("diary", __name__)
 
-def check_database_connection():
-    try:
-        with db.engine.connect():
-            print("Database connection established", "<<<<<<<<<<<<<<<<")
-    except Exception as e:
-        print("Error connecting to the database:", str(e), ">>>>>>>>>>>>>>>>>")
-        sys.exit(1)  # Exit the application with an error code
-
-check_database_connection()
 #Create a new diary entry
 @diary.route("/diary", methods=["POST"])
 def create_diary():
@@ -29,7 +20,6 @@ def create_diary():
     pet_id = data['pet_id']
     questions = data['questionsArray']
     answers = data['answersArray']
-    #answersValues = answerRandomAnamnese(answers)
     result = findDiagnosis(pet_id, questions, answers)
 
 
@@ -51,7 +41,7 @@ def create_diary():
 
         db.session.add(new_diary_entry)
         db.session.commit()
-        return jsonify({"message": 'sent'}), 201
+        return jsonify({"pet_id": new_diary_entry.pet_id, 'instance_id': new_diary_entry.id}), 201
     except Exception as e:
         print("ERROR!!!!!!!!!!", str(e))
 

@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from application import *
 import pandas as pd
-print("!!!!!!!!!!!!") 
+
 # Create an engine and bind it to a session
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
@@ -22,13 +22,13 @@ session = Session()
 # dfDiary.to_sql('diary', con=engine, if_exists='append', index=False)
 
 
-# dfDiseasesVariables = pd.read_csv('DiseasesVariables.csv')
-# # Rename the index column to 'id' and reset the index to start from 1
-# dfDiseasesVariables.rename_axis('id', inplace=True)
-# dfDiseasesVariables.reset_index(drop=True, inplace=True)
-# dfDiseasesVariables.index += 1  # Shift the index by 1 to start from 1
-# dfDiseasesVariables.to_sql('variables', con=engine, if_exists='append', index=False)
-# print(dfDiseasesVariables)
+dfDiseasesVariables = pd.read_csv('DiseasesVariables.csv')
+# Rename the index column to 'id' and reset the index to start from 1
+dfDiseasesVariables.rename_axis('id', inplace=True)
+dfDiseasesVariables.reset_index(drop=True, inplace=True)
+dfDiseasesVariables.index += 1  # Shift the index by 1 to start from 1
+dfDiseasesVariables.to_sql('variables', con=engine, if_exists='append', index=False)
+print(dfDiseasesVariables)
 
 dfDiseases = pd.read_csv('Diseases.csv')
 dfDiseases.rename_axis('id', inplace=True)
@@ -43,17 +43,17 @@ dfDiseaseRules.reset_index(drop=True, inplace=True)
 dfDiseaseRules.index += 1  # Shift the index by 1 to start from 1
 dfDiseaseRules.to_sql('users_answers_count', con=engine, if_exists='append', index=False)
 
-dfUsers = pd.read_csv('Users.csv')
-dfUsers.rename_axis('id', inplace=True)
-dfUsers.reset_index(drop=True, inplace=True)
-dfUsers.index += 1  # Shift the index by 1 to start from 1
-dfUsers.to_sql('users', con=engine, if_exists='append', index=False)
+# dfUsers = pd.read_csv('Users.csv')
+# dfUsers.rename_axis('id', inplace=True)
+# dfUsers.reset_index(drop=True, inplace=True)
+# dfUsers.index += 1  # Shift the index by 1 to start from 1
+# dfUsers.to_sql('users', con=engine, if_exists='append', index=False)
 
-dfPets = pd.read_csv('Pets.csv')
-dfPets.rename_axis('id', inplace=True)
-dfPets.reset_index(drop=True, inplace=True)
-dfPets.index += 1  # Shift the index by 1 to start from 1
-dfPets.to_sql('pets', con=engine, if_exists='append', index=False)
+# dfPets = pd.read_csv('Pets.csv')
+# dfPets.rename_axis('id', inplace=True)
+# dfPets.reset_index(drop=True, inplace=True)
+# dfPets.index += 1  # Shift the index by 1 to start from 1
+# dfPets.to_sql('pets', con=engine, if_exists='append', index=False)
 
 
 

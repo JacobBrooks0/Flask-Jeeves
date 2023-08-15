@@ -2,7 +2,6 @@
 from sqlalchemy import ARRAY
 from application import db
 
-
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
@@ -16,9 +15,6 @@ class Users(db.Model):
         self.last_name = last_name
         self.email = email
         self.password = password
-
-
-
 
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
