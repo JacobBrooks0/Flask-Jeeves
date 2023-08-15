@@ -48,8 +48,11 @@ const dietProps = [
 
 // error={text === ""}
 
-export default function CatRegisterForm() {
-  const { dark, setDark } = useCredentials();
+export default function CatRegisterForm({
+  width = "50%",
+  backgroundColor = "#D3CCFA",
+}) {
+  const { dark, setDark, profile, setProfile } = useCredentials();
   const [name, setName] = useState();
   const [breed, setBreed] = useState();
   const [dob, setDob] = useState();
