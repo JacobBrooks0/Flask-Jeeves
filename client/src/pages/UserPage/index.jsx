@@ -36,9 +36,11 @@ export default function UserPage() {
   }, []);
 
   function handleName() {
-    const names =
-      localStorage.length !== 0 ? name.split(" ") : ["Alex", "Earle"];
-    setInitials([names[0][0], names[1][0]]);
+    setTimeout(() => {
+      const names =
+        localStorage.length !== 0 ? name.split(" ") : ["Alex", "Earle"];
+      setInitials([names[0][0], names[1][0]]);
+    }, 5000);
   }
 
   async function getCats() {
@@ -185,7 +187,7 @@ export default function UserPage() {
               fontSize: "3rem",
             }}
           >
-            {catData ? `${initials[0]}${initials[1]}` : "loading"}
+            {initials.length !== 0 ? `${initials[0]}${initials[1]}` : "loading"}
           </div>
           <Typography
             variant="h6"
