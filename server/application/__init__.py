@@ -20,6 +20,8 @@ from flask_login import (
     login_required,
 )
 
+load_dotenv()
+
 # create a flask_login instance
 login_manager = LoginManager()
 login_manager.session_protection = "strong"
