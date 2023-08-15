@@ -15,12 +15,15 @@ import os
 load_dotenv()
  
 # Create an engine and bind it to a session
-DATABASE_URL = os.environ["DATABASE_URL"]
+# DATABASE_URL = os.environ["DATABASE_URL"]
 # engine = create_engine(DATABASE_URL)
 # Session = sessionmaker(bind=engine)
 # session = Session()
 
 # dfDiary = pd.read_csv('Diary.csv')
+# dfDiary.rename_axis('id', inplace=True)
+# dfDiary.reset_index(drop=True, inplace=True)
+# dfDiary.index += 1  # Shift the index by 1 to start from 1
 # dfDiary.to_sql('diary', con=engine, if_exists='replace', index=False)
 
 # dfDiseaseRules = pd.read_csv('DiseaseRules.csv')

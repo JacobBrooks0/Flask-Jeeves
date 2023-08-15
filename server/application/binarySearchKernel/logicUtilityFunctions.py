@@ -2,10 +2,14 @@ import os
 import sys
 from pathlib import Path
 
-from application.populateDB.populateDb import DATABASE_URL
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+
+DATABASE_URL = os.environ["DATABASE_URL"]
 # Import necessary modules
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
