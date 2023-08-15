@@ -10,7 +10,7 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "ui" : "vitest --ui"
+    "ui": "vitest --ui"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -39,7 +39,7 @@
     "socket.io-client": "^2.5.0",
     "vite": "^4.4.5",
     "vite-plugin-svgr": "^3.2.0",
-    "vitest": "^0.34.1"
+    "vitest": "^0.33.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -56,6 +56,6 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
     "vite": "^4.4.5",
-    "vitest": "^0.34.1"
+    "vitest": "^0.33.0"
   }
 }
