@@ -19,7 +19,7 @@ export default function CatBot() {
   const [botResponse, setBotResponse] = useState(
     `Hi! Can you tell me what is wrong with your cat today? It's important to understand that I am just a bot! My advice isn't always going to be 100% right, so make sure you seek help from a real vet. Explore the website to see how you can book an appointment.`
   );
-  const [responseFromAI, setResponseFromAI] = useState("G");
+  // const [responseFromAI, setResponseFromAI] = useState("G");
 
   const openAIFunc = async (value) => {
     const bearer = "Bearer " + import.meta.env.VITE_OPENAI_KEY;
@@ -52,6 +52,7 @@ export default function CatBot() {
     );
 
     const data = await response.json();
+    console.log(data);
 
     setMessagesArray([
       ...messagesArray,
@@ -71,7 +72,7 @@ export default function CatBot() {
     setInputValue("");
     setTimeout(() => {
       setBotLoader(false);
-    }, 2000);
+    }, 3000);
   };
 
   const handleChange = (e) => {
@@ -81,7 +82,7 @@ export default function CatBot() {
   const openModalHandler = () => {
     setTimeout(() => {
       setBotLoader(false);
-    }, 2000);
+    }, 3000);
   };
 
   const handleFormSubmission = (e) => {
@@ -204,7 +205,7 @@ export default function CatBot() {
                       }}
                     >
                       {botLoader && messagesArray.length - 1 === index ? (
-                        <p>Loading</p>
+                        <p>Loading...</p>
                       ) : (
                         <>
                           {messagesArray.length == 0 ? null : message.message}
@@ -222,6 +223,7 @@ export default function CatBot() {
                       >
                         <PersonIcon
                           style={{
+                            color: "#826bf5",
                             height: "60px",
                             width: "60px",
                           }}
@@ -253,7 +255,10 @@ export default function CatBot() {
               color="secondary"
               onChange={handleChange}
               value={inputValue}
-              style={{ width: "80%", paddingLeft: "10px" }}
+              style={{
+                width: "80%",
+                paddingLeft: "10px",
+              }}
             />
             <IconButton onClick={handleInputSubmit}>
               <SendIcon />
