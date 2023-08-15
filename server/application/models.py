@@ -24,19 +24,14 @@ class Users(UserMixin, db.Model):
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
-    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    # Relationship with Pet table
-    pets = db.relationship(
-        "Pets",
-        backref=db.backref("appointments", lazy=True, cascade="all,delete-orphan"),
-    )
+    user_id = db.Column(db.Integer, nullable=False)
+    time = db.Column(db.String(100), nullable=False)
 
     # initialiase all the class values as the instance values
-    def __init__(self, date, pet_id, description):
+    def __init__(self, date, user_id, time):
         self.date = date
-        self.pet_id = pet_id
-        self.description = description
+        self.user_id = user_id
+        self.time = time
 
 
 class Pets(db.Model):

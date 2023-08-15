@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./style.module.css";
-import CatList from "../../components/CatList";
+import CatList from "../../components/CatList/CatList";
 import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
 import Button from "@mui/material/Button";
 import SymptomForm from "../../components/SymptomForm/SymptomForm";

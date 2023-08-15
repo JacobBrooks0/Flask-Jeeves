@@ -48,7 +48,10 @@ const dietProps = [
 
 // error={text === ""}
 
-export default function CatRegisterForm() {
+export default function CatRegisterForm({
+  width = "50%",
+  backgroundColor = "#D3CCFA",
+}) {
   const { dark, setDark, profile, setProfile } = useCredentials();
   const [name, setName] = useState();
   const [breed, setBreed] = useState();
@@ -137,11 +140,11 @@ export default function CatRegisterForm() {
       <form
         style={{
           display: "flex",
-          width: "50%",
+          width: width,
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+          backgroundColor: dark ? "#826BF5" : backgroundColor,
         }}
       >
         <TextField

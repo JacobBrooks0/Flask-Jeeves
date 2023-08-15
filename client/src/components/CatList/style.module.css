@@ -1,0 +1,8 @@
+.cat-container:hover {
+  background-color: #826bf5;
+  transition: background-color 1s ease;
+}
+
+.cat-container {
+  background-color: #d3ccfa;
+}
