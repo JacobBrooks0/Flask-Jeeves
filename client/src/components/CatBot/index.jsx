@@ -117,6 +117,7 @@ export default function CatBot() {
     <>
       {!modalOpen ? (
         <button
+          role="button"
           className={style["catbot-container"]}
           onClick={() => {
             setModalOpen(true);
@@ -132,7 +133,7 @@ export default function CatBot() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
         >
-          <div className={style["catbot-modal"]}>
+          <div className={style["catbot-modal"]} role="container">
             <div
               style={{
                 width: "100%",

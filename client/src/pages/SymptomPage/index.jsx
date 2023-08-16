@@ -52,7 +52,7 @@ export default function SymptomPage() {
   return (
     <>
       {showCatSelectionPage ? (
-        <div>
+        <div role="container1">
           {catData.length !== 0 ? (
             <>
               <div

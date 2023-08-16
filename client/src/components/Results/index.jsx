@@ -55,7 +55,11 @@ export default function Results({ cat }) {
   return (
     <>
       {calculating ? (
-        <img src={spinner} style={{ width: "150px", height: "150px" }} />
+        <img
+          role="image"
+          src={spinner}
+          style={{ width: "150px", height: "150px" }}
+        />
       ) : (
         <div
           className={style["question-text"]}

@@ -140,6 +140,7 @@ export default function UserPage() {
   return (
     <div
       className="profile-page"
+      role="container1"
       style={{
         backgroundColor: dark ? "#121212" : "whitesmoke",
         marginBottom: "-100px",
