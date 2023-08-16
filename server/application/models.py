@@ -20,22 +20,6 @@ class Users(UserMixin, db.Model):
     def __repr__(self):
         return "<Users %r>" % self.username
 
-
-class Appointments(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.String(100), nullable=False)
-    meeting_id = db.Column(db.String(100), nullable=False)
-
-    # initialiase all the class values as the instance values
-    def __init__(self, date, user_id, time, meeting_id):
-        self.date = date
-        self.user_id = user_id
-        self.time = time
-        self.meeting_id = meeting_id
-
-
 class Pets(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -93,7 +77,6 @@ class Pets(db.Model):
 
 
 class Diary(db.Model):
-    __tablename__ = 'diary'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, index=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     #name = db.Column(db.String(100), nullable=False)

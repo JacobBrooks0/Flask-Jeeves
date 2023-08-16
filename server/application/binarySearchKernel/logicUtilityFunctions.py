@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from application import *
 from datetime import *
-from application.models import *
+from application.models import Variables, Diseases, UsersAnswersCount, Pets
 from BayesLib import CalculateAnswer
 import numpy as np
 
@@ -41,23 +41,23 @@ def getAllDiseasesIds():
     return allDiseasesIds
 
 #GETTING ALL VARIABLES' IDS THAT TYPE IS TRUE 
-def getAllTrueDefaultVariablesQuestions():
+def getAllTrueDefaultVariablesIds():
     true_default_variables = session.query(Variables).filter_by(defaultQuestion = True).all()
     all_true_default_variables= []
 
     for var in true_default_variables:
         var_dict = var.as_dict()
-        all_true_default_variables.append(var_dict['question']) 
+        all_true_default_variables.append(var_dict['id']) 
 
     return all_true_default_variables
 
-def getAllFalseDefaultVariablesQuestions():
-    false_default_variables = session.query(Variables).filter_by(defaultQuestion = False).all()
-    all_false_default_variables= []
+def getAllFalseDefaultVariablesIds():
+    false_default_variables = session.query(Variables).filter_by(defaultQuestion=False).all()
+    all_false_default_variables = []
 
     for var in false_default_variables:
         var_dict = var.as_dict()
-        all_false_default_variables.append(var_dict['question']) 
+        all_false_default_variables.append({"id": var_dict['id'], "question": var_dict['question']})
 
     return all_false_default_variables
 

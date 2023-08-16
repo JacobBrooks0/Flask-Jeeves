@@ -33,6 +33,7 @@ login_manager.login_message_category = "info"
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 
 def create_app(env=None):
