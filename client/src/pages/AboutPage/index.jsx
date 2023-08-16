@@ -186,13 +186,14 @@ export default function AboutPage() {
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Our aim is to make looking after your cat easier and stress free. We
-            have used real vertinary expertise to create a program that can
-            diagnose your cat from information you provide. Needless to say that
-            this does not replace a real vetinary appointment, so if the problem
-            is serious, go and see a vet. <br /> <br /> We have made this even
-            easier for you, by allowing you to book video calls with a vet, and
-            allowing you to view nearby vets and their information!
+            Our aim is to make looking after your cat easy and stress free. We
+            have used real veterinary expertise to create a program that can
+            diagnose your cat from the symptoms you provide. Needless to say
+            that this does not replace a real veterinary appointment, so if the
+            problem is serious, you must go and see a vet. <br /> <br /> We have
+            made the process even easier for you by allowing you to book video
+            calls with a vet and view nearby veterinarian practices and their
+            information!
           </Typography>
         </div>
         <img src={MissionCat} alt="cat" style={{ height: "500px" }} />
