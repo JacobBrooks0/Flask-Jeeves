@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.2% </span>
+                <span class="strong">8.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/134</span>
+                <span class='fraction'>12/145</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.2% </span>
+                <span class="strong">8.27% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/134</span>
+                <span class='fraction'>12/145</span>
             </div>
         
             
@@ -197,7 +197,18 @@
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -208,6 +219,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -341,6 +363,7 @@ import QuestionContainer from "../../components/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
 import SymptomCat from "../../assets/cat-9152.png";
+import { useNavigate } from "react-router-dom";
 &nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export default function SymptomPage() {</span></span>
 <span class="cstat-no" title="statement not covered" >  const [catData, setCatData] = useState([]);</span>
@@ -348,6 +371,10 @@ import SymptomCat from "../../assets/cat-9152.png";
 <span class="cstat-no" title="statement not covered" >  const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);</span>
 <span class="cstat-no" title="statement not covered" >  const [errorText, setErrorText] = useState(false);</span>
 <span class="cstat-no" title="statement not covered" >  const { dark, setDark, profile, setProfile } = useCredentials();</span>
+<span class="cstat-no" title="statement not covered" >  const navigate = useNavigate();</span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.length === 0 ? navigate("/login") : null;</span>
+<span class="cstat-no" title="statement not covered" >  }, []);</span>
 <span class="cstat-no" title="statement not covered" >  const {</span>
 <span class="cstat-no" title="statement not covered" >    questionNumber,</span>
 <span class="cstat-no" title="statement not covered" >    setQuestionNumber,</span>
@@ -381,56 +408,62 @@ import SymptomCat from "../../assets/cat-9152.png";
 <span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
 <span class="cstat-no" title="statement not covered" >      {showCatSelectionPage ? (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;div</span>
-<span class="cstat-no" title="statement not covered" >            className={style["first-container"]}</span>
-<span class="cstat-no" title="statement not covered" >            style={{ backgroundColor: dark ? "#121212" : "whitesmoke" }}</span>
-<span class="cstat-no" title="statement not covered" >          &gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;h1</span>
-<span class="cstat-no" title="statement not covered" >              className={style["text"]}</span>
-<span class="cstat-no" title="statement not covered" >              style={{ color: dark ? "whitesmoke" : "#121212" }}</span>
-<span class="cstat-no" title="statement not covered" >            &gt;</span>
-<span class="cstat-no" title="statement not covered" >              Choose a registered cat</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;div className={style["registered-div"]}&gt;</span>
-<span class="cstat-no" title="statement not covered" >              {catData.map((cat) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                return (</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;CatList</span>
-<span class="cstat-no" title="statement not covered" >                    setErrorText={setErrorText}</span>
-<span class="cstat-no" title="statement not covered" >                    cat={cat}</span>
-<span class="cstat-no" title="statement not covered" >                    selectedCat={selectedCat}</span>
-<span class="cstat-no" title="statement not covered" >                    setSelectedCat={setSelectedCat}</span>
-<span class="cstat-no" title="statement not covered" >                  /&gt;</span>
-<span class="cstat-no" title="statement not covered" >                );</span>
-<span class="cstat-no" title="statement not covered" >              })}</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;Button</span>
-<span class="cstat-no" title="statement not covered" >              variant="contained"</span>
-<span class="cstat-no" title="statement not covered" >              sx={{</span>
-<span class="cstat-no" title="statement not covered" >                mt: 4,</span>
-<span class="cstat-no" title="statement not covered" >                mb: !errorText ? 4 : null,</span>
-<span class="cstat-no" title="statement not covered" >                px: 4,</span>
-<span class="cstat-no" title="statement not covered" >                py: 0.8,</span>
-<span class="cstat-no" title="statement not covered" >                fontSize: "0.9rem",</span>
-<span class="cstat-no" title="statement not covered" >                textTransform: "capitalize",</span>
-<span class="cstat-no" title="statement not covered" >                borderRadius: 1,</span>
-<span class="cstat-no" title="statement not covered" >                borderColor: "#14192d",</span>
-<span class="cstat-no" title="statement not covered" >                color: "#fff",</span>
-<span class="cstat-no" title="statement not covered" >                backgroundColor: "#826BF5",</span>
-<span class="cstat-no" title="statement not covered" >                "&amp;&amp;:hover": {</span>
-<span class="cstat-no" title="statement not covered" >                  backgroundColor: "#7958D6",</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >                "&amp;&amp;:focus": {</span>
-<span class="cstat-no" title="statement not covered" >                  backgroundColor: "#7958D6",</span>
-<span class="cstat-no" title="statement not covered" >                },</span>
-<span class="cstat-no" title="statement not covered" >              }}</span>
-<span class="cstat-no" title="statement not covered" >              onClick={goToForm}</span>
-<span class="cstat-no" title="statement not covered" >            &gt;</span>
-<span class="cstat-no" title="statement not covered" >              Check Symptoms</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/Button&gt;</span>
-<span class="cstat-no" title="statement not covered" >            {errorText ? (</span>
-<span class="cstat-no" title="statement not covered" >              &lt;p className={style["error-text"]}&gt;You must select a cat!&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >            ) : null}</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          {catData.length !== 0 ? (</span>
+<span class="cstat-no" title="statement not covered" >            &lt;&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div</span>
+<span class="cstat-no" title="statement not covered" >                className={style["first-container"]}</span>
+<span class="cstat-no" title="statement not covered" >                style={{ backgroundColor: dark ? "#121212" : "whitesmoke" }}</span>
+<span class="cstat-no" title="statement not covered" >              &gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;h1</span>
+<span class="cstat-no" title="statement not covered" >                  className={style["text"]}</span>
+<span class="cstat-no" title="statement not covered" >                  style={{ color: dark ? "whitesmoke" : "#121212" }}</span>
+<span class="cstat-no" title="statement not covered" >                &gt;</span>
+<span class="cstat-no" title="statement not covered" >                  Choose a registered cat</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/h1&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;div className={style["registered-div"]}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                  {catData.map((cat, index) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+<span class="cstat-no" title="statement not covered" >                      &lt;CatList</span>
+<span class="cstat-no" title="statement not covered" >                        index={index}</span>
+<span class="cstat-no" title="statement not covered" >                        setErrorText={setErrorText}</span>
+<span class="cstat-no" title="statement not covered" >                        cat={cat}</span>
+<span class="cstat-no" title="statement not covered" >                        selectedCat={selectedCat}</span>
+<span class="cstat-no" title="statement not covered" >                        setSelectedCat={setSelectedCat}</span>
+<span class="cstat-no" title="statement not covered" >                      /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    );</span>
+<span class="cstat-no" title="statement not covered" >                  })}</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;Button</span>
+<span class="cstat-no" title="statement not covered" >                  variant="contained"</span>
+<span class="cstat-no" title="statement not covered" >                  sx={{</span>
+<span class="cstat-no" title="statement not covered" >                    mt: 4,</span>
+<span class="cstat-no" title="statement not covered" >                    mb: !errorText ? 4 : null,</span>
+<span class="cstat-no" title="statement not covered" >                    px: 4,</span>
+<span class="cstat-no" title="statement not covered" >                    py: 0.8,</span>
+<span class="cstat-no" title="statement not covered" >                    fontSize: "0.9rem",</span>
+<span class="cstat-no" title="statement not covered" >                    textTransform: "capitalize",</span>
+<span class="cstat-no" title="statement not covered" >                    borderRadius: 1,</span>
+<span class="cstat-no" title="statement not covered" >                    borderColor: "#14192d",</span>
+<span class="cstat-no" title="statement not covered" >                    color: "#fff",</span>
+<span class="cstat-no" title="statement not covered" >                    backgroundColor: "#826BF5",</span>
+<span class="cstat-no" title="statement not covered" >                    "&amp;&amp;:hover": {</span>
+<span class="cstat-no" title="statement not covered" >                      backgroundColor: "#7958D6",</span>
+<span class="cstat-no" title="statement not covered" >                    },</span>
+<span class="cstat-no" title="statement not covered" >                    "&amp;&amp;:focus": {</span>
+<span class="cstat-no" title="statement not covered" >                      backgroundColor: "#7958D6",</span>
+<span class="cstat-no" title="statement not covered" >                    },</span>
+<span class="cstat-no" title="statement not covered" >                  }}</span>
+<span class="cstat-no" title="statement not covered" >                  onClick={goToForm}</span>
+<span class="cstat-no" title="statement not covered" >                &gt;</span>
+<span class="cstat-no" title="statement not covered" >                  Check Symptoms</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {errorText ? (</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;p className={style["error-text"]}&gt;You must select a cat!&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >                ) : null}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/&gt;</span>
+<span class="cstat-no" title="statement not covered" >          ) : null}</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >          &lt;div</span>
 <span class="cstat-no" title="statement not covered" >            className={style["second-container"]}</span>
 <span class="cstat-no" title="statement not covered" >            style={{ backgroundColor: dark ? "#826BF5" : "#D3CCFA" }}</span>
@@ -472,7 +505,7 @@ import SymptomCat from "../../assets/cat-9152.png";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-15T10:27:37.251Z
+                at 2023-08-16T11:00:07.201Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
