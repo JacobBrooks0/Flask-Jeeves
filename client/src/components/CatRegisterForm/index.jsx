@@ -193,7 +193,7 @@ export default function CatRegisterForm({
       {update ? (
         <h2
           style={{
-            fontFamily: "Jua",
+            fontFamily: "Patua One",
             paddingTop: "30px",
             textAlign: "center",
             backgroundColor: "#D3CCFA",

@@ -13,7 +13,7 @@
 .calender {
   width: 100%;
   margin-bottom: 50px;
-  font-family: "Jua";
+  font-family: "Patua One";
 }
 
 .react-calendar {
@@ -21,7 +21,7 @@
 }
 
 .react-calendar__tile {
-  font-family: "Jua";
+  font-family: "Patua One";
 }
 
 .react-calendar {
@@ -33,7 +33,7 @@
 }
 
 .react-calendar__navigation__label__labelText {
-  font-family: "Jua";
+  font-family: "Patua One";
 }
 
 .react-calendar__tile--now {

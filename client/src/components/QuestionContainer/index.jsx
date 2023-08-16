@@ -48,12 +48,18 @@ export default function QuestionContainer({ cat }) {
 
   return (
     <div className={style["overall-container"]}>
-      <div className={style["main-container"]}>
-        <Tooltip title={toolTip}>
-          <div className={style["image-container"]}>
-            <div className={style["cat-image"]}>
-              <CatImage />
-            </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.35 }}
+      >
+        <div className={style["main-container"]}>
+          <Tooltip title={toolTip}>
+            <div className={style["image-container"]}>
+              <div className={style["cat-image"]}>
+                <CatImage />
+              </div>
 
             <div>
               <h3 className={style["cat-text"]}>{cat.name}</h3>

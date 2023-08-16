@@ -22,7 +22,7 @@ export default function HomePage() {
           <h1
             style={{
               margin: "50px 0 20px 0",
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               fontSize: "48px",
               fontWeight: "500",
             }}
@@ -30,7 +30,7 @@ export default function HomePage() {
             Let's check your cat!
           </h1>
           <p>
-            Our symptom checker will help you understand your cat's problems,
+            Our Symptoms Checker will help you understand your cat's problems,
             and we can advise you on the best course of action.
           </p>
           <Button
@@ -77,7 +77,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -150,7 +150,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -219,7 +219,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}

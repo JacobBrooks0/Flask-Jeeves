@@ -79,13 +79,13 @@ export default function CatList({
           padding: "0 10px",
         }}
       >
-        <h1 style={{ fontFamily: "Jua" }}>
+        <h1 style={{ fontFamily: "Patua One" }}>
           {cat.name} - {cat.sex}
         </h1>
         <h1
           style={{
             paddingTop: "10px",
-            fontFamily: "Jua",
+            fontFamily: "Patua One",
           }}
         >
           {cat.breed}

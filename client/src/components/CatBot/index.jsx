@@ -148,7 +148,9 @@ export default function CatBot() {
                 padding: "0 20px",
               }}
             >
-              <h2 style={{ fontFamily: "Jua", fontWeight: "300" }}>Catbot</h2>
+              <h2 style={{ fontFamily: "Patua One", fontWeight: "300" }}>
+                Catbot
+              </h2>
               <IconButton>
                 <CloseIcon
                   style={{ color: "whitesmoke" }}
@@ -201,7 +203,7 @@ export default function CatBot() {
                       <p
                         className={style["messsage-text"]}
                         style={{
-                          fontFamily: "Jua",
+                          fontFamily: "Patua One",
                           fontSize: "14px",
                           backgroundColor: "#d3ccfa",
                           marginRight: message.user ? "15px" : null,
