@@ -339,9 +339,7 @@ export default function Navbar() {
             </div>
           </Toolbar>
         </AppBar>
-        <Drawer
-          role="menubar"open={open}
-        >
+        <Drawer role="menubar" anchor="right" open={open}>
           <DrawerHeader sx={{ justifyContent: "flex-start" }}>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
@@ -368,7 +366,7 @@ export default function Navbar() {
               <ListItem
                 key={text.name}
                 className="navbar-header"
-                disablePadding
+                // disablePadding
               >
                 <NavLink
                   to={text.route}
@@ -406,7 +404,7 @@ export default function Navbar() {
       </Box>
 
       <Outlet />
-      <CatBot />
+      {/* <CatBot /> */}
       <footer style={{ display: "block" }}>
         <div className="footer">
           <div className="row icons">

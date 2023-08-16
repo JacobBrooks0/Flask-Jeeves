@@ -29,17 +29,12 @@ export default function UserPage() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [initials, setInitials] = useState([]);
+  const [storageUser, setStorageUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.length === 0 ? navigate("/login") : null;
   }, []);
-
-  function handleName() {
-    const names =
-      localStorage.length !== 0 ? name.split(" ") : ["Alex", "Earle"];
-    setInitials([names[0][0], names[1][0]]);
-  }
 
   async function getCats() {
     setName(
@@ -56,7 +51,6 @@ export default function UserPage() {
         (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
       );
       setCatData(cats);
-      handleName();
     } else {
       null;
     }
@@ -185,7 +179,7 @@ export default function UserPage() {
               fontSize: "3rem",
             }}
           >
-            {catData ? `${initials[0]}${initials[1]}` : "loading"}
+            {name ? name[0] + name[name.indexOf(" ") + 1] : "loading"}
           </div>
           <Typography
             variant="h6"
@@ -220,8 +214,8 @@ export default function UserPage() {
             value={value}
             className="calender"
           />
-          {catData.map((cat) => {
-            return <ProfileCat cat={cat} key={cat.id} />;
+          {catData.map((cat, index) => {
+            return <ProfileCat cat={cat} index={index} key={cat.id} />;
           })}
         </div>
       </div>

@@ -13,6 +13,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate  # db migration
 
+load_dotenv()
+
 # methods from Flask-Login for session management.
 from flask_login import (
     UserMixin,
