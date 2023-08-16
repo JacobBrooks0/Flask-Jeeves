@@ -32,7 +32,7 @@ export default function SelectAnswer() {
     if (selectedTick === null) {
       setErrorText(true);
     } else {
-      setAnswers([...answers, selectedIndex]);
+      setAnswers([...answers, selectedIndex + 1]);
       //this may change
       setQuestionNumber(questionNumber + 1);
       setSelectedTick(null);
