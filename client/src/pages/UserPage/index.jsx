@@ -142,6 +142,7 @@ export default function UserPage() {
           }}
         >
           <img
+            role="image"
             src={Alex}
             alt="user picture"
             style={{ width: "80%", borderRadius: "50%", marginBottom: "2rem" }}

@@ -7,7 +7,7 @@ export { default as LandingTitle } from "./LandingTitle";
 export { default as Navbar } from "./Navbar";
 export { default as CatList } from "./CatList"
 export { default as InfoBar} from "./InfoBar"
-export { default as HttpCall} from "./HttpCall"
+// export { default as HttpCall} from "./HttpCall"
 export { default as CatRegisterForm } from "./CatRegisterForm"
 export { default as SelectAnswer} from "./SelectAnswer"
 export { default as WebSocketCall} from "./WebSocketCall"

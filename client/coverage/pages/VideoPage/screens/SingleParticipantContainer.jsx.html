@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/CatList/index.jsx</title>
+    <title>Code coverage report for pages/VideoPage/screens/SingleParticipantContainer.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/CatList</a> index.jsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">pages/VideoPage/screens</a> SingleParticipantContainer.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.09% </span>
+                <span class="strong">9.45% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/82</span>
+                <span class='fraction'>7/74</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.09% </span>
+                <span class="strong">9.45% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/82</span>
+                <span class='fraction'>7/74</span>
             </div>
         
             
@@ -137,15 +137,7 @@
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -217,98 +209,82 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from "react";
-import React from "react";
-import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
-import { useCredentials } from "../../contexts";
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useParticipant } from "@videosdk.live/react-sdk";
+import React, { useEffect, useMemo, useRef } from "react";
+import ReactPlayer from "react-player";
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export default function CatList({</span></span>
-<span class="cstat-no" title="statement not covered" >  cat,</span>
-<span class="cstat-no" title="statement not covered" >  selectedCat,</span>
-<span class="cstat-no" title="statement not covered" >  setSelectedCat,</span>
-<span class="cstat-no" title="statement not covered" >  setErrorText,</span>
-<span class="cstat-no" title="statement not covered" >}) {</span>
-<span class="cstat-no" title="statement not covered" >  const { dark, setDark } = useCredentials();</span>
-<span class="cstat-no" title="statement not covered" >  const [backgroundButtonColor, setBackgroundButtonColor] = useState("#d3ccfa");</span>
+const SingleParticipantContainer = <span class="fstat-no" title="function not covered" >({ participantId }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const {</span>
+<span class="cstat-no" title="statement not covered" >    micOn,</span>
+<span class="cstat-no" title="statement not covered" >    micStream,</span>
+<span class="cstat-no" title="statement not covered" >    isLocal,</span>
+<span class="cstat-no" title="statement not covered" >    displayName,</span>
+<span class="cstat-no" title="statement not covered" >    webcamStream,</span>
+<span class="cstat-no" title="statement not covered" >    webcamOn,</span>
+<span class="cstat-no" title="statement not covered" >  } = useParticipant(participantId);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const audioPlayer = useRef();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const videoStream = useMemo(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (webcamOn &amp;&amp; webcamStream) {</span>
+<span class="cstat-no" title="statement not covered" >      const mediaStream = new MediaStream();</span>
+<span class="cstat-no" title="statement not covered" >      mediaStream.addTrack(webcamStream.track);</span>
+<span class="cstat-no" title="statement not covered" >      return mediaStream;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }, [webcamStream, webcamOn]);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!isLocal &amp;&amp; audioPlayer.current &amp;&amp; micOn &amp;&amp; micStream) {</span>
+<span class="cstat-no" title="statement not covered" >      const mediaStream = new MediaStream();</span>
+<span class="cstat-no" title="statement not covered" >      mediaStream.addTrack(micStream.track);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      audioPlayer.current.srcObject = mediaStream;</span>
+<span class="cstat-no" title="statement not covered" >      audioPlayer.current.play().catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (</span>
+<span class="cstat-no" title="statement not covered" >          err.message ===</span>
+<span class="cstat-no" title="statement not covered" >          "play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD"</span>
+<span class="cstat-no" title="statement not covered" >        ) {</span>
+<span class="cstat-no" title="statement not covered" >          console.error("audio" + err.message);</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >    } else {</span>
+<span class="cstat-no" title="statement not covered" >      audioPlayer.current.srcObject = null;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }, [micStream, micOn, isLocal, participantId]);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;button</span>
-<span class="cstat-no" title="statement not covered" >      onClick={() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        setSelectedCat(cat);</span>
-<span class="cstat-no" title="statement not covered" >        console.log(selectedCat);</span>
-<span class="cstat-no" title="statement not covered" >        setErrorText(false);</span>
-<span class="cstat-no" title="statement not covered" >      }}</span>
-<span class="cstat-no" title="statement not covered" >      onMouseEnter={() =&gt; setBackgroundButtonColor("#826bf5")}</span>
-<span class="cstat-no" title="statement not covered" >      onMouseLeave={() =&gt; setBackgroundButtonColor("#d3ccfa")}</span>
-<span class="cstat-no" title="statement not covered" >      style={{</span>
-<span class="cstat-no" title="statement not covered" >        width: "50%",</span>
-<span class="cstat-no" title="statement not covered" >        backgroundColor: backgroundButtonColor,</span>
-<span class="cstat-no" title="statement not covered" >        border: selectedCat.name === cat.name ? "3px solid #826bf5" : null,</span>
-<span class="cstat-no" title="statement not covered" >        display: "flex",</span>
-<span class="cstat-no" title="statement not covered" >        marginTop: "20px",</span>
-<span class="cstat-no" title="statement not covered" >        justifyContent: "center",</span>
-<span class="cstat-no" title="statement not covered" >        alignItems: "center",</span>
-<span class="cstat-no" title="statement not covered" >        padding: "10px 10px",</span>
-<span class="cstat-no" title="statement not covered" >        cursor: "pointer",</span>
-<span class="cstat-no" title="statement not covered" >      }}</span>
-<span class="cstat-no" title="statement not covered" >    &gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className="participant-view"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;audio autoPlay playsInline controls={false} ref={audioPlayer} /&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div</span>
-<span class="cstat-no" title="statement not covered" >        style={{</span>
-<span class="cstat-no" title="statement not covered" >          flex: 0.1,</span>
-<span class="cstat-no" title="statement not covered" >        }}</span>
+<span class="cstat-no" title="statement not covered" >        style={{ position: "absolute", background: "#ffffffb3", padding: 8 }}</span>
 <span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div</span>
-<span class="cstat-no" title="statement not covered" >          style={{</span>
-<span class="cstat-no" title="statement not covered" >            width: "90px",</span>
-<span class="cstat-no" title="statement not covered" >            height: "90px",</span>
-<span class="cstat-no" title="statement not covered" >            backgroundColor: "black",</span>
-<span class="cstat-no" title="statement not covered" >            borderRadius: "150px",</span>
-<span class="cstat-no" title="statement not covered" >            display: "flex",</span>
-<span class="cstat-no" title="statement not covered" >            alignItems: "center",</span>
-<span class="cstat-no" title="statement not covered" >            justifyContent: "center",</span>
-<span class="cstat-no" title="statement not covered" >          }}</span>
-<span class="cstat-no" title="statement not covered" >        &gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;div style={{ width: "90%", height: "90%" }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;CatImage /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;Name: {displayName}&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;Webcam: {webcamOn ? "on" : "off"}&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;Mic: {micOn ? "on" : "off"}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      &lt;div</span>
-<span class="cstat-no" title="statement not covered" >        style={{</span>
-<span class="cstat-no" title="statement not covered" >          flex: 0.9,</span>
-<span class="cstat-no" title="statement not covered" >          height: "100%",</span>
-<span class="cstat-no" title="statement not covered" >          display: "flex",</span>
-<span class="cstat-no" title="statement not covered" >          flexDirection: "column",</span>
-<span class="cstat-no" title="statement not covered" >          justifyContent: "center",</span>
-<span class="cstat-no" title="statement not covered" >          padding: "0 10px",</span>
-<span class="cstat-no" title="statement not covered" >        }}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;h1 style={{ fontFamily: "Jua" }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >          {cat.name} - {cat.sex}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;h1</span>
-<span class="cstat-no" title="statement not covered" >          style={{</span>
-<span class="cstat-no" title="statement not covered" >            paddingTop: "10px",</span>
-<span class="cstat-no" title="statement not covered" >            fontFamily: "Jua",</span>
+<span class="cstat-no" title="statement not covered" >      {webcamOn &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >        &lt;ReactPlayer</span>
+<span class="cstat-no" title="statement not covered" >          playsinline // very very imp prop</span>
+<span class="cstat-no" title="statement not covered" >          pip={false}</span>
+<span class="cstat-no" title="statement not covered" >          light={false}</span>
+<span class="cstat-no" title="statement not covered" >          controls={false}</span>
+<span class="cstat-no" title="statement not covered" >          muted={true}</span>
+<span class="cstat-no" title="statement not covered" >          playing={true}</span>
+<span class="cstat-no" title="statement not covered" >          url={videoStream}</span>
+<span class="cstat-no" title="statement not covered" >          height={"100%"}</span>
+<span class="cstat-no" title="statement not covered" >          width={"100%"}</span>
+<span class="cstat-no" title="statement not covered" >          onError={(err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            console.log(err, "participant video error");</span>
 <span class="cstat-no" title="statement not covered" >          }}</span>
-<span class="cstat-no" title="statement not covered" >        &gt;</span>
-<span class="cstat-no" title="statement not covered" >          {cat.breed}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >        /&gt;</span>
+<span class="cstat-no" title="statement not covered" >      )}</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" >};</span>
+&nbsp;
+export default SingleParticipantContainer;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -318,14 +294,14 @@ import { useCredentials } from "../../contexts";
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-08-15T15:56:23.958Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

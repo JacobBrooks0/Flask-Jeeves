@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { CredentialsProvider } from "../../contexts";
-import UserPage from ".";
+
+import VideoPage from ".";
 
 expect.extend(matchers);
 
@@ -17,7 +18,7 @@ describe("User Page", () => {
             <Router>
               <GoogleOAuthProvider>
                 <CredentialsProvider>
-                    <UserPage />
+                    <VideoPage />
                 </CredentialsProvider>
                 </GoogleOAuthProvider>
             </Router>
@@ -29,21 +30,18 @@ describe("User Page", () => {
     cleanup();
     });
 
-    it("Should display information", () => {
-      expect(screen.getByText(/First Name/i)).toBeTruthy();
+    it("Should display Title", () => {
+      expect(screen.getAllByText(/Your Video Page/i)).toBeTruthy();
     })
 
-    it("Should display User Image", () => {
-      const image = screen.getByRole("image"); 
+    it("Should display 2 buttons", () => {
+        expect(screen.getByRole('button', { name: /Join/i })).toBeTruthy();
+        expect(screen.getByRole('button', { name: /Create New Meeting/i })).toBeTruthy();
         
-        expect(image.alt).toBe("user picture")
+        
     })
 
-    it("Should display User Image", () => {
-      const image = screen.getByRole("image"); 
-        
-        expect(image.alt).toBe("user picture")
-    })
+    
 
 
     
