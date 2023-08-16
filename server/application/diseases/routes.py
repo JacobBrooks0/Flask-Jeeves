@@ -3,7 +3,6 @@ from application.models import Diseases, db
 
 diseases = Blueprint("diseases", __name__)
 
-
 # Create a new disease
 @diseases.route("/diseases", methods=["POST"])
 def create_disease():
