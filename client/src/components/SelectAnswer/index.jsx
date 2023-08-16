@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import List from "@mui/material/List";
+import { useNavigate } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -11,6 +12,7 @@ import { useSymptoms } from "../../contexts";
 import { useCredentials } from "../../contexts";
 
 export default function SelectAnswer() {
+  const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = React.useState(null);
   const [selectedTick, setSelectedTick] = React.useState(null);
   const [errorText, setErrorText] = useState(false);
@@ -75,7 +77,7 @@ export default function SelectAnswer() {
                   backgroundColor: "#7958D6",
                 },
               }}
-              // onClick={nextQuestion}
+              onClick={() => navigate("/video")}
             >
               Book A Video Call
             </Button>
@@ -96,7 +98,7 @@ export default function SelectAnswer() {
                   backgroundColor: "#7958D6",
                 },
               }}
-              // onClick={nextQuestion}
+              onClick={() => navigate("/map")}
             >
               See A Map of Local Vets
             </Button>
