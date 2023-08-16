@@ -190,214 +190,453 @@ export default function CatRegisterForm({
 
   return (
     <>
+      {update ? (
+        <h2
+          style={{
+            fontFamily: "Jua",
+            paddingTop: "30px",
+            textAlign: "center",
+            backgroundColor: "#D3CCFA",
+          }}
+        >
+          Update your cat's details
+        </h2>
+      ) : null}
       <form
         style={{
           display: "flex",
           width: width,
           alignItems: "center",
           justifyContent: "center",
-          flexDirection: "column",
+          flexDirection: update ? "row" : "column",
           backgroundColor: dark ? "#826BF5" : backgroundColor,
         }}
       >
         {update ? (
-          <h2 style={{ fontFamily: "Jua", paddingTop: "30px" }}>
-            Update your cat's details
-          </h2>
-        ) : null}
-        <TextField
-          variant="filled"
-          label="Name"
-          onChange={handleName}
-          value={name}
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            width: "75%",
-            marginTop: "20px",
-          }}
-        />
-        <TextField
-          variant="filled"
-          label="Breed"
-          onChange={handleBreed}
-          value={breed}
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            width: "75%",
-            marginTop: "40px",
-          }}
-        />
-
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Date of Birth"
-            defaultValue={update ? new Date(dobToUpdate) : null}
-            onChange={(value) => handleDob(value)}
-            format="dd/MM/yyyy"
-            slotProps={{
-              textField: {
-                variant: "filled",
-                color: "secondary",
-                style: {
+          <>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "50%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TextField
+                variant="filled"
+                label="Name"
+                onChange={handleName}
+                value={name}
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  width: "75%",
+                  marginTop: update ? "40px" : "20px",
+                }}
+              />
+              <TextField
+                variant="filled"
+                label="Breed"
+                onChange={handleBreed}
+                value={breed}
+                color="secondary"
+                sx={{
                   backgroundColor: "whitesmoke",
                   borderRadius: "5px",
                   width: "75%",
                   marginTop: "40px",
-                },
+                }}
+              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Date of Birth"
+                  defaultValue={update ? new Date(dobToUpdate) : null}
+                  onChange={(value) => handleDob(value)}
+                  format="dd/MM/yyyy"
+                  slotProps={{
+                    textField: {
+                      variant: "filled",
+                      color: "secondary",
+                      style: {
+                        backgroundColor: "whitesmoke",
+                        borderRadius: "5px",
+                        width: "75%",
+                        marginTop: "40px",
+                      },
+                    },
+                  }}
+                />
+              </LocalizationProvider>
+              <TextField
+                variant="filled"
+                label="Outdoor/Indoor"
+                onChange={handleOutdoor}
+                select
+                defaultValue={
+                  update
+                    ? outdoorToUpdate === true
+                      ? "Outdoor"
+                      : "Indoor"
+                    : "Indoor"
+                }
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  marginTop: "40px",
+                  width: "75%",
+                  marginBottom: update ? "40px" : "0",
+                }}
+              >
+                {outdoorProps.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "50%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TextField
+                variant="filled"
+                label="Neutered"
+                onChange={handleNeutered}
+                select
+                defaultValue={
+                  update ? (outdoorToUpdate === true ? "Yes" : "No") : "Yes"
+                }
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  marginTop: "40px",
+                  width: "75%",
+                }}
+              >
+                {neuteredProps.map((option) => (
+                  <MenuItem
+                    key={option.value}
+                    value={option.value}
+                    onChange={handleNeutered}
+                  >
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                variant="filled"
+                label="Sex"
+                onChange={handleSex}
+                value={sex}
+                select
+                defaultValue="Male"
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  marginTop: "40px",
+                  width: "75%",
+                }}
+              >
+                {genderProps.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                variant="filled"
+                label="Diet"
+                onChange={handleDiet}
+                value={diet}
+                select
+                defaultValue="Processed"
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  marginTop: "40px",
+                  width: "75%",
+                }}
+              >
+                {dietProps.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                variant="filled"
+                label="Contact with other Pets"
+                onChange={handleContact}
+                select
+                defaultValue={
+                  update
+                    ? contactWithOtherPetsToUpdate === true
+                      ? "Yes"
+                      : "No"
+                    : "Yes"
+                }
+                color="secondary"
+                sx={{
+                  backgroundColor: "whitesmoke",
+                  borderRadius: "5px",
+                  marginTop: "40px",
+                  width: "75%",
+                  marginBottom: update ? "40px" : "0",
+                }}
+              >
+                {neuteredProps.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.value}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+          </>
+        ) : (
+          <>
+            <TextField
+              variant="filled"
+              label="Name"
+              onChange={handleName}
+              value={name}
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                width: "75%",
+                marginTop: "20px",
+              }}
+            />
+            <TextField
+              variant="filled"
+              label="Breed"
+              onChange={handleBreed}
+              value={breed}
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                width: "75%",
+                marginTop: "40px",
+              }}
+            />
+
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Date of Birth"
+                defaultValue={update ? new Date(dobToUpdate) : null}
+                onChange={(value) => handleDob(value)}
+                format="dd/MM/yyyy"
+                slotProps={{
+                  textField: {
+                    variant: "filled",
+                    color: "secondary",
+                    style: {
+                      backgroundColor: "whitesmoke",
+                      borderRadius: "5px",
+                      width: "75%",
+                      marginTop: "40px",
+                    },
+                  },
+                }}
+              />
+            </LocalizationProvider>
+            <TextField
+              variant="filled"
+              label="Outdoor/Indoor"
+              onChange={handleOutdoor}
+              select
+              defaultValue={
+                update
+                  ? outdoorToUpdate === true
+                    ? "Outdoor"
+                    : "Indoor"
+                  : "Indoor"
+              }
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                marginTop: "40px",
+                width: "75%",
+              }}
+            >
+              {outdoorProps.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              variant="filled"
+              label="Neutered"
+              onChange={handleNeutered}
+              select
+              defaultValue={
+                update ? (outdoorToUpdate === true ? "Yes" : "No") : "Yes"
+              }
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                marginTop: "40px",
+                width: "75%",
+              }}
+            >
+              {neuteredProps.map((option) => (
+                <MenuItem
+                  key={option.value}
+                  value={option.value}
+                  onChange={handleNeutered}
+                >
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              variant="filled"
+              label="Sex"
+              onChange={handleSex}
+              value={sex}
+              select
+              defaultValue="Male"
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                marginTop: "40px",
+                width: "75%",
+              }}
+            >
+              {genderProps.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              variant="filled"
+              label="Diet"
+              onChange={handleDiet}
+              value={diet}
+              select
+              defaultValue="Processed"
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                marginTop: "40px",
+                width: "75%",
+              }}
+            >
+              {dietProps.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              variant="filled"
+              label="Contact with other Pets"
+              onChange={handleContact}
+              select
+              defaultValue={
+                update
+                  ? contactWithOtherPetsToUpdate === true
+                    ? "Yes"
+                    : "No"
+                  : "Yes"
+              }
+              color="secondary"
+              sx={{
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+                marginTop: "40px",
+                width: "75%",
+              }}
+            >
+              {neuteredProps.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            {update ? null : (
+              <Button
+                variant="contained"
+                onClick={handleSubmit}
+                sx={{
+                  my: 4,
+                  // mx: 2,
+                  px: 4,
+                  py: 0.8,
+                  fontSize: "0.9rem",
+                  textTransform: "capitalize",
+                  borderRadius: 1,
+                  borderColor: "#14192d",
+                  color: "#fff",
+                  backgroundColor: "#826BF5",
+                  "&&:hover": {
+                    backgroundColor: "#7958D6",
+                  },
+                  "&&:focus": {
+                    backgroundColor: "#7958D6",
+                  },
+                }}
+              >
+                {update ? "Update" : "Submit"}
+              </Button>
+            )}
+          </>
+        )}
+      </form>
+      {update ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#d3ccfa",
+          }}
+        >
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{
+              my: 4,
+              // mx: 2,
+              px: 4,
+              py: 0.8,
+              fontSize: "0.9rem",
+              textTransform: "capitalize",
+              borderRadius: 1,
+              borderColor: "#14192d",
+              color: "#fff",
+              backgroundColor: "#826BF5",
+              "&&:hover": {
+                backgroundColor: "#7958D6",
+              },
+              "&&:focus": {
+                backgroundColor: "#7958D6",
               },
             }}
-          />
-        </LocalizationProvider>
-        <TextField
-          variant="filled"
-          label="Outdoor/Indoor"
-          onChange={handleOutdoor}
-          select
-          defaultValue={
-            update
-              ? outdoorToUpdate === true
-                ? "Outdoor"
-                : "Indoor"
-              : "Indoor"
-          }
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            marginTop: "40px",
-            width: "75%",
-          }}
-        >
-          {outdoorProps.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          variant="filled"
-          label="Neutered"
-          onChange={handleNeutered}
-          select
-          defaultValue={
-            update ? (outdoorToUpdate === true ? "Yes" : "No") : "Yes"
-          }
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            marginTop: "40px",
-            width: "75%",
-          }}
-        >
-          {neuteredProps.map((option) => (
-            <MenuItem
-              key={option.value}
-              value={option.value}
-              onChange={handleNeutered}
-            >
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          variant="filled"
-          label="Sex"
-          onChange={handleSex}
-          value={sex}
-          select
-          defaultValue="Male"
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            marginTop: "40px",
-            width: "75%",
-          }}
-        >
-          {genderProps.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          variant="filled"
-          label="Diet"
-          onChange={handleDiet}
-          value={diet}
-          select
-          defaultValue="Processed"
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            marginTop: "40px",
-            width: "75%",
-          }}
-        >
-          {dietProps.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          variant="filled"
-          label="Contact with other Pets"
-          onChange={handleContact}
-          select
-          defaultValue={
-            update
-              ? contactWithOtherPetsToUpdate === true
-                ? "Yes"
-                : "No"
-              : "Yes"
-          }
-          color="secondary"
-          sx={{
-            backgroundColor: "whitesmoke",
-            borderRadius: "5px",
-            marginTop: "40px",
-            width: "75%",
-          }}
-        >
-          {neuteredProps.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.value}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          sx={{
-            my: 4,
-            // mx: 2,
-            px: 4,
-            py: 0.8,
-            fontSize: "0.9rem",
-            textTransform: "capitalize",
-            borderRadius: 1,
-            borderColor: "#14192d",
-            color: "#fff",
-            backgroundColor: "#826BF5",
-            "&&:hover": {
-              backgroundColor: "#7958D6",
-            },
-            "&&:focus": {
-              backgroundColor: "#7958D6",
-            },
-          }}
-        >
-          {update ? "Update" : "Submit"}
-        </Button>
-      </form>
+          >
+            {update ? "Update" : "Submit"}
+          </Button>
+        </div>
+      ) : null}
     </>
   );
 }
