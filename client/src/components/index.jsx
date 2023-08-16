@@ -12,3 +12,4 @@ export { default as SelectAnswer } from "./SelectAnswer";
 export { default as SymptomForm } from "./SymptomForm";
 export { default as QuestionContainer } from "./QuestionContainer";
 export { default as Results } from "./Results";
+

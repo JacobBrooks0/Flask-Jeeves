@@ -170,6 +170,14 @@ export default function UserPage() {
             paddingTop: "50px",
           }}
         >
+
+          <img
+            role="image"
+            src={Alex}
+            alt="user picture"
+            style={{ width: "80%", borderRadius: "50%", marginBottom: "2rem" }}
+          />
+
           <div
             style={{
               display: "flex",
@@ -187,6 +195,7 @@ export default function UserPage() {
           >
             {catData ? `${initials[0]}${initials[1]}` : "loading"}
           </div>
+
           <Typography
             variant="h6"
             component="p"
