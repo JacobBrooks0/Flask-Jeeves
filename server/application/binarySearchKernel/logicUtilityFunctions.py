@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 
@@ -18,48 +19,57 @@ engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-#GETTING ALL DISEASE VARIABLES' IDS
+
+# GETTING ALL DISEASE VARIABLES' IDS
 def getAllDiseaseVariablesIds():
     diseaseVariablesQuery = session.query(Variables).all()
     allDiseaseVariablesIds = []
 
     for diseaseVariable in diseaseVariablesQuery:
         diseaseVariable_dict = diseaseVariable.as_dict()
-        allDiseaseVariablesIds.append(diseaseVariable_dict['id'])
+        allDiseaseVariablesIds.append(diseaseVariable_dict["id"])
 
     return allDiseaseVariablesIds
 
-#GETTING ALL DISEASES' IDS
+
+# GETTING ALL DISEASES' IDS
 def getAllDiseasesIds():
     diseasesQuery = session.query(Diseases).all()
     allDiseasesIds = []
 
     for disease in diseasesQuery:
         disease_dict = disease.as_dict()
-        allDiseasesIds.append(disease_dict['id'])
-        
+        allDiseasesIds.append(disease_dict["id"])
+
     return allDiseasesIds
 
-#GETTING ALL VARIABLES' IDS THAT TYPE IS TRUE 
+
+# GETTING ALL VARIABLES' IDS THAT TYPE IS TRUE
 def getAllTrueDefaultVariablesQuestions():
-    true_default_variables = session.query(Variables).filter_by(defaultQuestion = True).all()
-    all_true_default_variables= []
+    true_default_variables = (
+        session.query(Variables).filter_by(defaultQuestion=True).all()
+    )
+    all_true_default_variables = []
 
     for var in true_default_variables:
         var_dict = var.as_dict()
-        all_true_default_variables.append(var_dict['question']) 
+        all_true_default_variables.append(var_dict["question"])
 
     return all_true_default_variables
 
+
 def getAllFalseDefaultVariablesQuestions():
-    false_default_variables = session.query(Variables).filter_by(defaultQuestion = False).all()
-    all_false_default_variables= []
+    false_default_variables = (
+        session.query(Variables).filter_by(defaultQuestion=False).all()
+    )
+    all_false_default_variables = []
 
     for var in false_default_variables:
         var_dict = var.as_dict()
-        all_false_default_variables.append(var_dict['question']) 
+        all_false_default_variables.append(var_dict["question"])
 
     return all_false_default_variables
+
 
 def getAllDiseaseRules():
     diseaseRulesQuery = session.query(UsersAnswersCount).all()
@@ -69,22 +79,25 @@ def getAllDiseaseRules():
 
     for rule in diseaseRulesQuery:
         rule_dict = rule.as_dict_for_probability_function()
-        rulesMatrix[rule_dict['disease_id']][rule_dict['diseasesVariables_id']] = CalculateAnswer(rule_dict['rules'])
+        rulesMatrix[rule_dict["disease_id"]][
+            rule_dict["diseasesVariables_id"]
+        ] = CalculateAnswer(rule_dict["rules"])
 
-    return rulesMatrix  
-    
-#GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS, RECEIVES THE OBJ FROM PET DETAILS 
+    return rulesMatrix
+
+
+# GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS, RECEIVES THE OBJ FROM PET DETAILS
 def answerDefaultAnamnese(obj):
     current_date = datetime.now().date()
-    age = datetime.strptime(str(obj['dob']), '%Y-%m-%d')    
-    age_in_years = ((current_date - datetime.date(age)).days)/360
-    sex = obj['sex']
-    diet= obj['diet']
-    outdoor = obj['outdoor']
-    contactWithOtherPets = obj['contactWithOtherPets']
-    neutered = obj['neutered']
-    answers = [] 
-    
+    age = datetime.strptime(str(obj["dob"]), "%Y-%m-%d")
+    age_in_years = ((current_date - datetime.date(age)).days) / 360
+    sex = obj["sex"]
+    diet = obj["diet"]
+    outdoor = obj["outdoor"]
+    contactWithOtherPets = obj["contactWithOtherPets"]
+    neutered = obj["neutered"]
+    answers = []
+
     if age_in_years < 1:
         answers.append(0.00)
     elif age_in_years >= 1 and age_in_years < 2:
@@ -95,12 +108,12 @@ def answerDefaultAnamnese(obj):
         answers.append(0.75)
     else:
         answers.append(1.00)
-    
-    if sex == 'Male':
+
+    if sex == "Male":
         answers.append(1.00)
     else:
         answers.append(0.00)
-   
+
     if outdoor == False:
         answers.append(0.00)
     else:
@@ -115,18 +128,18 @@ def answerDefaultAnamnese(obj):
         answers.append(1.00)
     else:
         answers.append(0.00)
-   
-    if diet == 'Processed':
+
+    if diet == "Processed":
         answers.append(1.00)
-    elif diet == 'Mixed':
+    elif diet == "Mixed":
         answers.append(0.50)
-    elif diet == 'natural':
+    elif diet == "natural":
         answers.append(0.00)
-    
+
     return answers
 
 
-#GET THE PET DETAILS BY ID
+# GET THE PET DETAILS BY ID
 def getPetDetailsbyId(id):
     pet = session.query(Pets).filter_by(id=id).all()
     selected_pet = None
@@ -134,8 +147,9 @@ def getPetDetailsbyId(id):
     for p in pet:
         var_dict = p.as_dict()
         selected_pet = var_dict
-    
+
     return selected_pet
+
 
 def answerRandomAnamnese(answers):
     answersConverted = []
@@ -152,5 +166,5 @@ def answerRandomAnamnese(answers):
             answersConverted.append(1.0)
         else:
             raise TypeError("Numbers must be from 1 to 5")
-        
+
     return answersConverted
