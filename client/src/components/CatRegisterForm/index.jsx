@@ -66,6 +66,7 @@ export default function CatRegisterForm({
   const [name, setName] = update ? useState(nameToUpdate) : useState();
   const [breed, setBreed] = update ? useState(breedToUpdate) : useState();
   const [dob, setDob] = update ? useState(dobToUpdate) : useState();
+  console.log(neuterToUpdate);
   const [outdoor, setOutdoor] = update
     ? useState(outdoorToUpdate)
     : useState(true);
@@ -120,7 +121,7 @@ export default function CatRegisterForm({
       contactWithOtherPets: contact,
     });
 
-    update ? putCat() : postCat();
+    update ? putCat(id) : postCat();
   };
 
   const postCat = async () => {
@@ -155,6 +156,7 @@ export default function CatRegisterForm({
   };
 
   const putCat = async (id) => {
+    console.log(id);
     const options = {
       method: "PUT",
       mode: "cors",

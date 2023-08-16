@@ -141,7 +141,7 @@ export default function ProfileCat({ cat, index }) {
           dobToUpdate={cat.dob}
           breedToUpdate={cat.breed}
           outdoorToUpdate={cat.outdoor}
-          neuterToUpdate={cat.neuter}
+          neuterToUpdate={cat.neutered}
           sexToUpdate={cat.sex}
           contactWithOtherPetsToUpdate={cat.contactWithOtherPets}
           update
