@@ -66,9 +66,10 @@ export default function SymptomPage() {
                   Choose a registered cat
                 </h1>
                 <div className={style["registered-div"]}>
-                  {catData.map((cat) => {
+                  {catData.map((cat, index) => {
                     return (
                       <CatList
+                        index={index}
                         setErrorText={setErrorText}
                         cat={cat}
                         selectedCat={selectedCat}

@@ -51,16 +51,34 @@ const dietProps = [
 export default function CatRegisterForm({
   width = "50%",
   backgroundColor = "#D3CCFA",
+  nameToUpdate = "",
+  dietToUpdate = "",
+  breedToUpdate = "",
+  dobToUpdate = "",
+  outdoorToUpdate = "",
+  neuterToUpdate = "",
+  sexToUpdate = "",
+  contactWithOtherPetsToUpdate = "",
+  id = "",
+  update = false,
 }) {
   const { dark, setDark, profile, setProfile } = useCredentials();
-  const [name, setName] = useState();
-  const [breed, setBreed] = useState();
-  const [dob, setDob] = useState();
-  const [outdoor, setOutdoor] = useState(true);
-  const [neutered, setNeutered] = useState(true);
-  const [sex, setSex] = useState("Male");
-  const [diet, setDiet] = useState("Processed");
-  const [contact, setContact] = useState(true);
+  const [name, setName] = update ? useState(nameToUpdate) : useState();
+  const [breed, setBreed] = update ? useState(breedToUpdate) : useState();
+  const [dob, setDob] = update ? useState(dobToUpdate) : useState();
+  const [outdoor, setOutdoor] = update
+    ? useState(outdoorToUpdate)
+    : useState(true);
+  const [neutered, setNeutered] = update
+    ? useState(neuterToUpdate)
+    : useState(true);
+  const [sex, setSex] = update ? useState(sexToUpdate) : useState("Male");
+  const [diet, setDiet] = update
+    ? useState(dietToUpdate)
+    : useState("Processed");
+  const [contact, setContact] = update
+    ? useState(contactWithOtherPetsToUpdate)
+    : useState(true);
   const [cat, setCat] = useState({});
 
   const handleName = (e) => {
@@ -102,7 +120,7 @@ export default function CatRegisterForm({
       contactWithOtherPets: contact,
     });
 
-    postCat();
+    update ? putCat() : postCat();
   };
 
   const postCat = async () => {
@@ -136,6 +154,38 @@ export default function CatRegisterForm({
     }
   };
 
+  const putCat = async (id) => {
+    const options = {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        id: id,
+        user_id: JSON.parse(localStorage.getItem("user")).id,
+        name: name,
+        dob: dob,
+        breed: breed,
+        outdoor: outdoor,
+        neutered: neutered,
+        sex: sex,
+        diet: diet,
+        contactWithOtherPets: contact,
+      }),
+    };
+    const response = await fetch(`http://127.0.0.1:5000/pet/${id}`, options);
+    const data = await response.json();
+    if (response.status == 200) {
+      alert(`Cat Updated!`);
+      window.location.reload();
+    } else {
+      alert(data.error);
+    }
+  };
+
   return (
     <>
       <form
@@ -148,6 +198,11 @@ export default function CatRegisterForm({
           backgroundColor: dark ? "#826BF5" : backgroundColor,
         }}
       >
+        {update ? (
+          <h2 style={{ fontFamily: "Jua", paddingTop: "30px" }}>
+            Update your cat's details
+          </h2>
+        ) : null}
         <TextField
           variant="filled"
           label="Name"
@@ -178,6 +233,7 @@ export default function CatRegisterForm({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             label="Date of Birth"
+            defaultValue={update ? new Date(dobToUpdate) : null}
             onChange={(value) => handleDob(value)}
             format="dd/MM/yyyy"
             slotProps={{
@@ -199,7 +255,13 @@ export default function CatRegisterForm({
           label="Outdoor/Indoor"
           onChange={handleOutdoor}
           select
-          defaultValue="Outdoor"
+          defaultValue={
+            update
+              ? outdoorToUpdate === true
+                ? "Outdoor"
+                : "Indoor"
+              : "Indoor"
+          }
           color="secondary"
           sx={{
             backgroundColor: "whitesmoke",
@@ -219,7 +281,9 @@ export default function CatRegisterForm({
           label="Neutered"
           onChange={handleNeutered}
           select
-          defaultValue="Yes"
+          defaultValue={
+            update ? (outdoorToUpdate === true ? "Yes" : "No") : "Yes"
+          }
           color="secondary"
           sx={{
             backgroundColor: "whitesmoke",
@@ -285,7 +349,13 @@ export default function CatRegisterForm({
           label="Contact with other Pets"
           onChange={handleContact}
           select
-          defaultValue="Yes"
+          defaultValue={
+            update
+              ? contactWithOtherPetsToUpdate === true
+                ? "Yes"
+                : "No"
+              : "Yes"
+          }
           color="secondary"
           sx={{
             backgroundColor: "whitesmoke",
@@ -322,9 +392,8 @@ export default function CatRegisterForm({
               backgroundColor: "#7958D6",
             },
           }}
-          // onClick={goToForm}
         >
-          Submit
+          {update ? "Update" : "Submit"}
         </Button>
       </form>
     </>
