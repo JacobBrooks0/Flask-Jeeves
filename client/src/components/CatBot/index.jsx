@@ -9,17 +9,16 @@ import style from "./style.module.css";
 import TextField from "@mui/material/TextField";
 import CatImage from "../../assets/Slack_cvYDvhxcxn.png";
 import PersonIcon from "@mui/icons-material/Person";
+import { motion } from "framer-motion";
 
 export default function CatBot() {
   const [modalOpen, setModalOpen] = useState(false);
   const [botLoader, setBotLoader] = useState(true);
   const [messagesArray, setMessagesArray] = useState([]);
-  // const [modalOpen, setModalOpen] = useState(false);
   const styles = { backgroundColor: "#826bf5" };
   const [botResponse, setBotResponse] = useState(
     `Hi! Can you tell me what is wrong with your cat today? It's important to understand that I am just a bot! My advice isn't always going to be 100% right, so make sure you seek help from a real vet. Explore the website to see how you can book an appointment.`
   );
-  // const [responseFromAI, setResponseFromAI] = useState("G");
 
   const openAIFunc = async (value) => {
     const bearer = "Bearer " + import.meta.env.VITE_OPENAI_KEY;
@@ -52,7 +51,6 @@ export default function CatBot() {
     );
 
     const data = await response.json();
-    console.log(data);
 
     setMessagesArray([
       ...messagesArray,
@@ -93,7 +91,7 @@ export default function CatBot() {
     setInputValue("");
     setTimeout(() => {
       setBotLoader(false);
-    }, 2000);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -128,143 +126,152 @@ export default function CatBot() {
           <ForumIcon style={{ color: "whitesmoke" }} />
         </button>
       ) : (
-        <div className={style["catbot-modal"]}>
-          <div
-            style={{
-              width: "100%",
-              height: "10%",
-              backgroundColor: "#826bf5",
-              color: "white",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              borderRadius: "20px 20px 0  0",
-              padding: "0 20px",
-            }}
-          >
-            <h2 style={{ fontFamily: "Jua", fontWeight: "300" }}>Catbot</h2>
-            <IconButton>
-              <CloseIcon
-                style={{ color: "whitesmoke" }}
-                onClick={() => setModalOpen(false)}
-              />
-            </IconButton>
-          </div>
-          <div
-            id="message-overflow"
-            style={{
-              width: "100%",
-              height: "80%",
-              backgroundColor: "#eee",
-              overflow: "auto",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <>
-              {messagesArray.map((message, index) => {
-                return (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: message.user ? "flex-end" : "flex-start",
-                      padding: message.user
-                        ? "20px 20px 20px 90px"
-                        : "20px 90px 20px 20px",
-                    }}
-                  >
-                    {!message.user ? (
-                      <div
-                        style={{
-                          width: "60px",
-                          height: "60px",
-
-                          backgroundColor: "#D3CCFA",
-                          borderRadius: "10px 0 10px  0",
-                        }}
-                      >
-                        <img
-                          style={{ height: "60px", width: "60px" }}
-                          src={CatImage}
-                        />
-                      </div>
-                    ) : null}
-                    <p
-                      className={style["messsage-text"]}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <div className={style["catbot-modal"]}>
+            <div
+              style={{
+                width: "100%",
+                height: "10%",
+                backgroundColor: "#826bf5",
+                color: "white",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                borderRadius: "20px 20px 0  0",
+                padding: "0 20px",
+              }}
+            >
+              <h2 style={{ fontFamily: "Jua", fontWeight: "300" }}>Catbot</h2>
+              <IconButton>
+                <CloseIcon
+                  style={{ color: "whitesmoke" }}
+                  onClick={() => setModalOpen(false)}
+                />
+              </IconButton>
+            </div>
+            <div
+              id="message-overflow"
+              style={{
+                width: "100%",
+                height: "80%",
+                backgroundColor: "#eee",
+                overflow: "auto",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <>
+                {messagesArray.map((message, index) => {
+                  return (
+                    <div
                       style={{
-                        fontFamily: "Jua",
-                        fontSize: "14px",
-                        backgroundColor: "#d3ccfa",
-                        marginRight: message.user ? "15px" : null,
-                        marginLeft: !message.user ? "15px" : null,
-                        padding: "15px",
-                        height: "fit-content",
-                        borderRadius: "0 10px 0 10px ",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: message.user
+                          ? "flex-end"
+                          : "flex-start",
+                        padding: message.user
+                          ? "20px 20px 20px 90px"
+                          : "20px 90px 20px 20px",
                       }}
                     >
-                      {botLoader && messagesArray.length - 1 === index ? (
-                        <p>Loading...</p>
-                      ) : (
-                        <>
-                          {messagesArray.length == 0 ? null : message.message}
-                        </>
-                      )}
-                    </p>
-                    {message.user ? (
-                      <div
+                      {!message.user ? (
+                        <div
+                          style={{
+                            width: "60px",
+                            height: "60px",
+
+                            backgroundColor: "#D3CCFA",
+                            borderRadius: "10px 0 10px  0",
+                          }}
+                        >
+                          <img
+                            style={{ height: "60px", width: "60px" }}
+                            src={CatImage}
+                          />
+                        </div>
+                      ) : null}
+                      <p
+                        className={style["messsage-text"]}
                         style={{
-                          width: "60px",
-                          height: "60px",
-                          backgroundColor: "#D3CCFA",
-                          borderRadius: "10px 0 10px  0",
+                          fontFamily: "Jua",
+                          fontSize: "14px",
+                          backgroundColor: "#d3ccfa",
+                          marginRight: message.user ? "15px" : null,
+                          marginLeft: !message.user ? "15px" : null,
+                          padding: "15px",
+                          height: "fit-content",
+                          borderRadius: "0 10px 0 10px ",
                         }}
                       >
-                        <PersonIcon
+                        {botLoader && messagesArray.length - 1 === index ? (
+                          <p>Loading...</p>
+                        ) : (
+                          <>
+                            {messagesArray.length == 0 ? null : message.message}
+                          </>
+                        )}
+                      </p>
+                      {message.user ? (
+                        <div
                           style={{
-                            color: "#826bf5",
-                            height: "60px",
                             width: "60px",
+                            height: "60px",
+                            backgroundColor: "#D3CCFA",
+                            borderRadius: "10px 0 10px  0",
                           }}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
-              <div ref={ref} />
-            </>
-          </div>
-          <form
-            onSubmit={handleFormSubmission}
-            style={{
-              width: "100%",
-              height: "10%",
-              display: "flex",
-              borderTop: "1px solid #826bf5",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "0 20px 0 10px",
-            }}
-          >
-            <TextField
-              id="standard-basic"
-              variant="standard"
-              color="secondary"
-              onChange={handleChange}
-              value={inputValue}
+                        >
+                          <PersonIcon
+                            style={{
+                              color: "#826bf5",
+                              height: "60px",
+                              width: "60px",
+                            }}
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  );
+                })}
+                <div ref={ref} />
+              </>
+            </div>
+            <form
+              onSubmit={handleFormSubmission}
               style={{
-                width: "80%",
-                paddingLeft: "10px",
+                width: "100%",
+                height: "10%",
+                display: "flex",
+                borderTop: "1px solid #826bf5",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "0 20px 0 10px",
               }}
-            />
-            <IconButton onClick={handleInputSubmit}>
-              <SendIcon />
-            </IconButton>
-          </form>
-        </div>
+            >
+              <TextField
+                id="standard-basic"
+                variant="standard"
+                color="secondary"
+                onChange={handleChange}
+                value={inputValue}
+                style={{
+                  width: "80%",
+                  paddingLeft: "10px",
+                }}
+              />
+              <IconButton onClick={handleInputSubmit}>
+                <SendIcon />
+              </IconButton>
+            </form>
+          </div>
+        </motion.div>
       )}
     </>
   );

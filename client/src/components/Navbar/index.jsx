@@ -440,7 +440,7 @@ export default function Navbar() {
       </Box>
 
       <Outlet />
-      {/* <CatBot /> */}
+      <CatBot />
       <footer style={{ display: "block" }}>
         <div className="footer">
           <div className="row icons">
