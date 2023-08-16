@@ -46,7 +46,9 @@ export default function SelectAnswer() {
         <>
           <h2
             className={style["end-of-quiz-text"]}
-            style={{ color: dark ? "whitesmoke" : "#121212" }}
+            style={{
+              color: dark ? "whitesmoke" : "#121212",
+            }}
           >
             It is important that you seek the correct medical help as our
             calculations may not always be correct. You can book a video

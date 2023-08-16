@@ -93,6 +93,7 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
             Head to your profile page using the link below to book a videochat
@@ -165,6 +166,7 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
             Head to the map page using the link below to search for nearby vets
@@ -232,6 +234,7 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
             Head to the video appointment page using the link below to access
