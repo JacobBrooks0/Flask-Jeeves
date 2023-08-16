@@ -1,7 +1,7 @@
 # Here we will build all out tables (DB).
+from sqlalchemy import ARRAY
 from application import db
 from flask_login import UserMixin
-
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,24 +23,21 @@ class Users(UserMixin, db.Model):
 
 class Appointments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, nullable=False)
-    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    # Relationship with Pet table
-    pets = db.relationship(
-        "Pets",
-        backref=db.backref("appointments", lazy=True, cascade="all,delete-orphan"),
-    )
+    date = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    time = db.Column(db.String(100), nullable=False)
+    meeting_id = db.Column(db.String(100), nullable=False)
 
     # initialiase all the class values as the instance values
-    def __init__(self, date, pet_id, description):
+    def __init__(self, date, user_id, time, meeting_id):
         self.date = date
-        self.pet_id = pet_id
-        self.description = description
+        self.user_id = user_id
+        self.time = time
+        self.meeting_id = meeting_id
 
 
 class Pets(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     dob = db.Column(db.Date, nullable=False)
@@ -96,22 +93,36 @@ class Pets(db.Model):
 
 
 class Diary(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'diary'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, index=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    diagnosis = db.Column(db.JSON)  # JSON column to store an array of diagnosis
-    field = db.Column(db.String(100))
+    #name = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.Date, nullable=True)
+    questions = db.Column(ARRAY(db.String(500)), nullable=False)
+    answers = db.Column(ARRAY(db.String(100)), nullable=False)
+    possiblesDiagnosis = db.Column(ARRAY(db.String(500)), nullable=False) 
+    #field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
     )
 
-    def __init__(self, pet_id, name, date, diagnosis, field):
+    def __init__(self, pet_id, date, questions, answers, possiblesDiagnosis):
         self.pet_id = pet_id
-        self.name = name
+        #self.name = name
         self.date = date
-        self.diagnosis = diagnosis
-        self.field = field
+        self.questions = questions
+        self.answers = answers
+        self.possiblesDiagnosis = possiblesDiagnosis
+        #self.field = field
+
+    def as_dict(self):
+        return {
+            "id": self.id,
+            "date": self.date,
+            "questions": self.questions,
+            "answers": self.answers,
+            "possiblesDiagnosis": self.possiblesDiagnosis
+        }
 
 
 class Diseases(db.Model):
@@ -139,14 +150,14 @@ class Diseases(db.Model):
 
 class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    specialty = db.Column(db.JSON)
+    specialty = db.Column(db.String(100))
     feature = db.Column(db.String(100), nullable=False)
     question = db.Column(db.String(200), nullable=False)
     defaultQuestion = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, specialty, feature, question, defaultQuestion):
-        self.specialty = specialty
+    def __init__(self, feature, specialty, question, defaultQuestion):
         self.feature = feature
+        self.specialty = specialty
         self.question = question
         self.defaultQuestion = defaultQuestion
 
@@ -201,10 +212,24 @@ class UsersAnswersCount(db.Model):
                 self.no,
                 self.probablyNot,
                 self.iDontKnow,
-                self.yes,
                 self.probablyYes,
+                self.yes,
             ],
         }
 
     def __repr__(self):
-        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, yes={self.yes}, probablyYes={self.probablyYes})>"
+        return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, probablyYes={self.probablyYes}, yes={self.yes})>"
+
+class Appointments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    time = db.Column(db.String(100), nullable=False)
+    meeting_id = db.Column(db.String(100), nullable=False)
+
+    # initialiase all the class values as the instance values
+    def __init__(self, date, user_id, time, meeting_id):
+        self.date = date
+        self.user_id = user_id
+        self.time = time
+        self.meeting_id = meeting_id

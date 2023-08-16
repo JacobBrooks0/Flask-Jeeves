@@ -8,6 +8,7 @@ import QuestionContainer from "../../components/QuestionContainer";
 import { useSymptoms } from "../../contexts/";
 import { useCredentials } from "../../contexts";
 import SymptomCat from "../../assets/cat-9152.png";
+import { useNavigate } from "react-router-dom";
 
 export default function SymptomPage() {
   const [catData, setCatData] = useState([]);
@@ -15,6 +16,10 @@ export default function SymptomPage() {
   const [showCatSelectionPage, setShowCatSelectionPage] = useState(true);
   const [errorText, setErrorText] = useState(false);
   const { dark, setDark, profile, setProfile } = useCredentials();
+  const navigate = useNavigate();
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
   const {
     questionNumber,
     setQuestionNumber,

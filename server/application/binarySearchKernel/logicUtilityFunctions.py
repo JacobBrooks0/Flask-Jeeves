@@ -5,14 +5,13 @@ full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 
 # Import necessary modules
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from application import *
 from datetime import *
 from application.models import *
-from binarySearchKernel import *
+from BayesLib import CalculateAnswer
 import numpy as np
-
 
 # Create an engine and bind it to a session
 engine = create_engine(DATABASE_URL)
@@ -42,23 +41,23 @@ def getAllDiseasesIds():
     return allDiseasesIds
 
 #GETTING ALL VARIABLES' IDS THAT TYPE IS TRUE 
-def getAllTrueDefaultVariablesIds():
+def getAllTrueDefaultVariablesQuestions():
     true_default_variables = session.query(Variables).filter_by(defaultQuestion = True).all()
     all_true_default_variables= []
 
     for var in true_default_variables:
         var_dict = var.as_dict()
-        all_true_default_variables.append(var_dict['id']) 
+        all_true_default_variables.append(var_dict['question']) 
 
     return all_true_default_variables
 
-def getAllFalseDefaultVariablesIds():
+def getAllFalseDefaultVariablesQuestions():
     false_default_variables = session.query(Variables).filter_by(defaultQuestion = False).all()
     all_false_default_variables= []
 
     for var in false_default_variables:
         var_dict = var.as_dict()
-        all_false_default_variables.append(var_dict['id']) 
+        all_false_default_variables.append(var_dict['question']) 
 
     return all_false_default_variables
 
@@ -77,7 +76,7 @@ def getAllDiseaseRules():
 #GET THE ARRAY OF ANSWERS OF THE DEFAULT QUESTIONS, RECEIVES THE OBJ FROM PET DETAILS 
 def answerDefaultAnamnese(obj):
     current_date = datetime.now().date()
-    age = datetime.strptime(obj['dob'], '%Y-%m-%d')    
+    age = datetime.strptime(str(obj['dob']), '%Y-%m-%d')    
     age_in_years = ((current_date - datetime.date(age)).days)/360
     sex = obj['sex']
     diet= obj['diet']
@@ -140,8 +139,6 @@ def getPetDetailsbyId(id):
 
 def answerRandomAnamnese(answers):
     answersConverted = []
-    # for answer in answers:
-    #     answersConverted.append(CalculateAnswer(answer))
     for answer in answers:
         if answer == 1:
             answersConverted.append(0.0)
