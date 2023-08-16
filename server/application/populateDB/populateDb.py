@@ -11,7 +11,8 @@ from application import *
 import pandas as pd
 
 # Create an engine and bind it to a session
-engine = create_engine(DATABASE_URL)
+DATABASE_URL2="postgresql://xouhhvvt:AJHqkM7FSLypbnj6M_BUh4jsTtsdteD9@trumpet.db.elephantsql.com/xouhhvvt"
+engine = create_engine(DATABASE_URL2)
 Session = sessionmaker(bind=engine)
 session = Session()
 

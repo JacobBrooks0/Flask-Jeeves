@@ -46,19 +46,20 @@ def create_diary():
         print("ERROR!!!!!!!!!!", str(e))
 
 
-# # Retrieve a diary entry by ID
-# @diary.route("/diary/<id>", methods=["GET"])
-# def get_diary_by_id(id):
-#     diary_entry = Diary.query.get_or_404(id)
-#     diary_data = {
-#         "id": diary_entry.id,
-#         "pet_id": diary_entry.pet_id,
-#         "name": diary_entry.name,
-#         "date": diary_entry.date.strftime("%Y-%m-%d"),
-#         "diagnosis": diary_entry.diagnosis,
-#         "field": diary_entry.field,
-#     }
-#     return jsonify(diary_data), 200
+# Retrieve a diary entry by ID
+@diary.route("/diary/<id>", methods=["GET"])
+def get_diary_by_id(id):
+    diary_entry = Diary.query.get_or_404(id)
+    diary_data = {
+        "id": diary_entry.id,
+        "pet_id": diary_entry.pet_id,
+        "date": diary_entry.date.strftime("%Y-%m-%d"),
+        "questions": diary_entry.questions,
+        "answers": diary_entry.answers,
+        "possiblesDiagnosis": diary_entry.possiblesDiagnosis,
+        
+    }
+    return jsonify(diary_data), 200
 
 
 # # Update a diary entry by ID
