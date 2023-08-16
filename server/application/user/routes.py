@@ -3,7 +3,7 @@ from flask import request, jsonify, Blueprint
 from application.models import Users
 from flask_bcrypt import generate_password_hash
 
-user = Blueprint("user", __name__)
+user = Blueprint("users", __name__)
 
 
 @user.route("/")
