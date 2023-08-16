@@ -112,6 +112,10 @@ export default function Navbar() {
     backgroundUserButtonColor,
     setBackgroundUserButtonColor,
   ] = React.useState(false);
+  const [
+    backgroundHomeButtonColor,
+    setBackgroundHomeButtonColor,
+  ] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -164,6 +168,37 @@ export default function Navbar() {
                 alignItems: "center",
               }}
             >
+              <NavLink
+                to="/home"
+                onMouseEnter={() => setBackgroundHomeButtonColor(true)}
+                onMouseLeave={() => setBackgroundHomeButtonColor(false)}
+                style={({ isActive, isPending }) => {
+                  return {
+                    color: isActive
+                      ? "whitesmoke"
+                      : !backgroundHomeButtonColor
+                      ? "rgba(0, 0, 0, 0.54)"
+                      : "rgba(0, 0, 0, 0.24)",
+                    textDecoration: "none",
+                    width: "100%",
+                    marginTop: "5px",
+                    marginRight: "30px",
+                    backgroundColor: "#826bf5",
+                    // backgroundColor: isActive ? "#eee" : null,
+                  };
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <HomeIcon />
+                  Home
+                </div>
+              </NavLink>
               <NavLink
                 to="/about"
                 onMouseEnter={() => setBackgroundAboutButtonColor(true)}
@@ -366,7 +401,8 @@ export default function Navbar() {
               <ListItem
                 key={text.name}
                 className="navbar-header"
-                // disablePadding
+                style={{ marginRight: "20px" }}
+                disablePadding
               >
                 <NavLink
                   to={text.route}
