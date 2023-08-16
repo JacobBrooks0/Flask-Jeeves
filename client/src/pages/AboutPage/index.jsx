@@ -45,7 +45,7 @@ export default function AboutPage() {
   const captionStyle = {
     fontSize: "2em",
     fontWeight: "bold",
-    fontFamily: "'Jua', sans-serif",
+    fontFamily: "'Patua One', sans-serif",
   };
   const slideNumberStyle = {
     fontSize: "20px",
@@ -73,7 +73,7 @@ export default function AboutPage() {
         <Typography
           variant="h3"
           component="h3"
-          sx={{ fontFamily: "'Jua', sans-serif", mt: 4 }}
+          sx={{ fontFamily: "'Patua One', sans-serif", mt: 4 }}
         >
           Meet the crew
         </Typography>
@@ -84,13 +84,16 @@ export default function AboutPage() {
               variant="h6"
               component="h6"
               sx={{
-                fontFamily: "'Jua', sans-serif",
+                fontFamily: "'Patua One', sans-serif",
                 display: "flex",
                 flexDirection: "row",
               }}
             >
               Alex Earle
-              <IconButton name="Alex" href="https://github.com/ajearle11">
+              <IconButton
+                name="Alex"
+                onClick={() => window.open(`https://github.com/ajearle11`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -100,10 +103,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Lais de Jesus Moraes
-              <IconButton href="https://github.com/laisjmvet">
+              <IconButton
+                onClick={() => window.open(`https://github.com/laisjmvet`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -113,10 +118,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Jacob Brooks
-              <IconButton href="https://github.com/JacobBrooks0">
+              <IconButton
+                onClick={() => window.open(`https://github.com/JacobBrooks0`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -126,10 +133,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Roberta Capuano
-              <IconButton href="https://github.com/Bibi0506">
+              <IconButton
+                onClick={() => window.open(`https://github.com/Bibi0506`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -139,10 +148,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Harry Turner-Burns
-              <IconButton href="https://github.com/HarryTB2112">
+              <IconButton
+                onClick={() => window.open(`https://github.com/HarryTB2112`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -167,7 +178,7 @@ export default function AboutPage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -202,7 +213,7 @@ export default function AboutPage() {
           variant="h3"
           component="header"
           sx={{
-            fontFamily: "'Jua', sans-serif",
+            fontFamily: "'Patua One', sans-serif",
             color: dark ? "whitesmoke" : "#121212",
             fontSize: "3rem",
           }}

@@ -46,7 +46,7 @@ export default function LandingHeader() {
             fontWeight: 500,
             color: "black",
           }}
-          style={{ fontFamily: "'Jua', sans-serif" }}
+          style={{ fontFamily: "'Patua One', sans-serif" }}
         >
           We'll help you look after your cat
         </Typography>

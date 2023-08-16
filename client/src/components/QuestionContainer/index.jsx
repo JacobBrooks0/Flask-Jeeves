@@ -5,6 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useSymptoms } from "../../contexts";
 import Results from "../Results";
 import { useCredentials } from "../../contexts";
+import { motion } from "framer-motion";
 
 export default function QuestionContainer({ cat }) {
   const {
@@ -35,35 +36,43 @@ export default function QuestionContainer({ cat }) {
 
   return (
     <div className={style["overall-container"]}>
-      <div className={style["main-container"]}>
-        <Tooltip title={toolTip}>
-          <div className={style["image-container"]}>
-            <div className={style["cat-image"]}>
-              <CatImage />
-            </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.35 }}
+      >
+        <div className={style["main-container"]}>
+          <Tooltip title={toolTip}>
+            <div className={style["image-container"]}>
+              <div className={style["cat-image"]}>
+                <CatImage />
+              </div>
 
-            <div>
-              <h3 className={style["cat-text"]}>{cat.name}</h3>
+              <div>
+                <h3 className={style["cat-text"]}>{cat.name}</h3>
+              </div>
             </div>
-          </div>
-        </Tooltip>
-      </div>
-      {/* this may change */}
-      <div className={style["question-container"]}>
-        {questions.length === 0 ? null : questionNumber == 15 ? (
-          <Results cat={cat} />
-        ) : (
-          <h1
-            className={style["question-text"]}
-            style={{
-              backgroundColor: dark ? "#826BF5" : "#D3CCFA",
-              color: dark ? "whitesmoke" : "#121212",
-            }}
-          >
-            Q{questionNumber + 1}: {questions[questionNumber].question}
-          </h1>
-        )}
-      </div>
+          </Tooltip>
+        </div>
+        {/* this may change */}
+        <div className={style["question-container"]}>
+          {questions.length === 0 ? null : questionNumber == 15 ? (
+            <Results cat={cat} />
+          ) : (
+            <h1
+              className={style["question-text"]}
+              style={{
+                backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+                color: dark ? "whitesmoke" : "#121212",
+                fontWeight: "lighter",
+              }}
+            >
+              Q{questionNumber + 1}: {questions[questionNumber].question}
+            </h1>
+          )}
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { useCredentials } from "../../contexts";
 import Alex from "../../assets/alex.jpg";
 import CatImage from "../../assets/images/pitr-Kitty-icon.svg";
@@ -37,11 +38,28 @@ export default function ProfileCat({ cat, index }) {
 
   return (
     <>
-      <button
+      <Button
         onClick={handleOpen}
-        onMouseEnter={() => setBackgroundtButtonColor("#826BF5")}
-        onMouseLeave={() => setBackgroundtButtonColor("#D3CCFA")}
-        style={{
+        // onMouseEnter={() => setBackgroundtButtonColor("#826BF5")}
+        // onMouseLeave={() => setBackgroundtButtonColor("#D3CCFA")}
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "row",
+        //   marginBottom: "20px",
+        //   padding: "20px",
+        //   width: "100%",
+        //   height: "175px",
+        //   cursor: "pointer",
+        //   justifyContent: "space-evenly",
+        //   backgroundColor: dark ? "#826BF5" : backgroundtButtonColor,
+        //   borderRadius: "10px",
+        //   alignItems: "center",
+        // }}
+        sx={{
+          mr: 2,
+          px: 4,
+          py: 1,
+          fontSize: "0.9rem",
           display: "flex",
           flexDirection: "row",
           marginBottom: "20px",
@@ -50,9 +68,20 @@ export default function ProfileCat({ cat, index }) {
           height: "175px",
           cursor: "pointer",
           justifyContent: "space-evenly",
-          backgroundColor: dark ? "#826BF5" : backgroundtButtonColor,
           borderRadius: "10px",
           alignItems: "center",
+          textTransform: "capitalize",
+          borderRadius: 3,
+          borderColor: "#14192d",
+          margin: "30px 0",
+          color: "whitesmoke",
+          backgroundColor: "#D3CCFA",
+          "&&:hover": {
+            backgroundColor: "#ADA0F2",
+          },
+          "&&:focus": {
+            backgroundColor: "#ADA0F2",
+          },
         }}
       >
         {imageHandler(index)}
@@ -73,7 +102,7 @@ export default function ProfileCat({ cat, index }) {
               width: "100%",
               display: "block",
               lineHeight: 1.6,
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               color: dark ? "whitesmoke" : "#121212",
               textTransform: "capitalize",
             }}
@@ -105,7 +134,7 @@ export default function ProfileCat({ cat, index }) {
               width: "100%",
               display: "block",
               lineHeight: 1.6,
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               color: dark ? "whitesmoke" : "#121212",
               textTransform: "capitalize",
             }}
@@ -119,7 +148,7 @@ export default function ProfileCat({ cat, index }) {
             Contact with Pets: {cat.contactWithOtherPets.toString()}
           </Typography>
         </div>
-      </button>
+      </Button>
       <Modal
         open={modalOpen}
         onClose={handleClose}

@@ -1,8 +1,9 @@
 .cat-container:hover {
-  background-color: #826bf5;
-  transition: background-color 1s ease;
+  background-color: #ada0f2;
+  transition: background-color 0.5s ease;
 }
 
 .cat-container {
   background-color: #d3ccfa;
+  border-radius: 8px;
 }

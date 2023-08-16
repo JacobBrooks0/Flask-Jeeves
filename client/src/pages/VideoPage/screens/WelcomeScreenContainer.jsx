@@ -70,7 +70,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -183,7 +183,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "2rem",
             }}
@@ -225,7 +225,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
                 component="header"
                 sx={{
                   pt: 3,
-                  fontFamily: "'Jua', sans-serif",
+                  fontFamily: "'Patua One', sans-serif",
                   color: dark ? "whitesmoke" : "#121212",
                   fontSize: "2rem",
                 }}

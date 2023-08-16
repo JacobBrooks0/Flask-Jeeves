@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Patua+One&display=swap");
+
 * {
   margin: 0;
   border: 0;
   box-sizing: border-box;
+  font-weight: lighter;
 }
 
 body,

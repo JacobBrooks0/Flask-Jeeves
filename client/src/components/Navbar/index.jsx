@@ -375,7 +375,11 @@ export default function Navbar() {
           </Toolbar>
         </AppBar>
         <Drawer role="menubar" anchor="right" open={open}>
-          <DrawerHeader sx={{ justifyContent: "flex-start" }}>
+          <DrawerHeader
+            sx={{
+              justifyContent: "flex-start",
+            }}
+          >
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "ltr" ? (
                 <ChevronRightIcon />
@@ -391,7 +395,7 @@ export default function Navbar() {
               { name: "About", icon: <InfoIcon />, route: "/about" },
               { name: "Account", icon: <AccountCircleIcon />, route: "/user" },
               {
-                name: "Symptom Checker",
+                name: "Symptoms Checker",
                 icon: <AssignmentIcon />,
                 route: "/symptom",
               },
@@ -440,7 +444,7 @@ export default function Navbar() {
       </Box>
 
       <Outlet />
-      <CatBot />
+      {/* <CatBot /> */}
       <footer style={{ display: "block" }}>
         <div className="footer">
           <div className="row icons">

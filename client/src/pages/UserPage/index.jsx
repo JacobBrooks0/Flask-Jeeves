@@ -176,7 +176,7 @@ export default function UserPage() {
               borderRadius: "50%",
               backgroundColor: dark ? "#826BF5" : "#D3CCFA",
               color: dark ? "whitesmoke" : "#121212",
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               fontSize: "3rem",
             }}
           >
@@ -192,7 +192,7 @@ export default function UserPage() {
               width: "100%",
               display: "block",
               lineHeight: 1.6,
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               textAlign: "center",
               color: dark ? "whitesmoke" : "#121212",
               // borderTop: "1px solid",
@@ -232,7 +232,7 @@ export default function UserPage() {
             variant="h5"
             component="h2"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "black",
             }}
           >
@@ -312,7 +312,7 @@ export default function UserPage() {
         <h1
           style={{
             textAlign: "center",
-            fontFamily: "Jua",
+            fontFamily: "Patua One",
             padding: "40px 20px",
           }}
         >

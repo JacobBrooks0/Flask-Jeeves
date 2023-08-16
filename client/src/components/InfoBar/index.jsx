@@ -172,7 +172,7 @@ export default function InfoBar() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
             }}
           >
             <PetsIcon style={{ height: "50%", width: "50%" }} />
@@ -227,7 +227,7 @@ export default function InfoBar() {
           >
             <h2
               style={{
-                fontFamily: "Jua",
+                fontFamily: "Patua One",
                 textAlign: "center",
                 padding: "0 20px",
               }}
