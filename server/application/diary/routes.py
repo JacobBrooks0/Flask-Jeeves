@@ -65,3 +65,26 @@ def get_diary_by_id(id):
         "possiblesDiagnosis": diary_entry.possiblesDiagnosis,
     }
     return jsonify(diary_data), 200
+
+
+# # Update a diary entry by ID
+# @diary.route("/diary/<id>", methods=["PUT"])
+# def update_diary(id):
+#     diary_entry = Diary.query.get_or_404(id)
+#     data = request.json
+#     diary_entry.pet_id = data["pet_id"]
+#     diary_entry.name = data["name"]
+#     diary_entry.date = data["date"]
+#     diary_entry.diagnosis = data["diagnosis"]
+#     diary_entry.field = data["field"]
+#     db.session.commit()
+#     return jsonify({"message": "Diary entry updated successfully!"}), 200
+
+
+# # Delete a diary entry by ID
+# @diary.route("/diary/<id>", methods=["DELETE"])
+# def delete_diary(id):
+#     diary_entry = Diary.query.get_or_404(id)
+#     db.session.delete(diary_entry)
+#     db.session.commit()
+#     return jsonify({"message": "Diary entry deleted successfully!"}), 200
