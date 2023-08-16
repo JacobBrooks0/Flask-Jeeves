@@ -177,6 +177,7 @@ export default function AboutPage() {
           <Typography
             variant="h6"
             component="p"
+            style={{ textAlign: "justify" }}
             sx={{
               py: 3,
               pr: 10,

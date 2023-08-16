@@ -3,6 +3,7 @@ from sqlalchemy import ARRAY
 from application import db
 from flask_login import UserMixin
 
+
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
@@ -93,27 +94,26 @@ class Pets(db.Model):
 
 
 class Diary(db.Model):
-    __tablename__ = 'diary'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, index=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
-    #name = db.Column(db.String(100), nullable=False)
+    # name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=True)
     questions = db.Column(ARRAY(db.String(500)), nullable=False)
     answers = db.Column(ARRAY(db.String(100)), nullable=False)
-    possiblesDiagnosis = db.Column(ARRAY(db.String(500)), nullable=False) 
-    #field = db.Column(db.String(100))
+    possiblesDiagnosis = db.Column(ARRAY(db.String(500)), nullable=False)
+    # field = db.Column(db.String(100))
     pets = db.relationship(
         "Pets", backref=db.backref("diary", lazy=True, cascade="all,delete-orphan")
     )
 
     def __init__(self, pet_id, date, questions, answers, possiblesDiagnosis):
         self.pet_id = pet_id
-        #self.name = name
+        # self.name = name
         self.date = date
         self.questions = questions
         self.answers = answers
         self.possiblesDiagnosis = possiblesDiagnosis
-        #self.field = field
+        # self.field = field
 
     def as_dict(self):
         return {
@@ -121,7 +121,7 @@ class Diary(db.Model):
             "date": self.date,
             "questions": self.questions,
             "answers": self.answers,
-            "possiblesDiagnosis": self.possiblesDiagnosis
+            "possiblesDiagnosis": self.possiblesDiagnosis,
         }
 
 
@@ -219,17 +219,3 @@ class UsersAnswersCount(db.Model):
 
     def __repr__(self):
         return f"<UsersAnswersCount(id={self.id}, disease_id={self.disease_id}, diseasesVariables_id={self.diseasesVariables_id}, no={self.no}, probablyNot={self.probablyNot}, iDontKnow={self.iDontKnow}, probablyYes={self.probablyYes}, yes={self.yes})>"
-
-class Appointments(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.String(100), nullable=False)
-    meeting_id = db.Column(db.String(100), nullable=False)
-
-    # initialiase all the class values as the instance values
-    def __init__(self, date, user_id, time, meeting_id):
-        self.date = date
-        self.user_id = user_id
-        self.time = time
-        self.meeting_id = meeting_id

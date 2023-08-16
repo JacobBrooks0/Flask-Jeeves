@@ -6,58 +6,6 @@ import { useSymptoms } from "../../contexts";
 import Results from "../Results";
 import { useCredentials } from "../../contexts";
 
-const questionsTest = [
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-];
-
 export default function QuestionContainer({ cat }) {
   const {
     questionNumber,
@@ -69,22 +17,21 @@ export default function QuestionContainer({ cat }) {
   } = useSymptoms();
   const { dark, setDark } = useCredentials();
 
+  async function getQuestions() {
+    const response = await fetch("http://127.0.0.1:5000/variables_questions");
+    if (response.status == 200) {
+      const data = await response.json();
+      setQuestions(data);
+    } else {
+      console.log("Question fetch failed");
+    }
+  }
+
   useEffect(() => {
-    //this may change
-    setQuestions(questionsTest);
+    getQuestions();
   }, []);
 
-  const toolTip = `Gender: ${cat.gender}, Breed: ${cat.breed}, DOB: ${cat.dateOfBirth}, Outdoor: ${cat.outdoor}, Neutered: ${cat.neutered}, Diet: ${cat.diet}, Contact with other pets: ${cat.contactWithPets}`;
-
-  //double check this is the response
-  //   name: "Kat",
-  //   gender: "Female",
-  //   breed: "Tabby",
-  //   dateOfBirth: "22nd Sept",
-  //   outdoor: true,
-  //   neutered: true,
-  //   diet: "processed",
-  //   contactWithPets: true,
+  const toolTip = `Gender: ${cat.sex}, Breed: ${cat.breed}, DOB: ${cat.dob}, Outdoor: ${cat.outdoor}, Neutered: ${cat.neutered}, Diet: ${cat.diet}, Contact with other pets: ${cat.contactWithPets}`;
 
   return (
     <div className={style["overall-container"]}>
@@ -104,7 +51,7 @@ export default function QuestionContainer({ cat }) {
       {/* this may change */}
       <div className={style["question-container"]}>
         {questions.length === 0 ? null : questionNumber == 15 ? (
-          <Results />
+          <Results cat={cat} />
         ) : (
           <h1
             className={style["question-text"]}

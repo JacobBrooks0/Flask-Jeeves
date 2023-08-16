@@ -32,7 +32,7 @@ export default function SelectAnswer() {
     if (selectedTick === null) {
       setErrorText(true);
     } else {
-      setAnswers([...answers, selectedIndex]);
+      setAnswers([...answers, selectedIndex + 1]);
       //this may change
       setQuestionNumber(questionNumber + 1);
       setSelectedTick(null);
@@ -41,12 +41,14 @@ export default function SelectAnswer() {
   };
 
   return (
-    <div className={style["container"]}>
+    <div role="container" className={style["container"]}>
       {questionNumber == 15 ? (
         <>
           <h2
             className={style["end-of-quiz-text"]}
-            style={{ color: dark ? "whitesmoke" : "#121212" }}
+            style={{
+              color: dark ? "whitesmoke" : "#121212",
+            }}
           >
             It is important that you seek the correct medical help as our
             calculations may not always be correct. You can book a video
@@ -99,10 +101,11 @@ export default function SelectAnswer() {
         </>
       ) : (
         <>
-          <div>
+          <div role="container2">
             <List
               component="nav"
               sx={{ color: dark ? "whitesmoke" : "#121212" }}
+              role="list"
             >
               <Divider />
               <ListItemButton
@@ -119,6 +122,7 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 1}
                 onClick={(event) => handleListItemClick(event, 1)}
               >
@@ -131,6 +135,7 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 2)}
               >
@@ -155,6 +160,7 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 4}
                 onClick={(event) => handleListItemClick(event, 4)}
               >
@@ -168,7 +174,7 @@ export default function SelectAnswer() {
               <Divider />
             </List>
           </div>
-          <div className={style["button-container"]}>
+          <div role="container3" className={style["button-container"]}>
             <Button
               variant="contained"
               sx={{
