@@ -19,22 +19,22 @@ BayesLibObj = BayesLib(allVariables, allDiseases, allRules, maxIter=15)
 
 
 def sendQuestions():
-    falseVariableQuestions = getAllFalseDefaultVariablesQuestions()
-    print(falseVariableQuestions)
+    falseVariableQuestions = getAllFalseDefaultVariablesIds()
     randomQuestions = BayesLibObj.getRandomQuestions(falseVariableQuestions)
     return randomQuestions
 
 
 def findDiagnosis(
-    pet_id,
-    questionsAnswered,
-    answersUser,
+    pet_id=1,
+    questionsAnswered=[1, 2, 3, 4, 5, 6, 7, 8, 13, 27, 25, 22, 21, 20, 19],
+    answersUser=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5],
 ):
-    defaultVariableQuestions = getAllTrueDefaultVariablesQuestions()
+    defaultVariableQuestions = getAllTrueDefaultVariablesIds()
     petDetails = getPetDetailsbyId(pet_id)
     answersTrueDefaultAnamnese = answerDefaultAnamnese(petDetails)
     BayesLibObj.setQuestionAnswer(defaultVariableQuestions, answersTrueDefaultAnamnese)
     answersRandomAnamnese = answerRandomAnamnese(answersUser)
     BayesLibObj.setQuestionAnswer(questionsAnswered, answersRandomAnamnese)
+    print(BayesLibObj.as_dict())
     probabilities = BayesLibObj.Solve()
     return probabilities

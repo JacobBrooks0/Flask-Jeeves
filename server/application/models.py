@@ -94,7 +94,6 @@ class Pets(db.Model):
 
 
 class Diary(db.Model):
-    __tablename__ = "diary"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, index=True)
     pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
     # name = db.Column(db.String(100), nullable=False)

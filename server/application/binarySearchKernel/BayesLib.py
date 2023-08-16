@@ -28,6 +28,12 @@ class BayesLib:
         self.answers_so_far = []
         self.Iter = 0
 
+    def as_dict(self):
+        return {
+            "diseasesVariables_so_far": self.diseasesVariables_so_far,
+            "answers_so_far": self.answers_so_far,
+        }
+
     def setQuestionAnswer(self, variableID, answer):
         if type(variableID) == type(list()) or type(answer) == type(list()):
             if len(variableID) != len(answer):

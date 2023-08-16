@@ -60,7 +60,7 @@ export default function QuestionContainer({ cat }) {
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Q{questionNumber + 1}: {questions[questionNumber]}
+            Q{questionNumber + 1}: {questions[questionNumber].question}
           </h1>
         )}
       </div>

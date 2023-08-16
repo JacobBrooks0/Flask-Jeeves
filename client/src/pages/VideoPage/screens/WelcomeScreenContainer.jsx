@@ -10,6 +10,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Snackbar } from "@mui/material";
 import { useCredentials } from "../../../contexts";
 import Doctor from "../../../assets/doctor.png";
+import { Link } from "react-router-dom";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
@@ -187,9 +188,9 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               fontSize: "2rem",
             }}
           >
-            Upcoming Appointment
+            Upcoming Appointment:
           </Typography>
-          {appointments ? (
+          {appointments[0] ? (
             <Typography
               variant="h6"
               component="p"
@@ -218,17 +219,44 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               </IconButton>
             </Typography>
           ) : (
-            <Typography
-              variant="h3"
-              component="header"
-              sx={{
-                fontFamily: "'Jua', sans-serif",
-                color: dark ? "whitesmoke" : "#121212",
-                fontSize: "2rem",
-              }}
-            >
-              You have no appointments
-            </Typography>
+            <>
+              <Typography
+                variant="h3"
+                component="header"
+                sx={{
+                  pt: 3,
+                  fontFamily: "'Jua', sans-serif",
+                  color: dark ? "whitesmoke" : "#121212",
+                  fontSize: "2rem",
+                }}
+              >
+                You have no appointments
+              </Typography>
+              <Button
+                component={Link}
+                to="/user"
+                sx={{
+                  my: 3,
+                  px: 4,
+                  py: 0.8,
+                  fontSize: "0.9rem",
+                  textTransform: "capitalize",
+                  borderRadius: 1,
+                  borderColor: "#14192d",
+                  color: "white",
+                  backgroundColor: "#826BF5",
+                  "&&:hover": {
+                    backgroundColor: "#7958D6",
+                  },
+                  "&&:focus": {
+                    backgroundColor: "#7958D6",
+                  },
+                }}
+                variant="contained"
+              >
+                Book an appointment
+              </Button>
+            </>
           )}
         </div>
         <Snackbar

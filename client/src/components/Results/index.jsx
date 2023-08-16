@@ -11,7 +11,10 @@ export default function Results({ cat }) {
   const [illness, setIllness] = useState("");
 
   async function postDiary() {
-    console.log(questions);
+    const questionIds = questions.map((question) => {
+      return question.id;
+    });
+    console.log(questionIds);
     const options = {
       method: "POST",
       mode: "cors",
@@ -20,7 +23,7 @@ export default function Results({ cat }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        questionsArray: questions,
+        questionsArray: questionIds,
         answersArray: answers,
         pet_id: cat.id,
       }),
