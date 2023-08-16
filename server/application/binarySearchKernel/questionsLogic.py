@@ -26,9 +26,9 @@ def sendQuestions():
 
 
 def findDiagnosis(
-    pet_id=1,
-    questionsAnswered=[1, 2, 3, 4, 5, 6, 7, 8, 13, 27, 25, 22, 21, 20, 19],
-    answersUser=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5],
+    pet_id,
+    questionsAnswered,
+    answersUser,
 ):
     defaultVariableQuestions = getAllTrueDefaultVariablesQuestions()
     petDetails = getPetDetailsbyId(pet_id)
