@@ -1,5 +1,5 @@
 import React from "react";
-import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
@@ -11,17 +11,26 @@ expect.extend(matchers);
 
 describe("User Page", () => {
 
-    it("renders without crashing", async () => {
+      beforeEach(() => {
         render(
-          <Router>
-            <CredentialsProvider>
-                <Routes>
-                    <Route path="/user" element={<UserPage />} />
-                </Routes>   
-            </CredentialsProvider>
-          </Router>
+
+            <Router>
+              <GoogleOAuthProvider>
+                <CredentialsProvider>
+                    <UserPage />
+                </CredentialsProvider>
+                </GoogleOAuthProvider>
+            </Router>
+          
         );
-      });
+    });
+
+    afterEach(() => {
+    cleanup();
+    });
+
+    
+
 
     
 })

@@ -1,31 +1,6 @@
-// import { useEffect } from "react";
-// import { Link, useNavigate, useLocation } from "react-router-dom";
-// import { useAuth } from "../../contexts";import axios from "axios";
-// import { UsernameInput, PasswordInput } from "../../components";
-// import { writePopup } from "../../components";
-// import LoginPage from './index'
-// import { screen, render, cleanup } from '@testing-library/react';
-// import { CredentialsProvider } from '../../contexts';
-// import userEvent from '@testing-library/user-event';
 
-
-// describe('Login component', () => {
-//     beforeEach(() => {
-//         render(
-
-//         <BrowserRouter>
-//             <CredentialsProvider>
-//               <App />
-//             </CredentialsProvider>
-//           </BrowserRouter>
-//         );
-//     });
-
-//     afterEach(() => {
-//         cleanup();
-//     });
-// })
 import React from "react";
+// import axios from axios
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -82,5 +57,33 @@ describe("Register Page", () => {
         
     });
 
+    it("Should send to login",() => {
+      expect(screen.getByRole("link").href).toBe("http://localhost:3000/login")
+  })
+
+//   it('should register a new user and redirect to login page', async () => {
+//     vi.spyOn(axios, 'post').mockResolvedValueOnce({
+//         status: 201,
+//         data: {
+//             error: 'This is a successful registration response',
+//         },
+//     });
+
+//     const usernameInput = screen.getByPlaceholderText(/username/i);
+//     const passwordInput = screen.getByPlaceholderText(/password/i);
+//     const registerButton = screen.getByRole('button', { name: /register account/i });
+
+//     await userEvent.type(usernameInput, 'new_user');
+//     await userEvent.type(passwordInput, 'new_password');
+//     userEvent.click(registerButton);
+
+//     await new Promise((resolve) => setTimeout(resolve, 100));
+
+//     expect(screen.findByText(/Your account has been registered!/i)).toBeTruthy();
+
+//     waitFor(() => {
+//         expect(window.location.pathname).toBe('/login').toBeTruthy(); //cannot get this to work.
+//     });
+// });
     
 })

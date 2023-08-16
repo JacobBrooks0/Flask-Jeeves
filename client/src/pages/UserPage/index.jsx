@@ -15,6 +15,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import DoneIcon from "@mui/icons-material/Done";
 import { createNewRoom } from "../VideoPage/API";
+import CatRegisterForm from "../../components/CatRegisterForm/";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
   const { dark, setDark } = useCredentials();
@@ -23,6 +25,69 @@ export default function UserPage() {
   const [appointmentDate, setAppointmentDate] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [time, setTime] = useState();
+  const [catData, setCatData] = useState([]);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [initials, setInitials] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
+
+  function handleName() {
+    const names =
+      localStorage.length !== 0 ? name.split(" ") : ["Alex", "Earle"];
+    setInitials([names[0][0], names[1][0]]);
+  }
+
+  async function getCats() {
+    setName(
+      `${JSON.parse(localStorage.getItem("user")).first_name} ${
+        JSON.parse(localStorage.getItem("user")).last_name
+      }`
+    );
+
+    setEmail(JSON.parse(localStorage.getItem("user")).email);
+    const response = await fetch("http://127.0.0.1:5000/pets");
+    if (response.status == 200) {
+      const array = await response.json();
+      const cats = array.filter(
+        (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+      );
+      setCatData(cats);
+      handleName();
+    } else {
+      null;
+    }
+  }
+
+  async function postAppointment() {
+    const date = appointmentDate.date.toLocaleDateString("en-GB");
+    const options = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        withCredentials: true,
+      },
+      body: JSON.stringify({
+        date: date,
+        time: appointmentDate.time,
+        user_id: JSON.parse(localStorage.getItem("user")).id,
+        meeting_id: appointmentDate.meetingId,
+      }),
+    };
+    const response = await fetch("http://127.0.0.1:5000/appointment", options);
+    setModalOpen(false);
+    const data = await response.json();
+  }
+
+  useEffect(() => {
+    getCats();
+  }, []);
+
   const handleOpen = () => {
     onChange();
     setModalOpen(true);
@@ -48,49 +113,8 @@ export default function UserPage() {
       time: selectedTime,
       meetingId: meetingId,
     });
+    postAppointment();
   };
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-  useEffect(() => {
-    console.log(selectedTime);
-  }, [selectedTime]);
-  useEffect(() => {
-    console.log(appointmentDate);
-  }, [appointmentDate]);
-
-  const testUser = {
-    userId: 1,
-    firstName: "Alex",
-    lastName: "Earle",
-    email: "stinkyal@hotmail.com",
-    DOB: "21/12/1970",
-    petsId: [1, 2],
-  };
-
-  const pets = [
-    {
-      petId: 1,
-      name: "Stan",
-      DOB: "04/02/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-    {
-      petId: 2,
-      name: "Alfie",
-      DOB: "21/04/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-  ];
 
   function renderRow(props) {
     const { index, style } = props;
@@ -129,7 +153,12 @@ export default function UserPage() {
     >
       <div
         className="top-section"
-        style={{ display: "flex", flexDirection: "row" }}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingRight: "2rem",
+          paddingLeft: "2rem",
+        }}
       >
         <div
           className="side-section"
@@ -137,36 +166,49 @@ export default function UserPage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+            backgroundColor: dark ? "#121212" : "whitesmoke",
             paddingTop: "50px",
           }}
         >
-          <img
-            src={Alex}
-            alt="user picture"
-            style={{ width: "80%", borderRadius: "50%", marginBottom: "2rem" }}
-          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "150px",
+              height: "150px",
+              borderRadius: "50%",
+              backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+              color: dark ? "whitesmoke" : "#121212",
+              fontFamily: "'Jua', sans-serif",
+              fontSize: "3rem",
+            }}
+          >
+            {catData ? `${initials[0]}${initials[1]}` : "loading"}
+          </div>
           <Typography
             variant="h6"
             component="p"
             sx={{
               py: 3,
-              pl: 6,
+              px: 3,
+              // pl: 6,
               width: "100%",
               display: "block",
               lineHeight: 1.6,
+              fontFamily: "Jua",
+              textAlign: "center",
               color: dark ? "whitesmoke" : "#121212",
-              borderTop: "1px dotted",
+              // borderTop: "1px solid",
               borderColor: dark ? "purple" : "#121212",
             }}
           >
-            First Name: {testUser.firstName}
+            {catData ? name : "loading"}
             <br />
-            Last Name: {testUser.lastName}
             <br />
-            Email: {testUser.email}
+            {catData ? email : "loading"}
             <br />
-            DOB: {testUser.DOB}
             <br />
           </Typography>
         </div>
@@ -178,8 +220,8 @@ export default function UserPage() {
             value={value}
             className="calender"
           />
-          {pets.map((pet) => {
-            return <ProfileCat cat={pet} key={pet.petId} />;
+          {catData.map((cat) => {
+            return <ProfileCat cat={cat} key={cat.id} />;
           })}
         </div>
       </div>
@@ -266,6 +308,23 @@ export default function UserPage() {
           </div>
         </Box>
       </Modal>
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: dark ? "#826BF5" : "#D3CCFA",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Jua",
+            padding: "40px 20px",
+          }}
+        >
+          Want to register a cat?
+        </h1>
+        <CatRegisterForm backgroundColor="#D3CCFA" width="100%" />
+      </div>
     </div>
   );
 }
