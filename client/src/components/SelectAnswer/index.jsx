@@ -20,6 +20,9 @@ export default function SelectAnswer() {
     setQuestionNumber,
     answers,
     setAnswers,
+    setAnimation,
+    animation,
+    differentAnswersIndex,
   } = useSymptoms();
 
   const handleListItemClick = (event, index) => {
@@ -33,7 +36,7 @@ export default function SelectAnswer() {
       setErrorText(true);
     } else {
       setAnswers([...answers, selectedIndex + 1]);
-      //this may change
+      setAnimation(!animation);
       setQuestionNumber(questionNumber + 1);
       setSelectedTick(null);
       setSelectedIndex(null);
@@ -112,8 +115,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 0}
                 onClick={(event) => handleListItemClick(event, 0)}
               >
-                {console.log(answers)}
-                <ListItemText primary="Yes" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "Less than a week ago"
+                      : "Yes"
+                  }
+                />
                 {selectedTick === 0 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -126,7 +134,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 1}
                 onClick={(event) => handleListItemClick(event, 1)}
               >
-                <ListItemText primary="Probably yes" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "A week to a month ago"
+                      : "Probably yes"
+                  }
+                />
                 {selectedTick === 1 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -139,7 +153,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 2)}
               >
-                <ListItemText primary="I don't know" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than a month ago"
+                      : "I don't know"
+                  }
+                />
                 {selectedTick === 2 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -151,7 +171,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 3}
                 onClick={(event) => handleListItemClick(event, 3)}
               >
-                <ListItemText primary="Probably not" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than six months ago"
+                      : "Probably not"
+                  }
+                />
                 {selectedTick === 3 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -164,7 +190,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 4}
                 onClick={(event) => handleListItemClick(event, 4)}
               >
-                <ListItemText primary="No" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than a year"
+                      : "No"
+                  }
+                />
                 {selectedTick === 4 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />

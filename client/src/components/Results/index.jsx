@@ -69,7 +69,8 @@ export default function Results({ cat }) {
           }}
         >
           <p style={{ color: dark ? "whitesmoke" : "#121212" }}>
-            We believe your cat could be suffering with: {illness}.
+            We believe your cat could be suffering with:{" "}
+            <strong>{illness}</strong>.
           </p>
         </div>
       )}

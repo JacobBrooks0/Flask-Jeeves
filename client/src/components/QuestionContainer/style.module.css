@@ -35,9 +35,14 @@
   background-color: #d3ccfadd;
   padding: 40px;
   font-size: 40px;
+}
+
+.animation-class {
   animation: fadeInAnimation ease 1s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+}
+
+.animation-class-two {
+  animation: fadeOutAnimation ease 1s;
 }
 
 .cat-image {
@@ -58,6 +63,15 @@
 }
 
 @keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutAnimation {
   0% {
     opacity: 0;
   }

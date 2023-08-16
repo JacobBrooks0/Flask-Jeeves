@@ -5,6 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useSymptoms } from "../../contexts";
 import Results from "../Results";
 import { useCredentials } from "../../contexts";
+import classNames from "classnames";
 
 export default function QuestionContainer({ cat }) {
   const {
@@ -14,6 +15,9 @@ export default function QuestionContainer({ cat }) {
     setQuestions,
     answers,
     setAnswers,
+    animation,
+    setDifferentAnswersIndex,
+    differentAnswersIndex,
   } = useSymptoms();
   const { dark, setDark } = useCredentials();
 
@@ -27,6 +31,15 @@ export default function QuestionContainer({ cat }) {
     }
   }
 
+  function arrayMap() {
+    console.log(questions);
+    let pos = questions
+      .map(function(e) {
+        return e.id;
+      })
+      .indexOf(35);
+    setDifferentAnswersIndex(pos);
+  }
   useEffect(() => {
     getQuestions();
   }, []);
@@ -48,19 +61,25 @@ export default function QuestionContainer({ cat }) {
           </div>
         </Tooltip>
       </div>
-      {/* this may change */}
       <div className={style["question-container"]}>
         {questions.length === 0 ? null : questionNumber == 15 ? (
           <Results cat={cat} />
         ) : (
           <h1
-            className={style["question-text"]}
+            className={classNames(
+              style["question-text"],
+              animation
+                ? style["animation-class"]
+                : style["animation-class-two"]
+            )}
             style={{
               backgroundColor: dark ? "#826BF5" : "#D3CCFA",
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Q{questionNumber + 1}: {questions[questionNumber].question}
+            {questions.length === 0 ? null : arrayMap()}Q{questionNumber + 1}:{" "}
+            {questions[questionNumber].question}
+            {console.log(differentAnswersIndex)}
           </h1>
         )}
       </div>
