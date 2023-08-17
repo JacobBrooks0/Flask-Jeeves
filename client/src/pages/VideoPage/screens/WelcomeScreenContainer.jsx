@@ -10,11 +10,11 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Snackbar } from "@mui/material";
 import { useCredentials } from "../../../contexts";
 import Doctor from "../../../assets/doctor.png";
+import { Link } from "react-router-dom";
 
 const WelcomeScreenContainer = ({ setAppData }) => {
   const [meetingId, setMeetingId] = useState("");
   const [appointments, setAppointments] = useState([]);
-  const [nextAppointment, setNextAppointment] = useState({});
   const [open, setOpen] = useState(false);
   const { dark, setDark } = useCredentials();
 
@@ -32,14 +32,6 @@ const WelcomeScreenContainer = ({ setAppData }) => {
     getAppointments();
   }, []);
 
-  // const timestamp = new Date().getTime();
-  // const date = new Date(timestamp);
-  // const hours = date.getHours();
-  // const minutes = "0" + date.getMinutes();
-  // const seconds = "0" + date.getSeconds();
-  // const time = hours + ":" + minutes.substring(0) + ":" + seconds.substring(1);
-  // console.log(time);
-
   const createClick = async () => {
     const meetingId = await createNewRoom();
 
@@ -47,31 +39,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
   };
   const hostClick = () => setAppData({ mode: "CONFERENCE", meetingId });
 
-  const findSoonestAppointment = () => {
-    const timestamps = appointments.map(
-      (appointment) => Date.parse(appointment.date) / 1000
-    );
-    const soonestTimestamp = Math.min(...timestamps);
-    const soonestAppointment = appointments.filter((appointment) => {
-      return Date.parse(appointment.date) / 1000 === soonestTimestamp;
-    });
-    setNextAppointment(soonestAppointment);
-  };
-
-  useEffect(() => {
-    findSoonestAppointment();
-  }, []);
-
   const handleClick = () => {
     setOpen(true);
     navigator.clipboard.writeText(
-      nextAppointment[0] ? nextAppointment[0].meetingId : null
+      appointments[0] ? appointments[0].meeting_id : null
     );
   };
-
-  useEffect(() => {
-    console.log(nextAppointment);
-  }, [nextAppointment]);
 
   return (
     <div
@@ -97,7 +70,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -107,6 +80,7 @@ const WelcomeScreenContainer = ({ setAppData }) => {
           <Typography
             variant="h6"
             component="p"
+            style={{ textAlign: "justify" }}
             sx={{
               py: 3,
               pr: 10,
@@ -198,21 +172,25 @@ const WelcomeScreenContainer = ({ setAppData }) => {
       <br />
       <div
         className="welcome-controls"
-        style={{ backgroundColor: dark ? "#7958D6" : "#D3CCFA" }}
+        style={{
+          backgroundColor: dark ? "#7958D6" : "#D3CCFA",
+          marginBottom: "-100px",
+          height: "500px",
+        }}
       >
         <div>
           <Typography
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "2rem",
             }}
           >
-            Upcoming Appointment
+            Upcoming Appointment:
           </Typography>
-          {appointments ? (
+          {appointments[0] ? (
             <Typography
               variant="h6"
               component="p"
@@ -223,14 +201,12 @@ const WelcomeScreenContainer = ({ setAppData }) => {
                 color: dark ? "whitesmoke" : "#121212",
               }}
             >
-              Date: {nextAppointment[0] ? nextAppointment[0].date : "loading"}
+              Date: {appointments[0] ? appointments[0].date : "loading"}
               <br />
-              Time: {nextAppointment[0] ? nextAppointment[0].time : "loading"}
+              Time: {appointments[0] ? appointments[0].time : "loading"}
               <br />
               Meeting ID:{" "}
-              {nextAppointment[0]
-                ? nextAppointment[0].meetingId
-                : "loading"}{" "}
+              {appointments[0] ? appointments[0].meeting_id : "loading"}{" "}
               <IconButton onClick={handleClick} color="#826BF5">
                 <ContentCopyIcon
                   sx={{
@@ -243,17 +219,44 @@ const WelcomeScreenContainer = ({ setAppData }) => {
               </IconButton>
             </Typography>
           ) : (
-            <Typography
-              variant="h3"
-              component="header"
-              sx={{
-                fontFamily: "'Jua', sans-serif",
-                color: dark ? "whitesmoke" : "#121212",
-                fontSize: "2rem",
-              }}
-            >
-              You have no appointments
-            </Typography>
+            <>
+              <Typography
+                variant="h3"
+                component="header"
+                sx={{
+                  pt: 3,
+                  fontFamily: "'Patua One', sans-serif",
+                  color: dark ? "whitesmoke" : "#121212",
+                  fontSize: "2rem",
+                }}
+              >
+                You have no appointments
+              </Typography>
+              <Button
+                component={Link}
+                to="/user"
+                sx={{
+                  my: 3,
+                  px: 4,
+                  py: 0.8,
+                  fontSize: "0.9rem",
+                  textTransform: "capitalize",
+                  borderRadius: 1,
+                  borderColor: "#14192d",
+                  color: "white",
+                  backgroundColor: "#826BF5",
+                  "&&:hover": {
+                    backgroundColor: "#7958D6",
+                  },
+                  "&&:focus": {
+                    backgroundColor: "#7958D6",
+                  },
+                }}
+                variant="contained"
+              >
+                Book an appointment
+              </Button>
+            </>
           )}
         </div>
         <Snackbar

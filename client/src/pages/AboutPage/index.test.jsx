@@ -10,17 +10,26 @@ expect.extend(matchers);
 
 describe("AboutPage", () => {
 
-    it("renders without crashing", async () => {
-        render(
-          <Router>
-            <CredentialsProvider>
-                <Routes>
-                    <Route path="/about" element={<AboutPage />} />
-                </Routes>   
-            </CredentialsProvider>
-          </Router>
-        );
-      });
+  beforeAll(() => {
+    render(
+      <Router>
+              <CredentialsProvider>
+                  <AboutPage/>
+              </CredentialsProvider>
+      </Router>
+    );
+  });
 
+  afterAll(() => {
+      cleanup();
+  })
     
+  
+
+  it("Should send to githubs", () => {
+
+    expect(screen.getByRole("IconButton", {name:"Alex"}).href).toBe("https://github.com/ajearle11")
+  })
+
+
 })

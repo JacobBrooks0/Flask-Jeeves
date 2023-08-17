@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from application.models import Variables, db
+from application.binarySearchKernel.questionsLogic import sendQuestions
 
 variables = Blueprint("variables", __name__)
 
@@ -33,23 +34,8 @@ def get_variable_by_id(id):
     return jsonify(variable_data), 200
 
 
-# Update a variable by ID
-@variables.route("/variables/<id>", methods=["PUT"])
-def update_variable(id):
-    variable = Variables.query.get_or_404(id)
-    data = request.json
-    variable.specialty = data["specialty"]
-    variable.feature = data["feature"]
-    variable.question = data["question"]
-    variable.defaultQuestion = data["defaultQuestion"]
-    db.session.commit()
-    return jsonify({"message": "Variable updated successfully!"}), 200
+@variables.route("/variables_questions", methods=["GET"])
+def get_variables_questions():
+    questions = sendQuestions()
 
-
-# Delete a variable by ID
-@variables.route("/variables/<id>", methods=["DELETE"])
-def delete_variable(id):
-    variable = Variables.query.get_or_404(id)
-    db.session.delete(variable)
-    db.session.commit()
-    return jsonify({"message": "Variable deleted successfully!"}), 200
+    return jsonify(questions), 200

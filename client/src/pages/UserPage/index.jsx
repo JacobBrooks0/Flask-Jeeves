@@ -15,7 +15,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { FixedSizeList } from "react-window";
 import DoneIcon from "@mui/icons-material/Done";
 import { createNewRoom } from "../VideoPage/API";
-import CatRegisterForm from "../../components/CatRegisterForm/CatRegisterForm";
+import CatRegisterForm from "../../components/CatRegisterForm/";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
   const { dark, setDark } = useCredentials();
@@ -25,17 +26,38 @@ export default function UserPage() {
   const [selectedTime, setSelectedTime] = useState();
   const [time, setTime] = useState();
   const [catData, setCatData] = useState([]);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [initials, setInitials] = useState([]);
+  const [storageUser, setStorageUser] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.length === 0 ? navigate("/login") : null;
+  }, []);
 
   async function getCats() {
-    const response = await fetch("http://127.0.0.1:5000/pets");
-    const array = await response.json();
-    const cats = array.filter(
-      (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+    setName(
+      `${JSON.parse(localStorage.getItem("user")).first_name} ${
+        JSON.parse(localStorage.getItem("user")).last_name
+      }`
     );
-    setCatData(cats);
+
+    setEmail(JSON.parse(localStorage.getItem("user")).email);
+    const response = await fetch("http://127.0.0.1:5000/pets");
+    if (response.status == 200) {
+      const array = await response.json();
+      const cats = array.filter(
+        (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
+      );
+      setCatData(cats);
+    } else {
+      null;
+    }
   }
 
   async function postAppointment() {
+    const date = appointmentDate.date.toLocaleDateString("en-GB");
     const options = {
       method: "POST",
       mode: "cors",
@@ -45,12 +67,14 @@ export default function UserPage() {
         withCredentials: true,
       },
       body: JSON.stringify({
-        date: appointmentDate,
-        time: time,
+        date: date,
+        time: appointmentDate.time,
         user_id: JSON.parse(localStorage.getItem("user")).id,
+        meeting_id: appointmentDate.meetingId,
       }),
     };
     const response = await fetch("http://127.0.0.1:5000/appointment", options);
+    setModalOpen(false);
     const data = await response.json();
   }
 
@@ -86,48 +110,6 @@ export default function UserPage() {
     postAppointment();
   };
 
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-  useEffect(() => {
-    console.log(selectedTime);
-  }, [selectedTime]);
-  useEffect(() => {
-    console.log(appointmentDate);
-  }, [appointmentDate]);
-
-  const testUser = {
-    userId: 1,
-    firstName: "Alex",
-    lastName: "Earle",
-    email: "stinkyal@hotmail.com",
-    DOB: "21/12/1970",
-    petsId: [1, 2],
-  };
-
-  const pets = [
-    {
-      petId: 1,
-      name: "Stan",
-      DOB: "04/02/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-    {
-      petId: 2,
-      name: "Alfie",
-      DOB: "21/04/2002",
-      breed: "mixed",
-      outdoor: true,
-      neutered: true,
-      sex: "male",
-      diet: "processed",
-    },
-  ];
-
   function renderRow(props) {
     const { index, style } = props;
 
@@ -158,6 +140,7 @@ export default function UserPage() {
   return (
     <div
       className="profile-page"
+      role="container1"
       style={{
         backgroundColor: dark ? "#121212" : "whitesmoke",
         marginBottom: "-100px",
@@ -193,13 +176,13 @@ export default function UserPage() {
               borderRadius: "50%",
               backgroundColor: dark ? "#826BF5" : "#D3CCFA",
               color: dark ? "whitesmoke" : "#121212",
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               fontSize: "3rem",
             }}
           >
-            {JSON.parse(localStorage.getItem("user")).first_name[0]}
-            {JSON.parse(localStorage.getItem("user")).last_name[0]}
+            {name ? name[0] + name[name.indexOf(" ") + 1] : "loading"}
           </div>
+
           <Typography
             variant="h6"
             component="p"
@@ -210,20 +193,17 @@ export default function UserPage() {
               width: "100%",
               display: "block",
               lineHeight: 1.6,
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               textAlign: "center",
               color: dark ? "whitesmoke" : "#121212",
               // borderTop: "1px solid",
               borderColor: dark ? "purple" : "#121212",
             }}
           >
-            First Name: {JSON.parse(localStorage.getItem("user")).first_name}
+            {catData ? name : "loading"}
             <br />
             <br />
-            Last Name: {JSON.parse(localStorage.getItem("user")).last_name}
-            <br />
-            <br />
-            Email: {JSON.parse(localStorage.getItem("user")).email}
+            {catData ? email : "loading"}
             <br />
             <br />
           </Typography>
@@ -236,8 +216,8 @@ export default function UserPage() {
             value={value}
             className="calender"
           />
-          {catData.map((cat) => {
-            return <ProfileCat cat={cat} key={cat.id} />;
+          {catData.map((cat, index) => {
+            return <ProfileCat cat={cat} index={index} key={cat.id} />;
           })}
         </div>
       </div>
@@ -253,7 +233,7 @@ export default function UserPage() {
             variant="h5"
             component="h2"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "black",
             }}
           >
@@ -333,7 +313,7 @@ export default function UserPage() {
         <h1
           style={{
             textAlign: "center",
-            fontFamily: "Jua",
+            fontFamily: "Patua One",
             padding: "40px 20px",
           }}
         >

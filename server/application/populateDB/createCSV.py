@@ -539,7 +539,7 @@ idx = 1
 for disease, symptoms in DiseaseRules.items():    
     for symptom, values in symptoms.items():            
         string = str(idx) + "," + str(DicDis[disease]) + "," + str(DicSym[symptom]) + "," + str(values[0]) + "," + str(values[1]) + "," + str(values[2]) + "," + str(values[3]) + "," + str(values[4]) + "\n"
-        idx+=1        
+        idx+=1      
         file.write(string)
 file.close()
 

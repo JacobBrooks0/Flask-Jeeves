@@ -6,9 +6,14 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 import os  # inbuilt python module
+from dotenv import load_dotenv
+
+load_dotenv()
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate  # db migration
+
+load_dotenv()
 
 # methods from Flask-Login for session management.
 from flask_login import (
@@ -32,6 +37,7 @@ login_manager.login_message_category = "info"
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 def create_app(env=None):
     # initialise the app
@@ -42,7 +48,6 @@ def create_app(env=None):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
     login_manager.init_app(app)
-    migrate.init_app(app, db)
     bcrypt.init_app(app)
 
     # config setup for different environment
@@ -58,16 +63,17 @@ def create_app(env=None):
         app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
     # initialising the db and connecting to app
     db.init_app(app)
+    migrate.init_app(app, db)
     app.app_context().push()
     CORS(app)
 
     # BLUEPRINTS
     from application.homepage.routes import homepage
-
     from application.login.routes import auth
     from application.appointments.routes import appointment
     from application.user.routes import user
     from application.pets.routes import pet
+
     from application.diary.routes import diary
     from application.variables.routes import variables
     from application.user_answer_count.routes import users_answers_count

@@ -114,7 +114,7 @@ export default function LoginPage() {
           component="h1"
           variant="h4"
           className="sign-in"
-          fontFamily={"'Jua', sans-serif"}
+          fontFamily={"'Patua One', sans-serif"}
           sx={{
             fontWeight: "400",
             textAlign: "center",

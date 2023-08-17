@@ -1,5 +1,5 @@
 export const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI2YzQ0MTJlYy04ZGQ1LTRjNTAtOGVhMS0yOTdiZWY0YTg3YjQiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY5MTQxODc2NSwiZXhwIjoxNjkyMDIzNTY1fQ.lnTq10JfaoiJQiHeNkfp96HZV5K69D5bNdGHvNOLS1s";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI2YzQ0MTJlYy04ZGQ1LTRjNTAtOGVhMS0yOTdiZWY0YTg3YjQiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY5MjA5NDQzOSwiZXhwIjoxNjk0Njg2NDM5fQ.PNEQsWzgMaOO1FgfqMUej-ZrbmOVvbLKLsWx0oyoxjQ";
 
 // API call to create meeting
 export const createNewRoom = async () => {
@@ -12,6 +12,5 @@ export const createNewRoom = async () => {
   });
 
   const { roomId } = await res.json();
-  console.log(res);
   return roomId;
 };

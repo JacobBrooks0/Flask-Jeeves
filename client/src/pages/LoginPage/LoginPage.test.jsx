@@ -27,7 +27,7 @@
 // })
 import React from "react";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { screen, render, cleanup, within } from "@testing-library/react";
+import { screen, render, cleanup, within ,fireEvent,waitFor} from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 
@@ -38,7 +38,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 expect.extend(matchers);
 
 describe("Login Page", () => {
-
+    
     beforeEach(() => {
           render(
 
@@ -83,4 +83,34 @@ describe("Login Page", () => {
     });
 
     
-})
+    it("Should send to register",() => {
+      expect(screen.getByRole("link").href).toBe("http://localhost:3000/register")
+  })
+
+    
+
+
+  // TEST 3
+  it('Should login ', async () => {
+      
+      const emailInput = screen.getByRole('textbox',{name:"Email Address"});
+      const passwordInput = screen.getByRole('password',{name:"Password"});
+      const submitButton = screen.getByRole('button', { name: "Sign In" });
+
+      fireEvent.change(emailInput, { target: { value: 'Test2' } });
+      fireEvent.change(passwordInput, { target: { value: 'Password' } });
+      fireEvent.click(submitButton);
+
+      expect(emailInput.value).toBe('Test2');
+      expect(passwordInput.value).toBe('Password');
+
+      await waitFor(() => {
+          const Home = screen.getByText("Let's check your cat!");
+          expect(Home).toBeInTheDocument();
+      });
+  });
+});
+
+
+    
+
