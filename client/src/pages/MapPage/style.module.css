@@ -1,0 +1,24 @@
+.header {
+  height: 100vh;
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+}
+
+.map-page {
+  margin-top: 60px;
+}
+
+.header-text-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  margin-bottom: -100px;
+}

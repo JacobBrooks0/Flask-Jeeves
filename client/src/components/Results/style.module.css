@@ -1,0 +1,8 @@
+.question-text {
+  background-color: #d3ccfadd;
+  padding: 40px;
+  font-size: 40px;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
