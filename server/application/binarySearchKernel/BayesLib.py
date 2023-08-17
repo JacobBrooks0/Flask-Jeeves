@@ -1,17 +1,24 @@
 import numpy as np
 import random as rd
 
+
 def CalculateAnswer(AnswerCounts):
     if sum(AnswerCounts) == 0.0:
         # Disease nor cataloged yet.
         return 0.5
 
-    AvgAnswer = AnswerCounts[0]*0.00 + AnswerCounts[1]*0.25 + AnswerCounts[2]*0.50 + AnswerCounts[3]*0.75 + AnswerCounts[4]*1.0
+    AvgAnswer = (
+        AnswerCounts[0] * 0.00
+        + AnswerCounts[1] * 0.25
+        + AnswerCounts[2] * 0.50
+        + AnswerCounts[3] * 0.75
+        + AnswerCounts[4] * 1.0
+    )
     AvgAnswer /= sum(AnswerCounts)
     return AvgAnswer
 
-class BayesLib:
 
+class BayesLib:
     def __init__(self, allDiseasesVariables, allDiseases, allRules, maxIter):
         self.allDiseasesVariables = np.copy(allDiseasesVariables)
         self.allDiseases = np.copy(allDiseases)
@@ -21,11 +28,17 @@ class BayesLib:
         self.answers_so_far = []
         self.Iter = 0
 
-    def setQuestionAnswer(self, variableID, answer):  
+    def as_dict(self):
+        return {
+            "diseasesVariables_so_far": self.diseasesVariables_so_far,
+            "answers_so_far": self.answers_so_far,
+        }
+
+    def setQuestionAnswer(self, variableID, answer):
         if type(variableID) == type(list()) or type(answer) == type(list()):
             if len(variableID) != len(answer):
                 print("Error: List with different sizes.")
-            
+
             for var in variableID:
                 self.diseasesVariables_so_far.append(var)
             for ans in answer:
@@ -33,14 +46,14 @@ class BayesLib:
         else:
             self.diseasesVariables_so_far.append(variableID)
             self.answers_so_far.append(answer)
- 
-    def getRandomQuestions(self, falseVariableQuestions): 
+
+    def getRandomQuestions(self, falseVariableQuestions):
         # Start with a random algorithm
         randomQuestions = []
-        idx = []      
+        idx = []
         while len(randomQuestions) < self.maxIter:
-            question_Idx = rd.randint(0, len(falseVariableQuestions)-1) 
-            print(question_Idx)           
+            question_Idx = rd.randint(0, len(falseVariableQuestions) - 1)
+            print(question_Idx)
             if question_Idx not in idx:
                 idx.append(question_Idx)
                 randomQuestions.append(falseVariableQuestions[question_Idx])
@@ -49,29 +62,34 @@ class BayesLib:
     def Solve(self):
         # Calculating Probabilities based on Bayes theorem
         probabilities = self.CalculateProbabilites()
-        probabilities = sorted( probabilities, key= lambda d:d['Likelihood'] )
+        probabilities = sorted(probabilities, key=lambda d: d["Likelihood"])
         probabilities.reverse()
         return probabilities[:3]
 
     def CalculateProbabilites(self):
-
         # Calculating the Disease Likelihood for all Diseases
-        DisLikelihood = np.ones(len(self.allDiseases)+1)
+        DisLikelihood = np.ones(len(self.allDiseases) + 1)
         for dis in range(len(self.allDiseases)):
             for ans in range(len(self.answers_so_far)):
                 LikeCalc = 0.0
                 try:
-                    LikeCalc = self.allRules[self.allDiseases[dis]][self.diseasesVariables_so_far[ans]]
+                    LikeCalc = self.allRules[self.allDiseases[dis]][
+                        self.diseasesVariables_so_far[ans]
+                    ]
                 except:
                     LikeCalc = 0.5
-                DisLikelihood[self.allDiseases[dis]] *= max( 0.01, 1.0 - abs( LikeCalc - self.answers_so_far[ans] ))
+                DisLikelihood[self.allDiseases[dis]] *= max(
+                    0.01, 1.0 - abs(LikeCalc - self.answers_so_far[ans])
+                )
 
         ProbabilitiesList = []
         for dis in self.allDiseases:
-            ProbabilitiesList.append({
-                'disease_id': dis,
-                'Likelihood': self.CalculateDiseaseProbability(dis, DisLikelihood)
-            })
+            ProbabilitiesList.append(
+                {
+                    "disease_id": dis,
+                    "Likelihood": self.CalculateDiseaseProbability(dis, DisLikelihood),
+                }
+            )
 
         return ProbabilitiesList
 
@@ -94,10 +112,13 @@ class BayesLib:
         for ans in range(len(self.allDiseases)):
             if self.allDiseases[ans] != GivenDisease:
                 P_AvgNonLikelihood += DisLikelihood[self.allDiseases[ans]]
-        P_AvgNonLikelihood /= ( len(self.allDiseases) - 1.0 )
+        P_AvgNonLikelihood /= len(self.allDiseases) - 1.0
         P_AvgNonLikelihood = max(P_AvgNonLikelihood, 0.01)
 
         # Bayes Theorem
-        P_Bayes = P_Disease*P_Likelihood / ( P_Disease*P_Likelihood + (1.0 - P_Disease)*P_AvgNonLikelihood )
+        P_Bayes = (
+            P_Disease
+            * P_Likelihood
+            / (P_Disease * P_Likelihood + (1.0 - P_Disease) * P_AvgNonLikelihood)
+        )
         return P_Bayes
-

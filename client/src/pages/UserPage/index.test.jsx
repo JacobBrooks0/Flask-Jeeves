@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -9,42 +9,34 @@ import UserPage from ".";
 
 expect.extend(matchers);
 
-describe("User Page", () => {
+describe("UserPage", () => {
+  beforeEach(() => {
+    render(
+      <Router>
+        <CredentialsProvider>
+          <UserPage />
+        </CredentialsProvider>
+      </Router>
+    );
+  });
 
-      beforeEach(() => {
-        render(
-
-            <Router>
-              <GoogleOAuthProvider>
-                <CredentialsProvider>
-                    <UserPage />
-                </CredentialsProvider>
-                </GoogleOAuthProvider>
-            </Router>
-          
-        );
-    });
-
-    afterEach(() => {
+  afterEach(() => {
     cleanup();
-    });
+  });
 
-    it("Should display information", () => {
-      expect(screen.getByText(/First Name/i)).toBeTruthy();
-    })
+  it("Should display information", () => {
+    expect(screen.getByText(/First Name/i)).toBeTruthy();
+  });
 
-    it("Should display User Image", () => {
-      const image = screen.getByRole("image"); 
-        
-        expect(image.alt).toBe("user picture")
-    })
+  it("Should display User Image", () => {
+    const image = screen.getByRole("image");
 
-    it("Should display User Image", () => {
-      const image = screen.getByRole("image"); 
-        
-        expect(image.alt).toBe("user picture")
-    })
+    expect(image.alt).toBe("user picture");
+  });
 
+  it("Should display User Image", () => {
+    const image = screen.getByRole("image");
 
-    
-})
+    expect(image.alt).toBe("user picture");
+  });
+});

@@ -42,7 +42,7 @@ const MapPage = () => {
       <div className={style["header-text-container"]}>
         <h1
           style={{
-            fontFamily: "Jua",
+            fontFamily: "Patua One",
             marginBottom: "20px",
             color: dark ? "whitesmoke" : "black",
           }}

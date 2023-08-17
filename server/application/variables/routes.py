@@ -4,6 +4,7 @@ from application.binarySearchKernel.questionsLogic import sendQuestions
 
 variables = Blueprint("variables", __name__)
 
+
 # Create a new variable
 @variables.route("/variables", methods=["POST"])
 def create_variable():
@@ -32,12 +33,9 @@ def get_variable_by_id(id):
     }
     return jsonify(variable_data), 200
 
+
 @variables.route("/variables_questions", methods=["GET"])
 def get_variables_questions():
-
     questions = sendQuestions()
-    
+
     return jsonify(questions), 200
-
-
-

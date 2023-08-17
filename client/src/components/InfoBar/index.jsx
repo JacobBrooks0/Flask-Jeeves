@@ -138,6 +138,7 @@ export default function InfoBar() {
 
   return (
     <div
+      role="container"
       style={{
         width: "40%",
         height: "750px",
@@ -153,6 +154,7 @@ export default function InfoBar() {
     >
       {Object.keys(details).length == 0 ? (
         <div
+          role="container2"
           style={{
             height: "100%",
             width: "100%",
@@ -170,12 +172,14 @@ export default function InfoBar() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
             }}
           >
             <PetsIcon style={{ height: "50%", width: "50%" }} />
-            <h2 style={{ padding: "20px 0" }}>Don't 'paws' to read this!</h2>
-            <h3>
+            <h2 role="dontpaws" style={{ padding: "20px 0" }}>
+              Don't 'paws' to read this!
+            </h2>
+            <h3 role="select">
               Select a marker to see information about that Veterinary business
             </h3>
           </div>
@@ -223,7 +227,7 @@ export default function InfoBar() {
           >
             <h2
               style={{
-                fontFamily: "Jua",
+                fontFamily: "Patua One",
                 textAlign: "center",
                 padding: "0 20px",
               }}

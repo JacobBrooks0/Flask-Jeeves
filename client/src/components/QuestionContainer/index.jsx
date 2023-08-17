@@ -5,58 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useSymptoms } from "../../contexts";
 import Results from "../Results";
 import { useCredentials } from "../../contexts";
-
-const questionsTest = [
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat behaving oddly?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-  {
-    question: "Is your cat having runny poos?",
-  },
-  {
-    question: "Is your cat in pain?",
-  },
-  {
-    question:
-      "Does your cat look like a dog Does your cat look like a dog? Does your cat look like a dog?Does your cat look like a dog? ?",
-  },
-];
+import classNames from "classnames";
 
 export default function QuestionContainer({ cat }) {
   const {
@@ -66,25 +15,36 @@ export default function QuestionContainer({ cat }) {
     setQuestions,
     answers,
     setAnswers,
+    animation,
+    setDifferentAnswersIndex,
+    differentAnswersIndex,
   } = useSymptoms();
   const { dark, setDark } = useCredentials();
 
+  async function getQuestions() {
+    const response = await fetch("http://127.0.0.1:5000/variables_questions");
+    if (response.status == 200) {
+      const data = await response.json();
+      setQuestions(data);
+    } else {
+      console.log("Question fetch failed");
+    }
+  }
+
+  function arrayMap() {
+    console.log(questions);
+    let pos = questions
+      .map(function(e) {
+        return e.id;
+      })
+      .indexOf(35);
+    setDifferentAnswersIndex(pos);
+  }
   useEffect(() => {
-    //this may change
-    setQuestions(questionsTest);
+    getQuestions();
   }, []);
 
-  const toolTip = `Gender: ${cat.gender}, Breed: ${cat.breed}, DOB: ${cat.dateOfBirth}, Outdoor: ${cat.outdoor}, Neutered: ${cat.neutered}, Diet: ${cat.diet}, Contact with other pets: ${cat.contactWithPets}`;
-
-  //double check this is the response
-  //   name: "Kat",
-  //   gender: "Female",
-  //   breed: "Tabby",
-  //   dateOfBirth: "22nd Sept",
-  //   outdoor: true,
-  //   neutered: true,
-  //   diet: "processed",
-  //   contactWithPets: true,
+  const toolTip = `Gender: ${cat.sex}, Breed: ${cat.breed}, DOB: ${cat.dob}, Outdoor: ${cat.outdoor}, Neutered: ${cat.neutered}, Diet: ${cat.diet}, Contact with other pets: ${cat.contactWithPets}`;
 
   return (
     <div className={style["overall-container"]}>
@@ -101,19 +61,25 @@ export default function QuestionContainer({ cat }) {
           </div>
         </Tooltip>
       </div>
-      {/* this may change */}
       <div className={style["question-container"]}>
         {questions.length === 0 ? null : questionNumber == 15 ? (
-          <Results />
+          <Results cat={cat} />
         ) : (
           <h1
-            className={style["question-text"]}
+            className={classNames(
+              style["question-text"],
+              animation
+                ? style["animation-class"]
+                : style["animation-class-two"]
+            )}
             style={{
               backgroundColor: dark ? "#826BF5" : "#D3CCFA",
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Q{questionNumber + 1}: {questions[questionNumber].question}
+            {questions.length === 0 ? null : arrayMap()}Q{questionNumber + 1}:{" "}
+            {questions[questionNumber].question}
+            {console.log(differentAnswersIndex)}
           </h1>
         )}
       </div>

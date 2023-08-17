@@ -19,7 +19,7 @@ export default function NotFoundPage() {
           opacity: "90%",
         }}
       >
-        <h1 style={{ fontFamily: "'Jua', sans-serif" }}>
+        <h1 style={{ fontFamily: "'Patua One', sans-serif" }}>
           Oops! You seem to be lost.
         </h1>
         <div className="p-and-img">
@@ -33,7 +33,7 @@ export default function NotFoundPage() {
               width: "100%",
               display: "block",
               lineHeight: 1.6,
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               textAlign: "center",
               color: "#121212",
               // borderTop: "1px solid",

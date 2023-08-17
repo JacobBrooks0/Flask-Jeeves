@@ -9,7 +9,7 @@ export default function LandingTitle({ text, textAlign }) {
         fontWeight: "400",
         textAlign: textAlign,
       }}
-      style={{ fontFamily: "'Jua', sans-serif" }}
+      style={{ fontFamily: "'Patua One', sans-serif" }}
     >
       {text}
     </Typography>

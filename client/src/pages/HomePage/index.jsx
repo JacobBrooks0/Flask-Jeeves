@@ -22,7 +22,7 @@ export default function HomePage() {
           <h1
             style={{
               margin: "50px 0 20px 0",
-              fontFamily: "Jua",
+              fontFamily: "Patua One",
               fontSize: "48px",
               fontWeight: "500",
             }}
@@ -30,7 +30,7 @@ export default function HomePage() {
             Let's check your cat!
           </h1>
           <p>
-            Our symptom checker will help you understand your cat's problems,
+            Our Symptoms Checker will help you understand your cat's problems,
             and we can advise you on the best course of action.
           </p>
           <Button
@@ -77,7 +77,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -93,11 +93,12 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
             Head to your profile page using the link below to book a videochat
             appointment with your vet! <br /> <br /> You can also view your
-            information and the information of your registered cats.
+            account information and the information about your registered cats.
           </Typography>
           <Button
             variant="contained"
@@ -149,7 +150,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -165,11 +166,13 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
-            Head to the map page using the link below to search for nearby vets
-            to your location. <br /> <br /> You can also see information about
-            the vets, including their website, contact number and rating.
+            Head to the map page using the link below to search for veterinarian
+            clinics close to your location. <br /> <br /> You can also see
+            information about the vets, including their website, contact number
+            and rating.
           </Typography>
           <Button
             variant="contained"
@@ -216,7 +219,7 @@ export default function HomePage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -232,11 +235,12 @@ export default function HomePage() {
               display: "block",
               lineHeight: 1.6,
               color: dark ? "whitesmoke" : "#121212",
+              textAlign: "justify",
             }}
           >
             Head to the video appointment page using the link below to access
             your video appointment. <br /> <br /> You can view when your next
-            appointment is and information about it.
+            appointment is and any information about it.
           </Typography>
           <Button
             variant="contained"

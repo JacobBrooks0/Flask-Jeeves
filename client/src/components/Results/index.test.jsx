@@ -4,7 +4,7 @@ import { screen, render, cleanup, within } from "@testing-library/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import matchers from "@testing-library/jest-dom/matchers";
 import { NavLink, Link } from "react-router-dom";
-import CatBot from "../../components/CatBot";
+import Results from "../../components/Results";
 import {
   CredentialsProvider,
   useCredentials,
@@ -16,12 +16,12 @@ import { Info } from "@mui/icons-material";
 
 expect.extend(matchers);
 
-describe("CatBot", () => {
+describe("Results", () => {
   beforeEach(() => {
     render(
       <Router>
         <CredentialsProvider>
-          <CatBot />
+          <Results />
         </CredentialsProvider>
       </Router>
     );
@@ -32,14 +32,9 @@ describe("CatBot", () => {
   });
 
   //   Doesnt run
-  it("Displays a button", () => {
-    const button = screen.getByRole("button");
-    expect(button).toBeInTheDocument();
+  it("Displays a image", () => {
+    const image = screen.getByRole("image");
+    expect(image).toBeInTheDocument();
   });
-  it("Displays a container", () => {
-    const container = screen.getByRole("container");
-    expect(container).toBeInTheDocument();
-  });
-
   // doesnt run
 });

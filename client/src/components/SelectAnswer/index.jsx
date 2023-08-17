@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import List from "@mui/material/List";
+import { useNavigate } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -11,6 +12,7 @@ import { useSymptoms } from "../../contexts";
 import { useCredentials } from "../../contexts";
 
 export default function SelectAnswer() {
+  const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = React.useState(null);
   const [selectedTick, setSelectedTick] = React.useState(null);
   const [errorText, setErrorText] = useState(false);
@@ -20,6 +22,9 @@ export default function SelectAnswer() {
     setQuestionNumber,
     answers,
     setAnswers,
+    setAnimation,
+    animation,
+    differentAnswersIndex,
   } = useSymptoms();
 
   const handleListItemClick = (event, index) => {
@@ -32,8 +37,8 @@ export default function SelectAnswer() {
     if (selectedTick === null) {
       setErrorText(true);
     } else {
-      setAnswers([...answers, selectedIndex]);
-      //this may change
+      setAnswers([...answers, selectedIndex + 1]);
+      setAnimation(!animation);
       setQuestionNumber(questionNumber + 1);
       setSelectedTick(null);
       setSelectedIndex(null);
@@ -41,12 +46,14 @@ export default function SelectAnswer() {
   };
 
   return (
-    <div className={style["container"]}>
+    <div role="container" className={style["container"]}>
       {questionNumber == 15 ? (
         <>
           <h2
             className={style["end-of-quiz-text"]}
-            style={{ color: dark ? "whitesmoke" : "#121212" }}
+            style={{
+              color: dark ? "whitesmoke" : "#121212",
+            }}
           >
             It is important that you seek the correct medical help as our
             calculations may not always be correct. You can book a video
@@ -70,7 +77,7 @@ export default function SelectAnswer() {
                   backgroundColor: "#7958D6",
                 },
               }}
-              // onClick={nextQuestion}
+              onClick={() => navigate("/video")}
             >
               Book A Video Call
             </Button>
@@ -91,7 +98,7 @@ export default function SelectAnswer() {
                   backgroundColor: "#7958D6",
                 },
               }}
-              // onClick={nextQuestion}
+              onClick={() => navigate("/map")}
             >
               See A Map of Local Vets
             </Button>
@@ -99,18 +106,24 @@ export default function SelectAnswer() {
         </>
       ) : (
         <>
-          <div>
+          <div role="container2">
             <List
               component="nav"
               sx={{ color: dark ? "whitesmoke" : "#121212" }}
+              role="list"
             >
               <Divider />
               <ListItemButton
                 selected={selectedIndex === 0}
                 onClick={(event) => handleListItemClick(event, 0)}
               >
-                {console.log(answers)}
-                <ListItemText primary="Yes" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than a year"
+                      : "No"
+                  }
+                />
                 {selectedTick === 0 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -119,10 +132,17 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 1}
                 onClick={(event) => handleListItemClick(event, 1)}
               >
-                <ListItemText primary="Probably yes" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than six months ago"
+                      : "Probably not"
+                  }
+                />
                 {selectedTick === 1 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -131,10 +151,17 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 2}
                 onClick={(event) => handleListItemClick(event, 2)}
               >
-                <ListItemText primary="I don't know" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "More than a month ago"
+                      : "I don't know"
+                  }
+                />
                 {selectedTick === 2 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -146,7 +173,13 @@ export default function SelectAnswer() {
                 selected={selectedIndex === 3}
                 onClick={(event) => handleListItemClick(event, 3)}
               >
-                <ListItemText primary="Probably not" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "A week to a month ago"
+                      : "Probably yes"
+                  }
+                />
                 {selectedTick === 3 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -155,10 +188,17 @@ export default function SelectAnswer() {
               </ListItemButton>
               <Divider />
               <ListItemButton
+                role="buttons"
                 selected={selectedIndex === 4}
                 onClick={(event) => handleListItemClick(event, 4)}
               >
-                <ListItemText primary="No" />
+                <ListItemText
+                  primary={
+                    differentAnswersIndex === questionNumber
+                      ? "Less than a week ago"
+                      : "Yes"
+                  }
+                />
                 {selectedTick === 4 ? (
                   <ListItemIcon style={{ color: "green", paddingLeft: "50px" }}>
                     <DoneIcon />
@@ -168,7 +208,7 @@ export default function SelectAnswer() {
               <Divider />
             </List>
           </div>
-          <div className={style["button-container"]}>
+          <div role="container3" className={style["button-container"]}>
             <Button
               variant="contained"
               sx={{

@@ -45,7 +45,7 @@ export default function AboutPage() {
   const captionStyle = {
     fontSize: "2em",
     fontWeight: "bold",
-    fontFamily: "'Jua', sans-serif",
+    fontFamily: "'Patua One', sans-serif",
   };
   const slideNumberStyle = {
     fontSize: "20px",
@@ -73,7 +73,7 @@ export default function AboutPage() {
         <Typography
           variant="h3"
           component="h3"
-          sx={{ fontFamily: "'Jua', sans-serif", mt: 4 }}
+          sx={{ fontFamily: "'Patua One', sans-serif", mt: 4 }}
         >
           Meet the crew
         </Typography>
@@ -84,13 +84,16 @@ export default function AboutPage() {
               variant="h6"
               component="h6"
               sx={{
-                fontFamily: "'Jua', sans-serif",
+                fontFamily: "'Patua One', sans-serif",
                 display: "flex",
                 flexDirection: "row",
               }}
             >
               Alex Earle
-              <IconButton name="Alex" href="https://github.com/ajearle11">
+              <IconButton
+                name="Alex"
+                onClick={() => window.open(`https://github.com/ajearle11`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -100,10 +103,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Lais de Jesus Moraes
-              <IconButton href="https://github.com/laisjmvet">
+              <IconButton
+                onClick={() => window.open(`https://github.com/laisjmvet`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -113,10 +118,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Jacob Brooks
-              <IconButton href="https://github.com/JacobBrooks0">
+              <IconButton
+                onClick={() => window.open(`https://github.com/JacobBrooks0`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -126,10 +133,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Roberta Capuano
-              <IconButton href="https://github.com/Bibi0506">
+              <IconButton
+                onClick={() => window.open(`https://github.com/Bibi0506`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -139,10 +148,12 @@ export default function AboutPage() {
             <Typography
               variant="h6"
               component="h6"
-              sx={{ fontFamily: "'Jua', sans-serif" }}
+              sx={{ fontFamily: "'Patua One', sans-serif" }}
             >
               Harry Turner-Burns
-              <IconButton href="https://github.com/HarryTB2112">
+              <IconButton
+                onClick={() => window.open(`https://github.com/HarryTB2112`)}
+              >
                 <GitHubIcon sx={{ color: dark ? "whitesmoke" : "#121212" }} />
               </IconButton>
             </Typography>
@@ -167,7 +178,7 @@ export default function AboutPage() {
             variant="h3"
             component="header"
             sx={{
-              fontFamily: "'Jua', sans-serif",
+              fontFamily: "'Patua One', sans-serif",
               color: dark ? "whitesmoke" : "#121212",
               fontSize: "3rem",
             }}
@@ -177,6 +188,7 @@ export default function AboutPage() {
           <Typography
             variant="h6"
             component="p"
+            style={{ textAlign: "justify" }}
             sx={{
               py: 3,
               pr: 10,
@@ -185,13 +197,14 @@ export default function AboutPage() {
               color: dark ? "whitesmoke" : "#121212",
             }}
           >
-            Our aim is to make looking after your cat easier and stress free. We
-            have used real vertinary expertise to create a program that can
-            diagnose your cat from information you provide. Needless to say that
-            this does not replace a real vetinary appointment, so if the problem
-            is serious, go and see a vet. <br /> <br /> We have made this even
-            easier for you, by allowing you to book video calls with a vet, and
-            allowing you to view nearby vets and their information!
+            Our aim is to make looking after your cat easy and stress free. We
+            have used real veterinary expertise to create a program that can
+            diagnose your cat from the symptoms you provide. Needless to say
+            that this does not replace a real veterinary appointment, so if the
+            problem is serious, you must go and see a vet. <br /> <br /> We have
+            made the process even easier for you by allowing you to book video
+            calls with a vet and view nearby veterinarian practices and their
+            information!
           </Typography>
         </div>
         <img src={MissionCat} alt="cat" style={{ height: "500px" }} />
@@ -201,7 +214,7 @@ export default function AboutPage() {
           variant="h3"
           component="header"
           sx={{
-            fontFamily: "'Jua', sans-serif",
+            fontFamily: "'Patua One', sans-serif",
             color: dark ? "whitesmoke" : "#121212",
             fontSize: "3rem",
           }}

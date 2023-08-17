@@ -2,7 +2,6 @@ import React, { useState, useContext, createContext } from "react";
 
 const CredentialsContext = createContext();
 
-
 export const CredentialsProvider = ({ children }) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
@@ -63,6 +62,8 @@ export const SymptomsProvider = ({ children }) => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [animation, setAnimation] = useState(true);
+  const [differentAnswersIndex, setDifferentAnswersIndex] = useState(true);
 
   return (
     <SymptomsContext.Provider
@@ -73,6 +74,10 @@ export const SymptomsProvider = ({ children }) => {
         setQuestions,
         answers,
         setAnswers,
+        animation,
+        setAnimation,
+        differentAnswersIndex,
+        setDifferentAnswersIndex,
       }}
     >
       {children}

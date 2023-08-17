@@ -1,0 +1,32 @@
+.catbot-container {
+  width: 65px;
+  height: 65px;
+  z-index: 1000000;
+  background-color: #826bf5;
+  border-radius: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+}
+
+.catbot-container:hover {
+  background-color: #7958d6;
+  cursor: pointer;
+}
+
+.catbot-modal {
+  width: 400px;
+  height: 600px;
+  z-index: 1000000;
+  border: 1px solid #826bf5;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  border-radius: 20px;
+}

@@ -13,6 +13,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate  # db migration
 
+load_dotenv()
+
 # methods from Flask-Login for session management.
 from flask_login import (
     UserMixin,
@@ -33,6 +35,7 @@ login_manager.login_message_category = "info"
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 
 def create_app(env=None):
@@ -69,6 +72,7 @@ def create_app(env=None):
     from application.appointments.routes import appointment
     from application.user.routes import user
     from application.pets.routes import pet
+
     from application.diary.routes import diary
     from application.variables.routes import variables
     from application.user_answer_count.routes import users_answers_count
