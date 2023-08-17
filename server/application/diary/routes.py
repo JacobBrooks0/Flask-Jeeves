@@ -1,24 +1,42 @@
 from flask import Blueprint, request, jsonify
-from application.models import Diary, db
+from application.models import Diary, Diseases, db
+from datetime import * 
+#from application.binarySearchKernnel import questionsLogic
+#from questionsLogic import findDiagnosis
 
 diary = Blueprint("diary", __name__)
 
 
 # Create a new diary entry
-@diary.route("/diary", methods=["POST"])
+""" @diary.route("/diary", methods=["POST"])
 def create_diary():
+    current_date = datetime.now().date()
     data = request.json
-    new_diary_entry = Diary(
-        pet_id=data["pet_id"],
-        name=data["name"],
-        date=data["date"],
-        diagnosis=data["diagnosis"],
-        field=data["field"],
-    )
-    db.session.add(new_diary_entry)
-    db.session.commit()
-    return jsonify({"message": "Diary entry created successfully!"}), 201
-
+    pet_id = data['pet_id']
+    questions = data['questionsArray']
+    answers = data['answersArray']
+    #answersValues = answerRandomAnamnese(answers)
+    result = findDiagnosis(pet_id, questions, answers)
+    listDiseases = []
+    for diagnosis in result:
+        id = int(diagnosis['disease_id'])
+        listDiseases.append(Diseases.query.get_or_404(id).as_dict()['name'])
+    try:
+        new_diary_entry = Diary(
+            pet_id=pet_id,
+            date=current_date,
+            questions=questions,
+            answers = answers,
+            possiblesDiagnosis= ['a']
+            #field=data["field"],
+        )
+        print(listDiseases, "!?!?!?!?!")
+        db.session.add(new_diary_entry)
+        db.session.commit()
+        return jsonify({"message": 'sent'}), 201
+    except Exception as e:
+        print("ERROR!!!!!!!!!!", str(e))
+ """
 
 # Retrieve a diary entry by ID
 @diary.route("/diary/<id>", methods=["GET"])

@@ -30,9 +30,13 @@ gunicorn = "*"
 flask-login = "*"
 flask-bcrypt = "*"
 flask-migrate = "*"
+<<<<<<< Updated upstream
 pytest = "*"
 coverage = "*"
 pytest-mock = "*"
+=======
+pandas = "*"
+>>>>>>> Stashed changes
 
 [dev-packages]
 pytest = "*"
