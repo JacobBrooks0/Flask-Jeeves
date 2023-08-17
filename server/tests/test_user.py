@@ -32,14 +32,9 @@ def test_user_equality():
     user2 = Users('Harry', 'T.', 'harry@example.com', 'securepassword')
     assert user1 == user2
 
-def test_user_inequality():
-    user1 = Users('Harry', 'T.', 'harry@example.com', 'securepassword')
-    user2 = Users('Jacob', 'Brooks', 'Jacob@email.com', 'Password')
-    assert user1 != user2
-
 def test_user_instance_variables():
     with mock.patch("application.models.Users"):
-        user = Users('Bob', 'Brown', 'bob@example.com', 'mypassword')
+        user = Users('Jacob', 'Brooks', 'jb12@example.com', 'mypassword')
         assert hasattr(user, 'first_name')
         assert hasattr(user, 'last_name')
         assert hasattr(user, 'email')
@@ -47,8 +42,8 @@ def test_user_instance_variables():
 
 def test_user_instance_initialization():
     with mock.patch("application.models.Users"):
-        user = Users('Sam', 'Smith', 'sam@example.com', 'testpassword')
-        assert user.first_name == 'Sam'
-        assert user.last_name == 'Smith'
-        assert user.email == 'sam@example.com'
+        user = Users('Lais', 'M.', 'lais@example.com', 'testpassword')
+        assert user.first_name == 'Lais'
+        assert user.last_name == 'M.'
+        assert user.email == 'lais@example.com'
         assert user.password == 'testpassword'

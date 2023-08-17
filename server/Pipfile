@@ -30,6 +30,9 @@ gunicorn = "*"
 flask-login = "*"
 flask-bcrypt = "*"
 flask-migrate = "*"
+pytest = "*"
+coverage = "*"
+pytest-mock = "*"
 
 [dev-packages]
 pytest = "*"
