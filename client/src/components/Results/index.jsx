@@ -43,6 +43,7 @@ export default function Results({ cat }) {
       const data = await response.json();
       setIllness(data.possiblesDiagnosis);
       setCalculating(false);
+      console.log(data);
     } else {
       console.log("Could not fetch diary");
     }
@@ -80,6 +81,16 @@ export default function Results({ cat }) {
             </strong>{" "}
             or <strong> {illness[2]}</strong>.
           </p>
+          {/* <p
+            style={{
+              color: dark ? "whitesmoke" : "#121212",
+              fontFamily: "Roboto",
+            }}
+          >
+            We believe your cat could be suffering with one of:{" "}
+            <strong>Flea Allergy, Atopic Dermatitis</strong> or{" "}
+            <strong> Scabies</strong>.
+          </p> */}
         </div>
       )}
     </>
