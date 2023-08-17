@@ -5,13 +5,13 @@ full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
 
 # Import necessary modules
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from application import *
 import pandas as pd
 
 # Create an engine and bind it to a session
-DATABASE_URL2="postgresql://xouhhvvt:AJHqkM7FSLypbnj6M_BUh4jsTtsdteD9@trumpet.db.elephantsql.com/xouhhvvt"
+DATABASE_URL2="postgresql://etijyuzx:rSbIdeGUOBQ9ZDy4EVwCDwu7K6d2adPa@trumpet.db.elephantsql.com/etijyuzx"
 engine = create_engine(DATABASE_URL2)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -29,7 +29,6 @@ dfDiseasesVariables.rename_axis('id', inplace=True)
 dfDiseasesVariables.reset_index(drop=True, inplace=True)
 dfDiseasesVariables.index += 1  # Shift the index by 1 to start from 1
 dfDiseasesVariables.to_sql('variables', con=engine, if_exists='append', index=False)
-print(dfDiseasesVariables)
 
 dfDiseases = pd.read_csv('Diseases.csv')
 dfDiseases.rename_axis('id', inplace=True)

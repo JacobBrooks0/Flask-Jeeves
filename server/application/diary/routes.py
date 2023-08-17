@@ -35,10 +35,7 @@ def create_diary():
             questions=questions,
             answers = answers,
             possiblesDiagnosis= listDiseases
-            #field=data["field"],
         )
-        print(new_diary_entry.as_dict())
-
         db.session.add(new_diary_entry)
         db.session.commit()
         return jsonify({"pet_id": new_diary_entry.pet_id, 'instance_id': new_diary_entry.id}), 201

@@ -47,9 +47,12 @@ flask-migrate = "*"
 
 [dev-packages]
 pytest = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.9"
 
 [scripts]
 dev = "flask run"
+test="pytest"
+cov="pytest --cov-report term-missing --cov=."

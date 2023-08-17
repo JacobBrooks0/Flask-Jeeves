@@ -2,7 +2,6 @@
 function to call with diff setting (dev or testing environment)
 run different version of the app (multiple instances with different config)
 setup app factory """
-from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
 import os  # inbuilt python module

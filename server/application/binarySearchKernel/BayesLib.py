@@ -55,12 +55,12 @@ class BayesLib:
 
     def Solve(self):
         # Calculating Probabilities based on Bayes theorem
-        probabilities = self.CalculateProbabilites()
+        probabilities = self.CalculateProbabilities()
         probabilities = sorted( probabilities, key= lambda d:d['Likelihood'] )
         probabilities.reverse()
         return probabilities[:3]
 
-    def CalculateProbabilites(self):
+    def CalculateProbabilities(self):
 
         # Calculating the Disease Likelihood for all Diseases
         DisLikelihood = np.ones(len(self.allDiseases)+1)
