@@ -19,7 +19,9 @@ const WelcomeScreenContainer = ({ setAppData }) => {
   const { dark, setDark } = useCredentials();
 
   async function getAppointments() {
-    const response = await fetch("http://127.0.0.1:5000/appointments");
+    const response = await fetch(
+      "https://catcareserver.onrender.com/appointments"
+    );
     const array = await response.json();
     const appointments = array.filter(
       (appointment) =>

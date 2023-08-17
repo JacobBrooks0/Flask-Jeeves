@@ -28,7 +28,7 @@ export default function SymptomPage() {
   } = useSymptoms();
 
   async function getCats() {
-    const response = await fetch("http://127.0.0.1:5000/pets");
+    const response = await fetch("https://catcareserver.onrender.com/pets");
     const array = await response.json();
     const cats = array.filter(
       (cat) => cat.user_id == JSON.parse(localStorage.getItem("user")).id
