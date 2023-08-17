@@ -43,7 +43,10 @@ export default function RegisterPage() {
         password: passwordValue,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/user", options);
+    const response = await fetch(
+      "https://catcareserver.onrender.com/user",
+      options
+    );
     const data = await response.json();
 
     if (response.status == 201) {

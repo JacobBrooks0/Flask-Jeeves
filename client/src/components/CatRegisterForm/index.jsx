@@ -145,7 +145,10 @@ export default function CatRegisterForm({
         contactWithOtherPets: contact,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/pet", options);
+    const response = await fetch(
+      "https://catcareserver.onrender.com/pet",
+      options
+    );
     const data = await response.json();
     if (response.status == 201) {
       alert(`Cat registered!`);
@@ -178,7 +181,10 @@ export default function CatRegisterForm({
         contactWithOtherPets: contact,
       }),
     };
-    const response = await fetch(`http://127.0.0.1:5000/pet/${id}`, options);
+    const response = await fetch(
+      `https://catcareserver.onrender.com/pet/${id}`,
+      options
+    );
     const data = await response.json();
     if (response.status == 200) {
       alert(`Cat Updated!`);

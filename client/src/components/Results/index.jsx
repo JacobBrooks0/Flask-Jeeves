@@ -28,7 +28,10 @@ export default function Results({ cat }) {
         pet_id: cat.id,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/diary", options);
+    const response = await fetch(
+      "https://catcareserver.onrender.com/diary",
+      options
+    );
     if (response.status == 201) {
       const data = await response.json();
       getDiary(data.instance_id);
@@ -38,7 +41,9 @@ export default function Results({ cat }) {
   }
 
   async function getDiary(id) {
-    const response = await fetch(`http://127.0.0.1:5000/diary/${id}`);
+    const response = await fetch(
+      `https://catcareserver.onrender.com/diary/${id}`
+    );
     if (response.status == 200) {
       const data = await response.json();
       setIllness(data.possiblesDiagnosis);

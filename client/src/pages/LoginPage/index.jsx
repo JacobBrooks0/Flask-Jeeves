@@ -79,7 +79,10 @@ export default function LoginPage() {
         password: passwordValue,
       }),
     };
-    const response = await fetch("http://127.0.0.1:5000/login", options);
+    const response = await fetch(
+      "https://catcareserver.onrender.com/login",
+      options
+    );
     const data = await response.json();
     localStorage.setItem("user", JSON.stringify(data));
 

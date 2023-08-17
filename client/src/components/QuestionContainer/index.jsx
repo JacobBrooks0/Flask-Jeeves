@@ -22,7 +22,9 @@ export default function QuestionContainer({ cat }) {
   const { dark, setDark } = useCredentials();
 
   async function getQuestions() {
-    const response = await fetch("http://127.0.0.1:5000/variables_questions");
+    const response = await fetch(
+      "https://catcareserver.onrender.com/variables_questions"
+    );
     if (response.status == 200) {
       const data = await response.json();
       setQuestions(data);
