@@ -41,7 +41,7 @@ export default function Results({ cat }) {
     const response = await fetch(`http://127.0.0.1:5000/diary/${id}`);
     if (response.status == 200) {
       const data = await response.json();
-      setIllness(data.possiblesDiagnosis[0]);
+      setIllness(data.possiblesDiagnosis);
       setCalculating(false);
     } else {
       console.log("Could not fetch diary");
@@ -70,7 +70,8 @@ export default function Results({ cat }) {
         >
           <p style={{ color: dark ? "whitesmoke" : "#121212" }}>
             We believe your cat could be suffering with:{" "}
-            <strong>{illness}</strong>.
+            <strong>{illness[0]}</strong>. <br /> There is a smaller chance it
+            could be: {illness[1]} or {illness[2]}.
           </p>
         </div>
       )}

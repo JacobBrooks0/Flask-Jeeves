@@ -120,8 +120,8 @@ export default function SelectAnswer() {
                 <ListItemText
                   primary={
                     differentAnswersIndex === questionNumber
-                      ? "Less than a week ago"
-                      : "Yes"
+                      ? "More than a year"
+                      : "No"
                   }
                 />
                 {selectedTick === 0 ? (
@@ -139,8 +139,8 @@ export default function SelectAnswer() {
                 <ListItemText
                   primary={
                     differentAnswersIndex === questionNumber
-                      ? "A week to a month ago"
-                      : "Probably yes"
+                      ? "More than six months ago"
+                      : "Probably not"
                   }
                 />
                 {selectedTick === 1 ? (
@@ -176,8 +176,8 @@ export default function SelectAnswer() {
                 <ListItemText
                   primary={
                     differentAnswersIndex === questionNumber
-                      ? "More than six months ago"
-                      : "Probably not"
+                      ? "A week to a month ago"
+                      : "Probably yes"
                   }
                 />
                 {selectedTick === 3 ? (
@@ -195,8 +195,8 @@ export default function SelectAnswer() {
                 <ListItemText
                   primary={
                     differentAnswersIndex === questionNumber
-                      ? "More than a year"
-                      : "No"
+                      ? "Less than a week ago"
+                      : "Yes"
                   }
                 />
                 {selectedTick === 4 ? (
