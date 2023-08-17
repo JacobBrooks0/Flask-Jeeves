@@ -44,13 +44,7 @@ wtforms = "==3.0.1"
 zipp = "==3.16.2"
 pytest = "*"
 flask-migrate = "*"
-<<<<<<< Updated upstream
-pytest = "*"
-coverage = "*"
-pytest-mock = "*"
-=======
-pandas = "*"
->>>>>>> Stashed changes
+"testing.postgresql" = "*"
 
 [dev-packages]
 pytest = "*"
