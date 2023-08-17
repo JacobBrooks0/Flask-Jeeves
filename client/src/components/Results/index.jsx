@@ -68,10 +68,17 @@ export default function Results({ cat }) {
             opacity: "90%",
           }}
         >
-          <p style={{ color: dark ? "whitesmoke" : "#121212" }}>
-            We believe your cat could be suffering with:{" "}
-            <strong>{illness[0]}</strong>. <br /> There is a smaller chance it
-            could be: {illness[1]} or {illness[2]}.
+          <p
+            style={{
+              color: dark ? "whitesmoke" : "#121212",
+              fontFamily: "Roboto",
+            }}
+          >
+            We believe your cat could be suffering with one of:{" "}
+            <strong>
+              {illness[0]}, {illness[1]}
+            </strong>{" "}
+            or <strong> {illness[2]}</strong>.
           </p>
         </div>
       )}

@@ -182,6 +182,7 @@ export default function UserPage() {
           >
             {name ? name[0] + name[name.indexOf(" ") + 1] : "loading"}
           </div>
+
           <Typography
             variant="h6"
             component="p"

@@ -20,7 +20,6 @@ describe("Join US", () => {
           render(
             <Router>
                 <CredentialsProvider>
-                    
                     <LandingHeader/>
                 </CredentialsProvider>
             </Router>

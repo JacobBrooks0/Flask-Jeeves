@@ -13,6 +13,7 @@ import {
   VideoPage,
   AboutPage,
   NotFoundPage,
+
 } from "./pages";
 import { AnimatePresence } from "framer-motion";
 

@@ -94,7 +94,7 @@ describe("Login Page", () => {
   it('Should login ', async () => {
       
       const emailInput = screen.getByRole('textbox',{name:"Email Address"});
-      const passwordInput = screen.getByRole('textbox',{name:"Password"});
+      const passwordInput = screen.getByRole('password',{name:"Password"});
       const submitButton = screen.getByRole('button', { name: "Sign In" });
 
       fireEvent.change(emailInput, { target: { value: 'Test2' } });
