@@ -44,12 +44,14 @@ wtforms = "==3.0.1"
 zipp = "==3.16.2"
 pytest = "*"
 flask-migrate = "*"
+"testing.postgresql" = "*"
 
 [dev-packages]
 pytest = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.11"
 
 [scripts]
 dev = "flask run"
+test = "pytest"

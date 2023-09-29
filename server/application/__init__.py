@@ -25,6 +25,8 @@ from flask_login import (
     login_required,
 )
 
+load_dotenv()
+
 # create a flask_login instance
 login_manager = LoginManager()
 login_manager.session_protection = "strong"
@@ -36,7 +38,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
 DATABASE_URL = os.environ["DATABASE_URL"]
-
 
 def create_app(env=None):
     # initialise the app

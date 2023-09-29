@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 full_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(Path(full_path).parents[1]))
-
 # Import necessary modules
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
@@ -24,7 +23,7 @@ session = Session()
 
 
 dfDiseasesVariables = pd.read_csv('DiseasesVariables.csv')
-# Rename the index column to 'id' and reset the index to start from 1
+#Rename the index column to 'id' and reset the index to start from 1
 dfDiseasesVariables.rename_axis('id', inplace=True)
 dfDiseasesVariables.reset_index(drop=True, inplace=True)
 dfDiseasesVariables.index += 1  # Shift the index by 1 to start from 1
@@ -60,6 +59,14 @@ dfDiseaseRules.to_sql('users_answers_count', con=engine, if_exists='append', ind
 
 # Commit the changes
 session.commit()
-
-# Close the session
+# # Close the session
 session.close()
+
+
+
+
+
+
+
+
+

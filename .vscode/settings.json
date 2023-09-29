@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./server/application/binarySearchKernnel"
+    ],
+    "python.analysis.typeCheckingMode": "off"
+}

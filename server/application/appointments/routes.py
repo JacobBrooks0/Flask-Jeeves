@@ -70,6 +70,3 @@ def delete_appointment(id):
     db.session.delete(appointment)
     db.session.commit()
     return jsonify({"message": "Appointment deleted successfully!"}), 200
-
-
-# ... More routes based on your application's requirements ...
